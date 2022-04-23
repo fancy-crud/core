@@ -18,6 +18,7 @@ declare module 'vue' {
     FFormHeader: typeof import('./components/FFormHeader.vue')['default']
     FFormMain: typeof import('./components/FFormMain.vue')['default']
     FInput: typeof import('./components/FInput.vue')['default']
+    FInputDate: typeof import('./components/FInputDate.vue')['default']
     FInputFile: typeof import('./components/FInputFile.vue')['default']
     FInputFilePreview: typeof import('./components/FInputFilePreview.vue')['default']
     FInputPassword: typeof import('./components/FInputPassword.vue')['default']

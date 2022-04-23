@@ -20,6 +20,7 @@
 <script lang="ts" setup>
 import type { Form, NormalizedFieldStructure } from '@/types'
 import FInput from '@/components/FInput.vue'
+import FInputDate from '@/components/FInputDate.vue'
 import FCheckbox from '@/components/FCheckbox.vue'
 import FInputPassword from '@/components/FInputPassword.vue'
 import FSelect from '@/components/FSelect.vue'
@@ -34,7 +35,7 @@ const props = defineProps<{
 
 const controls = {
   text: FInput,
-  date: FInput,
+  date: FInputDate,
   password: FInputPassword,
   select: FSelect,
   checkbox: FCheckbox,
