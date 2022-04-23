@@ -24,45 +24,19 @@ import { parseRules } from "./rules"
 //   // FDate
 // } from "/components"
 
-type ControlList = {
-  [k: string]: {
-    class: string
-  }
-}
-
 const locale = { t: (s: string) => s }
 
-const controls: ControlList = {
-  text: {
-    class: "input input-bordered animation-none no-animation",
-  },
-  date: {
-    class: "input input-bordered animation-none no-animation",
-  },
-  password: {
-    class: "input input-bordered w-full animation-none no-animation",
-  },
-  select: {
-    class: "select select-bordered w-full no-animation",
-  },
-  checkbox: {
-    class: "checkbox no-animation",
-  },
-  radio: {
-    class: "radio no-animation",
-  },
-  textarea: {
-    class: "textarea textarea-bordered h-24 no-animation",
-  },
-  color: {
-    class: "absolute outline-0 top-1/2 -translate-y-1/2 right-5",
-  },
-  file: {
-    class: "absolute outline-0 top-1/2 -translate-y-1/2 opacity-0 z-10 w-full",
-  },
-  image: {
-    class: "absolute outline-0 top-1/2 -translate-y-1/2 opacity-0 z-10 w-full",
-  },
+const controlsClasses  = {
+  text: "border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+  date: "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+  password: "border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+  select: "border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+  checkbox: "w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600",
+  radio: "w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600",
+  textarea: "block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+  color: "border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+  file: "block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400",
+  image: "block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400",
 }
 
 export function createDefaultKeys(
@@ -97,7 +71,8 @@ export function createDefaultKeys(
     _field.options = []
   }
 
-  _field.class = `${controls[_field.type || "text"].class} ${_field.class}`.trim()
+  type controlClassType = keyof typeof controlsClasses;
+  _field.class = `${controlsClasses[_field.type as controlClassType || "text"]} ${_field.class}`.trim()
 
   return _field
 }
