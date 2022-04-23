@@ -1,0 +1,147 @@
+<template>
+  <div class="card bg-base-100 shadow-xl rounded-md">
+    <div class="flex flex-nowrap p-4 items-center justify-between">
+      <div>
+        <input
+          type="text"
+          placeholder="locale.t('search')"
+          class="input input-bordered"
+        >
+      </div>
+      <div>
+        <div
+          class="tooltip tooltip-left"
+          data-tip="locale.t('create')"
+        >
+          <button
+            @click="openCreateModal"
+            class="btn btn-circle btn-ghost modal-button"
+          >
+            <i class="mdi mdi-plus text-slate-400 text-2xl" />
+          </button>
+        </div>
+        <div
+          class="tooltip tooltip-left"
+          data-tip="Exportar"
+        >
+          <button class="btn btn-circle btn-ghost">
+            <i class="mdi mdi-microsoft-excel text-slate-400 text-2xl" />
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="overflow-x-auto p-4">
+      <table class="table table-compact w-full divide-y divide-slate-100">
+        <f-table-header
+          :headers="headers"
+          :loading="loading"
+        />
+        <f-table-body
+          @edit="openEditModal"
+          :headers="headers"
+          :items="list.items"
+        />
+      </table>
+    </div>
+
+    <f-table-footer>
+      <span />
+      <f-pagination
+        v-model="pagination.page"
+        :pagination="pagination"
+      />
+      <p class="text-right text-sm font-bold">
+        {{ ItemsCount }} / {{ pagination.count }}
+      </p>
+    </f-table-footer>
+  </div>
+
+  <f-modal
+    :id="table.form.id"
+    v-model="displayModal"
+  >
+    <f-modal-card>
+      <f-form :form="form" />
+    </f-modal-card>
+  </f-modal>
+</template>
+
+<script lang="ts" setup>
+import _ from 'lodash'
+import { FormModes } from '@/types'
+import { createHeaders, fillFieldsWithRecordValues, getRecords, resetModelValue, retrieveRecord, setFormMode, setFormRecord } from '@/composables'
+
+const props = defineProps<{
+  table: Table
+  modal?: boolean
+}>()
+
+const emit = defineEmits<{
+  (e: 'update:modal', value: boolean)
+}>()
+
+const form = reactive(props.table.form)
+
+const cloneForm = _.cloneDeep(form)
+const headers = createHeaders(form.fields)
+const displayModal = ref(props.modal || false)
+
+const { list, loading, fetchItems, pagination } = getRecords({
+  url: props.table.settings.url,
+  _search: props.table.settings.search,
+  initialFilterParams: props.table.settings.filterParams,
+  pagination: props.table.settings.pagination,
+})
+
+const ItemsCount = computed(() => {
+  let count = pagination.rowsPerPage - list.items.length
+
+  if (count === 0)
+    count = pagination.page * pagination.rowsPerPage
+
+  else
+    count = pagination.count
+
+  return count
+})
+
+const closeModal = () => (displayModal.value = false)
+
+const openCreateModal = () => {
+  if (typeof form.settings.buttons.aux.onClick !== 'function')
+    form.settings.buttons.aux.onClick = closeModal
+
+  form.settings.mode = FormModes.CREATE_MODE
+  resetModelValue(form, cloneForm)
+  displayModal.value = true
+}
+
+const openEditModal = (row: unknown) => {
+  resetModelValue(form, cloneForm)
+
+  type rowKey = keyof typeof row
+  const lookupField = (props.table.settings.lookupField || form.settings.lookupField) as rowKey
+  let lookupValue = ''
+
+  if (Object.prototype.hasOwnProperty.call(row, lookupField))
+    lookupValue = String(row[lookupField])
+
+  if (typeof form.settings.buttons.aux.onClick !== 'function')
+    form.settings.buttons.aux.onClick = closeModal
+
+  retrieveRecord({ url: props.table.settings.url, lookupValue }).then((response) => {
+    form.record = response.value.data
+    form.settings.mode = FormModes.UPDATE_MODE
+    fillFieldsWithRecordValues(form.fields, form.record || {})
+    displayModal.value = true
+  })
+}
+
+watch(() => props.modal, () => {
+  displayModal.value = props.modal
+})
+
+watch(displayModal, () => {
+  emit('update:modal', displayModal.value)
+})
+</script>

@@ -1,0 +1,30 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.191.1/containers/vue
+{
+	"name": "Vue project container",
+	"dockerComposeFile": "../docker-compose.yml",
+	"service": "frontend",
+	"workspaceFolder": "/home/frontend/frontend",
+
+	// Set *default* container specific settings.json values on container create.
+	// "settings": {
+    //     "git.path": "/usr/bin/git"
+    // },
+	
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"dbaeumer.vscode-eslint",
+		"octref.vetur",
+		"tabnine.tabnine-vscode",
+		"syler.sass-indented"
+	],
+	
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [9090],
+	
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postStartCommand": "git config --global user.email \"cafadev@outlook.com\" && git config --global user.name \"Christopher Flores\""
+	
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	// "remoteUser": "node"
+}

@@ -1,0 +1,32 @@
+{
+  "extends": [
+    "@antfu",
+    "plugin:vue/vue3-recommended"
+  ],
+  "rules": {
+    "no-console": "off",
+    "vue/attribute-hyphenation": ["error", "always", {
+      "ignore": ["modelValue"]
+    }],
+    "vue/v-on-event-hyphenation": ["error", "always", {
+      "autofix": false,
+      "ignore": ["update:modelValue"]
+    }],
+    "vue/attributes-order": ["error", {
+      "order": [
+        "DEFINITION",
+        "LIST_RENDERING",
+        "CONDITIONALS",
+        "RENDER_MODIFIERS",
+        "GLOBAL",
+        ["UNIQUE", "SLOT"],
+        "TWO_WAY_BINDING",
+        "OTHER_DIRECTIVES",
+        "EVENTS",
+        "OTHER_ATTR",
+        "CONTENT"
+      ],
+      "alphabetical": false
+    }]
+  }
+}

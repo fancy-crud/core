@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  frontend:
+    build: .
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - '.:/home/frontend/frontend'
+    ports:
+      - "9090:9090"
+    tty: true
+    expose:
+      - 9090
+
+  cypress:
+    build:
+      context: .
+      dockerfile: Dockerfile.cypress
+    depends_on:
+      - frontend
+    environment:
+      - CYPRESS_baseUrl=http://frontend:9090
+    working_dir: /e2e
+    volumes:
+      - ./:/e2e
