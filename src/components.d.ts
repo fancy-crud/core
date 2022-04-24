@@ -5,11 +5,11 @@
 declare module 'vue' {
   export interface GlobalComponents {
     FButton: typeof import('./components/utils/FButton.vue')['default']
+    FButtonIcon: typeof import('./components/utils/FButtonIcon.vue')['default']
     FCheckbox: typeof import('./components/form/FCheckbox.vue')['default']
     FCheckboxMultiple: typeof import('./components/form/FCheckboxMultiple.vue')['default']
     FCheckboxSingle: typeof import('./components/form/FCheckboxSingle.vue')['default']
     FColor: typeof import('./components/form/FColor.vue')['default']
-    FControlContainer: typeof import('./components/utils/FControlContainer.vue')['default']
     FControlHintMessage: typeof import('./components/form/FControlHintMessage.vue')['default']
     FControlLabel: typeof import('./components/form/FControlLabel.vue')['default']
     FControlWrap: typeof import('./components/form/FControlWrap.vue')['default']
@@ -34,6 +34,7 @@ declare module 'vue' {
     FTableHeader: typeof import('./components/table/FTableHeader.vue')['default']
     FTableRow: typeof import('./components/table/FTableRow.vue')['default']
     FTextarea: typeof import('./components/form/FTextarea.vue')['default']
+    UiInput: typeof import('./components/form/UiInput.vue')['default']
   }
 }
 

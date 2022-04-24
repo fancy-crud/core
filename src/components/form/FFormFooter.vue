@@ -6,7 +6,6 @@
         v-bind="mainButton"
         :mode="form.settings.mode"
         class="shadow-lg shadow-primary-200"
-        loading
       />
       <f-button
         @click="auxOnClick"

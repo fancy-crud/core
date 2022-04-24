@@ -1,25 +1,30 @@
 <template>
-  <div>
-    <input
-      :id="id"
-      v-model="display"
-      type="checkbox"
-      class="modal-toggle"
+  <slot
+    name="activator"
+    v-bind="{ open, close }"
+  />
+  <teleport to="body">
+    <div
+      ref="modalRef"
+      tabindex="-1"
+      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full"
     >
-    <label
-      :id="id"
-      :for="!persistent ? id : ''"
-      class="modal"
-    >
-      <slot />
-    </label>
-  </div>
+      <div
+        class="relative p-4 w-full max-w-2xl h-full md:h-auto animate__animated animate__slideInDown"
+      >
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <slot />
+        </div>
+      </div>
+    </div>
+  </teleport>
 </template>
 
 <script lang="ts" setup>
 const props = defineProps<{
-  id: string
   modelValue: boolean
+  placement?: string
   persistent?: boolean
 }>()
 
@@ -29,8 +34,35 @@ const emit = defineEmits<{
 
 provide('persistent', () => props.persistent)
 
+const modal = ref()
+const modalRef = ref()
 const display = ref(props.modelValue)
 
-watch(display, () => emit('update:modelValue', display.value))
-watch(() => props.modelValue, () => display.value = props.modelValue)
+const open = () => modal.value.show()
+const close = () => modal.value.hide()
+
+watch(display, () => {
+  emit('update:modelValue', display.value)
+})
+
+watch(() => props.modelValue, () => {
+  if (display.value !== props.modelValue) {
+    display.value = props.modelValue
+    display.value ? open() : close()
+  }
+})
+
+onMounted(() => {
+  modal.value = new Modal(modalRef.value, {
+    placement: props.placement ?? 'center',
+    onShow() {
+      display.value = true
+    },
+    onHide() {
+      display.value = false
+    },
+  })
+
+  if (display.value) open()
+})
 </script>

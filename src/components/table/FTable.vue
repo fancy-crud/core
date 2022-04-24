@@ -5,28 +5,33 @@
         <input
           type="text"
           placeholder="locale.t('search')"
-          class="input input-bordered"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
       </div>
-      <div>
+      <div class="flex items-center">
         <div
           class="tooltip tooltip-left"
           data-tip="locale.t('create')"
         >
-          <button
-            @click="openCreateModal"
-            class="btn btn-circle btn-ghost modal-button"
+          <f-modal
+            v-model="displayModal"
           >
-            <i class="mdi mdi-plus text-slate-400 text-2xl" />
-          </button>
+            <template #activator>
+              <f-button-icon
+                @click="openCreateModal"
+                icon="mdi-plus"
+              />
+            </template>
+            <f-modal-card>
+              <f-form :form="form" />
+            </f-modal-card>
+          </f-modal>
         </div>
         <div
           class="tooltip tooltip-left"
           data-tip="Exportar"
         >
-          <button class="btn btn-circle btn-ghost">
-            <i class="mdi mdi-microsoft-excel text-slate-400 text-2xl" />
-          </button>
+          <f-button-icon icon="mdi-microsoft-excel" />
         </div>
       </div>
     </div>
@@ -55,15 +60,6 @@
       </p>
     </f-table-footer>
   </div>
-
-  <f-modal
-    :id="table.form.id"
-    v-model="displayModal"
-  >
-    <f-modal-card>
-      <f-form :form="form" />
-    </f-modal-card>
-  </f-modal>
 </template>
 
 <script lang="ts" setup>
