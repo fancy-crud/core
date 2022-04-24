@@ -8,7 +8,10 @@
         {{ field.label }}
       </f-control-label>
 
-      <f-checkbox-multiple :field="field" />
+      <f-checkbox-multiple
+        :field="field"
+        class="pl-3"
+      />
     </template>
 
     <f-checkbox-single

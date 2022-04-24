@@ -2,7 +2,8 @@
   <label
     v-for="(option, i) in options"
     :key="i"
-    class="label cursor-pointer justify-start"
+    class="label cursor-pointer flex items-center justify-start py-2"
+    v-bind="$attrs"
   >
     <input
       :id="field.id"

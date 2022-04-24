@@ -1,5 +1,8 @@
 <template>
-  <label class="label cursor-pointer justify-start">
+  <label
+    v-bind="$attrs"
+    class="label cursor-pointer flex items-center justify-start py-3"
+  >
     <input
       v-model="modelValue"
       v-bind="field"
