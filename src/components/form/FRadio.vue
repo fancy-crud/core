@@ -6,7 +6,7 @@
     <f-control-label>{{ field.label }}</f-control-label>
 
     <div :class="inRowDisplay">
-      <div
+      <label
         v-for="(option, i) in options"
         :key="i"
         class="cursor-pointer justify-start pl-4 flex items-center mb-4"
@@ -17,8 +17,13 @@
           @click="setModelValue(option)"
           :checked="_.isEqual(field.modelValue, option)"
         >
-        <label class="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ option[optionLabel] }}</label>
-      </div>
+        <span
+          class="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          :for="field.modelKey"
+        >
+          {{ option[optionLabel] }}
+        </span>
+      </label>
     </div>
 
     <f-control-hint-message :field="field" />
