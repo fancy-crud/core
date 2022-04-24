@@ -1,16 +1,12 @@
 <template>
-  <label
+  <p
     v-for="(message, key) in messages"
     :key="key"
     :class="textColorClass"
-    class="label f-label-hint"
+    class="mt-2 text-sm text-gray-500 dark:text-gray-400"
   >
-    <p
-      class="label-text-alt label-text font-semibold f-label-hint-message pt-0"
-    >
-      {{ message }}
-    </p>
-  </label>
+    {{ message }}
+  </p>
 </template>
 
 <script lang="ts" setup>
@@ -34,7 +30,7 @@ const hasErrors = computed(() => {
 })
 
 const textColorClass = computed(() => {
-  return hasErrors.value ? 'text-red-600' : 'text-gray-400'
+  return hasErrors.value ? 'text-red-600' : 'text-gray-500 dark:text-gray-400'
 })
 
 </script>

@@ -1,10 +1,10 @@
 <template>
   <label
-    class="label f-label font-bold pl-0"
+    class="f-label block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
     v-bind="$attrs"
   >
     <slot>
-      <span class="label-text f-label-text">{{ props.label }}</span>
+      {{ props.label }}
     </slot>
   </label>
 </template>
