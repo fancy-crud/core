@@ -5,14 +5,13 @@
   >
     <f-control-label>{{ field.label }}</f-control-label>
 
-    <div class="relative input input-bordered p-4">
+    <div class="relative pr-4">
       <input
         @change="setModelValue"
         v-bind="field"
+        class="block w-full text-sm text-gray-900 bg-gray-50 rounded-l-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+        type="file"
       >
-      <p class="absolute left-0 w-full top-1/2 -translate-y-1/2 left-0 pl-3">
-        {{ valueString }}
-      </p>
       <f-input-file-preview
         :type="field.type"
         url="https://nyota.nl/wp-content/uploads/sites/84/2013/10/500x500.gif"

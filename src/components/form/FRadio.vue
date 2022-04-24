@@ -6,10 +6,10 @@
     <f-control-label>{{ field.label }}</f-control-label>
 
     <div :class="inRowDisplay">
-      <label
+      <div
         v-for="(option, i) in options"
         :key="i"
-        class="label cursor-pointer justify-start pl-4"
+        class="cursor-pointer justify-start pl-4 flex items-center mb-4"
       >
         <input
           v-bind="field"
@@ -17,8 +17,8 @@
           @click="setModelValue(option)"
           :checked="_.isEqual(field.modelValue, option)"
         >
-        <span class="pl-2">{{ option[optionLabel] }}</span>
-      </label>
+        <label class="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ option[optionLabel] }}</label>
+      </div>
     </div>
 
     <f-control-hint-message :field="field" />
@@ -39,7 +39,7 @@ const emit = defineEmits<{
 }>()
 
 const inRowDisplay = computed(() => {
-  return props.field.class.includes('in-row') ? 'flex flex-nowrap' : ''
+  return props.field.class.includes('in-row') ? 'in-row' : ''
 })
 
 const options = computed(() => _.cloneDeep(props.field.options))
@@ -52,3 +52,9 @@ const setModelValue = (value: any) => {
 }
 
 </script>
+
+<style lang="sass">
+.in-row
+  display: flex
+  flex-flow: row nowrap
+</style>

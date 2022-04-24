@@ -1,6 +1,6 @@
 <template>
   <main
-    class="px-4"
+    class="px-4 grid grid-cols-12"
     v-bind="$attrs"
   >
     <template
@@ -19,15 +19,15 @@
 
 <script lang="ts" setup>
 import type { Form, NormalizedFieldStructure } from '@/types'
-import FInput from '@/components/FInput.vue'
-import FInputDate from '@/components/FInputDate.vue'
-import FCheckbox from '@/components/FCheckbox.vue'
-import FInputPassword from '@/components/FInputPassword.vue'
-import FSelect from '@/components/FSelect.vue'
-import FRadio from '@/components/FRadio.vue'
-import FColor from '@/components/FColor.vue'
-import FTextarea from '@/components/FTextarea.vue'
-import FInputFile from '@/components/FInputFile.vue'
+import FInput from '@/components/form/FInput.vue'
+import FInputDate from '@/components/form/FInputDate.vue'
+import FCheckbox from '@/components/form/FCheckbox.vue'
+import FInputPassword from '@/components/form/FInputPassword.vue'
+import FSelect from '@/components/form/FSelect.vue'
+import FRadio from '@/components/form/FRadio.vue'
+import FColor from '@/components/form/FColor.vue'
+import FTextarea from '@/components/form/FTextarea.vue'
+import FInputFile from '@/components/form/FInputFile.vue'
 
 const props = defineProps<{
   form: Form

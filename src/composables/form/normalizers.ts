@@ -102,7 +102,6 @@ export function normalizeButtons(buttons?: Buttons) {
   }
 
   const defaultAuxButton = {
-    class: "btn btn-outline animate-none ml-3",
     label: {
       create: locale.t("Cancel"),
       update: locale.t("Cancel"),

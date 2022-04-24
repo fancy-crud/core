@@ -85,7 +85,7 @@ const successNotificationMessage = computed(() => {
 })
 
 const insetScrollStyles = computed(() => {
-  return !props.noInsetScroll ? { maxHeight: '70vh', overflowY: 'auto' } : {}
+  return !props.noInsetScroll ? { maxHeight: '70vh', overflow: 'hidden auto' } : {}
 })
 
 const onSuccess = (response: AxiosResponse) => {
