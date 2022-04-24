@@ -5,8 +5,8 @@
     v-bind="$attrs"
   >
     <i
-      class="mdi text-slate-400 w-5 h-5 text-2xl flex items-center justify-center"
-      :class="icon"
+      class="mdi text-slate-400 w-5 h-5 flex items-center justify-center"
+      :class="[icon, iconSize]"
     />
   </button>
 </template>
@@ -14,5 +14,10 @@
 <script lang="ts" setup>
 const props = defineProps<{
   icon: string
+  size?: string
 }>()
+
+const iconSize = computed(() => {
+  return props.size ?? 'text-2xl'
+})
 </script>
