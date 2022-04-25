@@ -1,14 +1,21 @@
 <template>
-  <thead class="w-full">
+  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
     <tr>
       <template
         v-for="(header, i) in headers"
         :key="`header-${i}`"
       >
-        <th class="text-slate-400 bg-base-100 normal-case">
+        <th
+          scope="col"
+          class="px-6 py-3 text-left"
+        >
           {{ header.label }}
         </th>
       </template>
+      <th
+        scope="col"
+        class="px-6 py-3"
+      />
     </tr>
     <tr
       v-if="loading"

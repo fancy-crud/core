@@ -47,6 +47,8 @@ export interface FieldStructure extends InputHTMLAttributes {
     field?: (row: unknown, index: number) => unknown;
     format?: (value: unknown) => unknown;
     exclude?: boolean
+    allowCheckbox?: boolean
+    allowImagePreview?: boolean
   };
   [key: string]: unknown;
 }

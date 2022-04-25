@@ -7,6 +7,7 @@ export interface TableHeader {
   field?: (row: unknown, index: number) => unknown
   format?: (value: unknown) => unknown
   allowCheckbox?: boolean
+  allowImagePreview?: boolean
 }
 
 export interface Table {
