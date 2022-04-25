@@ -8,31 +8,25 @@
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
       </div>
-      <div class="flex items-center">
-        <div
-          class="tooltip tooltip-left"
-          data-tip="locale.t('create')"
+      <div class="flex items-center relative">
+        <f-modal
+          v-model="displayModal"
         >
-          <f-modal
-            v-model="displayModal"
-          >
-            <template #activator>
-              <f-button-icon
-                @click="openCreateModal"
-                icon="mdi-plus"
-              />
-            </template>
-            <f-modal-card>
-              <f-form :form="form" />
-            </f-modal-card>
-          </f-modal>
-        </div>
-        <div
-          class="tooltip tooltip-left"
-          data-tip="Exportar"
-        >
-          <f-button-icon icon="mdi-microsoft-excel" />
-        </div>
+          <template #activator>
+            <f-button-icon
+              @click="openCreateModal"
+              tooltip="Crear nuevo"
+              icon="mdi-plus"
+            />
+          </template>
+          <f-modal-card>
+            <f-form :form="form" />
+          </f-modal-card>
+        </f-modal>
+        <f-button-icon
+          icon="mdi-microsoft-excel"
+          tooltip="Exportar"
+        />
       </div>
     </div>
     <div class="overflow-x-auto p-4">

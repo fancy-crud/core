@@ -5,28 +5,26 @@
       :rows="items"
     >
       <template #default="{ rowIndex }">
-        <td class="text-right">
+        <td class="px-6 py-4 text-right flex">
           <div
             class="tooltip"
             data-tip="{locale.t('Edit')}"
           >
-            <button
+            <f-button-icon
               @click="onEdit(rowIndex)"
-              class="btn btn-circle btn-ghost"
-            >
-              <i class="mdi mdi-pencil text-slate-400 text-lg" />
-            </button>
+              icon="mdi-pencil"
+              size="text-lg"
+            />
           </div>
           <div
             class="tooltip"
             data-tip="{locale.t('Delete')}"
           >
-            <button
+            <f-button-icon
               @click="onDelete(rowIndex)"
-              class="btn btn-circle btn-ghost"
-            >
-              <i class="mdi mdi-delete text-red-600 text-lg" />
-            </button>
+              icon="mdi-delete"
+              size="text-lg"
+            />
           </div>
         </td>
       </template>
