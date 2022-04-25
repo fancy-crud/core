@@ -1,11 +1,11 @@
 <template>
   <tr
-    v-for="(row, rowIndex) in rows"
+    v-for="(row, rowIndex) in props.rows"
     :key="`row-${rowIndex}`"
     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 whitespace-nowrap"
   >
     <td
-      v-for="(header, j) in headers"
+      v-for="(header, j) in props.headers"
       :key="`row-item-${j}`"
       class="px-6 py-4 relative"
     >
@@ -24,7 +24,7 @@
         />
       </template>
       <template v-else>
-        {{ getValue(row, header) }}
+        {{ getValue(row, header, rowIndex) }}
       </template>
     </td>
     <slot v-bind="{ rowIndex}" />
@@ -39,13 +39,13 @@ const props = defineProps<{
   headers: TableHeader[]
 }>()
 
-const getValue = computed(() => (row: unknown, header: TableHeader) => {
+const getValue = computed(() => (row: any, header: TableHeader, rowIndex: number) => {
   let value: any
   if (typeof row === 'object')
-    value = (row as { [k: string]: unknown })[header.value]
+    value = row[header.value]
 
   if (header.field)
-    value = header.field(row)
+    value = header.field(row, rowIndex)
 
   if (header.format)
     value = header.format(value)

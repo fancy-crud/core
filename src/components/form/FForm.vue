@@ -44,7 +44,8 @@
 <script lang="ts" setup>
 import _ from 'lodash'
 import type { AxiosResponse } from 'axios'
-import type { Form } from '@/types'
+import { FormModes } from '@/types'
+import type { Form, Notification } from '@/types'
 import { errorNotification, successNotification } from '@/composables'
 
 const props = defineProps<{
@@ -61,9 +62,9 @@ const emit = defineEmits<{
 
 const slots = useSlots()
 
-const formClone = _.cloneDeep(props.form)
+// const formClone = _.cloneDeep(props.form)
 
-const notification = reactive<{ display: boolean; props: Notification }>({
+const notification = reactive<{ display: boolean; props: Partial<Notification> & { message: string} }>({
   display: false,
   props: {
     message: '',
@@ -89,19 +90,16 @@ const insetScrollStyles = computed(() => {
 })
 
 const onSuccess = (response: AxiosResponse) => {
-  const emitEventName = {
-    [FormModes.CREATE_MODE]: 'create',
-    [FormModes.UPDATE_MODE]: 'update',
-  }
   Object.assign(notification, {
     display: true,
     props: {
       ...successNotification(),
-      message: successNotificationMessage(),
+      message: successNotificationMessage.value,
     },
   })
 
-  emit(emitEventName, response)
+  if (props.form.settings.mode === FormModes.CREATE_MODE) emit('create', response)
+  else emit('update', response)
 }
 
 const dispatchErrorNotification = () => {

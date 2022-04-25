@@ -22,7 +22,8 @@
 import type { AxiosError, AxiosResponse } from 'axios'
 import { FormModes } from '@/types'
 import type { Form } from '@/types'
-import { resetModelValue, triggerCreateOrUpdate } from '@/composables'
+import { triggerCreateOrUpdate } from '@/composables'
+
 const props = defineProps<{
   form: Form
 }>()
@@ -30,8 +31,8 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'create', response: AxiosResponse): void
   (e: 'update', response: AxiosResponse): void
-  (e: 'create-error', response: AxiosResponse): void
-  (e: 'update-error', response: AxiosResponse): void
+  (e: 'create-error', response?: AxiosResponse): void
+  (e: 'update-error', response?: AxiosResponse): void
 }>()
 
 const mainOnClick = async() => {
@@ -45,19 +46,27 @@ const mainOnClick = async() => {
     value: AxiosResponse
   }
 
-  const emitEventName = props.form.settings.mode === FormModes.CREATE_MODE ? 'create' : 'update'
+  const emitEvent = (response: AxiosResponse) => {
+    if (props.form.settings.mode === FormModes.CREATE_MODE) emit('create', response)
+    else emit('update', response)
+  }
+
+  const emitErrorEvent = (response?: AxiosResponse) => {
+    if (props.form.settings.mode === FormModes.CREATE_MODE) emit('create-error', response)
+    else emit('update-error', response)
+  }
 
   try {
-    result = await triggerCreateOrUpdate(form)
+    result = await triggerCreateOrUpdate(props.form)
   }
   catch (err) {
     const error = err as { value: AxiosError }
-    emit(`${emitEventName}-error`, error.value.response)
+    emitErrorEvent(error.value.response)
     return
   }
 
-  emit(emitEventName, result.value)
-  resetModelValue(form, cloneForm)
+  emitEvent(result.value)
+  // resetModelValue(form, cloneForm)
 }
 
 const auxOnClick = () => {

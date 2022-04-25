@@ -41,8 +41,8 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'edit', row: any)
-  (e: 'delete', row: any)
+  (e: 'edit', row: any): void
+  (e: 'delete', row: any): void
 }>()
 
 const onEdit = (rowIndex: number) => {

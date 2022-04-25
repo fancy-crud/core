@@ -31,10 +31,9 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: boolean)
+  (e: 'update:modelValue', value: boolean): void
 }>()
 
-const isComponentMounted = ref(false)
 const display = ref(props.modelValue)
 
 const containerClass = computed(() => {

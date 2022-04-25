@@ -35,7 +35,6 @@ declare module 'vue' {
     FTableRow: typeof import('./components/table/FTableRow.vue')['default']
     FTableRowFilePreview: typeof import('./components/table/FTableRowFilePreview.vue')['default']
     FTextarea: typeof import('./components/form/FTextarea.vue')['default']
-    UiInput: typeof import('./components/form/UiInput.vue')['default']
   }
 }
 

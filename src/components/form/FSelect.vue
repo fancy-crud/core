@@ -32,14 +32,14 @@
 <script lang="ts" setup>
 import _ from 'lodash'
 import type { NormalizedFieldStructure } from '@/types'
-import { setInputSelectModelValue, useSetModelValue } from '@/composables'
+import { setInputSelectModelValue } from '@/composables'
 
 const props = defineProps<{
   field: NormalizedFieldStructure
 }>()
 
-const optionLabel = computed(() => props.field.optionLabel)
-const optionValue = computed(() => props.field.optionValue)
+const optionLabel = computed(() => props.field.optionLabel || '')
+const optionValue = computed(() => props.field.optionValue || '')
 const options = computed(() => {
   return _.cloneDeep(props.field.options)
 })

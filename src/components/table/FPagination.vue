@@ -92,8 +92,8 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', currentPage: number)
-  (e: 'change', currentPage: number)
+  (e: 'update:modelValue', currentPage: number): void
+  (e: 'change', currentPage: number): void
 }>()
 
 const currentPage = ref(props.modelValue)

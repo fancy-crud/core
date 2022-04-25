@@ -8,7 +8,4 @@
 </template>
 
 <script lang="ts" setup>
-const v = inject('persistent')
-const hasPersistent = computed(() => v())
-
 </script>

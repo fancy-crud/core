@@ -33,7 +33,7 @@
 <script lang="ts" setup>
 import _ from 'lodash'
 import type { NormalizedFieldStructure } from '@/types'
-import { setInputRadioModelValue, useSetModelValue } from '@/composables'
+import { setInputRadioModelValue } from '@/composables'
 
 const props = defineProps<{
   field: NormalizedFieldStructure
@@ -49,7 +49,6 @@ const inRowDisplay = computed(() => {
 
 const options = computed(() => _.cloneDeep(props.field.options))
 const optionLabel = ref(props.field.optionLabel || '')
-const optionValue = ref(props.field.optionValue || '')
 
 const setModelValue = (value: any) => {
   setInputRadioModelValue(props.field, value)

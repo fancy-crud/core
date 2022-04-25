@@ -3,10 +3,10 @@
     v-bind="$attrs"
     type="button"
     :class="className"
-    :disabled="loading"
+    :disabled="props.loading"
   >
     <svg
-      v-if="loading"
+      v-if="props.loading"
       role="status"
       class="inline w-4 h-4 mr-3 text-white animate-spin"
       viewBox="0 0 100 101"

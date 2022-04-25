@@ -24,7 +24,7 @@
 
 <script lang="ts" setup>
 import type { NormalizedFieldStructure } from '@/types'
-import { setInputFileModelValue, useSetModelValue } from '@/composables'
+import { setInputFileModelValue } from '@/composables'
 
 const props = defineProps<{
   field: NormalizedFieldStructure
@@ -39,14 +39,5 @@ const setModelValue = (e: Event) => {
   setInputFileModelValue(props.field, files)
   emit('update:modelValue', props.field.modelValue)
 }
-
-const valueString = computed(() => {
-  let _valueString = ''
-
-  if (Array.isArray(props.field.modelValue))
-    _valueString = props.field.modelValue.map(f => f.name).join(', ')
-
-  return _valueString
-})
 
 </script>

@@ -9,6 +9,7 @@ export enum FormModes {
 export interface Button extends ButtonHTMLAttributes {
   label?: { create?: string; update?: string};
   loading?: boolean;
+  onClick?: (payload?: MouseEvent) => void
 }
 
 export interface Buttons {
@@ -35,7 +36,7 @@ export interface FieldStructure extends InputHTMLAttributes {
   type?: string;
   errors?: string[];
   filterParams?: unknown;
-  options?: unknown[];
+  options?: any[];
   ref?: unknown;
   createOnly?: boolean;
   updateOnly?: boolean;
@@ -59,7 +60,7 @@ export interface NormalizedFieldStructure extends FieldStructure {
   class: string;
   modelKey: string;
   modelValue: unknown;
-  ref: unknown;
+  ref: any;
   // RenderField: any;
   errors: string[];
   rules: Array<(value: any) => string | boolean> | never[];

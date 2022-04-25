@@ -4,7 +4,7 @@
     v-bind="$attrs"
   >
     <template
-      v-for="(field, fieldKey) in form.fields"
+      v-for="([fieldKey, field]) in fields"
       :key="fieldKey"
     >
       <slot :name="`before-${fieldKey}`" />
@@ -19,6 +19,7 @@
 
 <script lang="ts" setup>
 import type { Form, NormalizedFieldStructure } from '@/types'
+import { FormModes } from '@/types'
 import FInput from '@/components/form/FInput.vue'
 import FInputDate from '@/components/form/FInputDate.vue'
 import FCheckbox from '@/components/form/FCheckbox.vue'
@@ -47,7 +48,17 @@ const controls = {
 }
 
 const getComponent = (field: NormalizedFieldStructure) => {
-  return controls[field.type] || controls.text
+  type ControlType = keyof typeof controls
+  return controls[field.type as ControlType] || controls.text
 }
+
+const fields = computed(() => {
+  return Object.entries(props.form.fields).filter(([_, field]) => {
+    if (field.hidden) return false
+    if (field.createOnly && props.form.settings.mode !== FormModes.CREATE_MODE) return false
+    if (field.updateOnly && props.form.settings.mode === FormModes.CREATE_MODE) return false
+    return true
+  })
+})
 
 </script>

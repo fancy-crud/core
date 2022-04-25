@@ -58,8 +58,9 @@
 
 <script lang="ts" setup>
 import _ from 'lodash'
+import type { Table } from '@/types'
 import { FormModes } from '@/types'
-import { createHeaders, fillFieldsWithRecordValues, getRecords, resetModelValue, retrieveRecord, setFormMode, setFormRecord } from '@/composables'
+import { createHeaders, fillFieldsWithRecordValues, getRecords, resetModelValue, retrieveRecord } from '@/composables'
 
 const props = defineProps<{
   table: Table
@@ -67,7 +68,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'update:modal', value: boolean)
+  (e: 'update:modal', value: boolean): void
 }>()
 
 const form = reactive(props.table.form)
@@ -76,7 +77,7 @@ const cloneForm = _.cloneDeep(form)
 const headers = createHeaders(form.fields)
 const displayModal = ref(props.modal || false)
 
-const { list, loading, fetchItems, pagination } = getRecords({
+const { list, loading, pagination } = getRecords({
   url: props.table.settings.url,
   _search: props.table.settings.search,
   initialFilterParams: props.table.settings.filterParams,
@@ -106,7 +107,7 @@ const openCreateModal = () => {
   displayModal.value = true
 }
 
-const openEditModal = (row: unknown) => {
+const openEditModal = (row: any) => {
   resetModelValue(form, cloneForm)
 
   type rowKey = keyof typeof row
@@ -128,7 +129,7 @@ const openEditModal = (row: unknown) => {
 }
 
 watch(() => props.modal, () => {
-  displayModal.value = props.modal
+  displayModal.value = Boolean(props.modal)
 })
 
 watch(displayModal, () => {

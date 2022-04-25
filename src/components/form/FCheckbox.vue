@@ -24,6 +24,8 @@
 </template>
 
 <script lang="ts" setup>
+import type { NormalizedFieldStructure } from '@/types'
+
 const props = defineProps<{
   field: NormalizedFieldStructure
 }>()

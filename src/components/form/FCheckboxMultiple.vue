@@ -29,7 +29,6 @@ const emit = defineEmits<{
 
 const options = computed(() => _.cloneDeep(props.field.options))
 const optionLabel = ref(props.field.optionLabel || '')
-const optionValue = ref(props.field.optionValue || '')
 
 const setModelValue = (value: any) => {
   setInputCheckboxModelValue(props.field, value)

@@ -2,8 +2,8 @@
   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
     <tr>
       <template
-        v-for="(header, i) in headers"
-        :key="`header-${i}`"
+        v-for="header in props.headers"
+        :key="`header-${header.value}`"
       >
         <th
           scope="col"
@@ -18,7 +18,7 @@
       />
     </tr>
     <tr
-      v-if="loading"
+      v-if="props.loading"
       class="relative w-full left-0 top-0 h-1 rounded preloader"
     />
   </thead>
