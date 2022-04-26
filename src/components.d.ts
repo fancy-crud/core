@@ -33,6 +33,7 @@ declare module 'vue' {
     FTableFooter: typeof import('./components/table/FTableFooter.vue')['default']
     FTableHeader: typeof import('./components/table/FTableHeader.vue')['default']
     FTableRow: typeof import('./components/table/FTableRow.vue')['default']
+    FTableRowActions: typeof import('./components/table/FTableRowActions.vue')['default']
     FTableRowFilePreview: typeof import('./components/table/FTableRowFilePreview.vue')['default']
     FTextarea: typeof import('./components/form/FTextarea.vue')['default']
   }
