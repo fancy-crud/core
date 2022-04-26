@@ -2,7 +2,8 @@
   <button
     ref="buttonRef"
     type="button"
-    class="text-primary-700 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-primary-500 dark:text-primary-500 dark:hover:text-white dark:focus:ring-primary-800"
+    class="hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-primary-500 dark:text-primary-500 dark:hover:text-white dark:focus:ring-primary-800"
+    :class="[bgColor, textColor]"
     v-bind="$attrs"
   >
     <i
@@ -32,6 +33,8 @@ const props = defineProps<{
   size?: string
   tooltip?: string
   tooltipPlacement?: string
+  bgColor?: string
+  textColor?: string
 }>()
 
 const buttonRef = ref()
@@ -41,6 +44,9 @@ const tooltipPopper = ref()
 const iconSize = computed(() => {
   return props.size ?? 'text-2xl'
 })
+
+const bgColor = computed(() => props.bgColor ?? '')
+const textColor = computed(() => props.textColor ?? 'text-primary-700')
 
 onMounted(() => {
   if (props.tooltip) {

@@ -8,7 +8,7 @@
       @click="emit('edit')"
       icon="mdi-pencil"
       size="text-lg"
-      class="text-gray-400"
+      text-color="text-gray-400"
     />
   </div>
   <div
@@ -20,7 +20,7 @@
       @click="emit('delete')"
       icon="mdi-delete"
       size="text-lg"
-      class="text-red-500"
+      text-color="text-red-500"
     />
   </div>
 </template>
