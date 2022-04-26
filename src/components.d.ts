@@ -13,6 +13,7 @@ declare module 'vue' {
     FControlHintMessage: typeof import('./components/form/FControlHintMessage.vue')['default']
     FControlLabel: typeof import('./components/form/FControlLabel.vue')['default']
     FControlWrap: typeof import('./components/form/FControlWrap.vue')['default']
+    FDeleteConfirmationModal: typeof import('./components/utils/FDeleteConfirmationModal.vue')['default']
     FForm: typeof import('./components/form/FForm.vue')['default']
     FFormFooter: typeof import('./components/form/FFormFooter.vue')['default']
     FFormHeader: typeof import('./components/form/FFormHeader.vue')['default']

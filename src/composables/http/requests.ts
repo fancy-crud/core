@@ -122,7 +122,7 @@ export async function retrieveRecord({ url, lookupValue }: RetrieveRequest) {
 }
 
 export async function deleteRecord(settings: DeleteRequest) {
-  const { url, lookupValue, field, hardDelete } = settings
+  const { url, lookupValue, fieldName, hardDelete } = settings
 
   const requestHardDelete = async () => {
     let response: AxiosResponse;
@@ -138,7 +138,7 @@ export async function deleteRecord(settings: DeleteRequest) {
   }
 
   const requestSoftDelete = async () => {
-    if (!field) {
+    if (!fieldName) {
       throw new Error('Field parameter is required when hardDelete is false')
     }
 
@@ -146,7 +146,7 @@ export async function deleteRecord(settings: DeleteRequest) {
 
     try {
       const _url = buildURL({ url, lookupValue })
-      response = await http.axios.patch(_url, { [field]: false })
+      response = await http.axios.patch(_url, { [fieldName]: false })
     } catch (error) {
       throw { isActionSucceed: false, value: error }
     }

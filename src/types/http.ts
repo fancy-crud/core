@@ -41,7 +41,7 @@ export interface DeleteRequest {
   url: string;
   lookupValue: string | number;
   hardDelete?: boolean;
-  field?: string;
+  fieldName?: string;
 }
 
 export interface RequestResponse {

@@ -10,7 +10,7 @@
       </div>
       <div class="flex items-center relative">
         <f-modal
-          v-model="displayModal"
+          v-model="formModal"
         >
           <template #activator>
             <f-button-icon
@@ -19,9 +19,7 @@
               icon="mdi-plus"
             />
           </template>
-          <f-modal-card>
-            <f-form :form="form" />
-          </f-modal-card>
+          <f-form :form="form" />
         </f-modal>
         <f-button-icon
           icon="mdi-microsoft-excel"
@@ -37,6 +35,7 @@
         />
         <f-table-body
           @edit="openEditModal"
+          @delete="openDeleteModal"
           :headers="headers"
           :items="list.items"
         />
@@ -54,30 +53,46 @@
       </p>
     </f-table-footer>
   </div>
+
+  <f-delete-confirmation-modal
+    v-model="deleteModal"
+    @accept="openDeleteModal(rowToDelete, false)"
+  >
+    <template #default="{ closeModal: closeDeleteConfirmationModal }">
+      <slot
+        name="delete-confirmation-modal"
+        v-bind="{ closeDeleteConfirmationModal }"
+      />
+    </template>
+  </f-delete-confirmation-modal>
 </template>
 
 <script lang="ts" setup>
 import _ from 'lodash'
 import type { Table } from '@/types'
 import { FormModes } from '@/types'
-import { createHeaders, fillFieldsWithRecordValues, getRecords, resetModelValue, retrieveRecord } from '@/composables'
+import { createHeaders, deleteRecord, fillFieldsWithRecordValues, getRecords, resetModelValue, retrieveRecord } from '@/composables'
 
 const props = defineProps<{
   table: Table
-  modal?: boolean
+  formModal?: boolean
+  deleteConfirmationModal?: boolean
 }>()
 
 const emit = defineEmits<{
-  (e: 'update:modal', value: boolean): void
+  (e: 'update:formModal', value: boolean): void
 }>()
 
 const form = reactive(props.table.form)
 
 const cloneForm = _.cloneDeep(form)
 const headers = createHeaders(form.fields)
-const displayModal = ref(props.modal || false)
+const formModal = ref(Boolean(props.formModal))
 
-const { list, loading, pagination } = getRecords({
+const rowToDelete = ref<any>(null)
+const deleteModal = ref(Boolean(props.deleteConfirmationModal))
+
+const { list, loading, fetchItems, pagination } = getRecords({
   url: props.table.settings.url,
   _search: props.table.settings.search,
   initialFilterParams: props.table.settings.filterParams,
@@ -96,7 +111,7 @@ const ItemsCount = computed(() => {
   return count
 })
 
-const closeModal = () => (displayModal.value = false)
+const closeModal = () => (formModal.value = false)
 
 const openCreateModal = () => {
   if (typeof form.settings.buttons.aux.onClick !== 'function')
@@ -104,7 +119,7 @@ const openCreateModal = () => {
 
   form.settings.mode = FormModes.CREATE_MODE
   resetModelValue(form, cloneForm)
-  displayModal.value = true
+  formModal.value = true
 }
 
 const openEditModal = (row: any) => {
@@ -124,15 +139,37 @@ const openEditModal = (row: any) => {
     form.record = response.value.data
     form.settings.mode = FormModes.UPDATE_MODE
     fillFieldsWithRecordValues(form.fields, form.record || {})
-    displayModal.value = true
+    formModal.value = true
   })
 }
 
-watch(() => props.modal, () => {
-  displayModal.value = Boolean(props.modal)
+const openDeleteModal = (row: any, requestDeleteConfirmation = true) => {
+  if (requestDeleteConfirmation) {
+    rowToDelete.value = row
+    deleteModal.value = true
+    return
+  }
+
+  type rowKey = keyof typeof row
+  const lookupField = (props.table.settings.lookupField || form.settings.lookupField) as rowKey
+  let lookupValue = ''
+
+  if (Object.prototype.hasOwnProperty.call(row, lookupField))
+    lookupValue = String(row[lookupField])
+
+  deleteRecord({
+    url: props.table.settings.url,
+    lookupValue,
+    fieldName: 'is_active',
+    hardDelete: false,
+  }).then(() => fetchItems())
+}
+
+watch(() => props.formModal, () => {
+  formModal.value = Boolean(props.formModal)
 })
 
-watch(displayModal, () => {
-  emit('update:modal', displayModal.value)
+watch(formModal, () => {
+  emit('update:formModal', formModal.value)
 })
 </script>
