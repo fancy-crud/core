@@ -18,12 +18,13 @@
     <figure
       v-if="isImageType"
       ref="targetEl"
-      class="bg-white rounded divide-y divide-gray-100 shadow-lg dark:bg-gray-700 w-56 z-10"
+      class="bg-white rounded divide-y divide-gray-100 shadow-lg dark:bg-gray-700 z-10 flex justify-end"
       :class="{'hidden': !display }"
     >
       <img
         :src="url"
         alt="Image preview"
+        style="max-width: 256px; max-height: 256px;"
       >
     </figure>
   </teleport>
