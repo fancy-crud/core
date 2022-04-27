@@ -36,6 +36,7 @@
         <f-table-body
           @edit="openEditModal"
           @delete="openDeleteModal"
+          @hot-update="updateCheckbox"
           :headers="headers"
           :items="list.items"
         />
@@ -71,12 +72,12 @@
 import _ from 'lodash'
 import type { Table } from '@/types'
 import { FormModes } from '@/types'
-import { createHeaders, deleteRecord, fillFieldsWithRecordValues, getRecords, resetModelValue, retrieveRecord } from '@/composables'
+import { createHeaders, deleteRecord, fillFieldsWithRecordValues, getRecords, resetModelValue, retrieveRecord, updateRecord } from '@/composables'
 
 const props = defineProps<{
   table: Table
   formModal?: boolean
-  deleteConfirmationModal?: boolean
+  skipDeleteConfirmation?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -90,7 +91,7 @@ const headers = createHeaders(form.fields)
 const formModal = ref(Boolean(props.formModal))
 
 const rowToDelete = ref<any>(null)
-const deleteModal = ref(Boolean(props.deleteConfirmationModal))
+const deleteModal = ref(false)
 
 const { list, loading, fetchItems, pagination } = getRecords({
   url: props.table.settings.url,
@@ -144,7 +145,7 @@ const openEditModal = (row: any) => {
 }
 
 const openDeleteModal = (row: any, requestDeleteConfirmation = true) => {
-  if (requestDeleteConfirmation) {
+  if (requestDeleteConfirmation && !props.skipDeleteConfirmation) {
     rowToDelete.value = row
     deleteModal.value = true
     return
@@ -163,6 +164,23 @@ const openDeleteModal = (row: any, requestDeleteConfirmation = true) => {
     fieldName: 'is_active',
     hardDelete: false,
   }).then(() => fetchItems())
+}
+
+const updateCheckbox = (value: { field: string; row: any }) => {
+  type rowKey = keyof typeof value.row
+  const lookupField = (props.table.settings.lookupField || form.settings.lookupField) as rowKey
+  let lookupValue = ''
+
+  if (Object.prototype.hasOwnProperty.call(value.row, lookupField))
+    lookupValue = String(value.row[lookupField])
+
+  updateRecord({
+    url: props.table.settings.url,
+    lookupValue,
+    form: {
+      [value.field]: !value.row[value.field],
+    },
+  })
 }
 
 watch(() => props.formModal, () => {

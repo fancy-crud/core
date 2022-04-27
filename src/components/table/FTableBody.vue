@@ -1,18 +1,42 @@
 <template>
   <tbody>
-    <f-table-row
-      :headers="headers"
-      :rows="items"
+    <tr
+      v-for="(row, rowIndex) in props.items"
+      :key="`row-${rowIndex}`"
+      class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 whitespace-nowrap"
     >
-      <template #default="{ rowIndex }">
-        <td class="px-6 py-4 text-right flex">
-          <f-table-row-actions
-            @edit="onEdit(rowIndex)"
-            @delete="onDelete(rowIndex)"
+      <td
+        v-for="(header, j) in props.headers"
+        :key="`row-item-${j}`"
+        class="px-6 py-4 relative"
+      >
+        <template v-if="header.allowCheckbox">
+          <div class="flex items-center justify-center">
+            <input
+              @click="hotUpdate(header.value, props.items[rowIndex])"
+              type="checkbox"
+              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              :checked="row[header.value]"
+            >
+          </div>
+        </template>
+        <template v-else-if="header.allowImagePreview">
+          <f-table-row-file-preview
+            type="image"
+            :url="row[header.value]"
           />
-        </td>
-      </template>
-    </f-table-row>
+        </template>
+        <template v-else>
+          {{ getValue(row, header, rowIndex) }}
+        </template>
+      </td>
+      <td class="px-6 py-4 text-right flex">
+        <f-table-row-actions
+          @edit="emit('edit', props.items[row])"
+          @delete="emit('delete', props.items[row])"
+        />
+      </td>
+    </tr>
   </tbody>
 </template>
 
@@ -21,20 +45,31 @@ import type { TableHeader } from '@/types'
 
 const props = defineProps<{
   headers: TableHeader[]
-  items: unknown[]
+  items: any[]
 }>()
 
 const emit = defineEmits<{
   (e: 'edit', row: any): void
   (e: 'delete', row: any): void
+  (e: 'hot-update', value: { field: string; row: any }): void
 }>()
 
-const onEdit = (rowIndex: number) => {
-  emit('edit', props.items[rowIndex])
+const hotUpdate = (field: string, row: any) => {
+  emit('hot-update', { field, row })
 }
 
-const onDelete = (rowIndex: number) => {
-  emit('delete', props.items[rowIndex])
-}
+const getValue = computed(() => (row: any, header: TableHeader, rowIndex: number) => {
+  let value: any
+  if (typeof row === 'object')
+    value = row[header.value]
+
+  if (header.field)
+    value = header.field(row, rowIndex)
+
+  if (header.format)
+    value = header.format(value)
+
+  return value
+})
 
 </script>
