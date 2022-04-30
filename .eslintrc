@@ -14,16 +14,16 @@
     }],
     "vue/attributes-order": ["error", {
       "order": [
-        "DEFINITION",
         "LIST_RENDERING",
         "CONDITIONALS",
+        "DEFINITION",
         "RENDER_MODIFIERS",
-        "GLOBAL",
-        ["UNIQUE", "SLOT"],
         "TWO_WAY_BINDING",
         "OTHER_DIRECTIVES",
         "EVENTS",
+        ["UNIQUE", "SLOT"],
         "OTHER_ATTR",
+        "GLOBAL",
         "CONTENT"
       ],
       "alphabetical": false
