@@ -32,8 +32,8 @@
       </td>
       <td class="px-6 py-4 text-right flex">
         <f-table-row-actions
-          @edit="emit('edit', props.items[row])"
-          @delete="emit('delete', props.items[row])"
+          @edit="emit('edit', row)"
+          @delete="emit('delete', row)"
         />
       </td>
     </tr>
