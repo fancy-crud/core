@@ -1,6 +1,6 @@
 <template>
   <main
-    class="px-4 grid grid-cols-12"
+    class="px-4 grid grid-cols-12 gap-x-8"
     v-bind="$attrs"
   >
     <template
