@@ -11,6 +11,7 @@
       <div class="flex items-center relative">
         <f-modal
           v-model="formModal"
+          class="pb-10"
         >
           <template #activator>
             <f-button-icon
@@ -19,7 +20,15 @@
               icon="mdi-plus"
             />
           </template>
-          <f-form :form="form" />
+          <f-modal-card
+            max-width="max-w-3xl"
+          >
+            <f-form
+              @create="fetchItems()"
+              @update="fetchItems()"
+              :form="props.table.form"
+            />
+          </f-modal-card>
         </f-modal>
         <f-button-icon
           icon="mdi-microsoft-excel"
@@ -84,16 +93,14 @@ const emit = defineEmits<{
   (e: 'update:formModal', value: boolean): void
 }>()
 
-const form = reactive(props.table.form)
-
-const cloneForm = _.cloneDeep(form)
-const headers = createHeaders(form.fields)
+const cloneForm = _.cloneDeep(props.table.form)
+const headers = createHeaders(props.table.form.fields)
 const formModal = ref(Boolean(props.formModal))
 
 const rowToDelete = ref<any>(null)
 const deleteModal = ref(false)
 
-const { list, loading, fetchItems, pagination } = getRecords({
+const { list, loading, pagination, fetchItems } = getRecords({
   url: props.table.settings.url,
   _search: props.table.settings.search,
   initialFilterParams: props.table.settings.filterParams,
@@ -115,31 +122,33 @@ const ItemsCount = computed(() => {
 const closeModal = () => (formModal.value = false)
 
 const openCreateModal = () => {
-  if (typeof form.settings.buttons.aux.onClick !== 'function')
-    form.settings.buttons.aux.onClick = closeModal
+  if (typeof props.table.form.settings.buttons.aux.onClick !== 'function')
+    Object.assign(props.table.form.settings.buttons.aux, { onClick: closeModal })
 
-  form.settings.mode = FormModes.CREATE_MODE
-  resetModelValue(form, cloneForm)
+  Object.assign(props.table.form.settings, { mode: FormModes.CREATE_MODE })
+  resetModelValue(props.table.form, cloneForm)
   formModal.value = true
 }
 
 const openEditModal = (row: any) => {
-  resetModelValue(form, cloneForm)
+  resetModelValue(props.table.form, cloneForm)
 
   type rowKey = keyof typeof row
-  const lookupField = (props.table.settings.lookupField || form.settings.lookupField) as rowKey
+  const lookupField = (props.table.settings.lookupField || props.table.form.settings.lookupField) as rowKey
   let lookupValue = ''
 
   if (Object.prototype.hasOwnProperty.call(row, lookupField))
     lookupValue = String(row[lookupField])
 
-  if (typeof form.settings.buttons.aux.onClick !== 'function')
-    form.settings.buttons.aux.onClick = closeModal
+  if (typeof props.table.form.settings.buttons.aux.onClick !== 'function')
+    Object.assign(props.table.form.settings.buttons.aux, { onClick: closeModal })
 
   retrieveRecord({ url: props.table.settings.url, lookupValue }).then((response) => {
-    form.record = response.value.data
-    form.settings.mode = FormModes.UPDATE_MODE
-    fillFieldsWithRecordValues(form.fields, form.record || {})
+    Object.assign(props.table.form, {
+      record: response.value.data,
+      mode: FormModes.UPDATE_MODE,
+    })
+    fillFieldsWithRecordValues(props.table.form.fields, props.table.form.record || {})
     formModal.value = true
   })
 }
@@ -152,7 +161,7 @@ const openDeleteModal = (row: any, requestDeleteConfirmation = true) => {
   }
 
   type rowKey = keyof typeof row
-  const lookupField = (props.table.settings.lookupField || form.settings.lookupField) as rowKey
+  const lookupField = (props.table.settings.lookupField || props.table.form.settings.lookupField) as rowKey
   let lookupValue = ''
 
   if (Object.prototype.hasOwnProperty.call(row, lookupField))
@@ -168,7 +177,7 @@ const openDeleteModal = (row: any, requestDeleteConfirmation = true) => {
 
 const updateCheckbox = (value: { field: string; row: any }) => {
   type rowKey = keyof typeof value.row
-  const lookupField = (props.table.settings.lookupField || form.settings.lookupField) as rowKey
+  const lookupField = (props.table.settings.lookupField || props.table.form.settings.lookupField) as rowKey
   let lookupValue = ''
 
   if (Object.prototype.hasOwnProperty.call(value.row, lookupField))
