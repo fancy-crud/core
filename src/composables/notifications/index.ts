@@ -1,3 +1,5 @@
+import _ from "lodash"
+import { ref, computed } from 'vue'
 import { Notification } from "@/types"
 
 export const successNotification = (props?: Partial<Notification>) => ({
@@ -19,10 +21,24 @@ export const warningNotification = (props?: Partial<Notification>) => ({
 })
 
 export const errorNotification = (props?: Partial<Notification>) => ({
-  backgroundColor: 'bg-red-400',
+  backgroundColor: 'bg-red-500',
   textColor: 'text-white',
   icon: 'mdi mdi-close-circle',
   message: 'Ha ocurrido un error',
   duration: 4000,
   ...props
+})
+
+const _notificationStore = ref<Notification[]>([])
+
+export function pushNotification(notification: Notification) {
+  _notificationStore.value.push(notification)
+}
+
+export function shiftNotification() {
+  _notificationStore.value.shift()
+}
+
+export const notificationStore = computed(() => {
+  return _notificationStore.value
 })

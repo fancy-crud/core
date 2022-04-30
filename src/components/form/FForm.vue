@@ -34,10 +34,15 @@
       :form="form"
     />
 
-    <f-notification
-      v-model="notification.display"
-      v-bind="notification.props"
-    />
+    <f-notification-group>
+      <f-notification
+        v-for="(notification, i) in notifications"
+        @dismiss="shiftNotification"
+        v-bind="notification"
+        :key="i"
+        class="mb-4"
+      />
+    </f-notification-group>
   </form>
 </template>
 
@@ -45,8 +50,8 @@
 import _ from 'lodash'
 import type { AxiosResponse } from 'axios'
 import { FormModes } from '@/types'
-import type { Form, Notification } from '@/types'
-import { errorNotification, successNotification } from '@/composables'
+import type { Form } from '@/types'
+import { errorNotification, notificationStore, pushNotification, shiftNotification, successNotification } from '@/composables'
 
 const props = defineProps<{
   form: Form
@@ -64,11 +69,10 @@ const slots = useSlots()
 
 // const formClone = _.cloneDeep(props.form)
 
-const notification = reactive<{ display: boolean; props: Partial<Notification> & { message: string} }>({
-  display: false,
-  props: {
-    message: '',
-  },
+const notifications = computed(() => notificationStore.value)
+
+watch(notifications, () => {
+  console.log(notifications.value.length)
 })
 
 const beforeAndAfterFieldSlots = computed(() => {
@@ -90,12 +94,9 @@ const insetScrollStyles = computed(() => {
 })
 
 const onSuccess = (response: AxiosResponse) => {
-  Object.assign(notification, {
-    display: true,
-    props: {
-      ...successNotification(),
-      message: successNotificationMessage.value,
-    },
+  pushNotification({
+    ...successNotification(),
+    message: successNotificationMessage.value,
   })
 
   if (props.form.settings.mode === FormModes.CREATE_MODE) emit('create', response)
@@ -103,11 +104,8 @@ const onSuccess = (response: AxiosResponse) => {
 }
 
 const dispatchErrorNotification = () => {
-  Object.assign(notification, {
-    props: {
-      ...errorNotification(),
-    },
-    display: true,
+  pushNotification({
+    ...errorNotification(),
   })
 }
 
