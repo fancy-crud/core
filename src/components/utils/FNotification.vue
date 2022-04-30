@@ -52,8 +52,6 @@ const emit = defineEmits<{
 
 const notificationRef = ref()
 
-console.log(props)
-
 onMounted(() => {
   const dismiss = new Dismiss(notificationRef.value, {
     timing: 'ease-out',
