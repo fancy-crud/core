@@ -29,7 +29,20 @@
               @update="fetchItems()"
               :key="formModalKey"
               :form="props.table.form"
-            />
+            >
+              <template #form-header="{ title }">
+                <div class="flex justify-between items-center pb-4">
+                  <h3 class="text-2xl">
+                    {{ title }}
+                  </h3>
+                  <f-button-icon
+                    @click="closeModal"
+                    text-color="text-gray-400"
+                    icon="mdi-close"
+                  />
+                </div>
+              </template>
+            </f-form>
           </f-modal-card>
         </f-modal>
         <f-button-icon
