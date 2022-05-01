@@ -1,5 +1,5 @@
 <template>
-  <div class="card bg-base-100 shadow-xl rounded-md">
+  <div class="card bg-base-100 border rounded-md">
     <div class="flex flex-nowrap p-4 items-center justify-between">
       <div>
         <input
