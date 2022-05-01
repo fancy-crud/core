@@ -26,6 +26,7 @@
             <f-form
               @create="fetchItems()"
               @update="fetchItems()"
+              :key="formModalKey"
               :form="props.table.form"
             />
           </f-modal-card>
@@ -96,6 +97,7 @@ const emit = defineEmits<{
 const cloneForm = _.cloneDeep(props.table.form)
 const headers = createHeaders(props.table.form.fields)
 const formModal = ref(Boolean(props.formModal))
+const formModalKey = ref(0)
 
 const rowToDelete = ref<any>(null)
 const deleteModal = ref(false)
@@ -146,9 +148,14 @@ const openEditModal = (row: any) => {
   retrieveRecord({ url: props.table.settings.url, lookupValue }).then((response) => {
     Object.assign(props.table.form, {
       record: response.value.data,
+    })
+
+    Object.assign(props.table.form.settings, {
       mode: FormModes.UPDATE_MODE,
     })
+
     fillFieldsWithRecordValues(props.table.form.fields, props.table.form.record || {})
+    formModalKey.value++
     formModal.value = true
   })
 }
