@@ -1,8 +1,8 @@
 <template>
   <a
-    ref="triggerEl"
     @mouseenter="openPreview"
     @mouseleave="closePreview"
+    ref="triggerEl"
     :href="url"
     tabindex="0"
     target="_blank"
@@ -35,7 +35,7 @@ import { createPopper } from '@popperjs/core'
 
 const props = defineProps<{
   type: string
-  url: string
+  url: string | null
 }>()
 
 // set the dropdown menu element
