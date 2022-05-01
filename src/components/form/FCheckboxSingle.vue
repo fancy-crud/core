@@ -6,6 +6,7 @@
     <input
       v-model="modelValue"
       v-bind="field"
+      class="cursor-pointer"
     >
     <span class="pl-4">{{ field.label }}</span>
   </label>

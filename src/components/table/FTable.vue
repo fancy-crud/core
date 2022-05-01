@@ -5,7 +5,7 @@
         <input
           type="text"
           placeholder="locale.t('search')"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
       </div>
       <div class="flex items-center relative">
@@ -21,6 +21,7 @@
             />
           </template>
           <f-modal-card
+            class="p-5"
             max-width="max-w-3xl"
           >
             <f-form

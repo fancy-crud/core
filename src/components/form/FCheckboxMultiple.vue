@@ -6,9 +6,10 @@
     v-bind="$attrs"
   >
     <input
-      :id="field.id"
-      v-bind="field"
       @change="setModelValue(option)"
+      v-bind="field"
+      class="cursor-pointer"
+      :id="field.id"
     >
     <span class="pl-4">{{ option[optionLabel] }}</span>
   </label>
