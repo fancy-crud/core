@@ -13,14 +13,11 @@ services:
     expose:
       - 9090
 
-  cypress:
+  server:
     build:
-      context: .
-      dockerfile: Dockerfile.cypress
-    depends_on:
-      - frontend
-    environment:
-      - CYPRESS_baseUrl=http://frontend:9090
-    working_dir: /e2e
+      context: ./server
     volumes:
-      - ./:/e2e
+      - ./server:/usr/share/backend
+    ports:
+      - "9000:9000"
+    tty: true

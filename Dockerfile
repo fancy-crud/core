@@ -28,9 +28,6 @@ COPY package*.json ./
 
 RUN pnpm install
 
-RUN Xvfb :99 &
-RUN export DISPLAY=:99
-
 COPY . .
 
 USER root

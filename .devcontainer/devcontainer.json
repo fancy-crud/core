@@ -13,10 +13,20 @@
 	
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
+        "misterJ.vue-volar-extention-pack",
+		"johnsoncodehk.vscode-typescript-vue-plugin",
+		"lokalise.i18n-ally",
+		"antfu.iconify",
 		"dbaeumer.vscode-eslint",
-		"octref.vetur",
-		"tabnine.tabnine-vscode",
-		"syler.sass-indented"
+		"csstools.postcss",
+		"bradlc.vscode-tailwindcss",
+		"formulahendry.auto-close-tag",
+		"formulahendry.auto-rename-tag",
+		"streetsidesoftware.code-spell-checker",
+		"streetsidesoftware.code-spell-checker-spanish",
+		"anseki.vscode-color",
+		"eg2.vscode-npm-script",
+		"redhat.vscode-yaml"
 	],
 	
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
