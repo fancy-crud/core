@@ -4,7 +4,7 @@ import axios from 'axios'
 import App from './App.vue'
 import { http } from '@/composables'
 import '@mdi/font/css/materialdesignicons.css'
-import './styles/main.css'
+import './styles/main.sass'
 import 'flowbite';
 
 axios.defaults.baseURL = 'http://localhost:9000/api/'
