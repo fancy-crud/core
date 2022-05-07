@@ -1,9 +1,9 @@
 <template>
   <div class="absolute right-0 top-1/2 -translate-y-1/2 z-10">
     <a
-      ref="triggerEl"
       @mouseenter="openPreview"
       @mouseleave="closePreview"
+      ref="triggerEl"
       :href="url"
       tabindex="0"
       target="_blank"

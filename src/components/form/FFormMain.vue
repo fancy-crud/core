@@ -20,15 +20,15 @@
 <script lang="ts" setup>
 import type { Form, NormalizedFieldStructure } from '@/types'
 import { FormModes } from '@/types'
-import FInput from '@/components/form/FInput.vue'
-import FInputDate from '@/components/form/FInputDate.vue'
-import FCheckbox from '@/components/form/FCheckbox.vue'
-import FInputPassword from '@/components/form/FInputPassword.vue'
-import FSelect from '@/components/form/FSelect.vue'
-import FRadio from '@/components/form/FRadio.vue'
-import FColor from '@/components/form/FColor.vue'
-import FTextarea from '@/components/form/FTextarea.vue'
-import FInputFile from '@/components/form/FInputFile.vue'
+import FInput from '@/components/inputs/FInput/FInput.vue'
+import FInputDate from '@/components/inputs/FInputDate/FInputDate.vue'
+import FCheckbox from '@/components/inputs/FCheckbox/FCheckbox.vue'
+import FInputPassword from '@/components/inputs/FInputPassword/FInputPassword.vue'
+import FSelect from '@/components/inputs/FSelect/FSelect.vue'
+import FRadio from '@/components/inputs/FRadio/FRadio.vue'
+import FColor from '@/components/inputs/FColor/FColor.vue'
+import FTextarea from '@/components/inputs/FTextarea/FTextarea.vue'
+import FInputFile from '@/components/inputs/FInputFile/FInputFile.vue'
 
 const props = defineProps<{
   form: Form

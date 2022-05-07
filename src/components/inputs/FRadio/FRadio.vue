@@ -12,10 +12,10 @@
         class="cursor-pointer justify-start pl-4 flex items-center mb-4"
       >
         <input
-          v-bind="field"
-          :id="`${field.id}-${i}`"
           @click="setModelValue(option)"
           :checked="_.isEqual(field.modelValue, option)"
+          v-bind="field"
+          :id="`${field.id}-${i}`"
         >
         <span
           class="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
