@@ -74,10 +74,10 @@
             <input
               class="mr-3"
               type="checkbox"
-              :checked="option._isSelected"
+              :checked="isOptionSelected(option)"
             >
           </slot>
-          <span>{{ option.name }}</span>
+          <span>{{ getOptionLabel(option) }}</span>
           <slot
             v-bind="{ option }"
             name="append-option"
@@ -94,7 +94,7 @@
 import _ from 'lodash'
 import type { NormalizedFieldStructure } from '@/types'
 
-interface Option {
+type Option = string | number | {
   _isSelected?: boolean
   [key: string]: any
 }
@@ -140,9 +140,16 @@ const state = reactive<State>({
 setupModelValue()
 setupOptions()
 
+const optionLabel = computed(() => props.field.optionLabel || 'label')
+const optionValue = computed(() => props.field.optionValue || 'value')
+const getOptionLabel = computed(() => (option: Option) => {
+  if (typeof option === 'object') return option[optionValue.value]
+  return option
+})
+
 const selectedOptions = computed(() => {
   if (!Array.isArray(state.modelValue)) {
-    if (state.modelValue) return [state.modelValue.name]
+    if (state.modelValue) return [state.modelValue]
     else return []
   }
 
@@ -156,16 +163,34 @@ function setupModelValue() {
 
 function setupOptions() {
   const options = _.cloneDeep(props.field.options || [])
-  state.options = options.map(option => ({
-    _isSelected: false,
-    ...option,
-  }))
+  state.options = options.map((option) => {
+    if (typeof option === 'object') {
+      return {
+        _isSelected: false,
+        ...option,
+      } as Option
+    }
+    return option
+  })
 }
 
 function onSelectAll() {
   state.selectAll = !state.selectAll
-  state.options.forEach(option => option._isSelected = state.selectAll)
-  state.modelValue = state.options.filter(option => option._isSelected)
+
+  if (!Array.isArray(state.modelValue) || !state.modelValue) return
+
+  state.modelValue = state.options.reduce((previousValue, currentValue) => {
+    if (typeof currentValue === 'object') {
+      currentValue._isSelected = state.selectAll
+      if (currentValue._isSelected) return [...previousValue, currentValue]
+      else return previousValue
+    }
+
+    if (!Array.isArray(state.modelValue)) return previousValue
+
+    if (state.modelValue.includes(currentValue)) return previousValue
+    else return [...previousValue, currentValue]
+  }, [] as Option[])
 }
 
 function openOptions() {
@@ -181,41 +206,72 @@ function remove() {
   if (Array.isArray(state.modelValue) && state.modelValue.length) {
     const obj = state.modelValue.pop()
 
-    if (obj) obj._isSelected = false
+    if (obj && typeof obj === 'object') obj._isSelected = false
     state.modelValue = [...state.modelValue]
     return
   }
 
   if (!state.modelValue || Array.isArray(state.modelValue)) return
 
-  state.modelValue._isSelected = false
+  if (typeof state.modelValue === 'object')
+    state.modelValue._isSelected = false
   state.modelValue = null
 }
 
 function clear() {
   if (Array.isArray(state.modelValue)) {
-    state.modelValue.forEach(option => option._isSelected = false)
+    state.modelValue.forEach((option) => {
+      if (typeof option === 'object')
+        option._isSelected = false
+    })
     state.modelValue = []
     return
   }
 
+  let oldValue: ModelValue = null
+
   if (state.modelValue) {
-    const oldValue = state.modelValue
+    oldValue = state.modelValue
     state.modelValue = null
-    oldValue._isSelected = false
   }
+
+  if (oldValue && typeof oldValue === 'object')
+    oldValue._isSelected = false
 }
 
-function insert(value: any) {
-  if (props.field.multiple) {
+function insertMultiple(value: Option) {
+  if (typeof value === 'object')
     value._isSelected = !value._isSelected
-    state.modelValue = state.options.filter(option => option._isSelected)
-    state.searchTerm = ''
+
+  state.modelValue = state.options.reduce((previousValue, currentValue) => {
+    if (typeof currentValue === 'object') {
+      if (currentValue._isSelected) return [...previousValue, currentValue]
+      return previousValue
+    }
+
+    if (!Array.isArray(state.modelValue)) return previousValue
+
+    if (state.modelValue.includes(currentValue)) return previousValue
+    return [...previousValue, currentValue]
+  }, [] as Option[])
+
+  state.searchTerm = ''
+}
+
+function insert(value: Option) {
+  if (props.field.multiple) {
+    insertMultiple(value)
     return
   }
 
-  let oldValue: any
-  if (state.modelValue)
+  if (typeof value === 'string' || typeof value === 'number') {
+    state.modelValue = null
+    return
+  }
+
+  let oldValue: ModelValue = null
+
+  if (state.modelValue && typeof state.modelValue === 'object')
     oldValue = state.modelValue
 
   if (_.isEqual(oldValue, value) && value._isSelected) {
@@ -227,7 +283,7 @@ function insert(value: any) {
   value._isSelected = true
   state.modelValue = value
 
-  if (oldValue)
+  if (oldValue && typeof oldValue === 'object' && !Array.isArray(oldValue))
     oldValue._isSelected = false
 }
 
@@ -240,7 +296,7 @@ watch(() => state.searchTerm, () => {
     clearInterval(state.bounceTimer)
 
   state.bounceTimer = setTimeout(() => {
-    console.log('hello')
+    // console.log('hello')
   }, 1000)
 })
 
