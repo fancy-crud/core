@@ -1,8 +1,5 @@
 <template>
-  <f-control-wrap
-    :field="field"
-    :field-key="field.modelKey"
-  >
+  <f-control-wrap>
     <f-control-label>{{ field.label }}</f-control-label>
 
     <div class="relative">
@@ -24,7 +21,7 @@
       </button>
     </div>
 
-    <f-control-hint-message :field="field" />
+    <f-control-hint-message />
   </f-control-wrap>
 </template>
 
@@ -39,6 +36,8 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'update:modelValue', value: unknown): void
 }>()
+
+provide('field', props.field)
 
 const modelValue = useSetModelValue(props.field, () => {
   setInputTextModelValue(props.field, modelValue.value)

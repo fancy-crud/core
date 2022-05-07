@@ -12,21 +12,19 @@
 <script lang="ts" setup>
 import type { NormalizedFieldStructure } from '@/types'
 
-const props = defineProps<{
-  field: NormalizedFieldStructure
-}>()
+const field = computed(() => inject('field') as NormalizedFieldStructure)
 
 const messages = computed(() => {
-  let result: string[] = props.field.hintText ? [props.field.hintText] : []
+  let result: string[] = field.value.hintText ? [field.value.hintText] : []
 
-  if (props.field.errors.length)
-    result = props.field.errors
+  if (field.value.errors.length)
+    result = field.value.errors
 
   return result
 })
 
 const hasErrors = computed(() => {
-  return !!props.field.errors.length
+  return !!field.value.errors.length
 })
 
 const textColorClass = computed(() => {

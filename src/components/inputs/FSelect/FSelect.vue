@@ -1,8 +1,5 @@
 <template>
-  <f-control-wrap
-    :field="field"
-    :field-key="field.modelKey"
-  >
+  <f-control-wrap>
     <f-control-label>{{ field.label }}</f-control-label>
 
     <select
@@ -25,7 +22,7 @@
       </option>
     </select>
 
-    <f-control-hint-message :field="field" />
+    <f-control-hint-message />
   </f-control-wrap>
 </template>
 
@@ -47,6 +44,8 @@ const options = computed(() => {
 const emit = defineEmits<{
   (e: 'update:modelValue', value: unknown): void
 }>()
+
+provide('field', props.field)
 
 const setModelValue = (e: any) => {
   const value = e.target.value

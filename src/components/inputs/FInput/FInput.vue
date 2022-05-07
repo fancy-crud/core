@@ -2,15 +2,10 @@
   <f-control-wrap>
     <f-control-label>{{ field.label }}</f-control-label>
 
-    <div class="relative input input-bordered">
-      <span class="absolute font-medium top-1/2 -translate-y-1/2">
-        {{ modelValue }}
-      </span>
-      <input
-        v-model="modelValue"
-        v-bind="field"
-      >
-    </div>
+    <input
+      v-model="modelValue"
+      v-bind="field"
+    >
 
     <f-control-hint-message />
   </f-control-wrap>

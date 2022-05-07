@@ -7,14 +7,14 @@
 <script lang="ts" setup>
 import type { NormalizedFieldStructure } from '@/types'
 
-const props = defineProps<{ field: NormalizedFieldStructure; fieldKey: string }>()
+const field = computed(() => inject('field') as NormalizedFieldStructure)
 
 const attrs = useAttrs()
 
 const wrapClass = computed(() => {
-  const wrapName = `field-${props.fieldKey}-container`
-  const cols = props.field.wrapCols ? props.field.wrapCols : 'col-span-12'
-  const _wrapClass = props.field.wrapClass ? props.field.wrapClass : 'pb-5'
+  const wrapName = `field-${field.value.modelKey}-container`
+  const cols = field.value.wrapCols ? field.value.wrapCols : 'col-span-12'
+  const _wrapClass = field.value.wrapClass ? field.value.wrapClass : 'pb-5'
   const arrayResult: string[] = [_wrapClass, wrapName, cols]
 
   if (attrs.class) arrayResult.push(attrs.class as string)

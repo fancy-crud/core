@@ -1,8 +1,5 @@
 <template>
-  <f-control-wrap
-    :field="field"
-    :field-key="field.modelKey"
-  >
+  <f-control-wrap>
     <template v-if="isMultiple">
       <f-control-label>
         {{ field.label }}
@@ -19,7 +16,7 @@
       :field="field"
     />
 
-    <f-control-hint-message :field="field" />
+    <f-control-hint-message />
   </f-control-wrap>
 </template>
 
@@ -29,6 +26,8 @@ import type { NormalizedFieldStructure } from '@/types'
 const props = defineProps<{
   field: NormalizedFieldStructure
 }>()
+
+provide('field', props.field)
 
 const isMultiple = computed(() => {
   return Array.isArray(props.field.options) && Array.isArray(props.field.modelValue)

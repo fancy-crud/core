@@ -1,8 +1,5 @@
 <template>
-  <f-control-wrap
-    :field="field"
-    :field-key="field.modelKey"
-  >
+  <f-control-wrap>
     <f-control-label>{{ field.label }}</f-control-label>
 
     <div class="relative pr-4">
@@ -18,7 +15,7 @@
       />
     </div>
 
-    <f-control-hint-message :field="field" />
+    <f-control-hint-message />
   </f-control-wrap>
 </template>
 
@@ -33,6 +30,8 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'update:modelValue', value: unknown): void
 }>()
+
+provide('field', props.field)
 
 const setModelValue = (e: Event) => {
   const files = (e.target as HTMLInputElement).files
