@@ -1,8 +1,8 @@
 <template>
   <div class="p-5">
-    <f-table :table="table" />
-
-    <input v-model="value">
+    <f-button>
+      Create a new Element
+    </f-button>
   </div>
 </template>
 
@@ -75,8 +75,8 @@ const table = createTable({
   },
 })
 
-setTimeout(() => {
-  table.form.fields.name.modelValue = 'Hello'
-}, 6000)
+// setTimeout(() => {
+//   table.form.fields.name.modelValue = 'Hello'
+// }, 6000)
 
 </script>

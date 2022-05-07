@@ -2,6 +2,7 @@
   <button
     v-bind="$attrs"
     type="button"
+    class="f-button hover--effect"
     :class="className"
     :disabled="props.loading"
   >
@@ -22,33 +23,41 @@
         fill="currentColor"
       />
     </svg>
-    <slot>{{ label }}</slot>
+    <slot>{{ props.label }}</slot>
   </button>
 </template>
 
 <script lang="ts" setup>
-import { FormModes } from '@/types'
-
 const props = defineProps<{
-  mode?: FormModes
   loading?: boolean
-  label?: { create?: string; update?: string}
+  label?: string
   bgColor?: string
+  textColor?: string
+  flat?: boolean
 }>()
 
-const label = computed(() => {
-  return props.mode === FormModes.CREATE_MODE ? props.label?.create : props.label?.update
-})
-
 const className = computed(() => {
-  const bgColor = props.bgColor ?? 'primary'
+  const bgColor = props.bgColor ?? 'bg-gray-200'
+  const textColor = props.bgColor ? 'text-white' : (props.textColor || '')
+
+  const defaultStyle = !props.bgColor ? 'f-button--default' : ''
+  const flatStyle = props.flat ? 'shadow-0' : 'shadow'
+
   return [
-    `bg-${bgColor}-700 hover:bg-${bgColor}-800 focus:ring-4 focus:ring-${bgColor}-300`,
-    `dark:bg-${bgColor}-600 dark:hover:bg-${bgColor}-700 dark:focus:ring-${bgColor}-800`,
-    'font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none',
-    'f-btn-main',
-    !props.bgColor ? 'text-white' : '',
+    defaultStyle,
+    bgColor,
+    textColor,
+    flatStyle,
   ].join(' ')
 })
 
 </script>
+
+<style lang="sass">
+.f-button
+  @apply font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none
+  @apply focus:ring-0 hover:shadow-lg transition-all duration-500 focus:shadow-primary-400
+
+// .f-button--default
+//   @apply border
+</style>
