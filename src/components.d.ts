@@ -4,6 +4,7 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    FAutocomplete: typeof import('./components/form/FAutocomplete.vue')['default']
     FButton: typeof import('./components/utils/FButton.vue')['default']
     FButtonIcon: typeof import('./components/utils/FButtonIcon.vue')['default']
     FCheckbox: typeof import('./components/inputs/FCheckbox/FCheckbox.vue')['default']
