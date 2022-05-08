@@ -1,10 +1,11 @@
 <template>
   <button
     v-bind="$attrs"
-    type="button"
-    class="f-button hover--effect"
-    :class="className"
+    ref="buttonRef"
     :disabled="props.loading"
+    :class="className"
+    class="f-button f-button--hover"
+    type="button"
   >
     <svg
       v-if="props.loading"
@@ -23,41 +24,83 @@
         fill="currentColor"
       />
     </svg>
-    <slot>{{ props.label }}</slot>
+    <template v-if="props.icon">
+      <i
+        :class="props.icon"
+        class="w-5 h-5 flex items-center justify-center"
+      />
+    </template>
+    <slot v-else>
+      {{ props.label }}
+    </slot>
   </button>
+
+  <teleport to="body">
+    <div
+      ref="tooltipRef"
+      role="tooltip"
+      class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700"
+    >
+      {{ tooltip }}
+      <div
+        class="tooltip-arrow"
+        data-popper-arrow
+      />
+    </div>
+  </teleport>
 </template>
 
 <script lang="ts" setup>
+const attrs = useAttrs() as any
+
 const props = defineProps<{
   loading?: boolean
   label?: string
-  bgColor?: string
-  textColor?: string
-  flat?: boolean
+  icon?: string
+  tooltip?: string
+  tooltipPlacement?: string
 }>()
 
-const className = computed(() => {
-  const bgColor = props.bgColor ?? 'bg-gray-200'
-  const textColor = props.bgColor ? 'text-white' : (props.textColor || '')
+const buttonRef = ref()
+const tooltipRef = ref()
+const tooltipPopper = ref()
 
-  const defaultStyle = !props.bgColor ? 'f-button--default' : ''
-  const flatStyle = props.flat ? 'shadow-0' : 'shadow'
+const bgColor = computed(() => {
+  let bgColor = ''
+  if (typeof attrs === 'object' && attrs.class) {
+    const bgColorMatches = attrs.class.match(/(?:^|\s)bg-(\w)+([-\w\/]+)/)
 
-  return [
-    defaultStyle,
-    bgColor,
-    textColor,
-    flatStyle,
-  ].join(' ')
+    if (bgColorMatches && bgColorMatches.length)
+      bgColor = bgColorMatches[0].trim()
+  }
+
+  return bgColor || 'bg-gray-300'
 })
 
+const className = computed(() => {
+  const isIcon = props.icon ? 'f-button--icon' : ''
+  return [
+    bgColor.value,
+    isIcon,
+  ]
+})
+
+onMounted(() => {
+  if (props.tooltip) {
+    tooltipPopper.value = new Tooltip(tooltipRef.value, buttonRef.value, {
+      triggerType: 'hover',
+      placement: props.tooltipPlacement ?? 'bottom',
+    })
+  }
+})
 </script>
 
 <style lang="sass">
 .f-button
-  @apply font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none
-  @apply focus:ring-0 hover:shadow-lg transition-all duration-500 focus:shadow-primary-400
+  @apply font-medium px-5 py-3 focus:outline-none
+  @apply focus:ring-0 transition-all duration-500
 
-// .f-button--default
-//   @apply border
+.f-button--icon
+  @apply p-2.5
+
 </style>
