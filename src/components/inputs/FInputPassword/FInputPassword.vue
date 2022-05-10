@@ -9,16 +9,11 @@
         :class="className"
         :type="inputType"
       >
-      <button
+      <f-button
         @click="togglePasswordVisibility(field)"
-        class="absolute top-0 right-0 rounded-l-none btn"
-        type="button"
-      >
-        <i
-          class="mdi"
-          :class="iconVisibility"
-        />
-      </button>
+        class="absolute top-1/2 right-0 rounded-r-md p-3 -translate-y-[50%]"
+        :icon="iconVisibility"
+      />
     </div>
 
     <f-control-hint-message />
@@ -45,7 +40,7 @@ const modelValue = useSetModelValue(props.field, () => {
 })
 
 const iconVisibility = computed(() => {
-  return props.field.showPassword ? 'mdi-eye' : 'mdi-eye-off'
+  return props.field.showPassword ? 'mdi mdi-eye' : 'mdi mdi-eye-off'
 })
 
 const inputType = computed(() => props.field.showPassword ? 'text' : 'password')

@@ -1,18 +1,19 @@
 <template>
   <footer class="px-3">
-    <slot v-bind="{ mainButton, auxButton }">
+    <slot v-bind="{ mainButton, auxButton, getLabel }">
       <f-button
         @click="mainOnClick"
-        v-bind="mainButton"
-        :mode="form.settings.mode"
-        class="shadow-lg shadow-primary-200"
+        :label="getLabel(mainButton)"
+        :icon="mainButton.icon"
+        :class="mainButton.class"
+        class="bg-primary-500 text-white rounded-lg hover:shadow-md hover:shadow-primary-300"
       />
       <f-button
         @click="auxOnClick"
-        v-bind="auxButton"
-        :mode="form.settings.mode"
-        bg-color="white"
-        class="border"
+        :label="getLabel(auxButton)"
+        :icon="auxButton.icon"
+        :class="auxButton.class"
+        class="border ml-4 rounded-lg bg-transparent text-primary-500 border-primary-500 px-8 hover:bg-primary-50"
       />
     </slot>
   </footer>
@@ -21,7 +22,7 @@
 <script lang="ts" setup>
 import type { AxiosError, AxiosResponse } from 'axios'
 import { FormModes } from '@/types'
-import type { Form } from '@/types'
+import type { Button, Form } from '@/types'
 import { triggerCreateOrUpdate } from '@/composables'
 
 const props = defineProps<{
@@ -34,6 +35,13 @@ const emit = defineEmits<{
   (e: 'create-error', response?: AxiosResponse): void
   (e: 'update-error', response?: AxiosResponse): void
 }>()
+
+const mainButton = computed(() => props.form.settings.buttons.main)
+const auxButton = computed(() => props.form.settings.buttons.aux)
+
+const getLabel = computed(() => (button: Button) => {
+  return props.form.settings.mode === FormModes.CREATE_MODE ? button.label?.create : button.label?.update
+})
 
 const mainOnClick = async() => {
   if (typeof props.form.settings.buttons.main.onClick === 'function') {
@@ -75,7 +83,4 @@ const auxOnClick = () => {
 
   // resetModelValue(props.form, cloneForm)
 }
-
-const mainButton = computed(() => props.form.settings.buttons.main)
-const auxButton = computed(() => props.form.settings.buttons.aux)
 </script>

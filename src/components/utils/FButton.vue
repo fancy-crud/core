@@ -102,5 +102,4 @@ onMounted(() => {
 
 .f-button--icon
   @apply p-2.5
-
 </style>

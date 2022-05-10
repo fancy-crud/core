@@ -9,6 +9,7 @@ export enum FormModes {
 export interface Button extends ButtonHTMLAttributes {
   label?: { create?: string; update?: string};
   loading?: boolean;
+  icon?: string;
   onClick?: (payload?: MouseEvent) => void
 }
 
@@ -90,7 +91,7 @@ export interface Title {
 
 export interface Settings {
   url: string;
-  buttons?: NormalizedButtons;
+  buttons?: Buttons;
   mode?: FormModes;
   title?: string | Title
   lookupField?: string

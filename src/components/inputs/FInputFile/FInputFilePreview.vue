@@ -7,7 +7,7 @@
       :href="url"
       tabindex="0"
       target="_blank"
-      class="text-white bg-primary-700 hover:bg-primary-800 focus:outline-none focus:ring-primary-300 font-medium rounded-r-lg text-lg py-2 px-3 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+      class="text-white bg-primary-500 hover:bg-primary-800 focus:outline-none focus:ring-primary-300 font-medium rounded-r-lg text-lg py-2 px-3 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
       role="button"
     >
       <i
