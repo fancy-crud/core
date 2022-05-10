@@ -1,7 +1,5 @@
 <template>
-  <div class="p-4">
-    <!-- <f-filters /> -->
-  </div>
+  <div class="p-4" />
   <div class="p-5">
     <f-button>
       Create a new Element
