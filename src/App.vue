@@ -31,7 +31,6 @@ const form = createForm({
         { name: 'perrin' },
         { name: 'perrin' },
         { name: 'perrin' },
-        { name: 'perrin' },
       ],
     },
     // gender: {
