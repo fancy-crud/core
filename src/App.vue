@@ -10,12 +10,6 @@
 <script lang="ts" setup>
 import { createForm } from './composables'
 
-// const field = reactive({
-//   modelKey: 'custom-field',
-//   modelValue: 'Christopher Flores',
-//   errors: [],
-// })
-
 const state = ref<any[]>([])
 
 const form = createForm({
