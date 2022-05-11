@@ -2,7 +2,5 @@ export * from "./form"
 export * from "./table"
 export * from "./http"
 export * from "./notifications"
-// export * from "./components"
-// export * from "./pseudo"
-
+export * from "./config"
 import "animate.css"
