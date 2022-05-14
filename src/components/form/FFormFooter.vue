@@ -6,14 +6,12 @@
         :label="getLabel(mainButton)"
         :icon="mainButton.icon"
         :class="mainButton.class"
-        class="bg-primary-500 text-white rounded-lg hover:shadow-md hover:shadow-primary-300"
       />
       <f-button
         @click="auxOnClick"
         :label="getLabel(auxButton)"
         :icon="auxButton.icon"
         :class="auxButton.class"
-        class="border ml-4 rounded-lg bg-transparent text-primary-500 border-primary-500 px-8 hover:bg-primary-50"
       />
     </slot>
   </footer>

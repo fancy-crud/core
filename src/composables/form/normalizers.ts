@@ -72,7 +72,9 @@ export function normalizeFormFields(fields: Fields): NormalizedFields {
 }
 
 export function normalizeButtons(buttons?: Buttons) {
+  const defaults = getDefaults()
   const defaultMainButton = {
+    class: defaults.classes.mainButton,
     label: {
       create: locale.t("Create new"),
       update: locale.t("Update record"),
@@ -80,6 +82,7 @@ export function normalizeButtons(buttons?: Buttons) {
   }
 
   const defaultAuxButton = {
+    class: defaults.classes.auxButton,
     label: {
       create: locale.t("Cancel"),
       update: locale.t("Cancel"),
