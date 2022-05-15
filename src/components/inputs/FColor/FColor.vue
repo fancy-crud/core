@@ -2,14 +2,19 @@
   <f-control-wrap>
     <f-control-label>{{ field.label }}</f-control-label>
 
-    <div class="relative input input-bordered">
-      <span class="absolute font-medium top-1/2 -translate-y-1/2">
+    <div class="relative border rounded-lg p-3 flex row flex-nowrap justify-between items-center h-full max-h-10">
+      <span class="font-medium">
         {{ modelValue }}
       </span>
       <input
         v-model="modelValue"
         v-bind="field"
+        class="absolute top-0 left-0 opacity-0 h-full w-full"
       >
+      <span
+        class="w-6 h-6 rounded-full"
+        :style="selectedColor"
+      />
     </div>
 
     <f-control-hint-message />
@@ -33,6 +38,10 @@ provide('field', props.field)
 const modelValue = useSetModelValue(props.field, () => {
   setInputTextModelValue(props.field, modelValue.value)
   emit('update:modelValue', modelValue.value)
+})
+
+const selectedColor = computed(() => {
+  return { backgroundColor: (modelValue.value as string) || '' }
 })
 
 </script>
