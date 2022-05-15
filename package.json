@@ -19,12 +19,12 @@
     "axios": "^0.24.0",
     "flowbite": "^1.4.2",
     "prism-theme-vars": "^0.2.2",
+    "uuid": "^8.3.2",
     "vue": "^3.2.26",
     "vue-demi": "^0.12.1",
     "vue-i18n": "^9.1.9"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.14.0",
     "@iconify-json/carbon": "^1.0.12",
     "@intlify/vite-plugin-vue-i18n": "^3.2.1",
     "@types/lodash": "^4.14.181",
