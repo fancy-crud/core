@@ -15,17 +15,19 @@
         :class="iconClass"
       />
     </a>
-    <figure
-      v-if="isImageType"
-      ref="targetEl"
-      class="bg-white rounded divide-y divide-gray-100 shadow-lg dark:bg-gray-700 w-56"
-      :class="{'hidden': !display }"
-    >
-      <img
-        :src="url"
-        alt="Image preview"
+    <teleport to="body">
+      <figure
+        v-if="isImageType"
+        ref="targetEl"
+        class="bg-white rounded divide-y divide-gray-100 shadow-lg dark:bg-gray-700 w-56"
+        :class="{'hidden': !display }"
       >
-    </figure>
+        <img
+          :src="url"
+          alt="Image preview"
+        >
+      </figure>
+    </teleport>
   </div>
 </template>
 
