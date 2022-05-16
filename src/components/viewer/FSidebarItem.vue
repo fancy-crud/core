@@ -31,6 +31,7 @@ const props = defineProps<{
 
 const updateModelValue = inject('updateModelValue') as (value: string) => void
 const triggerUpdateModelValue = () => {
+  localStorage.setItem('sidebar-item', props.id)
   updateModelValue(props.id)
 }
 </script>

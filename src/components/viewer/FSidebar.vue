@@ -18,7 +18,9 @@
 </template>
 
 <script setup lang='ts'>
-const modelValue = ref('')
+const sidebarItem = localStorage.getItem('sidebar-item')
+const modelValue = ref(sidebarItem || '')
+
 const updateModelValue = (value: string) => {
   modelValue.value = value
 }
