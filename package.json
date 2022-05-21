@@ -18,6 +18,7 @@
     "animate.css": "^4.1.1",
     "axios": "^0.24.0",
     "flowbite": "^1.4.2",
+    "flowbite-datepicker": "^1.2.1",
     "prism-theme-vars": "^0.2.2",
     "uuid": "^8.3.2",
     "vue": "^3.2.26",
