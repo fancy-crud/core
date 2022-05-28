@@ -12,6 +12,9 @@
       "autofix": false,
       "ignore": ["update:modelValue"]
     }],
+    "vue/component-tags-order": ["error", {
+      "order": [ [ "template", "script" ], "style" ]
+    }],
     "vue/attributes-order": ["error", {
       "order": [
         "LIST_RENDERING",
