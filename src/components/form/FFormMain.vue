@@ -39,6 +39,7 @@ const controls = {
   date: FInputDate,
   password: FInputPassword,
   select: FSelect,
+  autocomplete: FSelect,
   checkbox: FCheckbox,
   radio: FRadio,
   color: FColor,
@@ -54,11 +55,16 @@ const getComponent = (field: NormalizedFieldStructure) => {
 
 const fields = computed(() => {
   return Object.entries(props.form.fields).filter(([_, field]) => {
-    if (field.hidden) return false
-    if (field.createOnly && props.form.settings.mode !== FormModes.CREATE_MODE) return false
-    if (field.updateOnly && props.form.settings.mode === FormModes.CREATE_MODE) return false
+    if (field.hidden)
+      return false
+
+    if (field.createOnly && props.form.settings.mode !== FormModes.CREATE_MODE)
+      return false
+
+    if (field.updateOnly && props.form.settings.mode === FormModes.CREATE_MODE)
+      return false
+
     return true
   })
 })
-
 </script>

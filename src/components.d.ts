@@ -39,6 +39,8 @@ declare module 'vue' {
     FRadio: typeof import('./components/inputs/FRadio/FRadio.vue')['default']
     FRadioViewer: typeof import('./components/viewer/FRadioViewer.vue')['default']
     FSelect: typeof import('./components/inputs/FSelect/FSelect.vue')['default']
+    FSelectOptions: typeof import('./components/inputs/FSelect/FSelectOptions.vue')['default']
+    FSelectViewer: typeof import('./components/viewer/FSelectViewer.vue')['default']
     FSidebar: typeof import('./components/viewer/FSidebar.vue')['default']
     FSidebarItem: typeof import('./components/viewer/FSidebarItem.vue')['default']
     FTable: typeof import('./components/table/FTable.vue')['default']

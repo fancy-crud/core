@@ -22,7 +22,7 @@ import FInputViewer from '@/components/viewer/FInputViewer.vue'
 import FInputDate from '@/components/viewer/FDateViewer.vue'
 import FCheckbox from '@/components/viewer/FCheckboxViewer.vue'
 import FPasswordViewer from '@/components/viewer/FPasswordViewer.vue'
-// import FSelect from '@/components/viewer/FSelectViewer.vue'
+import FSelect from '@/components/viewer/FSelectViewer.vue'
 import FRadioViewer from '@/components/viewer/FRadioViewer.vue'
 import FColor from '@/components/viewer/FColorViewer.vue'
 import FTextareaViewer from '@/components/viewer/FTextareaViewer.vue'
@@ -33,7 +33,7 @@ const inputs = {
   text: FInputViewer,
   date: FInputDate,
   password: FPasswordViewer,
-  // select: FSelect,
+  select: FSelect,
   checkbox: FCheckbox,
   radio: FRadioViewer,
   color: FColor,

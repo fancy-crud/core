@@ -43,9 +43,8 @@ export function createDefaultKeys(
     _field.valueString = ""
   }
 
-  if (_field.url && !_field.options) {
+  if (_field.url && (!_field.options || !Array.isArray(_field.options)))
     _field.options = []
-  }
 
   const defaults = getDefaults()
   const controlsClasses = defaults.classes
