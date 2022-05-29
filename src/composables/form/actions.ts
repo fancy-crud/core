@@ -113,7 +113,10 @@ export function setFormRecord(form: Form, record: unknown) {
 export function useSetModelValue(field: NormalizedFieldStructure, callback: () => void) {
   const modelValue = ref<unknown>(field.modelValue)
 
-  effect(() => modelValue.value, { scheduler: callback })
+  effect(() => modelValue.value, { scheduler: () => {
+    field.errors = []
+    callback()
+  } })
 
   effect(() => field.modelValue, {
     scheduler: () => modelValue.value = field.modelValue

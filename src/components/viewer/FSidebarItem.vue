@@ -24,14 +24,14 @@
 
 <script lang="ts" setup>
 const props = defineProps<{
-  id: string
+  id?: string
   label?: string
   title?: string
 }>()
 
 const updateModelValue = inject('updateModelValue') as (value: string) => void
 const triggerUpdateModelValue = () => {
-  localStorage.setItem('sidebar-item', props.id)
-  updateModelValue(props.id)
+  localStorage.setItem('sidebar-item', props.id ?? '')
+  updateModelValue(props.id ?? '')
 }
 </script>

@@ -30,8 +30,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'create', response: AxiosResponse): void
   (e: 'update', response: AxiosResponse): void
-  (e: 'create-error', response?: AxiosResponse): void
-  (e: 'update-error', response?: AxiosResponse): void
+  (e: 'error', response?: AxiosResponse): void
 }>()
 
 const mainButton = computed(() => props.form.settings.buttons.main)
@@ -41,7 +40,7 @@ const getLabel = computed(() => (button: Button) => {
   return props.form.settings.mode === FormModes.CREATE_MODE ? button.label?.create : button.label?.update
 })
 
-const mainOnClick = async() => {
+const mainOnClick = async () => {
   if (typeof props.form.settings.buttons.main.onClick === 'function') {
     props.form.settings.buttons.main.onClick()
     return
@@ -53,13 +52,13 @@ const mainOnClick = async() => {
   }
 
   const emitEvent = (response: AxiosResponse) => {
-    if (props.form.settings.mode === FormModes.CREATE_MODE) emit('create', response)
+    if (props.form.settings.mode === FormModes.CREATE_MODE)
+      emit('create', response)
     else emit('update', response)
   }
 
   const emitErrorEvent = (response?: AxiosResponse) => {
-    if (props.form.settings.mode === FormModes.CREATE_MODE) emit('create-error', response)
-    else emit('update-error', response)
+    emit('error', response)
   }
 
   try {
@@ -72,13 +71,10 @@ const mainOnClick = async() => {
   }
 
   emitEvent(result.value)
-  // resetModelValue(form, cloneForm)
 }
 
 const auxOnClick = () => {
   if (typeof props.form.settings.buttons.aux.onClick === 'function')
     props.form.settings.buttons.aux.onClick()
-
-  // resetModelValue(props.form, cloneForm)
 }
 </script>

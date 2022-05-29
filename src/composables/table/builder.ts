@@ -1,5 +1,5 @@
 import { TableHeader, Table, NormalizedFields } from '@/types';
-import { reactive } from '@vue/reactivity';
+import { reactive } from 'vue';
 
 export function createHeaders(fields: NormalizedFields) {
   return Object.entries(fields).reduce((accumulator, [fieldKey, field]) => {

@@ -1,10 +1,11 @@
 <template>
   <f-sidebar>
+    <f-sidebar-item title="Forms" />
     <f-sidebar-item
       v-for="(_, inputKey) in inputs"
       :key="inputKey"
       :label="inputKey.toUpperCase()"
-      :id="`${ inputKey }-field`"
+      :id="`${inputKey}-field`"
     />
 
     <template
@@ -18,6 +19,7 @@
 </template>
 
 <script lang="ts" setup>
+import FFormViewer from '@/components/viewer/FFormViewer.vue'
 import FInputViewer from '@/components/viewer/FInputViewer.vue'
 import FInputDate from '@/components/viewer/FDateViewer.vue'
 import FCheckbox from '@/components/viewer/FCheckboxViewer.vue'
@@ -40,5 +42,6 @@ const inputs = {
   textarea: FTextareaViewer,
   file: FFileViewer,
   image: FImageViewer,
+  genreForm: FFormViewer,
 }
 </script>

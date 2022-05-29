@@ -51,7 +51,7 @@ import _ from 'lodash'
 import type { AxiosResponse } from 'axios'
 import { FormModes } from '@/types'
 import type { Form } from '@/types'
-import { errorNotification, notificationStore, pushNotification, shiftNotification, successNotification } from '@/composables'
+import { errorNotification, handleBadRequest, notificationStore, pushNotification, shiftNotification, successNotification } from '@/composables'
 
 const props = defineProps<{
   form: Form
@@ -61,8 +61,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'create', response: AxiosResponse): void
   (e: 'update', response: AxiosResponse): void
-  (e: 'create-error', response: AxiosResponse): void
-  (e: 'update-error', response: AxiosResponse): void
+  (e: 'error', response?: AxiosResponse): void
 }>()
 
 const slots = useSlots()
@@ -99,14 +98,21 @@ const onSuccess = (response: AxiosResponse) => {
     message: successNotificationMessage.value,
   })
 
-  if (props.form.settings.mode === FormModes.CREATE_MODE) emit('create', response)
-  else emit('update', response)
+  if (props.form.settings.mode === FormModes.CREATE_MODE)
+    emit('create', response)
+
+  else
+    emit('update', response)
 }
 
-const dispatchErrorNotification = () => {
+const dispatchErrorNotification = (error?: AxiosResponse) => {
+  if (error && error.status === 400)
+    handleBadRequest(props.form, error.data)
+
   pushNotification({
     ...errorNotification(),
   })
-}
 
+  emit('error', error)
+}
 </script>

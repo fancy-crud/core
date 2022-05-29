@@ -4,7 +4,6 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
-    FAutocomplete: typeof import('./components/form/FAutocomplete.vue')['default']
     FButton: typeof import('./components/utils/FButton.vue')['default']
     FButtonIcon: typeof import('./components/utils/FButtonIcon.vue')['default']
     FCheckbox: typeof import('./components/inputs/FCheckbox/FCheckbox.vue')['default']
@@ -23,6 +22,7 @@ declare module 'vue' {
     FFormFooter: typeof import('./components/form/FFormFooter.vue')['default']
     FFormHeader: typeof import('./components/form/FFormHeader.vue')['default']
     FFormMain: typeof import('./components/form/FFormMain.vue')['default']
+    FFormViewer: typeof import('./components/viewer/FFormViewer.vue')['default']
     FImageViewer: typeof import('./components/viewer/FImageViewer.vue')['default']
     FInput: typeof import('./components/inputs/FInput/FInput.vue')['default']
     FInputDate: typeof import('./components/inputs/FInputDate/FInputDate.vue')['default']
@@ -49,6 +49,7 @@ declare module 'vue' {
     FTableHeader: typeof import('./components/table/FTableHeader.vue')['default']
     FTableRowActions: typeof import('./components/table/FTableRowActions.vue')['default']
     FTableRowFilePreview: typeof import('./components/table/FTableRowFilePreview.vue')['default']
+    FTableViewer: typeof import('./components/viewer/FTableViewer.vue')['default']
     FTextarea: typeof import('./components/inputs/FTextarea/FTextarea.vue')['default']
     FTextareaViewer: typeof import('./components/viewer/FTextareaViewer.vue')['default']
   }

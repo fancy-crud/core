@@ -29,5 +29,4 @@ const modelValue = useSetModelValue(props.field, () => {
   setInputTextModelValue(props.field, modelValue.value)
   emit('update:modelValue', modelValue.value)
 })
-
 </script>

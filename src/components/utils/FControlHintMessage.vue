@@ -3,7 +3,7 @@
     v-for="(message, key) in messages"
     :key="key"
     :class="textColorClass"
-    class="mt-2 text-sm text-gray-500 dark:text-gray-400"
+    class="mt-2 text-sm font-medium text-gray-500 dark:text-gray-400"
   >
     {{ message }}
   </p>
@@ -30,5 +30,4 @@ const hasErrors = computed(() => {
 const textColorClass = computed(() => {
   return hasErrors.value ? 'text-red-600' : 'text-gray-500 dark:text-gray-400'
 })
-
 </script>
