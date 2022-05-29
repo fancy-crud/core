@@ -29,8 +29,7 @@
     <f-form-footer
       @create="onSuccess"
       @update="onSuccess"
-      @create-error="dispatchErrorNotification"
-      @update-error="dispatchErrorNotification"
+      @error="dispatchErrorNotification"
       :form="form"
     />
 
