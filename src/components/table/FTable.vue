@@ -3,6 +3,7 @@
     <div class="flex flex-nowrap p-4 items-center justify-between">
       <div>
         <input
+          v-model="_search.value"
           type="text"
           placeholder="locale.t('search')"
           class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -97,6 +98,10 @@ import _ from 'lodash'
 import type { Table } from '@/types'
 import { FormModes } from '@/types'
 import { createHeaders, deleteRecord, fillFieldsWithRecordValues, getRecords, resetModelValue, retrieveRecord, updateRecord } from '@/composables'
+interface Search {
+  value: string
+  bounceInterval: NodeJS.Timeout | null
+}
 
 const props = defineProps<{
   table: Table
@@ -115,8 +120,12 @@ const formModalKey = ref(0)
 
 const rowToDelete = ref<any>(null)
 const deleteModal = ref(false)
+const _search: Search = reactive({
+  value: '',
+  bounceInterval: null,
+})
 
-const { list, loading, pagination, fetchItems } = getRecords({
+const { list, loading, pagination, fetchItems, search } = getRecords({
   url: props.table.settings.url,
   _search: props.table.settings.search,
   initialFilterParams: props.table.settings.filterParams,
@@ -135,9 +144,28 @@ const ItemsCount = computed(() => {
   return count
 })
 
-const closeModal = () => (formModal.value = false)
+watch(() => props.formModal, () => {
+  formModal.value = Boolean(props.formModal)
+})
 
-const openCreateModal = () => {
+watch(formModal, () => {
+  emit('update:formModal', formModal.value)
+})
+
+watch(() => _search.value, (searchValue: string) => {
+  if (_search.bounceInterval)
+    clearTimeout(_search.bounceInterval)
+
+  _search.bounceInterval = setTimeout(() => {
+    search.value = searchValue
+  }, 700)
+})
+
+function closeModal() {
+  formModal.value = false
+}
+
+function openCreateModal() {
   if (typeof props.table.form.settings.buttons.aux.onClick !== 'function')
     Object.assign(props.table.form.settings.buttons.aux, { onClick: closeModal })
 
@@ -146,7 +174,7 @@ const openCreateModal = () => {
   formModal.value = true
 }
 
-const openEditModal = (row: any) => {
+function openEditModal(row: any) {
   resetModelValue(props.table.form, cloneForm)
 
   type rowKey = keyof typeof row
@@ -174,7 +202,7 @@ const openEditModal = (row: any) => {
   })
 }
 
-const openDeleteModal = (row: any, requestDeleteConfirmation = true) => {
+function openDeleteModal(row: any, requestDeleteConfirmation = true) {
   if (requestDeleteConfirmation && !props.skipDeleteConfirmation) {
     rowToDelete.value = row
     deleteModal.value = true
@@ -196,7 +224,7 @@ const openDeleteModal = (row: any, requestDeleteConfirmation = true) => {
   }).then(() => fetchItems())
 }
 
-const updateCheckbox = (value: { field: string; row: any }) => {
+function updateCheckbox(value: { field: string; row: any }) {
   type rowKey = keyof typeof value.row
   const lookupField = (props.table.settings.lookupField || props.table.form.settings.lookupField) as rowKey
   let lookupValue = ''
@@ -212,12 +240,4 @@ const updateCheckbox = (value: { field: string; row: any }) => {
     },
   })
 }
-
-watch(() => props.formModal, () => {
-  formModal.value = Boolean(props.formModal)
-})
-
-watch(formModal, () => {
-  emit('update:formModal', formModal.value)
-})
 </script>

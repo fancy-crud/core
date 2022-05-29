@@ -14,6 +14,8 @@ class ArtistViewSet(ModelViewSet):
     queryset = models.Artist.objects.all()
     serializer_class = serializers.ArtistSerializer
 
+    search_fields = ['name']
+
 
 class AlbumViewSet(ModelViewSet):
 

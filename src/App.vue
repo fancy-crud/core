@@ -30,6 +30,7 @@ import FColor from '@/components/viewer/FColorViewer.vue'
 import FTextareaViewer from '@/components/viewer/FTextareaViewer.vue'
 import FFileViewer from '@/components/viewer/FFileViewer.vue'
 import FImageViewer from '@/components/viewer/FImageViewer.vue'
+import FTableViewer from '@/components/viewer/FTableViewer.vue'
 
 const inputs = {
   text: FInputViewer,
@@ -43,5 +44,6 @@ const inputs = {
   file: FFileViewer,
   image: FImageViewer,
   genreForm: FFormViewer,
+  table: FTableViewer,
 }
 </script>
