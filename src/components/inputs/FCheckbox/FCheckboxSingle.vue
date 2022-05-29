@@ -8,13 +8,18 @@
       v-bind="field"
       class="cursor-pointer"
     >
-    <span class="pl-4">{{ field.label }}</span>
+    <span
+      class="pl-4"
+      :class="[errorStyles.textColor]"
+    >
+      {{ field.label }}
+    </span>
   </label>
 </template>
 
 <script lang="ts" setup>
 import type { NormalizedFieldStructure } from '@/types'
-import { setInputCheckboxModelValue, useSetModelValue } from '@/composables'
+import { setInputCheckboxModelValue, useErrorStyles, useSetModelValue } from '@/composables'
 
 const props = defineProps<{
   field: NormalizedFieldStructure
@@ -24,9 +29,10 @@ const emit = defineEmits<{
   (e: 'update:modelValue', value: unknown): void
 }>()
 
+const errorStyles = useErrorStyles(props.field)
+
 const modelValue = useSetModelValue(props.field, () => {
   setInputCheckboxModelValue(props.field, modelValue.value)
   emit('update:modelValue', modelValue.value)
 })
-
 </script>

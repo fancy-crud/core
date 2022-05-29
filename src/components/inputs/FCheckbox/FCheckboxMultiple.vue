@@ -3,6 +3,7 @@
     v-for="(option, i) in options"
     :key="i"
     class="label cursor-pointer flex items-center justify-start py-2"
+    :class="[errorStyles.textColor]"
     v-bind="$attrs"
   >
     <input
@@ -18,7 +19,7 @@
 <script lang="ts" setup>
 import _ from 'lodash'
 import type { NormalizedFieldStructure } from '@/types'
-import { setInputCheckboxModelValue } from '@/composables'
+import { setInputCheckboxModelValue, useErrorStyles } from '@/composables'
 
 const props = defineProps<{
   field: NormalizedFieldStructure
@@ -31,9 +32,10 @@ const emit = defineEmits<{
 const options = computed(() => _.cloneDeep(props.field.options))
 const optionLabel = ref(props.field.optionLabel || '')
 
+const errorStyles = useErrorStyles(props.field)
+
 const setModelValue = (value: any) => {
   setInputCheckboxModelValue(props.field, value)
   emit('update:modelValue', value)
 }
-
 </script>

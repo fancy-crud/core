@@ -1,10 +1,13 @@
 <template>
   <f-control-wrap>
-    <f-control-label>{{ field.label }}</f-control-label>
+    <f-control-label :class="[errorStyles.textColor]">
+      {{ field.label }}
+    </f-control-label>
 
     <input
       v-model="modelValue"
       v-bind="field"
+      :class="[errorStyles.borderColor]"
     >
 
     <f-control-hint-message />
@@ -13,7 +16,7 @@
 
 <script lang="ts" setup>
 import type { NormalizedFieldStructure } from '@/types'
-import { setInputTextModelValue, useSetModelValue } from '@/composables'
+import { setInputTextModelValue, useErrorStyles, useSetModelValue } from '@/composables'
 
 const props = defineProps<{
   field: NormalizedFieldStructure
@@ -24,6 +27,8 @@ const emit = defineEmits<{
 }>()
 
 provide('field', props.field)
+
+const errorStyles = useErrorStyles(props.field)
 
 const modelValue = useSetModelValue(props.field, () => {
   setInputTextModelValue(props.field, modelValue.value)

@@ -1,12 +1,14 @@
 <template>
   <f-control-wrap>
-    <f-control-label>{{ field.label }}</f-control-label>
+    <f-control-label :class="[errorStyles.textColor]">
+      {{ field.label }}
+    </f-control-label>
 
     <div class="relative">
       <input
         v-model="modelValue"
         v-bind="field"
-        :class="className"
+        :class="[errorStyles.borderColor]"
         :type="inputType"
       >
       <f-button
@@ -22,7 +24,7 @@
 
 <script lang="ts" setup>
 import type { NormalizedFieldStructure } from '@/types'
-import { setInputTextModelValue, togglePasswordVisibility, useSetModelValue } from '@/composables'
+import { setInputTextModelValue, togglePasswordVisibility, useErrorStyles, useSetModelValue } from '@/composables'
 
 const props = defineProps<{
   field: NormalizedFieldStructure
@@ -34,6 +36,7 @@ const emit = defineEmits<{
 
 provide('field', props.field)
 
+const errorStyles = useErrorStyles(props.field)
 const modelValue = useSetModelValue(props.field, () => {
   setInputTextModelValue(props.field, modelValue.value)
   emit('update:modelValue', modelValue.value)
@@ -44,6 +47,4 @@ const iconVisibility = computed(() => {
 })
 
 const inputType = computed(() => props.field.showPassword ? 'text' : 'password')
-
-const className = computed(() => `w-full ${props.field.class}`)
 </script>

@@ -1,6 +1,8 @@
 <template>
   <f-control-wrap>
-    <f-control-label>{{ field.label }}</f-control-label>
+    <f-control-label :class="[errorStyles.textColor]">
+      {{ field.label }}
+    </f-control-label>
 
     <div class="relative">
       <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -19,8 +21,10 @@
       </div>
       <input
         @blur="setModel"
+        v-bind="props.field"
         ref="inputRef"
-        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        :class="[errorStyles.borderColor]"
+        class="border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         datepicker-format="dd/mm/yyyy"
         placeholder="Select datetime"
         type="text"
@@ -32,9 +36,9 @@
 </template>
 
 <script lang="ts" setup>
-import Datepicker from 'flowbite-datepicker/Datepicker';
+import Datepicker from 'flowbite-datepicker/Datepicker'
 import type { NormalizedFieldStructure } from '@/types'
-import { setInputTextModelValue, useSetModelValue } from '@/composables'
+import { setInputTextModelValue, useErrorStyles, useSetModelValue } from '@/composables'
 
 const props = defineProps<{
   field: NormalizedFieldStructure
@@ -48,6 +52,8 @@ provide('field', props.field)
 
 const inputRef = ref<HTMLInputElement>()
 const dateInput = ref<any>()
+
+const errorStyles = useErrorStyles(props.field)
 const modelValue = useSetModelValue(props.field, () => {
   setInputTextModelValue(props.field, modelValue.value)
   emit('update:modelValue', modelValue.value)
@@ -59,12 +65,12 @@ const setModel = (e: Event) => {
 }
 
 onMounted(() => {
- if (inputRef.value) {
+  if (inputRef.value) {
     dateInput.value = new Datepicker(inputRef.value, {
       todayHighlight: true,
       todayBtn: true,
       clearBtn: true,
-    });
+    })
   }
 })
 

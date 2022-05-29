@@ -1,8 +1,13 @@
 <template>
   <f-control-wrap>
-    <f-control-label>{{ field.label }}</f-control-label>
+    <f-control-label :class="[errorStyles.textColor]">
+      {{ field.label }}
+    </f-control-label>
 
-    <div class="relative border rounded-lg p-3 flex row flex-nowrap justify-between items-center h-full max-h-10">
+    <div
+      class="relative border rounded-lg p-3 flex row flex-nowrap justify-between items-center h-full max-h-10"
+      :class="[errorStyles.borderColor]"
+    >
       <span class="font-medium">
         {{ modelValue }}
       </span>
@@ -23,7 +28,7 @@
 
 <script lang="ts" setup>
 import type { NormalizedFieldStructure } from '@/types'
-import { setInputTextModelValue, useSetModelValue } from '@/composables'
+import { setInputTextModelValue, useErrorStyles, useSetModelValue } from '@/composables'
 
 const props = defineProps<{
   field: NormalizedFieldStructure
@@ -35,6 +40,7 @@ const emit = defineEmits<{
 
 provide('field', props.field)
 
+const errorStyles = useErrorStyles(props.field)
 const modelValue = useSetModelValue(props.field, () => {
   setInputTextModelValue(props.field, modelValue.value)
   emit('update:modelValue', modelValue.value)
@@ -43,5 +49,4 @@ const modelValue = useSetModelValue(props.field, () => {
 const selectedColor = computed(() => {
   return { backgroundColor: (modelValue.value as string) || '' }
 })
-
 </script>

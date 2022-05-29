@@ -1,7 +1,7 @@
 <template>
   <f-control-wrap>
     <template v-if="isMultiple">
-      <f-control-label>
+      <f-control-label :class="[errorStyles.textColor]">
         {{ field.label }}
       </f-control-label>
 
@@ -21,6 +21,7 @@
 </template>
 
 <script lang="ts" setup>
+import { useErrorStyles } from '@/composables'
 import type { NormalizedFieldStructure } from '@/types'
 
 const props = defineProps<{
@@ -29,6 +30,7 @@ const props = defineProps<{
 
 provide('field', props.field)
 
+const errorStyles = useErrorStyles(props.field)
 const isMultiple = computed(() => {
   return Array.isArray(props.field.options) && Array.isArray(props.field.modelValue)
 })

@@ -1,12 +1,14 @@
 <template>
   <f-control-wrap>
-    <f-control-label>{{ field.label }}</f-control-label>
+    <f-control-label :class="[errorStyles.textColor]">
+      {{ field.label }}
+    </f-control-label>
 
     <div class="relative pr-4">
       <input
         @change="setModelValue"
         v-bind="field"
-        class="block w-full text-sm text-gray-900 bg-gray-50 rounded-l-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+        :class="[errorStyles.borderColor]"
         type="file"
       >
       <f-input-file-preview
@@ -21,7 +23,7 @@
 
 <script lang="ts" setup>
 import type { NormalizedFieldStructure } from '@/types'
-import { setInputFileModelValue } from '@/composables'
+import { setInputFileModelValue, useErrorStyles } from '@/composables'
 
 const props = defineProps<{
   field: NormalizedFieldStructure
@@ -33,10 +35,10 @@ const emit = defineEmits<{
 
 provide('field', props.field)
 
+const errorStyles = useErrorStyles(props.field)
 const setModelValue = (e: Event) => {
   const files = (e.target as HTMLInputElement).files
   setInputFileModelValue(props.field, files)
   emit('update:modelValue', props.field.modelValue)
 }
-
 </script>

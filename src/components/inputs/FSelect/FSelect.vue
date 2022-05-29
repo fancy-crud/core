@@ -1,13 +1,18 @@
 <template>
   <f-control-wrap>
-    <f-control-label>{{ field.label }}</f-control-label>
+    <f-control-label :class="[errorStyles.textColor]">
+      {{ field.label }}
+    </f-control-label>
 
     <div
       @click="openPopper"
       ref="triggerElement"
       class="relative"
     >
-      <div class="flex flex-nowrap items-center justify-between border border-gray-300 rounded-md px-2">
+      <div
+        class="flex flex-nowrap items-center justify-between border border-gray-300 rounded-md px-2"
+        :class="[errorStyles.borderColor]"
+      >
         <slot name="prepend" />
         <div class="flex flex-wrap flex-auto items-center">
           <div
@@ -74,6 +79,7 @@ import _ from 'lodash'
 import type { Instance as PopperInstance } from '@popperjs/core'
 import { createPopper } from '@popperjs/core'
 import type { NormalizedFieldStructure } from '@/types'
+import { useErrorStyles } from '@/composables'
 
 interface State {
   modelValue: unknown
@@ -91,6 +97,7 @@ const props = defineProps<{
 
 provide('field', props.field)
 
+const errorStyles = useErrorStyles(props.field)
 const triggerElement = ref<HTMLElement>()
 const targetElement = ref<HTMLElement>()
 const popper = ref<PopperInstance | null>()

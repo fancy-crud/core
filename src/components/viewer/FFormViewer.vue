@@ -12,6 +12,14 @@ const form = createForm({
   fields: {
     name: {
       label: 'Genre name',
+      type: 'textarea',
+      // multiple: true,
+      optionLabel: 'label',
+      optionValue: 'value',
+      options: [
+        { label: 'Valor 1', value: 1 },
+        { label: 'Valor 2', value: 2 },
+      ],
     },
   },
   settings: {

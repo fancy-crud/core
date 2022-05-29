@@ -1,6 +1,8 @@
 <template>
   <f-control-wrap>
-    <f-control-label>{{ field.label }}</f-control-label>
+    <f-control-label :class="[errorStyles.textColor]">
+      {{ field.label }}
+    </f-control-label>
 
     <div :class="inRowDisplay">
       <label
@@ -16,6 +18,7 @@
         >
         <span
           class="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          :class="[errorStyles.textColor]"
           :for="field.modelKey"
         >
           {{ option[optionLabel] }}
@@ -30,7 +33,7 @@
 <script lang="ts" setup>
 import _ from 'lodash'
 import type { NormalizedFieldStructure } from '@/types'
-import { setInputRadioModelValue } from '@/composables'
+import { setInputRadioModelValue, useErrorStyles } from '@/composables'
 
 const props = defineProps<{
   field: NormalizedFieldStructure
@@ -49,11 +52,11 @@ const inRowDisplay = computed(() => {
 const options = computed(() => _.cloneDeep(props.field.options))
 const optionLabel = ref(props.field.optionLabel || '')
 
+const errorStyles = useErrorStyles(props.field)
 const setModelValue = (value: any) => {
   setInputRadioModelValue(props.field, value)
   emit('update:modelValue', value)
 }
-
 </script>
 
 <style lang="sass">

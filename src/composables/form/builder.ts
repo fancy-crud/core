@@ -2,7 +2,6 @@ import _ from "lodash"
 import { reactive } from "@vue/reactivity"
 
 import { normalizeFormFields, normalizeFormSettings } from "./normalizers"
-import { actions, NO_ACTION } from "./actions"
 import { validateRules } from "./rules"
 import {
   NormalizedFieldStructure,
@@ -145,57 +144,6 @@ export async function validateForm(form: Form, _fieldKey?: string) {
   }
 }
 
-// export function activeRenderingFieldWatcher(form: Form) {
-//   Object.entries(form.fields).forEach(([fieldKey, field]) => {
-//     effect(() => {
-//       const ControlGenerator = field.RenderField({
-//         fieldKey,
-//         field,
-//         ...field,
-//       }) as HTMLElement
-
-//       if (field.ref) {
-//         const items: Node[] = []
-//         const element = field.ref as HTMLElement
-//         const selector = field.type === "textarea" ? "textarea" : "input"
-
-//         const focusedElement = document.activeElement
-//         const beforeReplaceInput = element.querySelector(selector)
-//         const execFocus = beforeReplaceInput === focusedElement
-
-//         ControlGenerator.childNodes.forEach((item) => items.push(item))
-//         element.replaceChildren(...items)
-
-//         const _input = element.querySelector(selector)
-
-//         if (_input && field.onFocus && execFocus) {
-//           _input.focus()
-//         }
-//       }
-//     })
-
-//     effect(() => field.modelValue, {
-//       scheduler: () => {
-//         if (validateRules(field)) {
-//           validateForm(form)
-//         }
-//       },
-//     })
-//   })
-// }
-
-export function setEventHandler(form: Form) {
-  // Object.values(form.fields).forEach((field) => {
-  //   const handler = actions[field.type] || actions["text"]
-
-  //   if (handler) {
-  //     const onInput = handler.onInput ? handler.onInput.call(null, field) : NO_ACTION
-  //     const onChange = handler.onChange ? handler.onChange.call(null, field) : NO_ACTION
-
-  //     Object.assign(field, { onInput, onChange })
-  //   }
-  // })
-}
 
 export function resetModelValue(form: Form, cloneForm: Form) {
   Object.entries(cloneForm.fields).forEach(([fieldKey, field]) => {
@@ -207,7 +155,7 @@ export function resetModelValue(form: Form, cloneForm: Form) {
 }
 
 export function createForm(args: CreateForm) {
-  const { fields, settings, record } = args
+  const { fields, settings } = args
 
   let _fields = normalizeFormFields(fields)
 

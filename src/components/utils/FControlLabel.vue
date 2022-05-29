@@ -1,6 +1,6 @@
 <template>
   <label
-    class="f-label block mb-2 text-sm font-bold text-gray-900 dark:text-gray-300"
+    class="f-label block mb-2 text-sm font-bold"
     v-bind="$attrs"
   >
     <slot>
