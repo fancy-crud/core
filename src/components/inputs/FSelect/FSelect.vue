@@ -26,10 +26,11 @@
             </template>
           </div>
           <input
-            v-if="props.field.type === 'autocomplete'"
             v-model="state.searchTerm"
             @keydown.backspace="remove"
             ref="input"
+            :readonly="props.field.type === 'select'"
+            :placeholder="placeholder"
             type="text"
             class="border-0 focus:border-none focus:outline-none focus:ring-0 focus:shadow-outline flex-auto px-0 grow"
           >
@@ -144,6 +145,11 @@ const selectedOptions = computed(() => {
   }
 
   return []
+})
+
+const placeholder = computed(() => {
+  const isArrayAndEmpty = Array.isArray(props.field.modelValue) && !props.field.modelValue.length
+  return !props.field.modelValue || isArrayAndEmpty ? props.field.placeholder : ''
 })
 
 watch(() => state.searchTerm, () => {

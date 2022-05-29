@@ -27,7 +27,7 @@ const form = createForm({
   fields: {
     select: {
       label: 'Select',
-      type: 'autocomplete',
+      type: 'select',
       placeholder: 'Select',
       optionLabel: 'name',
       optionValue: 'id',
