@@ -16,6 +16,6 @@ export function createHeaders(fields: NormalizedFields) {
   }, [] as TableHeader[])
 }
 
-export function createTable(args: Table) {
+export function createTable(args: Table): Table {
   return reactive(args)
 }

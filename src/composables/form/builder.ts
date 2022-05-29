@@ -170,7 +170,7 @@ export function createForm(args: CreateForm) {
     }
   )
 
-  const form = reactive<Form>(_form)
+  const form: Form = reactive(_form)
 
   // const triggerFormUpdateMode = () => {
   //   if (form.settings.mode === FormModes.UPDATE_MODE && form.record) {
