@@ -30,6 +30,7 @@ export interface FieldStructure extends InputHTMLAttributes {
   optionValue?: string;
   modelKey?: string;
   modelValue?: unknown;
+  chips?: boolean;
   fileUrl?: string;
   wrapClass?: string;
   class?: string;

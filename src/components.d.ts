@@ -10,6 +10,7 @@ declare module 'vue' {
     FCheckboxMultiple: typeof import('./components/inputs/FCheckbox/FCheckboxMultiple.vue')['default']
     FCheckboxSingle: typeof import('./components/inputs/FCheckbox/FCheckboxSingle.vue')['default']
     FCheckboxViewer: typeof import('./components/viewer/FCheckboxViewer.vue')['default']
+    FChip: typeof import('./components/utils/FChip.vue')['default']
     FColor: typeof import('./components/inputs/FColor/FColor.vue')['default']
     FColorViewer: typeof import('./components/viewer/FColorViewer.vue')['default']
     FControlHintMessage: typeof import('./components/utils/FControlHintMessage.vue')['default']

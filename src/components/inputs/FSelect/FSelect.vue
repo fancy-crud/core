@@ -18,10 +18,17 @@
           <div
             v-for="(option, optionIndex) in selectedOptions"
             :key="option"
-            class="mr-2 grow-0"
+            class="mr-1 grow-0"
           >
-            <span>{{ option }}</span>
-            <template v-if="optionIndex !== selectedOptions.length - 1">
+            <f-chip
+              v-if="props.field.chips"
+              class="text-black pt-2 pb-2 pr-4 pl-4 font-bold"
+            >
+              {{ option }}
+            </f-chip>
+            <span v-else>{{ option }}</span>
+
+            <template v-if="displayComma(optionIndex)">
               <span>,</span>
             </template>
           </div>
@@ -67,6 +74,7 @@
         v-show="popper"
         v-model="state.modelValue"
         @click-outside="closePopper"
+        @scroll-bottom="loadMoreOptions"
         ref="optionsList"
         :search="state.searchTerm"
         :list-width="listWidth"
@@ -79,8 +87,8 @@
 import _ from 'lodash'
 import type { Instance as PopperInstance } from '@popperjs/core'
 import { createPopper } from '@popperjs/core'
-import type { NormalizedFieldStructure } from '@/types'
-import { useErrorStyles } from '@/composables'
+import type { NormalizedFieldStructure, RecordManager } from '@/types'
+import { addOptionsToField, getRecords, useErrorStyles } from '@/composables'
 
 interface State {
   modelValue: unknown
@@ -98,6 +106,8 @@ const props = defineProps<{
 
 provide('field', props.field)
 
+let recordsManager: RecordManager | null = null
+
 const errorStyles = useErrorStyles(props.field)
 const triggerElement = ref<HTMLElement>()
 const targetElement = ref<HTMLElement>()
@@ -111,6 +121,7 @@ const state = reactive<State>({
   clonedOptions: _.cloneDeep(props.field.options) || [],
 })
 
+setupRecordsManager()
 setupModelValue()
 
 window.onresize = () => {
@@ -153,11 +164,15 @@ const placeholder = computed(() => {
 })
 
 watch(() => state.searchTerm, () => {
+  openPopper()
   if (state.bounceTimer)
     clearInterval(state.bounceTimer)
 
   state.bounceTimer = setTimeout(() => {
+    if (!recordsManager)
+      return
 
+    recordsManager.search.value = state.searchTerm
   }, 1000)
 })
 
@@ -169,6 +184,39 @@ watch(() => state.modelValue, (modelValue) => {
   input.value?.focus()
   state.searchTerm = ''
 })
+
+watch(() => recordsManager?.list.items, () => {
+  if (!props.field.options || !recordsManager)
+    return
+
+  addOptionsToField(props.field, recordsManager?.list.items)
+})
+
+function displayComma(optionIndex: number) {
+  return !props.field.chips && (optionIndex !== selectedOptions.value.length - 1 || state.searchTerm)
+}
+
+function setupRecordsManager() {
+  if (props.field.url) {
+    recordsManager = getRecords({
+      url: props.field.url,
+      initialFilterParams: props.field.filterParams as object,
+    })
+  }
+}
+
+function loadMoreOptions() {
+  if (!props.field.url || !props.field.options || !recordsManager)
+    return
+
+  const updatePaginationPage = (
+    (recordsManager.pagination.page === 1 && !recordsManager.list.items.length)
+    || props.field.options.length < recordsManager.pagination.count
+  )
+
+  if (updatePaginationPage)
+    recordsManager.pagination.page++
+}
 
 function openPopper() {
   if (triggerElement.value && targetElement.value)

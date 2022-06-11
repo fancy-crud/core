@@ -1,6 +1,7 @@
 <template>
   <ul
     v-click-outside="triggerClickOutside"
+    ref="optionsList"
     :style="{ width: props.listWidth }"
     class="select-list shadow-lg absolute z-10 bg-white bottom-100% left-0 max-h-56 overflow-y-auto divide-y"
   >
@@ -64,6 +65,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'update:modelValue', value: unknown | unknown[]): void
   (e: 'clickOutside'): void
+  (e: 'scrollBottom'): void
 }>()
 
 const vClickOutside = {
@@ -79,6 +81,7 @@ const vClickOutside = {
   },
 }
 
+const optionsList = ref<HTMLElement | null>()
 const state = reactive({
   modelValue: props.modelValue,
   selectAll: false,
@@ -127,7 +130,12 @@ const selectedOptions = computed(() => {
 })
 
 onMounted(normalizeOptions)
+onMounted(watchOptionsListScroll)
+
 watch(() => state.selectAll, () => onSelectAll())
+watch(() => JSON.stringify(field.value.options), () => {
+  normalizeOptions()
+})
 watch(() => props.modelValue, () => {
   state.modelValue = props.modelValue
   normalizeOptions()
@@ -149,6 +157,16 @@ function normalizeOptions() {
   })
 
   state.options = options || []
+}
+
+function watchOptionsListScroll() {
+  if (!optionsList.value)
+    return
+
+  optionsList.value.addEventListener('scroll', () => {
+    if (optionsList.value && optionsList.value.scrollTop + optionsList.value.clientHeight >= optionsList.value.scrollHeight)
+      emit('scrollBottom')
+  })
 }
 
 function toggleOption(option: Option, isSelected: boolean, updateModelValue = true) {

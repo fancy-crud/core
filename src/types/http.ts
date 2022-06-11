@@ -1,3 +1,5 @@
+import { Ref } from "vue";
+
 export interface SameAPIEndpoint {
   [key: string]: string[]
 }
@@ -23,6 +25,22 @@ export interface GetListRequest {
     page?: number;
     rowsPerPage?: number;
     count?: number;
+  }
+}
+
+export interface RecordManager {
+  filterParams: object;
+  pagination: {
+      page: number;
+      rowsPerPage: number;
+      count: number;
+  };
+  fetchItems: (page?: number) => void;
+  search: Ref<string>;
+  loading: Ref<boolean>;
+  list: {
+    unmutedItems: unknown[],
+    items: unknown[]
   }
 }
 

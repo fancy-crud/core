@@ -2,7 +2,7 @@ import _ from 'lodash'
 import { effect, reactive, ref } from '@vue/reactivity'
 import { AxiosInstance, AxiosResponse } from "axios";
 
-import { Form, FormModes, NormalizedFields, NormalizedFieldStructure } from "@/types";
+import { Form, FormModes, NormalizedFields, NormalizedFieldStructure, RecordManager } from "@/types";
 import { CreateRequest, DeleteRequest, RetrieveRequest, SameAPIEndpoint as SameAPIEndpoint, UpdateRequest, GetListRequest } from "@/types";
 import { getFormData } from '..';
 
@@ -42,10 +42,9 @@ export function buildURL({
   return result.replaceAll('//', '/');
 }
 
-export function getForeignKeys(fields: NormalizedFields): void {
-  const sameAPIEndpoint: SameAPIEndpoint = {};
+function _getSameAPIEndpoint(fields: NormalizedFields) {
   const fieldsEntries = Object.entries<NormalizedFieldStructure>(fields)
-
+  const sameAPIEndpoint: SameAPIEndpoint = {};
   fieldsEntries.forEach(([fieldKey, field]) => {
     if (!field.url) return false
 
@@ -73,10 +72,41 @@ export function getForeignKeys(fields: NormalizedFields): void {
     return true
   });
 
+  return sameAPIEndpoint
+}
+
+export function addOptionsToField(field: NormalizedFieldStructure, data: any) {
+  const options: any[] = field.options || []
+
+  const addOptionsItems = (items: any[]) => {
+    items.forEach(item => {
+      const result = options.find(option => _.isEqual(option, item))
+      
+      if (!result) {
+        options.push(item)
+      }
+    })
+  }
+  
+  if (Array.isArray(data)) {
+    addOptionsItems(data)
+  }
+  else {
+    addOptionsItems(
+      getPaginationResultsKey(data)
+    )
+  }
+  9
+  return options
+}
+
+export function getForeignKeys(fields: NormalizedFields): void {
+  const sameAPIEndpoint: SameAPIEndpoint = _getSameAPIEndpoint(fields);
+
   Object.entries(sameAPIEndpoint).forEach(([url, fieldKeys]) => {
     http.axios.get(url).then(({ data }) => {
       fieldKeys.forEach(fieldKey => {
-        fields[fieldKey].options = data;
+        fields[fieldKey].options = addOptionsToField(fields[fieldKey], data)
       })
     })
     .catch((e) => console.log(e));
@@ -185,7 +215,7 @@ export async function triggerCreateOrUpdate(form: Form) {
   return response
 }
 
-export function getRecords(args: GetListRequest) {
+export function getRecords(args: GetListRequest): RecordManager {
   const { url, _search, initialFilterParams } = args
 
   const loading = ref(false)
@@ -242,14 +272,13 @@ export function getRecords(args: GetListRequest) {
     fetchItems()
   }
 
-  const watchFilterParams = () => JSON.stringify(filterParams)
-  effect(watchFilterParams, {
+  effect(() => JSON.stringify(filterParams), {
     scheduler: resetPagination
   })
 
   effect(() => search.value, { scheduler: resetPagination })
 
-  effect(() => fetchItems(pagination.page))
+  effect(() => pagination.page, { scheduler: () => fetchItems(pagination.page) })
 
   return {
     filterParams,

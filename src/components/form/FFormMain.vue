@@ -29,6 +29,7 @@ import FRadio from '@/components/inputs/FRadio/FRadio.vue'
 import FColor from '@/components/inputs/FColor/FColor.vue'
 import FTextarea from '@/components/inputs/FTextarea/FTextarea.vue'
 import FInputFile from '@/components/inputs/FInputFile/FInputFile.vue'
+import { getForeignKeys } from '@/composables'
 
 const props = defineProps<{
   form: Form
@@ -54,7 +55,7 @@ const getComponent = (field: NormalizedFieldStructure) => {
 }
 
 const fields = computed(() => {
-  return Object.entries(props.form.fields).filter(([_, field]) => {
+  const _fields = Object.entries(props.form.fields).filter(([_, field]) => {
     if (field.hidden)
       return false
 
@@ -66,5 +67,9 @@ const fields = computed(() => {
 
     return true
   })
+
+  return _fields
 })
+
+onMounted(() => getForeignKeys(props.form.fields))
 </script>

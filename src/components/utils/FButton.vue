@@ -51,7 +51,7 @@
 </template>
 
 <script lang="ts" setup>
-const attrs = useAttrs() as any
+import { useDefaultBackgroundColor } from '@/composables'
 
 const props = defineProps<{
   loading?: boolean
@@ -60,22 +60,16 @@ const props = defineProps<{
   tooltip?: string
   tooltipPlacement?: string
 }>()
+const attrs = useAttrs() as any
 
 const buttonRef = ref()
 const tooltipRef = ref()
 const tooltipPopper = ref()
 
-const bgColor = computed(() => {
-  let bgColor = ''
-  if (typeof attrs === 'object' && attrs.class) {
-    const bgColorMatches = attrs.class.match(/(?:^|\s)bg-(\w)+([-\w\/]+)/)
-
-    if (bgColorMatches && bgColorMatches.length)
-      bgColor = bgColorMatches[0].trim()
-  }
-
-  return bgColor || 'bg-gray-300'
-})
+const bgColor = useDefaultBackgroundColor(
+  'bg-gray-300',
+  typeof attrs === 'object' && attrs.class ? attrs.class : '',
+)
 
 const className = computed(() => {
   const isIcon = props.icon ? 'f-button--icon' : ''

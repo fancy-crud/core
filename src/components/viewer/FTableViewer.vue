@@ -14,6 +14,9 @@ const form = createForm({
   },
   settings: {
     url: 'artists/',
+    title: {
+      create: 'Crear artista',
+    },
   },
 })
 
