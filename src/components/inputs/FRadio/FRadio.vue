@@ -21,7 +21,7 @@
           :class="[errorStyles.textColor]"
           :for="field.modelKey"
         >
-          {{ option[optionLabel] }}
+          {{ getOptionLabel(option) }}
         </span>
       </label>
     </div>
@@ -53,9 +53,17 @@ const options = computed(() => _.cloneDeep(props.field.options))
 const optionLabel = ref(props.field.optionLabel || '')
 
 const errorStyles = useErrorStyles(props.field)
-const setModelValue = (value: any) => {
+
+function setModelValue(value: any) {
   setInputRadioModelValue(props.field, value)
   emit('update:modelValue', value)
+}
+
+function getOptionLabel(option: any) {
+  if (typeof option !== 'object')
+    return option
+
+  return option[optionLabel.value]
 }
 </script>
 

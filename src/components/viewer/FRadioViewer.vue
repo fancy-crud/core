@@ -18,9 +18,9 @@ const form = createForm({
       optionLabel: 'label',
       optionValue: 'value',
       options: [
-        { value: 1, label: 'Opción 1' },
-        { value: 2, label: 'Opción 2' },
-        { value: 3, label: 'Opción 3' },
+        'Option 1',
+        'Option 2',
+        'Option 3',
       ],
     },
   },
