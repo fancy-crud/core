@@ -9,12 +9,27 @@
 <script lang='ts' setup>
 import { createForm } from '@/composables'
 
+// const options = [
+//   'Option 1',
+//   'Option 2',
+//   'Option 3',
+// ]
+
+const options = [
+  { label: 'Option 1', value: 'option-1' },
+  { label: 'Option 2', value: 'option-2' },
+  { label: 'Option 3', value: 'option-3' },
+]
 const form = createForm({
   id: 'checkbox-field',
   fields: {
     checkbox: {
       label: 'Checkbox',
       type: 'checkbox',
+      multiple: true,
+      optionLabel: 'label',
+      optionValue: 'value',
+      options,
     },
   },
   settings: {

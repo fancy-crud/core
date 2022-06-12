@@ -12,7 +12,7 @@
       class="cursor-pointer"
       :id="field.id"
     >
-    <span class="pl-4">{{ option[optionLabel] }}</span>
+    <span class="pl-4">{{ getOptionLabel(option) }}</span>
   </label>
 </template>
 
@@ -34,8 +34,15 @@ const optionLabel = ref(props.field.optionLabel || '')
 
 const errorStyles = useErrorStyles(props.field)
 
-const setModelValue = (value: any) => {
+function setModelValue(value: any) {
   setInputCheckboxModelValue(props.field, value)
   emit('update:modelValue', value)
+}
+
+function getOptionLabel(option: any) {
+  if (typeof option !== 'object')
+    return option
+
+  return option[optionLabel.value]
 }
 </script>
