@@ -12,7 +12,6 @@
       <div class="flex items-center relative">
         <f-modal
           v-model="formModal"
-          class="pb-10"
         >
           <template #activator>
             <f-button-icon
@@ -58,6 +57,7 @@
           :headers="headers"
           :loading="loading"
         />
+
         <f-table-body
           @edit="openEditModal"
           @delete="openDeleteModal"
@@ -66,6 +66,7 @@
           :items="list.items"
         />
       </table>
+      <f-progress-bar v-if="loading" />
     </div>
 
     <f-table-footer>
@@ -160,6 +161,8 @@ watch(() => _search.value, (searchValue: string) => {
     search.value = searchValue
   }, 700)
 })
+
+fetchItems()
 
 function closeModal() {
   formModal.value = false

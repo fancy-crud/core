@@ -36,8 +36,8 @@
       </template>
       <li
         v-for="p in pager.pages"
-        :key="p"
         @click="onSelectPage(p)"
+        :key="p"
       >
         <button
           class="py-2 px-3 leading-tight border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
@@ -63,6 +63,7 @@
       </template>
       <li>
         <button
+          @click="onSelectPage(pagination.page + 1)"
           class="block py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
         >
           <span class="sr-only">Next</span>
@@ -106,7 +107,8 @@ const pager = computed(() => paginate(
 ))
 
 const onSelectPage = (page: number) => {
-  if (page < 1 || page > pager.value.totalPages) return
+  if (page < 1 || page > pager.value.totalPages)
+    return
 
   currentPage.value = page
   emit('update:modelValue', currentPage.value)
