@@ -10,7 +10,8 @@
       @change="setModelValue(option)"
       v-bind="field"
       class="cursor-pointer"
-      :id="field.id"
+      :checked="isChecked(option)"
+      :id="`${field.id}-${i}`"
     >
     <span class="pl-4">{{ getOptionLabel(option) }}</span>
   </label>
@@ -44,5 +45,9 @@ function getOptionLabel(option: any) {
     return option
 
   return option[optionLabel.value]
+}
+
+function isChecked(option: unknown) {
+  return (props.field.modelValue as unknown[]).some(_option => _.isEqual(_option, option))
 }
 </script>

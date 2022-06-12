@@ -17,17 +17,17 @@ export const setInputSelectModelValue = (field: NormalizedFieldStructure, value:
   )
 }
 
-export const setInputCheckboxModelValue = (field: NormalizedFieldStructure, value: any) => {
+export const setInputCheckboxModelValue = (field: NormalizedFieldStructure, value: unknown) => {
   const singleValue = () => {
     field.modelValue = value
   }
 
   const multipleValue = () => {
     const indexInModelValue = (field.modelValue as unknown[]).findIndex(
-      (item: any) => _.isEqual(item, value)
+      (item: unknown) => _.isEqual(item, value)
     )
 
-    if ((field.modelValue as unknown[]).includes(value)) {
+    if (indexInModelValue >= 0) {
       (field.modelValue as unknown[]).splice(indexInModelValue, 1)
       field.modelValue = [...field.modelValue as unknown[]]
     }
