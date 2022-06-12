@@ -37,6 +37,7 @@ declare module 'vue' {
     FNotificationGroup: typeof import('./components/utils/FNotificationGroup.vue')['default']
     FPagination: typeof import('./components/table/FPagination.vue')['default']
     FPasswordViewer: typeof import('./components/viewer/FPasswordViewer.vue')['default']
+    FProgressBar: typeof import('./components/utils/FProgressBar.vue')['default']
     FRadio: typeof import('./components/inputs/FRadio/FRadio.vue')['default']
     FRadioViewer: typeof import('./components/viewer/FRadioViewer.vue')['default']
     FSelect: typeof import('./components/inputs/FSelect/FSelect.vue')['default']

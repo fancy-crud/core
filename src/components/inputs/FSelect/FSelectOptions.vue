@@ -5,6 +5,11 @@
     :style="{ width: props.listWidth }"
     class="select-list shadow-lg absolute z-10 bg-white bottom-100% left-0 max-h-56 overflow-y-auto divide-y"
   >
+    <f-progress-bar
+      v-if="props.loading"
+      class="fixed top-0 left-0"
+      :style="{ width: props.listWidth }"
+    />
     <slot name="first-option">
       <li
         v-if="field.multiple"
@@ -60,6 +65,7 @@ const props = defineProps<{
   listWidth: string
   modelValue: unknown
   search?: string
+  loading?: boolean
 }>()
 
 const emit = defineEmits<{

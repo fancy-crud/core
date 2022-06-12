@@ -78,6 +78,7 @@
         ref="optionsList"
         :search="state.searchTerm"
         :list-width="listWidth"
+        :loading="isFetchingRecords"
       />
     </div>
   </teleport>
@@ -161,6 +162,10 @@ const selectedOptions = computed(() => {
 const placeholder = computed(() => {
   const isArrayAndEmpty = Array.isArray(props.field.modelValue) && !props.field.modelValue.length
   return !props.field.modelValue || isArrayAndEmpty ? props.field.placeholder : ''
+})
+
+const isFetchingRecords = computed(() => {
+  return recordsManager?.loading.value
 })
 
 const displayClearButton = computed(() => {
