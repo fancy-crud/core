@@ -48,7 +48,7 @@
         >
           <div>
             <f-button
-              v-if="props.field.clearable"
+              v-if="displayClearButton"
               @click="clear"
               icon="mdi mdi-close"
               class="bg-transparent"
@@ -161,6 +161,20 @@ const selectedOptions = computed(() => {
 const placeholder = computed(() => {
   const isArrayAndEmpty = Array.isArray(props.field.modelValue) && !props.field.modelValue.length
   return !props.field.modelValue || isArrayAndEmpty ? props.field.placeholder : ''
+})
+
+const displayClearButton = computed(() => {
+  let display = props.field.clearable
+
+  if (!display)
+    return false
+
+  if (Array.isArray(props.field.modelValue))
+    display = !!props.field.modelValue.length
+  else
+    display = !!props.field.modelValue
+
+  return display
 })
 
 watch(() => state.searchTerm, () => {

@@ -86,7 +86,6 @@ const state = reactive({
   modelValue: props.modelValue,
   selectAll: false,
   options: [] as Option[],
-  selectedOptions: [] as Option[],
   showOptions: false,
 })
 
@@ -170,6 +169,9 @@ function watchOptionsListScroll() {
 }
 
 function toggleOption(option: Option, isSelected: boolean, updateModelValue = true) {
+  if (!field.value.multiple)
+    computedOptions.value.forEach(_option => _option._isSelected = false)
+
   option._isSelected = isSelected
 
   if (updateModelValue) {
