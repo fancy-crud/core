@@ -6,20 +6,8 @@ const setFocused = (field: NormalizedFieldStructure) => () => {
   field.wasFocused = true
 }
 
-// export const onFocus = (field: NormalizedFieldStructure) => () => {
-//   const selector = field.type === 'textarea' ? 'textarea' : 'input'
-//   const el = (field.ref as HTMLElement).querySelector(selector)
-
-//   if (el) {
-//     const length = el.value.length
-//     el.setSelectionRange(length, length)
-//   }
-
-//   setFocused(field)()
-// }
 
 export const setInputTextModelValue = (field: NormalizedFieldStructure, value: any) => {
-  // let value: any = (e.target as HTMLInputElement).value
   field.modelValue = value
 }
 
@@ -35,10 +23,6 @@ export const setInputCheckboxModelValue = (field: NormalizedFieldStructure, valu
   }
 
   const multipleValue = () => {
-    // const _value = field.options?.find(
-    //   (item: any) => item[field.optionValue || ''] == value
-    // )
-
     const indexInModelValue = (field.modelValue as unknown[]).findIndex(
       (item: any) => _.isEqual(item, value)
     )
@@ -50,14 +34,6 @@ export const setInputCheckboxModelValue = (field: NormalizedFieldStructure, valu
     else {
       field.modelValue = [..._.cloneDeep(field.modelValue as unknown[]), value]
     }
-
-    // if (indexInModelValue >= 0) {
-    //   (field.modelValue as unknown[]).splice(indexInModelValue, 1)
-    //   field.modelValue = [..._.cloneDeep(field.modelValue as unknown[])]
-    // }
-    // else {
-    //   field.modelValue = [..._.cloneDeep(field.modelValue as unknown[]), _value]
-    // }
   }
 
   if (Array.isArray(field.options) && Array.isArray(field.modelValue)) {
