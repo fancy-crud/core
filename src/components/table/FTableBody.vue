@@ -51,11 +51,11 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'edit', row: any): void
   (e: 'delete', row: any): void
-  (e: 'hot-update', value: { field: string; row: any }): void
+  (e: 'hotUpdate', value: { field: string; row: any }): void
 }>()
 
 const hotUpdate = (field: string, row: any) => {
-  emit('hot-update', { field, row })
+  emit('hotUpdate', { field, row })
 }
 
 const getValue = computed(() => (row: any, header: TableHeader, rowIndex: number) => {
@@ -71,5 +71,4 @@ const getValue = computed(() => (row: any, header: TableHeader, rowIndex: number
 
   return value
 })
-
 </script>

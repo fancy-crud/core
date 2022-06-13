@@ -51,8 +51,9 @@ export interface FieldStructure extends InputHTMLAttributes {
     format?: (value: unknown) => unknown;
     exclude?: boolean
     allowCheckbox?: boolean
-    allowImagePreview?: boolean
+    allowImagePreview?: boolean,
   };
+  xlsx?: Record<string, unknown>
   [key: string]: unknown;
 }
 

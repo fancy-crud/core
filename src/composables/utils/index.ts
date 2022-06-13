@@ -1,3 +1,5 @@
+export * from './formats'
+
 import { computed } from 'vue'
 
 export function useDefaultBackgroundColor(defaultBgColor: string, colorContainer?: string) {

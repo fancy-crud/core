@@ -46,6 +46,7 @@
           </f-modal-card>
         </f-modal>
         <f-button-icon
+          @click="exportXlsx"
           icon="mdi-microsoft-excel"
           tooltip="Exportar"
         />
@@ -98,7 +99,7 @@
 import _ from 'lodash'
 import type { Table } from '@/types'
 import { FormModes } from '@/types'
-import { createHeaders, deleteRecord, fillFieldsWithRecordValues, getRecords, resetModelValue, retrieveRecord, updateRecord } from '@/composables'
+import { createHeaders, deleteRecord, fillFieldsWithRecordValues, getRecords, resetModelValue, retrieveRecord, updateRecord, useXLSX } from '@/composables'
 interface Search {
   value: string
   bounceInterval: NodeJS.Timeout | null
@@ -163,6 +164,11 @@ watch(() => _search.value, (searchValue: string) => {
 })
 
 fetchItems()
+
+function exportXlsx() {
+  const xlsx = useXLSX(props.table)
+  xlsx.fetchItems()
+}
 
 function closeModal() {
   formModal.value = false
