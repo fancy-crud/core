@@ -1,28 +1,21 @@
 <template>
-  <div
+  <f-button-icon
     v-if="!props.hideEdit"
-    class="tooltip"
-    data-tip="{locale.t('Edit')}"
-  >
-    <f-button-icon
-      @click="emit('edit')"
-      icon="mdi-pencil"
-      size="text-lg"
-      text-color="text-gray-400"
-    />
-  </div>
-  <div
+    @click="emit('edit')"
+    :tooltip="t('button.edit')"
+    icon="mdi-pencil"
+    size="text-lg"
+    text-color="text-gray-400"
+  />
+
+  <f-button-icon
     v-if="!props.hideDelete"
-    class="tooltip"
-    data-tip="{locale.t('Delete')}"
-  >
-    <f-button-icon
-      @click="emit('delete')"
-      icon="mdi-delete"
-      size="text-lg"
-      text-color="text-red-500"
-    />
-  </div>
+    @click="emit('delete')"
+    :tooltip="t('button.delete')"
+    icon="mdi-delete"
+    size="text-lg"
+    text-color="text-red-500"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -34,4 +27,6 @@ const emit = defineEmits<{
   (e: 'edit'): void
   (e: 'delete'): void
 }>()
+
+const { t } = useI18n()
 </script>

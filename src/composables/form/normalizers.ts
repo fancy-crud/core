@@ -12,8 +12,9 @@ import {
 } from "@/types"
 import { parseRules } from "./rules"
 import { getDefaults } from '../config'
+import { i18n } from "@/composables"
 
-const locale = { t: (s: string) => s }
+const t = i18n.global.t
 
 export function createDefaultKeys(
   fieldKey: string,
@@ -75,16 +76,16 @@ export function normalizeButtons(buttons?: Buttons) {
   const defaultMainButton = {
     class: defaults.classes.mainButton,
     label: {
-      create: locale.t("Create new"),
-      update: locale.t("Update record"),
+      create: t("button.create-new"),
+      update: t("button.update-record"),
     },
   }
 
   const defaultAuxButton = {
     class: defaults.classes.auxButton,
     label: {
-      create: locale.t("Cancel"),
-      update: locale.t("Cancel"),
+      create: t("button.cancel"),
+      update: t("button.cancel"),
     },
   }
 
@@ -124,8 +125,8 @@ export function normalizeButtons(buttons?: Buttons) {
 
 export function normalizeTitle(title?: string | Title) {
   const defaultTitle = {
-    create: locale.t("Create new element"),
-    update: locale.t("Update element"),
+    create: t("button.create-new-record"),
+    update: t("button.update-record"),
   }
 
   if (!title) return defaultTitle

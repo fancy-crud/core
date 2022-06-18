@@ -14,6 +14,7 @@ const form = useForm({
   fields: {
     date: {
       label: 'Date',
+      placeholder: 'Seleccionar',
       type: 'date',
     },
   },

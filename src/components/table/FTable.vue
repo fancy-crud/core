@@ -11,7 +11,7 @@
           <template #activator>
             <f-button-icon
               @click="openCreateModal"
-              tooltip="Crear nuevo"
+              :tooltip="t('button.create')"
               icon="mdi-plus"
             />
           </template>
@@ -43,7 +43,7 @@
         <f-button-icon
           @click="exportXlsx"
           icon="mdi-microsoft-excel"
-          tooltip="Exportar"
+          :tooltip="t('button.export')"
         />
       </div>
     </div>
@@ -106,6 +106,7 @@ const emit = defineEmits<{
   (e: 'update:formModal', value: boolean): void
 }>()
 
+const { t } = useI18n()
 const cloneForm = _.cloneDeep(props.table.form)
 const headers = createHeaders(props.table.form.fields)
 const formModal = ref(Boolean(props.formModal))

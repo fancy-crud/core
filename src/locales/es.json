@@ -1,0 +1,13 @@
+{
+    "button": {
+      "cancel": "Cancelar",
+      "create": "Crear",
+      "create-new": "Crear nuevo",
+      "create-new-record": "Crear nuevo registro",
+      "delete": "Eliminar",
+      "edit": "Editar",
+      "export": "Exportar",
+      "update-record": "Actualizar registro"
+    }
+  }
+  
