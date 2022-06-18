@@ -171,17 +171,5 @@ export function createForm(args: CreateForm) {
   )
 
   const form: Form = reactive(_form)
-
-  // const triggerFormUpdateMode = () => {
-  //   if (form.settings.mode === FormModes.UPDATE_MODE && form.record) {
-  //     fillFieldsWithRecordValues(form.fields, form.record)
-  //   }
-  // }
-
-  // setEventHandler(form)
-  // activeRenderingFieldWatcher(form)
-  // effect(triggerFormUpdateMode)
-  // validateForm(form)
-
   return form
 }
