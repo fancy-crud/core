@@ -7,9 +7,9 @@
 </template>
 
 <script lang='ts' setup>
-import { createForm } from '@/composables'
+import { useForm } from '@/composables'
 
-const form = createForm({
+const form = useForm({
   id: 'color-field',
   fields: {
     color: {

@@ -7,7 +7,7 @@
 </template>
 
 <script lang='ts' setup>
-import { createForm } from '@/composables'
+import { useForm } from '@/composables'
 
 const options = [
   'Option 1',
@@ -21,7 +21,7 @@ const options = [
 //   { label: 'Option 3', value: 'option-3' },
 // ]
 
-const form = createForm({
+const form = useForm({
   id: 'checkbox-field',
   fields: {
     checkbox: {

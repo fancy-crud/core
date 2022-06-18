@@ -5,9 +5,9 @@
 </template>
 
 <script setup lang='ts'>
-import { createForm } from '@/composables'
+import { useForm } from '@/composables'
 
-const form = createForm({
+const form = useForm({
   id: 'select-field',
   fields: {
     name: {

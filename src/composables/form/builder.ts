@@ -154,7 +154,7 @@ export function resetModelValue(form: Form, cloneForm: Form) {
   })
 }
 
-export function createForm(args: CreateForm) {
+export function useForm(args: CreateForm) {
   const { fields, settings } = args
 
   let _fields = normalizeFormFields(fields)
