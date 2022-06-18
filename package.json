@@ -1,5 +1,6 @@
 {
   "private": true,
+  "version": "0.0.1",
   "scripts": {
     "serve": "vite --port 9090 --host 0.0.0.0 --open",
     "build": "vite build",
