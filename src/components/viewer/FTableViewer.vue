@@ -1,5 +1,9 @@
 <template>
-  <f-table :table="table" />
+  <f-table :table="table">
+    <template #table-header-prepend>
+      <f-filter :filters="filters" />
+    </template>
+  </f-table>
 </template>
 
 <script lang='ts' setup>
@@ -12,11 +16,11 @@ const createdAtTable = {
   exclude: false,
 }
 
-const { filterParams } = useFilters({
+const { filters, filterParams } = useFilters({
   search: {
     placeholder: 'Filtrar artista',
     wrapCols: 'col-span-3',
-    modelValue: 'Many',
+    bounceTime: 700,
   },
 })
 

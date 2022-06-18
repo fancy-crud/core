@@ -5,7 +5,7 @@
     </f-control-label>
 
     <input
-      v-model="modelValue"
+      v-model="state.temporalModelValue"
       v-bind="field"
       :class="[errorStyles.borderColor]"
     >
@@ -17,6 +17,11 @@
 <script lang="ts" setup>
 import type { NormalizedFieldStructure } from '@/types'
 import { setInputTextModelValue, useErrorStyles, useSetModelValue } from '@/composables'
+
+interface State {
+  temporalModelValue: string
+  timeout?: NodeJS.Timeout | null
+}
 
 const props = defineProps<{
   field: NormalizedFieldStructure
@@ -30,8 +35,29 @@ provide('field', props.field)
 
 const errorStyles = useErrorStyles(props.field)
 
+const state: State = reactive({
+  temporalModelValue: '',
+  timeout: null,
+})
+
 const modelValue = useSetModelValue(props.field, () => {
   setInputTextModelValue(props.field, modelValue.value)
   emit('update:modelValue', modelValue.value)
+})
+
+watch(() => state.temporalModelValue, () => {
+  if (!props.field.bounceTime) {
+    modelValue.value = state.temporalModelValue
+    return
+  }
+
+  if (state.timeout) {
+    clearTimeout(state.timeout)
+    state.timeout = null
+  }
+
+  state.timeout = setTimeout(() => {
+    modelValue.value = state.temporalModelValue
+  }, props.field.bounceTime)
 })
 </script>

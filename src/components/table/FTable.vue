@@ -95,10 +95,6 @@ import _ from 'lodash'
 import type { Table } from '@/types'
 import { FormModes } from '@/types'
 import { createHeaders, deleteRecord, fillFieldsWithRecordValues, getRecords, resetModelValue, retrieveRecord, updateRecord, useXLSX } from '@/composables'
-interface Search {
-  value: string
-  bounceInterval: NodeJS.Timeout | null
-}
 
 const props = defineProps<{
   table: Table
@@ -117,14 +113,9 @@ const formModalKey = ref(0)
 
 const rowToDelete = ref<any>(null)
 const deleteModal = ref(false)
-const _search: Search = reactive({
-  value: '',
-  bounceInterval: null,
-})
 
-const { list, loading, pagination, fetchItems, search } = getRecords({
+const { list, loading, pagination, fetchItems } = getRecords({
   url: props.table.settings.url,
-  _search: props.table.settings.search,
   initialFilterParams: props.table.settings.filterParams,
   pagination: props.table.settings.pagination,
 })
@@ -147,15 +138,6 @@ watch(() => props.formModal, () => {
 
 watch(formModal, () => {
   emit('update:formModal', formModal.value)
-})
-
-watch(() => _search.value, (searchValue: string) => {
-  if (_search.bounceInterval)
-    clearTimeout(_search.bounceInterval)
-
-  _search.bounceInterval = setTimeout(() => {
-    search.value = searchValue
-  }, 700)
 })
 
 fetchItems()

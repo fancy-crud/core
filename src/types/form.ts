@@ -44,6 +44,7 @@ export interface FieldStructure extends InputHTMLAttributes {
   updateOnly?: boolean;
   hidden?: boolean;
   hintText?: string;
+  bounceTime?: number;
   table?: {
     label?: string;
     value?: string;
