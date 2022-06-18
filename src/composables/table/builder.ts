@@ -49,8 +49,6 @@ export function useXLSX(table: Table) {
   function generateFile() {
     const xlsxHeaders = createHeaders(table.form.fields, "xlsx")
 
-    console.log('xlsxHeaders', xlsxHeaders)
-
     const items = list.items.map((item, itemIndex) => {
       const result: Record<string, unknown> = {}
 
@@ -77,6 +75,6 @@ export function useXLSX(table: Table) {
   }
 }
 
-export function createTable(args: Table): Table {
+export function useTable(args: Table): Table {
   return reactive(args)
 }

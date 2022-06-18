@@ -7,7 +7,7 @@
 </template>
 
 <script lang='ts' setup>
-import { createForm, createTable, useFilters, useFormats } from '@/composables'
+import { useFilters, useForm, useFormats, useTable } from '@/composables'
 
 const formats = useFormats()
 
@@ -24,7 +24,7 @@ const { filters, filterParams } = useFilters({
   },
 })
 
-const form = createForm({
+const form = useForm({
   id: 'formulario',
   fields: {
     name: {
@@ -47,7 +47,7 @@ const form = createForm({
   },
 })
 
-const table = createTable({
+const table = useTable({
   form,
   settings: {
     url: form.settings.url,
