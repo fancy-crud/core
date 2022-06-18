@@ -3,7 +3,7 @@
 </template>
 
 <script lang='ts' setup>
-import { createForm, createTable, useFormats } from '@/composables'
+import { createForm, createTable, useFilters, useFormats } from '@/composables'
 
 const formats = useFormats()
 
@@ -11,6 +11,14 @@ const createdAtTable = {
   format: (value: unknown) => formats.dateTimeFormat(value as string),
   exclude: false,
 }
+
+const { filterParams } = useFilters({
+  search: {
+    placeholder: 'Filtrar artista',
+    wrapCols: 'col-span-3',
+    modelValue: 'Many',
+  },
+})
 
 const form = createForm({
   id: 'formulario',
@@ -24,7 +32,7 @@ const form = createForm({
     created_at: {
       label: 'Created at',
       table: { ...createdAtTable },
-      xlsx: { ...createdAtTable, exclude: true },
+      xlsx: { ...createdAtTable },
     },
   },
   settings: {
@@ -39,11 +47,9 @@ const table = createTable({
   form,
   settings: {
     url: form.settings.url,
-    filterParams: {
-      search: 'Base',
-    },
+    filterParams,
     pagination: {
-      rowsPerPage: 50,
+      rowsPerPage: 10,
     },
   },
 })

@@ -33,10 +33,10 @@
             </template>
           </div>
           <input
+            v-if="isAutocomplete"
             v-model="state.searchTerm"
             @keydown.backspace="remove"
             ref="input"
-            :readonly="props.field.type === 'select'"
             :placeholder="placeholder"
             type="text"
             class="border-0 focus:border-none focus:outline-none focus:ring-0 focus:shadow-outline flex-auto px-0 grow"
@@ -129,6 +129,9 @@ window.onresize = () => {
   state.listWidth = triggerElement.value?.offsetWidth || 0
 }
 
+const isAutocomplete = computed(() => {
+  return props.field.type !== 'select'
+})
 const optionLabel = computed(() => props.field.optionLabel || '')
 const listWidth = computed(() => {
   const width = state.listWidth || triggerElement.value?.offsetWidth

@@ -19,6 +19,7 @@ declare module 'vue' {
     FDateViewer: typeof import('./components/viewer/FDateViewer.vue')['default']
     FDeleteConfirmationModal: typeof import('./components/utils/FDeleteConfirmationModal.vue')['default']
     FFileViewer: typeof import('./components/viewer/FFileViewer.vue')['default']
+    FFilter: typeof import('./components/filters/FFilter.vue')['default']
     FForm: typeof import('./components/form/FForm.vue')['default']
     FFormFooter: typeof import('./components/form/FFormFooter.vue')['default']
     FFormHeader: typeof import('./components/form/FFormHeader.vue')['default']
