@@ -1,6 +1,5 @@
 {
   "name": "fancy-crud",
-  "private": true,
   "version": "0.0.0-development",
   "license": "MIT",
   "description": "Create forms and tables in an easy way",
@@ -65,6 +64,10 @@
     "vite-plugin-inspect": "^0.3.11",
     "vitest": "^0.0.113",
     "vue-tsc": "^0.30.0"
+  },
+  "private": false,
+  "publishConfig": {
+    "access": "public"
   },
   "repository": {
     "type": "git",
