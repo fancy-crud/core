@@ -4,6 +4,7 @@
       <f-filter :filters="filters" />
     </template>
   </f-table>
+  testing semantic-release
 </template>
 
 <script lang='ts' setup>
