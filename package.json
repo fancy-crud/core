@@ -1,6 +1,9 @@
 {
+  "name": "fancy-crud",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.0-development",
+  "license": "MIT",
+  "description": "Create forms and tables in an easy way",
   "scripts": {
     "serve": "vite --port 9090 --host 0.0.0.0 --open",
     "build": "vite build",
@@ -10,7 +13,8 @@
     "test": "vitest",
     "test:e2e": "cypress open",
     "test:unit": "vitest",
-    "typecheck": "vue-tsc --noEmit"
+    "typecheck": "vue-tsc --noEmit",
+    "semantic-release": "semantic-release"
   },
   "dependencies": {
     "@antfu/eslint-config": "^0.23.1",
@@ -59,6 +63,11 @@
     "vite": "^2.7.6",
     "vite-plugin-inspect": "^0.3.11",
     "vitest": "^0.0.113",
-    "vue-tsc": "^0.30.0"
+    "vue-tsc": "^0.30.0",
+    "semantic-release": "^19.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cafadev/fancy-crud.git"
   }
 }
