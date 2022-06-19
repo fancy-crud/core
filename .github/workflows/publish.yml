@@ -25,8 +25,9 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm test
+        cache: 'pnpm'
+    - run: pnpm install
+    # - run: npm test
   
   publish:
     runs-on: ubuntu-latest
@@ -38,8 +39,9 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm run semantic-release
+        cache: 'pnpm'
+    - run: pnpm install
+    - run: pnpm run semantic-release
       env: 
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
