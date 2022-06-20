@@ -12,9 +12,9 @@ import {
 } from "@/types"
 import { parseRules } from "./rules"
 import { getDefaults } from '../config'
-import { i18n } from "@/composables"
+import { useLocale } from "@/composables"
 
-const t = i18n.global.t
+const t = useLocale()
 
 export function createDefaultKeys(
   fieldKey: string,
@@ -35,7 +35,7 @@ export function createDefaultKeys(
       class: "",
       ref: null,
       // RenderField: controls[field.type || "text"].control,
-      onInput: (e: Event) => e,
+      // onInput: (e: Event) => e,
       ...field,
     }
   )
@@ -76,16 +76,16 @@ export function normalizeButtons(buttons?: Buttons) {
   const defaultMainButton = {
     class: defaults.classes.mainButton,
     label: {
-      create: t("button.create-new"),
-      update: t("button.update-record"),
+      create: t.value("create-new"),
+      update: t.value("update-record"),
     },
   }
 
   const defaultAuxButton = {
     class: defaults.classes.auxButton,
     label: {
-      create: t("button.cancel"),
-      update: t("button.cancel"),
+      create: t.value("cancel"),
+      update: t.value("cancel"),
     },
   }
 
@@ -125,8 +125,8 @@ export function normalizeButtons(buttons?: Buttons) {
 
 export function normalizeTitle(title?: string | Title) {
   const defaultTitle = {
-    create: t("button.create-new-record"),
-    update: t("button.update-record"),
+    create: t.value("create-new-record"),
+    update: t.value("update-record"),
   }
 
   if (!title) return defaultTitle

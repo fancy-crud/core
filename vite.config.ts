@@ -1,21 +1,47 @@
 import path from 'path'
+import { dependencies } from './package.json'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
+import dts from 'vite-plugin-dts'
 
-import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import Inspect from 'vite-plugin-inspect'
 
 export default defineConfig({
+  build: {
+    lib: {
+      entry: path.resolve(__dirname, 'src/index.ts'),
+      name: 'FancyCrud',
+      fileName: (format) => `fancy-crud.${format}.js`,
+    },
+    rollupOptions: {
+      external: [ ...Object.keys(dependencies)],
+      output: {
+        // Provide global variables to use in the UMD build
+        // Add external deps here
+        globals: {
+          vue: 'Vue',
+          xlsx: 'xlsx',
+          axios: 'axios',
+          moment: 'moment',
+        },
+      },
+    },
+    target: 'esnext',
+    sourcemap: true
+  },
   resolve: {
     alias: {
       '@/': `${path.resolve(__dirname, 'src')}/`,
     },
   },
   plugins: [
+    dts({
+      outputDir: 'dist/types'
+    }),
     Vue({
       include: [/\.vue$/],
       reactivityTransform: true,
@@ -26,7 +52,6 @@ export default defineConfig({
       imports: [
         'vue',
         'vue-router',
-        'vue-i18n',
         '@vueuse/head',
         '@vueuse/core',
         'vitest',
@@ -71,24 +96,12 @@ export default defineConfig({
       autoInstall: true,
     }),
 
-    VueI18n({
-      runtimeOnly: true,
-      compositionOnly: true,
-      include: [path.resolve(__dirname, 'locales/**')],
-    }),
-
     // https://github.com/antfu/vite-plugin-inspect
     Inspect({
       // change this to enable inspect for debugging
       enabled: true,
     }),
   ],
-
-  server: {
-    fs: {
-      strict: true,
-    },
-  },
 
   optimizeDeps: {
     include: [

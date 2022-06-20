@@ -11,7 +11,7 @@
           <template #activator>
             <f-button-icon
               @click="openCreateModal"
-              :tooltip="t('button.create')"
+              :tooltip="t('create')"
               icon="mdi-plus"
             />
           </template>
@@ -43,7 +43,7 @@
         <f-button-icon
           @click="exportXlsx"
           icon="mdi-microsoft-excel"
-          :tooltip="t('button.export')"
+          :tooltip="t('export')"
         />
       </div>
     </div>
@@ -94,7 +94,17 @@
 import _ from 'lodash'
 import type { Table } from '@/types'
 import { FormModes } from '@/types'
-import { createHeaders, deleteRecord, fillFieldsWithRecordValues, getRecords, resetModelValue, retrieveRecord, updateRecord, useXLSX } from '@/composables'
+import {
+  createHeaders,
+  deleteRecord,
+  fillFieldsWithRecordValues,
+  getRecords,
+  resetModelValue,
+  retrieveRecord,
+  updateRecord,
+  useLocale,
+  useXLSX,
+} from '@/composables'
 
 const props = defineProps<{
   table: Table
@@ -106,7 +116,7 @@ const emit = defineEmits<{
   (e: 'update:formModal', value: boolean): void
 }>()
 
-const { t } = useI18n()
+const t = useLocale()
 const cloneForm = _.cloneDeep(props.table.form)
 const headers = createHeaders(props.table.form.fields)
 const formModal = ref(Boolean(props.formModal))

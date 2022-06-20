@@ -1,4 +1,5 @@
 export * from './formats'
+export * from './locale'
 
 import { computed } from 'vue'
 

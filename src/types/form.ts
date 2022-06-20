@@ -68,7 +68,7 @@ export interface NormalizedFieldStructure extends FieldStructure {
   // RenderField: any;
   errors: string[];
   rules: Array<(value: any) => string | boolean> | never[];
-  onInput: (e: Event) => void
+  onInput?: (e: Event) => void
 }
 
 export interface Actions {

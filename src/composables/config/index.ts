@@ -1,8 +1,3 @@
-import _ from 'lodash'
-import { createI18n } from 'vue-i18n'
-import en from '@/locales/en.json'
-import es from '@/locales/es.json'
-
 const defaults = {
   classes: {
     text: "border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
@@ -27,9 +22,3 @@ export function setDefaultClasses(classes: {[k: string]: string}) {
 export function getDefaults() {
   return defaults
 }
-
-export const i18n = createI18n({
-  legacy: false,
-  locale: 'en',
-  messages: { en, es }
-})

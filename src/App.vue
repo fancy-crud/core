@@ -16,6 +16,7 @@
       <component :is="inputType" />
     </template>
   </f-sidebar>
+  <!-- <h1>Hello world</h1> -->
 </template>
 
 <script lang="ts" setup>

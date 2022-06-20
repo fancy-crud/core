@@ -24,6 +24,10 @@ function getPaginationCountKey(data: any) {
   return splittedKey.reduce((accum, key) => accum[key], data)
 }
 
+export function setHttpConfig(options: unknown) {
+  Object.assign(http, options)
+}
+
 export function buildURL({
   url,
   lookupValue,
