@@ -4,6 +4,8 @@
     "module": "ESNext",
     "target": "ESNext",
     "lib": ["DOM", "ESNext"],
+    "declaration": true,
+    "emitDeclarationOnly": true,
     "strict": true,
     "esModuleInterop": true,
     "jsx": "preserve",
@@ -13,16 +15,28 @@
     "noUnusedLocals": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "typeRoots": [
+      "src/types"
+    ],
     "types": [
       "vite/client",
-      "vue/ref-macros",
-      "src/**/*.vue"
+      // "vue/ref-macros",
+      // "src/**/*.vue"
     ],
     "paths": {
       "@/*": ["src/*"]
     }
   },
-  "exclude": ["dist", "node_modules", "cypress"],
-  "outDir": "dist",
-  "declaration": true
+  "exclude": [
+    "node_modules",
+    "demo",
+    "cypress",
+    "**/**/*.test.ts",
+    "**/**/*.stories.tsx",
+    "**/**/*.md",
+    "**/dist",
+    "packages/.test",
+    "packages/_docs"
+  ],
 }

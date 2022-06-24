@@ -15,6 +15,7 @@
 </template>
 
 <script lang="ts" setup>
+import { provide } from 'vue'
 import type { NormalizedFieldStructure } from '@/types'
 import { setInputTextModelValue, useErrorStyles, useSetModelValue } from '@/composables'
 

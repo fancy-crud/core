@@ -1,4 +1,3 @@
-import { Observable, SubjectLike } from 'rxjs'
 import { ButtonHTMLAttributes, InputHTMLAttributes } from 'vue';
 
 export enum FormModes {
@@ -55,7 +54,7 @@ export interface FieldStructure extends InputHTMLAttributes {
     allowImagePreview?: boolean,
   };
   xlsx?: Record<string, unknown>
-  [key: string]: unknown;
+  // [key: string]: unknown;
 }
 
 export interface NormalizedFieldStructure extends FieldStructure {
@@ -79,13 +78,9 @@ export interface Actions {
   }
 }
 
-export interface Fields {
-  [key: string]: FieldStructure;
-}
+export interface Fields extends Record<string, FieldStructure>{}
 
-export interface NormalizedFields {
-  [key: string]: NormalizedFieldStructure;
-}
+export interface NormalizedFields extends Record<string, NormalizedFieldStructure> {}
 
 export interface Title {
   create?: string;
@@ -114,18 +109,7 @@ export interface FieldWatcher {
   oldValue: unknown;
 }
 
-export interface ObservableFieldWatcher {
-  [key: string]: Observable<FieldWatcher>
-}
-
-export interface FormEmitter {
-  generalErrors: SubjectLike<unknown>,
-  notifications: SubjectLike<unknown>
-  isFormValid: SubjectLike<boolean>,
-  fields: {
-    [key: string]: ObservableFieldWatcher
-  }
-}
+export interface IFormRecord extends Record<string, any>{}
 
 export interface Form {
   id: string;
@@ -134,11 +118,6 @@ export interface Form {
   generalError?: string;
   record?: IFormRecord
 }
-
-export interface IFormRecord {
-  [key: string]: any;
-}
-
 export interface CreateForm {
   id: string;
   fields: Fields;

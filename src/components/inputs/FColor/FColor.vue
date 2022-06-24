@@ -27,6 +27,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, provide } from 'vue'
 import type { NormalizedFieldStructure } from '@/types'
 import { setInputTextModelValue, useErrorStyles, useSetModelValue } from '@/composables'
 

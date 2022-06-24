@@ -41,6 +41,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
 import type { TableHeader } from '@/types'
 
 const props = defineProps<{

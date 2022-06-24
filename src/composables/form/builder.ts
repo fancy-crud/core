@@ -1,5 +1,5 @@
 import _ from "lodash"
-import { reactive } from "@vue/reactivity"
+import { reactive } from "vue"
 
 import { normalizeFormFields, normalizeFormSettings } from "./normalizers"
 import { validateRules } from "./rules"
@@ -9,7 +9,7 @@ import {
   CreateForm,
   IFormRecord,
   FormModes,
-  Form,
+  Form
 } from "@/types"
 
 export function fillFieldsWithRecordValues(fields: NormalizedFields, record: IFormRecord) {
@@ -154,15 +154,16 @@ export function resetModelValue(form: Form, cloneForm: Form) {
   })
 }
 
-export function useForm(args: CreateForm) {
+export function useForm<T extends CreateForm>(args: T): Form {
   const { fields, settings } = args
-
+  const form = reactive({}) as Form
+  
   let _fields = normalizeFormFields(fields)
 
   const _settings = normalizeFormSettings(settings)
 
-  const _form = Object.assign(
-    {},
+  Object.assign(
+    form,
     {
       ...args,
       fields: _fields,
@@ -170,6 +171,5 @@ export function useForm(args: CreateForm) {
     }
   )
 
-  const form: Form = reactive(_form)
   return form
 }

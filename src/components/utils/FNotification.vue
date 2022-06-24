@@ -37,6 +37,7 @@
 </template>
 
 <script lang="ts" setup>
+import { onMounted, ref } from 'vue'
 const props = defineProps<{
   message: string
   backgroundColor?: string

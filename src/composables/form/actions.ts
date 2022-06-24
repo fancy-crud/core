@@ -1,11 +1,6 @@
-import { effect } from '@vue/reactivity';
-import { Actions, Form, FormModes, NormalizedFieldStructure } from '@/types';
+import { effect, ref } from 'vue';
+import { Form, FormModes, NormalizedFieldStructure } from '@/types';
 import _ from 'lodash';
-
-const setFocused = (field: NormalizedFieldStructure) => () => {
-  field.wasFocused = true
-}
-
 
 export const setInputTextModelValue = (field: NormalizedFieldStructure, value: any) => {
   field.modelValue = value

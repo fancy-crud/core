@@ -1,12 +1,12 @@
-import { reactive } from "vue"
+import { reactive, computed, watch } from 'vue'
 import { Fields } from "@/types";
 import { getFormData, normalizeFormFields } from "../form";
 import type { NormalizedFields } from '@/types';
 
-export function useFilters(_filters: Fields) {
-  const filters: NormalizedFields = reactive(
-    normalizeFormFields(_filters)
-  )
+export function useFilters<T extends Fields>(_filters: T) {
+  const filters: NormalizedFields = reactive({}) as NormalizedFields
+  
+  Object.assign(filters, normalizeFormFields(_filters))
 
   const filterParams = reactive(
     getFormData({ fields: filters }).jsonForm

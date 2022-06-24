@@ -51,6 +51,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, onMounted, ref, useAttrs } from 'vue'
 import { useDefaultBackgroundColor } from '@/composables'
 
 const props = defineProps<{

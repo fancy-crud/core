@@ -20,6 +20,8 @@
 </template>
 
 <script lang="ts" setup>
+import FSidebar from '@/components/viewer/FSidebar.vue'
+import FSidebarItem from '@/components/viewer/FSidebarItem.vue'
 import FFormViewer from '@/components/viewer/FFormViewer.vue'
 import FInputViewer from '@/components/viewer/FInputViewer.vue'
 import FInputDate from '@/components/viewer/FDateViewer.vue'

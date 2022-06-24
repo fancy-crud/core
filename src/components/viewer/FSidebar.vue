@@ -18,6 +18,7 @@
 </template>
 
 <script setup lang='ts'>
+import { provide, ref } from 'vue'
 const sidebarItem = localStorage.getItem('sidebar-item')
 const modelValue = ref(sidebarItem || '')
 

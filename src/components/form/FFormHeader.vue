@@ -9,6 +9,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
 import type { Form } from '@/types'
 import { FormModes } from '@/types'
 

@@ -14,7 +14,8 @@
   </teleport>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup>import { onMounted, provide, ref, watch } from 'vue';
+
 const props = defineProps<{
   modelValue: boolean
   placement?: string

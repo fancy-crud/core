@@ -53,6 +53,7 @@ declare module 'vue' {
     FTableRowActions: typeof import('./components/table/FTableRowActions.vue')['default']
     FTableRowFilePreview: typeof import('./components/table/FTableRowFilePreview.vue')['default']
     FTableViewer: typeof import('./components/viewer/FTableViewer.vue')['default']
+    FText: typeof import('./components/inputs/FText/FText.vue')['default']
     FTextarea: typeof import('./components/inputs/FTextarea/FTextarea.vue')['default']
     FTextareaViewer: typeof import('./components/viewer/FTextareaViewer.vue')['default']
   }

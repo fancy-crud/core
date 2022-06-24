@@ -18,6 +18,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, ref } from 'vue'
 import _ from 'lodash'
 import type { NormalizedFieldStructure } from '@/types'
 import { setInputCheckboxModelValue, useErrorStyles } from '@/composables'

@@ -28,6 +28,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, onMounted, ref } from 'vue'
 const props = defineProps<{
   icon: string
   size?: string

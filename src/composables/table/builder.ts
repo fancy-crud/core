@@ -75,6 +75,10 @@ export function useXLSX(table: Table) {
   }
 }
 
-export function useTable(args: Table): Table {
-  return reactive(args)
+export function useTable<T extends Table>(args: T): Table {
+  const table = reactive({}) as T
+
+  Object.assign(table, args)
+
+  return table
 }

@@ -32,12 +32,12 @@ class AlbumSerializer(serializers.ModelSerializer):
         write_only=True
     )
 
-    genres_id = serializers.PrimaryKeyRelatedField(
-        queryset=models.Genre.objects.all(),
-        source='artist',
-        many=True,
-        write_only=True
-    )
+    # genres_id = serializers.PrimaryKeyRelatedField(
+    #     queryset=models.Genre.objects.all(),
+    #     source='genre',
+    #     many=True,
+    #     write_only=True
+    # )
 
     class Meta:
         model = models.Album

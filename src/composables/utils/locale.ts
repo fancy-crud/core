@@ -1,4 +1,4 @@
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
 import en from '@/locales/en.json'
 
 interface Locale {

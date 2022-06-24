@@ -84,6 +84,8 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, ref, watch } from 'vue'
+
 const props = defineProps<{
   modelValue: number
   pagination: {

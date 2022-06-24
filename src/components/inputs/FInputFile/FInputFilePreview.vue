@@ -32,6 +32,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, onMounted, ref } from 'vue'
 import { createPopper } from '@popperjs/core'
 
 const props = defineProps<{
