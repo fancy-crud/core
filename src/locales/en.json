@@ -6,5 +6,7 @@
   "delete": "Delete",
   "edit": "Edit",
   "export": "Export",
-  "update-record": "Update record"
+  "update-record": "Update record",
+  "element-created": "The item has been successfully created",
+  "element-updated": "The item has been successfully updated"
 }

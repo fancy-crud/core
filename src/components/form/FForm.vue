@@ -62,7 +62,7 @@ import type { AxiosResponse } from 'axios'
 // import { FFormMain, FNotificationGroup } from '@/components'
 import { FormModes } from '@/types'
 import type { Form } from '@/types'
-import { errorNotification, handleBadRequest, notificationStore, pushNotification, shiftNotification, successNotification } from '@/composables'
+import { errorNotification, handleBadRequest, notificationStore, pushNotification, shiftNotification, successNotification, useLocale } from '@/composables'
 
 const props = defineProps<{
   form: Form
@@ -75,7 +75,7 @@ const emit = defineEmits<{
 }>()
 
 const slots = useSlots()
-
+const t = useLocale()
 // const formClone = _.cloneDeep(props.form)
 
 const notifications = computed(() => notificationStore.value)
@@ -92,8 +92,8 @@ const beforeAndAfterFieldSlots = computed(() => {
 
 const successNotificationMessage = computed(() => {
   const messages = {
-    [FormModes.CREATE_MODE]: 'Se ha creado el elemento con éxito',
-    [FormModes.UPDATE_MODE]: 'Se ha actualizado el elemento con éxito',
+    [FormModes.CREATE_MODE]: t.value('element-created'),
+    [FormModes.UPDATE_MODE]: t.value('element-updated'),
   }
   return messages[props.form.settings.mode]
 })
