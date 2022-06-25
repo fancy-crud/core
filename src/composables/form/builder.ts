@@ -41,15 +41,34 @@ export function getFormData(form: { fields: NormalizedFields }) {
 
     const addFormDataValue = (value: any) => {
       const optionValue = String(field.optionValue)
-      const formValue = value[optionValue]
-
-      if (field.multiple) {
-        metadata[formKey] = !Array.isArray(metadata[formKey])
-          ? [formValue]
-          : (metadata[formKey] as Array<unknown>).push(formValue)
-      } else {
-        metadata[formKey] = formValue
+      
+      if (typeof value === "object") {
+        const formValue = value[optionValue]
+  
+        if (field.multiple) {
+          if (!Array.isArray(metadata[formKey])) {
+            metadata[formKey] = [formValue]
+          }
+          else {
+            (metadata[formKey] as Array<unknown>).push(formValue)
+          }
+        } else {
+          metadata[formKey] = formValue
+        }
+        return
       }
+      
+      if (field.multiple) {
+        if (!Array.isArray(metadata[formKey])) {
+          metadata[formKey] = [value]
+        }
+        else {
+          (metadata[formKey] as Array<unknown>).push(value)
+        }
+      } else {
+        metadata[formKey] = value
+      }
+      console.log(metadata)
     }
 
     if (!field.modelValue) {
@@ -57,12 +76,8 @@ export function getFormData(form: { fields: NormalizedFields }) {
       return
     }
 
-    if (!field.optionValue) {
-      throw new Error(`'${fieldKey}' field require optionValue property`)
-    }
-
-    if (field.multiple) {
-      ;(field.modelValue as Array<any>).forEach(addFormDataValue)
+    if (field.multiple && Array.isArray(field.modelValue)) {
+      field.modelValue.forEach(addFormDataValue)
       return
     }
 
