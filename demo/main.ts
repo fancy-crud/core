@@ -1,19 +1,17 @@
 import { createApp } from 'vue'
 import axios from 'axios'
-
+import FancyCrud from '../src/index'
 import App from './App.vue'
-// import { http } from '@/composables'
-import '@mdi/font/css/materialdesignicons.css'
-import './styles/main.sass'
-import 'flowbite';
 
-// import FancyCrud from './index'
+import '@mdi/font/css/materialdesignicons.css'
+import 'flowbite';
+import '../src/styles/main.sass'
 
 axios.defaults.baseURL = 'http://localhost:9000/api/'
 
-// Object.assign(http, { axios })
-
 const app = createApp(App)
-// app.use(FancyCrud)
+app.use(FancyCrud, {
+    http: { axios }
+})
 
 app.mount('#app')
