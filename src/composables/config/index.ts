@@ -1,4 +1,4 @@
-import { HandleErrorRequest } from "@/types/response-handlers"
+import { HandleRequestStatusCodes } from "@/types/response-handlers"
 
 const defaults = {
   classes: {
@@ -17,7 +17,7 @@ const defaults = {
   }
 }
 
-const statusCodes: HandleErrorRequest = {}
+const statusCodes: HandleRequestStatusCodes = {}
 
 export function setDefaultClasses(classes: {[k: string]: string}) {
   Object.assign(defaults.classes, classes)
@@ -31,6 +31,6 @@ export function getStatusCodesHandlers() {
   return statusCodes
 }
 
-export function setStatusCodesHandlers(handlers: HandleErrorRequest) {
+export function setStatusCodesHandlers(handlers: HandleRequestStatusCodes) {
   Object.assign(statusCodes, handlers)
 }
