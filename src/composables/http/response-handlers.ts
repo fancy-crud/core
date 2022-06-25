@@ -1,8 +1,15 @@
 import { AxiosResponse } from "axios"
 import { Form } from "@/types"
-// import { errorNotification } from "../notifications"
+import { HandleRequestStatusCodes } from "@/types"
+import { errorNotification, getStatusCodesHandlers, pushNotification, useLocale } from "@/composables"
 
-export function handleBadRequest(form: Form, data?: any) {
+const t = useLocale()
+
+function handleBadRequest(form: Form, data?: any) {
+  pushNotification(errorNotification({
+    message: t.value('server-bad-request')
+  }))
+
   if (!data) return
 
   Object.entries(data).forEach(([fieldKey, value]) => {
@@ -28,27 +35,39 @@ export function handleBadRequest(form: Form, data?: any) {
   })
 }
 
-// export function handlePermission() {
-// }
-
-export function handleUnknownError(_form: Form, _data?: any) {
-  // errorNotification({
-  //   message: 'Ha ocurrido un error inesperado, por favor contacte con soporte técnico para dar seguimiento'
-  // })
+export function handleUnauthorizedUser() {
+  pushNotification(errorNotification({
+    message: t.value('server-unauthorized-user')
+  }))
 }
 
-export function handleErrorRequest(form: Form, error?: AxiosResponse) {
-  if (!error) {
-    handleUnknownError(form)
-    return
-  }
+function handleUnknownError(_form: Form, _data?: any) {
+  pushNotification(errorNotification({
+    message: t.value('server-error')
+  }))
+}
 
-  const statusCode: Record<number, any> = {
+export function useHandleRequestStatusCodes(statusCodes?: HandleRequestStatusCodes) {
+  const _statusCodes: HandleRequestStatusCodes = {
     400: handleBadRequest,
-    // 401: handlePermission,
-    500: handleUnknownError
+    500: handleUnknownError,
+    401: handleUnauthorizedUser,
+    ...getStatusCodesHandlers()
   }
 
-  const handler = statusCode[error.status || 500]
-  handler(form, error.data)
+  if (statusCodes) {
+    Object.assign(_statusCodes, statusCodes)
+  }
+
+  function getHandler(error?: AxiosResponse) {
+    if (!error) return
+    return _statusCodes[error?.status]
+  }
+
+  return {
+    getHandler,
+    handleBadRequest,
+    handleUnknownError,
+    handleUnauthorizedUser
+  }
 }

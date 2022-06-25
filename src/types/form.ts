@@ -1,3 +1,4 @@
+import { HandleErrorRequest } from '@/types';
 import { ButtonHTMLAttributes, InputHTMLAttributes } from 'vue';
 
 export enum FormModes {
@@ -94,14 +95,16 @@ export interface Settings {
   title?: string | Title
   lookupField?: string
   isValid?: boolean
+  statusCodesHandlers?: Record<number, HandleErrorRequest>
 }
 
 export interface NormalizedSettings extends Settings {
-  url: string;
-  buttons: Required<Buttons>;
-  mode: FormModes;
+  url: string
+  buttons: Required<Buttons>
+  mode: FormModes
   title: string | Title
   lookupField: string
+  statusCodesHandlers: Record<number, HandleErrorRequest>
 }
 
 export interface FieldWatcher {
@@ -116,7 +119,7 @@ export interface Form {
   fields: NormalizedFields;
   settings: NormalizedSettings;
   generalErrors?: string[];
-  record?: IFormRecord
+  record?: IFormRecord;
 }
 export interface CreateForm {
   id: string;

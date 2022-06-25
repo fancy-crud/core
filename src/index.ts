@@ -2,7 +2,7 @@
 import { App, Plugin } from 'vue'
 
 // import * as components from '@/components/index';
-import { setHttpConfig } from '@/composables'
+import { setHttpConfig, setStatusCodesHandlers } from '@/composables'
 import './styles/main.sass'
 
 
@@ -23,6 +23,11 @@ const install: Plugin = function installFancyCrud(app: App, options: any = {}) {
 
   if (options.http) {
     setHttpConfig(options.http)
+  }
+
+  if (options.statusCodesHandlers) {
+    console.log(options.statusCodesHandlers)
+    setStatusCodesHandlers(options.statusCodesHandlers)
   }
 };
 

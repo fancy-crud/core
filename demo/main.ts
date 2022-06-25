@@ -11,7 +11,7 @@ axios.defaults.baseURL = 'http://localhost:9000/api/'
 
 const app = createApp(App)
 app.use(FancyCrud, {
-    http: { axios }
+    http: { axios },
 })
 
 app.mount('#app')

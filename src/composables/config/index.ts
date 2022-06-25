@@ -1,3 +1,5 @@
+import { HandleErrorRequest } from "@/types/response-handlers"
+
 const defaults = {
   classes: {
     text: "border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
@@ -15,10 +17,20 @@ const defaults = {
   }
 }
 
+const statusCodes: HandleErrorRequest = {}
+
 export function setDefaultClasses(classes: {[k: string]: string}) {
   Object.assign(defaults.classes, classes)
 }
 
 export function getDefaults() {
   return defaults
+}
+
+export function getStatusCodesHandlers() {
+  return statusCodes
+}
+
+export function setStatusCodesHandlers(handlers: HandleErrorRequest) {
+  Object.assign(statusCodes, handlers)
 }

@@ -62,7 +62,14 @@ import type { AxiosResponse } from 'axios'
 // import { FFormMain, FNotificationGroup } from '@/components'
 import { FormModes } from '@/types'
 import type { Form } from '@/types'
-import { errorNotification, handleBadRequest, notificationStore, pushNotification, shiftNotification, successNotification, useLocale } from '@/composables'
+import {
+  notificationStore,
+  pushNotification,
+  shiftNotification,
+  successNotification,
+  useHandleRequestStatusCodes,
+  useLocale,
+} from '@/composables'
 
 const props = defineProps<{
   form: Form
@@ -76,6 +83,7 @@ const emit = defineEmits<{
 
 const slots = useSlots()
 const t = useLocale()
+const { getHandler } = useHandleRequestStatusCodes(props.form.settings.statusCodesHandlers)
 // const formClone = _.cloneDeep(props.form)
 
 const notifications = computed(() => notificationStore.value)
@@ -112,16 +120,19 @@ const onSuccess = (response: AxiosResponse) => {
     message: successNotificationMessage.value,
   })
 
+  const handler = getHandler(response)
+
+  if (handler)
+    handler(props.form, response.data)
+
   emit('success', props.form.settings.mode, response)
 }
 
 const dispatchErrorNotification = (error?: AxiosResponse) => {
-  if (error && error.status === 400)
-    handleBadRequest(props.form, error.data)
+  const handler = getHandler(error)
 
-  pushNotification({
-    ...errorNotification(),
-  })
+  if (handler)
+    handler(props.form, error?.data)
 
   emit('error', props.form.settings.mode, error)
 }

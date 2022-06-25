@@ -152,6 +152,7 @@ export function normalizeFormSettings(settings: Settings): NormalizedSettings {
     title: normalizeTitle(settings.title),
     buttons: normalizeButtons(settings.buttons),
     isValid: false,
+    statusCodesHandlers: settings.statusCodesHandlers || {}
   })
 
   return _settings
