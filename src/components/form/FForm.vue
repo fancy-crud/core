@@ -26,6 +26,16 @@
       </template>
     </f-form-main>
 
+    <ul class="pl-4 pb-4">
+      <li
+        v-for="(error, i) in generarErrors"
+        :key="i"
+        class="text-red-500 font-medium"
+      >
+        {{ error }}
+      </li>
+    </ul>
+
     <f-form-footer
       @create="onSuccess"
       @update="onSuccess"
@@ -60,9 +70,8 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'create', response: AxiosResponse): void
-  (e: 'update', response: AxiosResponse): void
-  (e: 'error', response?: AxiosResponse): void
+  (e: 'success', formMode: FormModes, response: AxiosResponse): void
+  (e: 'error', formMode: FormModes, response?: AxiosResponse): void
 }>()
 
 const slots = useSlots()
@@ -93,17 +102,17 @@ const insetScrollStyles = computed(() => {
   return !props.noInsetScroll ? { maxHeight: '70vh', overflow: 'hidden auto' } : {}
 })
 
+const generarErrors = computed(() => {
+  return props.form.generalErrors || []
+})
+
 const onSuccess = (response: AxiosResponse) => {
   pushNotification({
     ...successNotification(),
     message: successNotificationMessage.value,
   })
 
-  if (props.form.settings.mode === FormModes.CREATE_MODE)
-    emit('create', response)
-
-  else
-    emit('update', response)
+  emit('success', props.form.settings.mode, response)
 }
 
 const dispatchErrorNotification = (error?: AxiosResponse) => {
@@ -114,6 +123,6 @@ const dispatchErrorNotification = (error?: AxiosResponse) => {
     ...errorNotification(),
   })
 
-  emit('error', error)
+  emit('error', props.form.settings.mode, error)
 }
 </script>

@@ -115,7 +115,7 @@ export interface Form {
   id: string;
   fields: NormalizedFields;
   settings: NormalizedSettings;
-  generalError?: string;
+  generalErrors?: string[];
   record?: IFormRecord
 }
 export interface CreateForm {

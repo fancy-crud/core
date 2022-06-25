@@ -14,7 +14,17 @@ export function handleBadRequest(form: Form, data?: any) {
       messageError = (value as string)
     }
 
-    form.fields[fieldKey].errors = [messageError]
+    if (!form.fields[fieldKey]) {
+      if (Array.isArray(form.generalErrors)) {
+        form.generalErrors.push(`${fieldKey} - ${messageError}`)
+      }
+      else {
+        form.generalErrors = [`${fieldKey} - ${messageError}`]
+      }
+    }
+    else {
+      form.fields[fieldKey].errors = [messageError]
+    }
   })
 }
 
@@ -33,7 +43,7 @@ export function handleErrorRequest(form: Form, error?: AxiosResponse) {
     return
   }
 
-  const statusCode: {[k: number]: any} = {
+  const statusCode: Record<number, any> = {
     400: handleBadRequest,
     // 401: handlePermission,
     500: handleUnknownError
