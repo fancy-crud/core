@@ -1,6 +1,7 @@
 {
   "name": "@fancy-crud/core",
   "private": false,
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/fancy-crud/core.git"
