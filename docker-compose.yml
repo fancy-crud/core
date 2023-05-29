@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  frontend:
+    build: .
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - .:/home/fancy-crud/fancy-crud
+    ports:
+      - '9090:9090'
+    tty: true
+    expose:
+      - 9090

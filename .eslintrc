@@ -1,0 +1,46 @@
+{
+  "extends": [
+    "@antfu"
+  ],
+  "rules": {
+    "no-console": "warn",
+    "vue/attribute-hyphenation": ["error", "always", {
+      "ignore": ["modelValue"]
+    }],
+    "vue/v-on-event-hyphenation": ["error", "always", {
+      "autofix": false,
+      "ignore": ["update:modelValue"]
+    }],
+    "vue/component-tags-order": ["error", {
+      "order": [ "template", "script", "style" ]
+    }],
+    "vue/component-name-in-template-casing": ["error", "kebab-case"],
+    "vue/custom-event-name-casing": ["error", "kebab-case"],
+    "vue/block-lang": ["error",
+      {
+        "script": {
+          "lang": "ts"
+        },
+        "style": {
+          "lang": "sass"
+        }
+      }
+    ],
+    "vue/attributes-order": ["error", {
+      "order": [
+        "LIST_RENDERING",
+        "CONDITIONALS",
+        "DEFINITION",
+        "RENDER_MODIFIERS",
+        "TWO_WAY_BINDING",
+        "OTHER_DIRECTIVES",
+        "EVENTS",
+        ["UNIQUE", "SLOT"],
+        "OTHER_ATTR",
+        "GLOBAL",
+        "CONTENT"
+      ],
+      "alphabetical": false
+    }]
+  }
+}

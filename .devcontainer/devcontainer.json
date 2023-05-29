@@ -1,0 +1,29 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.191.1/containers/vue
+{
+	"name": "Vue project container",
+	"dockerComposeFile": "../docker-compose.yml",
+	"service": "frontend",
+	"workspaceFolder": "/home/fancy-crud/fancy-crud",
+	
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"misterJ.vue-volar-extention-pack",
+		"lokalise.i18n-ally",
+		"antfu.iconify",
+		"dbaeumer.vscode-eslint",
+		"csstools.postcss",
+		"bradlc.vscode-tailwindcss",
+		"formulahendry.auto-close-tag",
+		"formulahendry.auto-rename-tag",
+		"streetsidesoftware.code-spell-checker",
+		"streetsidesoftware.code-spell-checker-spanish",
+		"anseki.vscode-color",
+		"eg2.vscode-npm-script",
+		"redhat.vscode-yaml",
+		"MisterJ.vue-volar-extention-pack"
+	],
+	
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [9090]
+}

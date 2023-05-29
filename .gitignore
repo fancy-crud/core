@@ -1,0 +1,13 @@
+.DS_Store
+.vite-ssg-dist
+.vite-ssg-temp
+*.local
+dist
+dist-ssr
+node_modules
+.pnpm-store/
+.idea/
+*.log
+server/media
+server/*.sqlite3
+__pycache__
