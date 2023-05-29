@@ -6,25 +6,17 @@
     "type": "git",
     "url": "https://github.com/fancy-crud/core.git"
   },
-  "exports": {
-    ".": {
-      "require": "./dist/fancy-crud-core.umd.js",
-      "import": "./dist/fancy-crud-core.es.js"
-    },
-    "./style.css": {
-      "require": "./dist/style.css",
-      "import": "./dist/style.css"
-    }
-  },
-  "main": "./dist/fancy-crud-core.umd.js",
-  "module": "./dist/fancy-crud-core.es.js",
-  "types": "./dist/src/index.d.ts",
+  "type": "module",
+  "main": "./dist/core.cjs.js",
+  "module": "./dist/core.umd.js",
+  "types": "dist/src/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "index.js"
   ],
   "scripts": {
     "dev": "vite --port 9090 --host 0.0.0.0",
-    "build": "node build/exports.js && vite build && vue-tsc --emitDeclarationOnly",
+    "build": "vite build && vue-tsc --emitDeclarationOnly",
     "typecheck": "vue-tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

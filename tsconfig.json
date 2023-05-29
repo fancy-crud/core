@@ -14,7 +14,7 @@
     "noUnusedLocals": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist_types",
+    "outDir": "./dist",
     "typeRoots": [
       "vite/client",
       "src/**/typings",
