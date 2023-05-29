@@ -15,6 +15,7 @@
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
+    "outFile": "types",
     "typeRoots": [
       "vite/client",
       "src/**/typings",

@@ -7,12 +7,13 @@
     "url": "https://github.com/fancy-crud/core.git"
   },
   "type": "module",
-  "main": "./dist/core.cjs.js",
-  "module": "./dist/core.umd.js",
-  "types": "dist/src/index.d.ts",
+  "main": "./dist/core.js",
+  "module": "./dist/core.umd.cjs",
+  "types": "types.d.ts",
   "files": [
     "dist",
-    "index.js"
+    "index.js",
+    "types.d.ts"
   ],
   "scripts": {
     "dev": "vite --port 9090 --host 0.0.0.0",
