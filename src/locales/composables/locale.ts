@@ -5,12 +5,12 @@ interface Locale {
   messages: Record<string, Record<string, string>>
 }
 
-export const i18n: Locale = reactive({
+export const i18n: Locale = {
   locale: 'en',
   messages: {
     en,
   },
-})
+}
 
 export function setLocale(locale: Locale) {
   Object.assign(i18n, locale)

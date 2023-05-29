@@ -51,7 +51,8 @@ export class TableManagerHandler implements TableManager {
     if (typeof form.buttons.aux.onClick !== 'function' && options?.onClickAux)
       Object.assign(form.buttons.aux, { onClick: options.onClickAux })
 
-    useRetrieveRequest(settings.url, lookupValue, {
+    const request = new RequestRetrieve(httpService)
+    request.execute(settings.url, lookupValue, {
       onSuccess(response: { data: Record<string, unknown> }) {
         formManager.fillWithRecordValues(response.data || {})
         formManager.switchToUpdateMode()
@@ -80,7 +81,8 @@ export class TableManagerHandler implements TableManager {
     if (Object.prototype.hasOwnProperty.call(row, lookupField))
       lookupValue = String(row[lookupField])
 
-    useRequestDelete(settings.url, lookupValue, options)
+    const request = new RequestDelete(httpService)
+    request.execute(settings.url, lookupValue, options)
   }
 
   updateCheckbox(value: { field: string; row: Row }) {
@@ -93,7 +95,8 @@ export class TableManagerHandler implements TableManager {
     if (Object.prototype.hasOwnProperty.call(value.row, lookupField))
       lookupValue = String(value.row[lookupField])
 
-    useRequestUpdate(settings.url, lookupValue, {
+    const request = new RequestUpdate(httpService)
+    request.execute(settings.url, lookupValue, {
       [value.field]: !value.row[value.field],
     })
   }
