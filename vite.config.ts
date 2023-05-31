@@ -14,6 +14,7 @@ export default defineConfig({
     lib: {
       name,
       entry: path.resolve(__dirname, 'src/index.ts'),
+      formats: ['es', 'cjs', 'umd'],
     },
     rollupOptions: {
       external: [...Object.keys(dependencies)],

@@ -45,6 +45,6 @@ declare global {
   const setLocale: typeof import('./src/locales/composables/locale')['setLocale']
   const setStatusCodesHandlers: typeof import('./src/settings/composables/index')['setStatusCodesHandlers']
   const setUtils: typeof import('./src/settings/composables/index')['setUtils']
-  const useLocale: typeof import('./src/locales/composables/locale')['useLocale']
+  const t: typeof import('./src/locales/composables/locale')['t']
   const utils: typeof import('./src/settings/composables/index')['utils']
 }

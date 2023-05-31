@@ -1,7 +1,5 @@
 import type { NormalizedTitles, RawTitle } from '@/forms/axioma'
 
-const t = useLocale()
-
 /**
  * A utility class that normalizes title configurations by using the provided title or default values.
  * Provides an `execute` method that takes an optional object containing title configurations

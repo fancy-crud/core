@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "module": "ESNext",
-    "target": "ESNext",
-    "lib": ["DOM", "ESNext"],
+    "target": "ES2022",
+    "module": "CommonJS",
+    "lib": ["DOM", "ES2022"],
     "declaration": true,
     "sourceMap": true,
     "strict": true,
@@ -16,16 +16,15 @@
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
-    "outFile": "core",
     "typeRoots": [
       "vite/client",
-      "src/**/typings",
+      "src/**/typing",
     ],
     "types": [
       "vite/client"
     ],
     "paths": {
-      "@/*": ["src/*"],
+      "@/*": ["./src"],
     }
   },
   "exclude": [

@@ -6,18 +6,15 @@
     "type": "git",
     "url": "https://github.com/fancy-crud/core.git"
   },
-  "type": "module",
-  "main": "./dist/core.js",
-  "module": "./dist/core.umd.cjs",
-  "types": "./types.d.ts",
+  "main": "./dist/core.mjs",
+  "module": "./dist/core.mjs",
+  "types": "./dist/src/index.d.ts",
   "files": [
-    "dist",
-    "index.js",
-    "types.d.ts"
+    "dist"
   ],
   "scripts": {
     "dev": "vite --port 9090 --host 0.0.0.0",
-    "build": "vite build && vue-tsc --emitDeclarationOnly",
+    "build": "vite build && tsc && tsc-alias --verbose -p ./tsconfig.json",
     "typecheck": "vue-tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -42,6 +39,8 @@
     "eslint-plugin-prettier": "^4.2.1",
     "fast-glob": "^3.2.7",
     "taze": "^0.8.2",
+    "tsc": "^2.0.4",
+    "tsc-alias": "^1.8.6",
     "typescript": "^4.8.3",
     "unplugin-auto-import": "^0.11.2",
     "vite": "^3.1.3",

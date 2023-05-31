@@ -1,7 +1,4 @@
 import type { NormalizedButton, NormalizedButtons, RawButton } from '@/forms/axioma'
-
-const t = useLocale()
-
 /**
  * A utility class that normalizes button configurations by merging them with default properties.
  * Provides an `execute` method that takes an optional object containing button configurations
