@@ -59,6 +59,7 @@ export interface DefaultOptions {
 }
 
 export interface RequestDefaultOptions {
+  onInit?: () => void
   onSuccess?: OnSuccess
   onFailed?: OnFailed
   onFinally?: OnFinally

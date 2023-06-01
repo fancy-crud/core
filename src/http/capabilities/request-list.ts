@@ -5,6 +5,9 @@ export class RequestList {
   constructor(private http: HttpService) { }
 
   execute(url: string, params?: Record<string, unknown>, options?: ListRequestOptions) {
+    if (options?.onInit)
+      options.onInit()
+
     this.http.get(url, params)
       .then(response => onSuccess(response, options))
       .catch(e => onFailed(e, options))

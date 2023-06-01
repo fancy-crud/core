@@ -6,6 +6,9 @@ export class RequestRetrieve {
   constructor(private http: HttpService) { }
 
   execute(url: string, lookupValue: string | number, options?: RetrieveRequestOptions) {
+    if (options?.onInit)
+      options.onInit()
+
     const _url = new Url(url, lookupValue)
     this.http.get(_url.value)
       .then(response => onSuccess(response, options))

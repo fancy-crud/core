@@ -6,6 +6,9 @@ export class RequestDelete {
   constructor(private http: HttpService) { }
 
   execute(url: string, lookupValue: string | number, options?: DeleteRequestOptions) {
+    if (options?.onInit)
+      options.onInit()
+
     const _url = new Url(url, lookupValue)
     this.http.delete(_url.value)
       .then(response => onSuccess(response, options))

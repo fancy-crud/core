@@ -5,6 +5,9 @@ export class RequestCreate {
   constructor(private http: HttpService) { }
 
   execute(url: string, form: JSONForm | FormData, options?: CreateRequestOptions) {
+    if (options?.onInit)
+      options.onInit()
+
     this.http.post(url, form)
       .then(response => onSuccess(response, options))
       .catch(e => onFailed(e, options))

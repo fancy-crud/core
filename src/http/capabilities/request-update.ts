@@ -6,6 +6,9 @@ export class RequestUpdate {
   constructor(private http: HttpService) { }
 
   execute(url: string, lookupValue: string | number, form: JSONForm | FormData, options?: UpdateRequestOptions) {
+    if (options?.onInit)
+      options.onInit()
+
     const _url = new Url(url, lookupValue)
     this.http.patch(_url.value, form)
       .then(response => onSuccess(response, options))
