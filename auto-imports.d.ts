@@ -30,6 +30,8 @@ declare global {
   const ResponseManagerHandler: typeof import('./src/forms/capabilities/manager/response')['ResponseManagerHandler']
   const TableManagerHandler: typeof import('./src/tables/capabilities/manager/table')['TableManagerHandler']
   const Url: typeof import('./src/http/axioma/value-objects/url')['Url']
+  const ValidateFieldRules: typeof import('./src/forms/capabilities/fields/validate-field-rules')['ValidateFieldRules']
+  const ValidateForm: typeof import('./src/forms/capabilities/fields/validate-form')['ValidateForm']
   const columnValue: typeof import('./src/tables/capabilities/column-value')['columnValue']
   const fields: typeof import('./src/settings/composables/index')['fields']
   const getDefaults: typeof import('./src/settings/composables/index')['getDefaults']

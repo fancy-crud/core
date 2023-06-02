@@ -1,7 +1,8 @@
-import { FillWithRecordValues, GenerateFormData, HandleErrors, ResetFields } from '../fields'
+import { FillWithRecordValues, GenerateFormData, HandleErrors, ResetFields, ValidateForm } from '../fields'
 import { ResponseManagerHandler } from './response'
 import { NotificationManagerHandler } from './notification'
-import type { FieldErrors, FormManager, FormMap, NotificationManager, ObjectWithNormalizedFields, ResponseManager } from '@/forms/axioma'
+import { ValidateFieldRules } from '@/forms/capabilities'
+import type { FieldErrors, FormManager, FormMap, NotificationManager, ObjectWithNormalizedFields, ResponseManager, RuleOptions } from '@/forms/axioma'
 import { FormModes, NotificationType } from '@/forms/axioma'
 import { GetForeignKeyValues } from '@/http/axioma'
 
@@ -89,5 +90,14 @@ export class FormManagerHandler implements FormManager {
     const form = this.getForm()
 
     form.settings.mode = FormModes.UPDATE_MODE
+  }
+
+  isFormValid() {
+    const form = this.getForm()
+
+    const validateField = new ValidateFieldRules()
+    const validate = new ValidateForm(validateField)
+
+    return validate.execute(form.fields)
   }
 }

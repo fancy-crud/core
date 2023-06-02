@@ -14,6 +14,14 @@ export enum FieldType {
   datepicker = 'datepicker',
 }
 
+export type RawRuleResult = string | true | unknown
+export type RuleResult = string | true
+export type Rule = (value?: any) => RawRuleResult
+
+export interface RuleOptions {
+  processResult?: (rawResult: any) => RuleResult
+}
+
 export interface BaseRawField extends Record<string, any> {
   type: string | FieldType
   wrapper?: Record<string, unknown>
@@ -24,7 +32,7 @@ export interface BaseRawField extends Record<string, any> {
   updateOnly?: boolean
   hidden?: boolean
   hintText?: string
-  rules?: any
+  rules?: Rule
   bounceTime?: number
   modelKey?: string
   modelValue?: unknown
@@ -198,4 +206,5 @@ export interface FormManager {
   setErrors: (errors: FieldErrors) => void
   switchToCreateMode: () => void
   switchToUpdateMode: () => void
+  isFormValid: () => boolean
 }
