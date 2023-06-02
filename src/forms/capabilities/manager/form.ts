@@ -12,9 +12,15 @@ export class FormManagerHandler implements FormManager {
   readonly responseManager: ResponseManager
   readonly notificationManager: NotificationManager
 
-  constructor(private id: symbol) {
+  private ruleOptions?: RuleOptions = {}
+
+  constructor(private id: symbol, options?: { ruleOptions?: RuleOptions }) {
     this.responseManager = new ResponseManagerHandler(id)
     this.notificationManager = new NotificationManagerHandler(id)
+
+    const { ruleOptions = {} } = options || {}
+
+    this.ruleOptions = ruleOptions
   }
 
   getForm(): FormMap {
@@ -92,12 +98,15 @@ export class FormManagerHandler implements FormManager {
     form.settings.mode = FormModes.UPDATE_MODE
   }
 
-  isFormValid() {
+  isFormValid(options: RuleOptions = {}) {
     const form = this.getForm()
 
     const validateField = new ValidateFieldRules()
     const validate = new ValidateForm(validateField)
 
-    return validate.execute(form.fields)
+    return validate.execute(form.fields, {
+      ...this.ruleOptions,
+      ...options,
+    })
   }
 }

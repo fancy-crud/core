@@ -142,14 +142,6 @@ export type NormalizedDatepickerField = FieldNormalizer<RawDatepickerField>
 
 export type NormalizedFields<T> = { [K in keyof T]: NormalizedField & T[K] }
 
-export interface Form<T, U> {
-  originalNormalizedFields: NormalizedFields<T>
-  clonedNormalizedFields: NormalizedFields<T>
-  normalizedButtons: NormalizedButtons<U>
-  normalizedTitles: NormalizedTitles
-  normalizedSettings: NormalizedSettings
-}
-
 export interface ObjectWithRawFields extends Record<string, RawField> {}
 export interface ObjectWithNormalizedFields extends Record<string, NormalizedField> {}
 export interface FieldErrors extends Record<string, string[]> {}
@@ -207,4 +199,14 @@ export interface FormManager {
   switchToCreateMode: () => void
   switchToUpdateMode: () => void
   isFormValid: () => boolean
+}
+
+export interface Form<T, U> {
+  id: symbol
+  originalNormalizedFields: NormalizedFields<T>
+  clonedNormalizedFields: NormalizedFields<T>
+  normalizedButtons: NormalizedButtons<U>
+  normalizedTitles: NormalizedTitles
+  normalizedSettings: NormalizedSettings
+  manager: FormManager
 }
