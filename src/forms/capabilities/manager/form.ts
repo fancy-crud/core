@@ -1,8 +1,9 @@
 import { FillWithRecordValues, GenerateFormData, HandleErrors, ResetFields, ValidateForm } from '../fields'
 import { ResponseManagerHandler } from './response'
 import { NotificationManagerHandler } from './notification'
+import { RuleOptionsManagerHandler } from './rules'
 import { ValidateFieldRules } from '@/forms/capabilities'
-import type { FieldErrors, FormManager, FormMap, NotificationManager, ObjectWithNormalizedFields, ResponseManager, RuleOptions } from '@/forms/axioma'
+import type { FieldErrors, FormManager, FormMap, NotificationManager, ObjectWithNormalizedFields, ResponseManager, RuleOptions, RuleOptionsManager } from '@/forms/axioma'
 import { FormModes, NotificationType } from '@/forms/axioma'
 import { GetForeignKeyValues } from '@/http/axioma'
 
@@ -11,16 +12,16 @@ const forms = new Map<symbol, FormMap>()
 export class FormManagerHandler implements FormManager {
   readonly responseManager: ResponseManager
   readonly notificationManager: NotificationManager
+  readonly ruleOptionsManager: RuleOptionsManager
 
-  private ruleOptions?: RuleOptions = {}
-
-  constructor(private id: symbol, options?: { ruleOptions?: RuleOptions }) {
+  constructor(private id: symbol) {
     this.responseManager = new ResponseManagerHandler(id)
     this.notificationManager = new NotificationManagerHandler(id)
+    this.ruleOptionsManager = new RuleOptionsManagerHandler(id)
+  }
 
-    const { ruleOptions = {} } = options || {}
-
-    this.ruleOptions = ruleOptions
+  get ruleOptions(): RuleOptions {
+    return this.ruleOptionsManager.getRuleOptions()
   }
 
   getForm(): FormMap {
@@ -108,5 +109,9 @@ export class FormManagerHandler implements FormManager {
       ...this.ruleOptions,
       ...options,
     })
+  }
+
+  setRuleOptions(ruleOptions: RuleOptions = {}) {
+    this.ruleOptionsManager.setRuleOptions(ruleOptions)
   }
 }

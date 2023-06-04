@@ -20,6 +20,7 @@ export type Rule = (value?: any) => RawRuleResult
 
 export interface RuleOptions {
   processResult?: (rawResult: any) => RuleResult
+  preventErrorMessage?: boolean
 }
 
 export interface BaseRawField extends Record<string, any> {
@@ -185,9 +186,16 @@ export interface NotificationManager {
   removeNotificationHandlers: () => void
 }
 
+export interface RuleOptionsManager {
+  setRuleOptions(ruleOptions: RuleOptions): void
+  getRuleOptions(): RuleOptions
+  removeRuleOptions(): void
+}
+
 export interface FormManager {
   readonly responseManager: ResponseManager
   readonly notificationManager: NotificationManager
+  readonly ruleOptionsManager: RuleOptionsManager
   fillWithRecordValues: (record: Record<string, unknown>) => void
   getForeignKeyValues: (fields?: ObjectWithNormalizedFields) => void
   resetFields: () => void
@@ -199,6 +207,7 @@ export interface FormManager {
   switchToCreateMode: () => void
   switchToUpdateMode: () => void
   isFormValid: () => boolean
+  setRuleOptions(ruleOptions: RuleOptions): void
 }
 
 export interface Form<T, U> {

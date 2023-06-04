@@ -28,6 +28,7 @@ declare global {
   const RequestUpdate: typeof import('./src/http/capabilities/request-update')['RequestUpdate']
   const ResetFields: typeof import('./src/forms/capabilities/fields/reset-fields')['ResetFields']
   const ResponseManagerHandler: typeof import('./src/forms/capabilities/manager/response')['ResponseManagerHandler']
+  const RuleOptionsManagerHandler: typeof import('./src/forms/capabilities/manager/rules')['RuleOptionsManagerHandler']
   const TableManagerHandler: typeof import('./src/tables/capabilities/manager/table')['TableManagerHandler']
   const Url: typeof import('./src/http/axioma/value-objects/url')['Url']
   const ValidateFieldRules: typeof import('./src/forms/capabilities/fields/validate-field-rules')['ValidateFieldRules']
