@@ -1,1 +1,1 @@
-# ⚠⚠ We're making updates in the documentation ⚠⚠
+# ⚠ We're making updates in the documentation ⚠
