@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts" setup>
-import { createPopper } from '@popperjs/core'
+// import { createPopper } from '@popperjs/core'
 
 const props = defineProps<{
   type: string
@@ -58,16 +58,16 @@ const closePreview = () => {
 }
 
 onMounted(() => {
-  createPopper(triggerEl.value, targetEl.value, {
-    placement: 'left',
-    modifiers: [
-      {
-        name: 'offset',
-        options: {
-          offset: [0, 10],
-        },
-      },
-    ],
-  })
+  // createPopper(triggerEl.value, targetEl.value, {
+  //   placement: 'left',
+  //   modifiers: [
+  //     {
+  //       name: 'offset',
+  //       options: {
+  //         offset: [0, 10],
+  //       },
+  //     },
+  //   ],
+  // })
 })
 </script>
