@@ -11,6 +11,7 @@ module.exports = {
     extend: {},
     colors: {
       primary: colors.blue,
+      danger: colors.red,
     },
   },
   plugins: [

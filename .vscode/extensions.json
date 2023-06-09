@@ -1,7 +1,6 @@
 {
   "recommendations": [
     "misterJ.vue-volar-extention-pack",
-    "johnsoncodehk.vscode-typescript-vue-plugin",
     "lokalise.i18n-ally",
     "antfu.iconify",
     "dbaeumer.vscode-eslint",

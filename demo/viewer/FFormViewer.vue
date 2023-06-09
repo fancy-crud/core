@@ -1,11 +1,11 @@
 <template>
   <div>
-    <f-form :form="form" />
+    <f-form v-bind="form" />
   </div>
 </template>
 
 <script setup lang='ts'>
-import { useForm } from '@/composables'
+import { useForm } from '@/forms/integration/composables'
 
 const form = useForm({
   id: 'select-field',

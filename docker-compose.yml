@@ -6,9 +6,9 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
     volumes:
-      - '.:/home/frontend/frontend'
+      - .:/home/fancy-crud/fancy-crud
     ports:
-      - "9090:9090"
+      - '9090:9090'
     tty: true
     expose:
       - 9090
@@ -19,5 +19,5 @@ services:
     volumes:
       - ./server:/usr/share/backend
     ports:
-      - "9000:9000"
+      - '9000:9000'
     tty: true

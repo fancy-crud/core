@@ -1,0 +1,12 @@
+{
+  "cancel": "Cancel",
+  "create": "Create",
+  "create-new": "Create new",
+  "create-new-record": "Create new record",
+  "delete": "Delete",
+  "edit": "Edit",
+  "export": "Export",
+  "update-record": "Update record",
+  "element-created": "Successfully created",
+  "element-updated": "Successfully updated"
+}

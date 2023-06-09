@@ -4,17 +4,11 @@
 	"name": "Vue project container",
 	"dockerComposeFile": "../docker-compose.yml",
 	"service": "frontend",
-	"workspaceFolder": "/home/frontend/frontend",
-
-	// Set *default* container specific settings.json values on container create.
-	// "settings": {
-    //     "git.path": "/usr/bin/git"
-    // },
+	"workspaceFolder": "/home/fancy-crud/fancy-crud",
 	
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-        "misterJ.vue-volar-extention-pack",
-		"johnsoncodehk.vscode-typescript-vue-plugin",
+		"misterJ.vue-volar-extention-pack",
 		"lokalise.i18n-ally",
 		"antfu.iconify",
 		"dbaeumer.vscode-eslint",
@@ -26,15 +20,10 @@
 		"streetsidesoftware.code-spell-checker-spanish",
 		"anseki.vscode-color",
 		"eg2.vscode-npm-script",
-		"redhat.vscode-yaml"
+		"redhat.vscode-yaml",
+		"MisterJ.vue-volar-extention-pack"
 	],
 	
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [9090],
-	
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postStartCommand": "git config --global user.email \"cafadev@outlook.com\" && git config --global user.name \"Christopher Flores\""
-	
-	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	// "remoteUser": "node"
+	"forwardPorts": [9090]
 }

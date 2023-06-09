@@ -5,7 +5,6 @@
     "target": "ESNext",
     "lib": ["DOM", "ESNext"],
     "declaration": true,
-    "emitDeclarationOnly": true,
     "strict": true,
     "esModuleInterop": true,
     "jsx": "preserve",
@@ -15,22 +14,25 @@
     "noUnusedLocals": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist",
+    "outDir": "./dist_types",
     "typeRoots": [
-      "src/types"
+      "vite/client",
+      "src/**/typings",
+      "./node_modules/zod/lib/external",
+      "./node_modules/@oruga-ui/oruga-next/src/components/**",
+      "./node_modules/@fancy-crud/core/dist/src/**"
     ],
     "types": [
-      "vite/client",
-      // "vue/ref-macros",
-      // "src/**/*.vue"
+      "vite/client"
     ],
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "~/*": ["demo/*"]
     }
   },
   "exclude": [
+    "dist",
     "node_modules",
-    "demo",
     "cypress",
     "**/**/*.test.ts",
     "**/**/*.stories.tsx",
@@ -38,5 +40,5 @@
     "**/dist",
     "packages/.test",
     "packages/_docs"
-  ],
+  ]
 }

@@ -1,21 +1,24 @@
 <template>
-  <f-form :form="form" />
+  <f-form v-bind="form" />
 
-  <div class="p-10 mt-10 border">
+  <p class="p-10 mt-10 border">
     {{ form.fields.date.modelValue }}
-  </div>
+  </p>
 </template>
 
 <script lang='ts' setup>
-import { useForm } from '@/composables'
+import { FieldType } from '@fancy-crud/core'
+import { useForm } from '@/forms/integration/composables'
 
 const form = useForm({
-  id: 'date-field',
   fields: {
     date: {
       label: 'Date',
       placeholder: 'Seleccionar',
-      type: 'date',
+      type: FieldType.datepicker,
+      wrapper: {
+        class: 'col-span-12',
+      },
     },
   },
   settings: {

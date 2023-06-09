@@ -1,5 +1,8 @@
 {
-  "cSpell.words": ["Vitesse"],
+  "cSpell.words": [
+    "Vitesse",
+    "vmodel"
+  ],
   "i18n-ally.keystyle": "nested",
   "i18n-ally.localesPaths": [
     "locales",
@@ -9,10 +12,10 @@
   "prettier.enable": false,
   "typescript.tsdk": "node_modules/typescript/lib",
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
+    "source.fixAll.eslint": true
   },
   "files.associations": {
-    "*.css": "postcss",
+    "*.css": "postcss"
   },
   "editor.formatOnSave": false,
   "i18n-ally.sourceLanguage": "en",

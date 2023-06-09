@@ -1,17 +1,29 @@
+import 'animate.css'
+import type { App, Plugin } from 'vue'
 
-import { App, Plugin } from 'vue'
-
-// import * as components from '@/components/index';
-import { setHttpConfig, setStatusCodesHandlers } from '@/composables'
+import type { HttpService, RuleOptions } from '@fancy-crud/core'
+import { setDefaultClasses, setFields, setHttpInstance, setHttpPagination, setRuleOptions, setTable, setUtils } from '@fancy-crud/core'
 import './styles/main.sass'
 
+interface Options {
+  http: {
+    service?: Omit<HttpService, 'pagination'>
+    pagination?: HttpService['pagination']
+  }
+  fields: Record<string, any>
+  utils: Record<string, any>
+  ruleOptions: RuleOptions
+  table: Record<string, any>
+  defaultClasses: Record<string, string>
+}
 
 const components: Record<string, any> = {}
 // install function executed by Vue.use()
-const install: Plugin = function installFancyCrud(app: App, options: any = {}) {
-
-  Object.entries(import.meta.globEager('@/components/**/*.vue')).forEach(([key, value]) => {
-    if (key.includes('/viewer/')) return
+const install: Plugin = function installFancyCrud(app: App, options: Partial<Options>) {
+  const componentsList: [string, any][] = Object.entries(import.meta.glob('@/**/components/*.vue'))
+  componentsList.forEach(([key, value]) => {
+    if (key.includes('/viewer/'))
+      return
 
     const componentName = key.match(/[\w]+?(?=\.)/g)
 
@@ -21,22 +33,40 @@ const install: Plugin = function installFancyCrud(app: App, options: any = {}) {
     }
   })
 
-  if (options.http) {
-    setHttpConfig(options.http)
-  }
+  if (options.http?.service)
+    setHttpInstance(options.http.service)
 
-  if (options.statusCodesHandlers) {
-    console.log(options.statusCodesHandlers)
-    setStatusCodesHandlers(options.statusCodesHandlers)
-  }
-};
+  if (options.http?.pagination)
+    setHttpPagination(options.http.pagination)
+
+  // if (options.statusCodesHandlers)
+  //   setStatusCodesHandlers(options.statusCodesHandlers)
+
+  if (options.fields)
+    setFields(options.fields)
+
+  if (options.utils)
+    setUtils(options.utils)
+
+  if (options.table)
+    setTable(options.table)
+
+  if (options.ruleOptions)
+    setRuleOptions(options.ruleOptions)
+
+  if (options.defaultClasses)
+    setDefaultClasses(options.defaultClasses)
+}
 
 // Create module definition for Vue.use()
-export default install;
+export default install
 
 // To allow individual component use, export components
 // each can be registered via Vue.component()
-export * from './components';
-export * from './composables'
+export * from './common/integration'
+// export * from './filters'
+export * from './forms/integration'
+export * from './http/integration'
 export * from './locales'
-export * from './types'
+// export * from './config'
+export * from './tables/integration'

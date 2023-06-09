@@ -1,5 +1,5 @@
 <template>
-  <f-form :form="form" />
+  <f-form v-bind="form" />
 
   <div class="p-10 mt-10 border">
     {{ form.fields.textarea.modelValue }}
@@ -7,7 +7,7 @@
 </template>
 
 <script lang='ts' setup>
-import { useForm } from '@/composables'
+import { useForm } from '@/forms/integration/composables'
 
 const form = useForm({
   id: 'textarea-field',

@@ -1,5 +1,5 @@
 <template>
-  <f-form :form="form" />
+  <f-form v-bind="form" />
 
   <div class="p-10 mt-10 border">
     {{ form.fields.color.modelValue }}
@@ -7,8 +7,6 @@
 </template>
 
 <script lang='ts' setup>
-import { useForm } from '@/composables'
-
 const form = useForm({
   id: 'color-field',
   fields: {
