@@ -19,7 +19,7 @@ export class NormalizeButtons {
 
     const defaultMainButton: NormalizedButton = {
       ...main,
-      class: main?.class || defaults.classes.mainButton,
+      class: main?.class || defaults.mainButton?.class,
       isLoading: main?.isLoading || false,
       icon: main?.icon || '',
       label: {
@@ -32,7 +32,7 @@ export class NormalizeButtons {
       ...aux,
       isLoading: aux.isLoading || false,
       icon: aux.icon || '',
-      class: aux.class || defaults.classes.auxButton,
+      class: aux.class || defaults.auxButton?.class,
       label: {
         create: aux.label?.create || t('cancel'),
         update: aux.label?.update || t('cancel'),

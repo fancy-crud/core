@@ -6,6 +6,12 @@ import type { NormalizedField, NormalizedFields, ObjectWithRawFields, RawField }
   a new object with normalized fields.
 **/
 export class NormalizeFormFields {
+  private getDefaultNormalizedField<T extends NormalizedField>(obj: T): NormalizedField & T {
+    const field: NormalizedField & T = Object.assign({}, obj)
+
+    return field
+  }
+
   /**
     Creates a new object with default keys and values for a form field, merging it with the provided field object.
     Assigns a unique id, modelKey, name, and other properties. If the field object has any properties
@@ -14,31 +20,38 @@ export class NormalizeFormFields {
     @param {RawField} field - The form field object containing the properties to be merged with the default keys.
     @returns {NormalizedField & RawField} - A new object combining the default keys and values with the provided field object.
   **/
-  private createDefaultKeys(fieldKey: string, field: RawField): NormalizedField {
-    const _field: NormalizedField = Object.assign({}, {
+  private createDefaultKeys(fieldKey: string, rawField: RawField): NormalizedField {
+    const defaults = getDefaults()
+
+    const field = this.getDefaultNormalizedField({
       id: `field-${fieldKey}-control`,
       modelKey: fieldKey,
       name: fieldKey,
       errors: [],
       wasFocused: false,
-      modelValue: field.multiple ? [] : null,
-      showPassword: false,
+      modelValue: rawField.multiple ? [] : null,
       class: '',
+      wrapper: {
+        class: '',
+      },
       ref: null,
-      ...field,
+      ...rawField,
     })
 
-    // if (_field.type === 'autocomplete')
-    //   _field.valueString = ''
+    const fieldDefaults = defaults[field.type]
+    field.class = `${fieldDefaults?.class || ''} ${field.class}`.trim()
+    field.wrapper.class = `${fieldDefaults?.wrapper?.class || ''} ${field.wrapper.class}`.trim()
 
-    if (_field.url && (!_field.options || !Array.isArray(_field.options)))
-      _field.options = []
+    if (field.type === FieldType.password)
+      field.showPassword = false
 
-    const defaults = getDefaults()
-    const fieldClasses = defaults.classes[_field.type] || ''
-    _field.class = `${fieldClasses} ${_field.class}`.trim()
+    // if (field.type === 'autocomplete')
+    //   field.valueString = ''
 
-    return _field
+    if (field.url && (!field.options || !Array.isArray(field.options)))
+      field.options = []
+
+    return field
   }
 
   /**
