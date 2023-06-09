@@ -1,6 +1,10 @@
 {
   "name": "@fancy-crud/core",
   "private": false,
+  "author": {
+    "name": "Christopher A. Flores",
+    "url": "https://github.com/cafadev"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
