@@ -45,7 +45,7 @@ jobs:
       - run: yarn run build
       - name: Semantic Release
         run: |
-          npm -i semantic-release@^19.0.5    \
+          npm i semantic-release@^19.0.5    \
           "@semantic-release/changelog"              \
           "@semantic-release/commit-analyzer"        \
           "@semantic-release/github"                 \
