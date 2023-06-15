@@ -38,7 +38,9 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - run: echo "Token ${{ secrets.NPM_TOKEN }}""
+      - name: Echo value
+        run: echo "Token ${{ secrets.NPM_TOKEN }}""
+
       - run: yarn install
       - run: yarn run build
       - name: Semantic Release
