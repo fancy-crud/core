@@ -39,7 +39,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Echo value
-        run: echo "Token ${{ secrets.NPM_TOKEN }}""
+        run: echo ${{ secrets.NPM_TOKEN }}
 
       - run: yarn install
       - run: yarn run build
