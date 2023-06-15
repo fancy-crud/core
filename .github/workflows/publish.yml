@@ -42,7 +42,7 @@ jobs:
           node-version: 18.x
       - name: Semantic Release
         run: |
-          npm i semantic-release@^19.0.5    \
+          npm i -g semantic-release@^19.0.5    \
           "@semantic-release/changelog"              \
           "@semantic-release/commit-analyzer"        \
           "@semantic-release/github"                 \
