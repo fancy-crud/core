@@ -1,4 +1,4 @@
-import type { NormalizedField, NormalizedFields, ObjectWithRawFields, RawField } from '@/forms/axioma'
+import type { BaseRawField, NormalizedField, NormalizedFields, ObjectWithRawFields } from '@/forms/axioma'
 
 /**
   A utility class that normalizes form fields by merging them with default keys and values.
@@ -17,10 +17,10 @@ export class NormalizeFormFields {
     Assigns a unique id, modelKey, name, and other properties. If the field object has any properties
     that conflict with the default keys, the field object's properties will take precedence.
     @param {string} fieldKey - The unique key for the form field.
-    @param {RawField} field - The form field object containing the properties to be merged with the default keys.
-    @returns {NormalizedField & RawField} - A new object combining the default keys and values with the provided field object.
+    @param {BaseRawField} field - The form field object containing the properties to be merged with the default keys.
+    @returns {NormalizedField & BaseRawField} - A new object combining the default keys and values with the provided field object.
   **/
-  private createDefaultKeys(fieldKey: string, rawField: RawField): NormalizedField {
+  private createDefaultKeys(fieldKey: string, rawField: BaseRawField): NormalizedField {
     const defaults = getDefaults()
 
     const field = this.getDefaultNormalizedField({

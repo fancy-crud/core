@@ -2,18 +2,6 @@ import type { NormalizedButtons, ObjectWithNormalizedButtons } from './buttons'
 import type { NormalizedSettings } from './settings'
 import type { NormalizedTitles } from './titles'
 
-export enum FieldType {
-  text = 'text',
-  password = 'password',
-  color = 'color',
-  textarea = 'textarea',
-  radio = 'radio',
-  checkbox = 'checkbox',
-  select = 'select',
-  file = 'file',
-  datepicker = 'datepicker',
-}
-
 export type RawRuleResult = string | true | unknown
 export type RuleResult = string | true
 export type Rule = (value?: any) => RawRuleResult
@@ -24,7 +12,7 @@ export interface RuleOptions {
 }
 
 export interface BaseRawField extends Record<string, any> {
-  type: string | FieldType
+  type: string
   wrapper?: Record<string, unknown>
   class?: string
   label?: string
@@ -39,77 +27,6 @@ export interface BaseRawField extends Record<string, any> {
   modelValue?: unknown
 }
 
-export interface RawTextField extends BaseRawField {
-  type: FieldType.text
-}
-
-export interface RawPasswordField extends BaseRawField {
-  type: FieldType.password
-  showPassword?: boolean
-}
-
-export interface RawColorField extends BaseRawField {
-  type: FieldType.color
-}
-
-export interface RawTextareaField extends BaseRawField {
-  type: FieldType.textarea
-}
-
-export interface RawRadioField extends BaseRawField {
-  type: FieldType.radio
-  inRow?: boolean
-  optionLabel?: string
-  optionValue?: string
-  options?: any[]
-}
-
-export interface RawCheckboxField extends BaseRawField {
-  type: FieldType.checkbox
-  inRow?: boolean
-  optionLabel?: string
-  optionValue?: string
-  options?: any[]
-  multiple?: boolean
-}
-
-export interface RawSelectField extends BaseRawField {
-  type: FieldType.select
-  clearable?: boolean
-  multiple?: boolean
-  optionLabel?: string
-  optionValue?: string
-  options?: any[]
-  url?: string
-  filterParams?: Record<string, unknown>
-}
-
-export interface File {
-  name: string
-}
-
-export interface RawFileField extends BaseRawField {
-  type: FieldType.file
-  fileUrl?: string
-  modelValue: File | File[] | null
-}
-
-export interface RawDatepickerField extends BaseRawField {
-  type: FieldType.datepicker
-}
-
-export type RawField =
-  | BaseRawField
-  | RawTextField
-  | RawPasswordField
-  | RawColorField
-  | RawTextareaField
-  | RawRadioField
-  | RawCheckboxField
-  | RawSelectField
-  | RawFileField
-  | RawDatepickerField
-
 export interface DefaultAttributes {
   name: string
   class: string
@@ -121,29 +38,11 @@ export interface DefaultAttributes {
 
 export type FieldNormalizer<T> = T & DefaultAttributes
 
-export type NormalizedField = FieldNormalizer<RawField>
-
-export type NormalizedTextField = FieldNormalizer<RawTextField>
-
-export type NormalizedColorField = FieldNormalizer<RawColorField>
-
-export type NormalizedPasswordField = FieldNormalizer<RawPasswordField>
-
-export type NormalizedTextareaField = FieldNormalizer<RawTextareaField>
-
-export type NormalizedRadioField = FieldNormalizer<RawRadioField>
-
-export type NormalizedCheckboxField = FieldNormalizer<RawCheckboxField>
-
-export type NormalizedSelectField = FieldNormalizer<RawSelectField>
-
-export type NormalizedFileField = FieldNormalizer<RawFileField>
-
-export type NormalizedDatepickerField = FieldNormalizer<RawDatepickerField>
+export type NormalizedField = FieldNormalizer<BaseRawField>
 
 export type NormalizedFields<T> = { [K in keyof T]: NormalizedField & T[K] }
 
-export interface ObjectWithRawFields extends Record<string, RawField> {}
+export interface ObjectWithRawFields extends Record<string, BaseRawField> {}
 export interface ObjectWithNormalizedFields extends Record<string, NormalizedField> {}
 export interface FieldErrors extends Record<string, string[]> {}
 
