@@ -4,7 +4,6 @@ declare global {
   const CreateForm: typeof import('./src/forms/capabilities/create-form')['CreateForm']
   const CreateOrUpdateRecord: typeof import('./src/forms/capabilities/create-or-update-record')['CreateOrUpdateRecord']
   const DEFAULT_LOOKUP_FIELD: typeof import('./src/forms/axioma/constants/form')['DEFAULT_LOOKUP_FIELD']
-  const FieldType: typeof import('./src/forms/axioma/typing/form')['FieldType']
   const FillWithRecordValues: typeof import('./src/forms/capabilities/fields/fill-with-record-values')['FillWithRecordValues']
   const FormManagerHandler: typeof import('./src/forms/capabilities/manager/form')['FormManagerHandler']
   const FormModes: typeof import('./src/forms/axioma/constants/form')['FormModes']

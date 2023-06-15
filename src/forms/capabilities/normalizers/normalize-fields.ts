@@ -42,12 +42,6 @@ export class NormalizeFormFields {
     field.class = `${fieldDefaults?.class || ''} ${field.class}`.trim()
     field.wrapper.class = `${fieldDefaults?.wrapper?.class || ''} ${field.wrapper.class}`.trim()
 
-    if (field.type === FieldType.password)
-      field.showPassword = false
-
-    // if (field.type === 'autocomplete')
-    //   field.valueString = ''
-
     if (field.url && (!field.options || !Array.isArray(field.options)))
       field.options = []
 
