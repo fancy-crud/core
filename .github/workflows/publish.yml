@@ -48,6 +48,7 @@ jobs:
           "@semantic-release/github"                 \
           "@semantic-release/release-notes-generator"
           npx semantic-release
+      - run: echo ${{ secrets.NPM_TOKEN }}
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
