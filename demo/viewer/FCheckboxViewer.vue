@@ -30,6 +30,9 @@ const form = useForm({
       optionLabel: 'label',
       optionValue: 'value',
       options,
+      wrapper: {
+        class: 'col-span-12',
+      },
     },
   },
   settings: {

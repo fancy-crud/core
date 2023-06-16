@@ -7,8 +7,8 @@
 </template>
 
 <script lang='ts' setup>
-import { FieldType } from '@fancy-crud/core'
 import { useForm } from '@/forms/integration/composables'
+import { FieldType } from '@/index'
 
 const form = useForm({
   fields: {

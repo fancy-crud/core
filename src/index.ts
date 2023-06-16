@@ -2,7 +2,7 @@ import 'animate.css'
 import type { App, Plugin } from 'vue'
 
 import type { HttpService, RuleOptions } from '@fancy-crud/core'
-import { setDefaultClasses, setFields, setHttpInstance, setHttpPagination, setRuleOptions, setTable, setUtils } from '@fancy-crud/core'
+import { fields, setDefaultClasses, setFields, setHttpInstance, setHttpPagination, setRuleOptions, setTable, setUtils } from '@fancy-crud/core'
 import './styles/main.sass'
 
 interface Options {
@@ -56,6 +56,9 @@ const install: Plugin = function installFancyCrud(app: App, options: Partial<Opt
 
   if (options.defaultClasses)
     setDefaultClasses(options.defaultClasses)
+
+  if (Object.keys(fields).length === 0)
+    throw new Error('You should install a ui wrapper, please follow the documentation at: https://fancy-crud.github.io/docs/')
 }
 
 // Create module definition for Vue.use()

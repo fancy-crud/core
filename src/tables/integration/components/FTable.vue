@@ -3,7 +3,7 @@
     <f-table-header-actions @create="openCreateModal" @export="exportData" />
   </slot>
 
-  <slot name="table-form" v-bind="{ onSuccess, form, formModal }">
+  <slot name="table-form" v-bind="{ onSuccess, form: formFromManager, formModal }">
     <f-modal v-model="formModal">
       <div
         class="p-5 bg-white"
@@ -11,7 +11,7 @@
       >
         <f-form
           @success="onSuccess"
-          v-bind="form"
+          v-bind="formFromManager"
           :id="props.form.id"
         />
       </div>
@@ -81,7 +81,7 @@ const formModal = ref(Boolean(props.formModal))
 const confirmationModal = ref(false)
 const rowToDelete = ref<Row | null>(null)
 
-const form = tableManager.getTable().formManager.getForm()
+const formFromManager = tableManager.getTable().formManager.getForm()
 const headers = computed(() => Object.values(props.columns).filter(column => !column.exclude))
 
 const computedData = computed<DataType[]>(() => {

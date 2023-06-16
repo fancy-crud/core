@@ -5,7 +5,7 @@
 </template>
 
 <script lang='ts' setup>
-import { FieldType } from '@fancy-crud/core'
+import { FieldType } from '@/index'
 
 // const formats = useFormats()
 

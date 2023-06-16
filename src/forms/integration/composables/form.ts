@@ -1,6 +1,6 @@
-import type { NormalizedButtons, NormalizedFields, ObjectWithRawFields, RawButton } from '@fancy-crud/core'
+import type { NormalizedButtons, NormalizedFields, RawButton } from '@fancy-crud/core'
 import { CreateForm, ruleOptions } from '@fancy-crud/core'
-import type { Args, UseForm } from '@/forms/integration'
+import type { Args, ObjectWithRawFields, UseForm } from '@/forms/integration'
 
 /**
  * A function that provides functionality to create a reactive form object from raw fields, titles, buttons, and settings.

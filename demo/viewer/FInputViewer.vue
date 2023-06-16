@@ -16,7 +16,7 @@
 
 <script lang='ts' setup>
 import { z } from 'zod'
-import { FieldType } from '@fancy-crud/core'
+import { FieldType } from '@/index'
 // import { NotificationType, useForm } from '@/forms/integration'
 
 // const { rules } = useRules()

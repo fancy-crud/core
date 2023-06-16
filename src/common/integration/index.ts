@@ -1,3 +1,5 @@
+import type { Component } from 'vue'
+
 export function exportComponents(components: Record<string, any>) {
   const exportable: any = {}
 
@@ -10,6 +12,10 @@ export function exportComponents(components: Record<string, any>) {
 
     exportable[keyName] = value.default
   })
+}
+
+export function ReturnObject<T extends Record<string, Component>>(obj: T): Record<keyof T, Component> {
+  return { ...obj }
 }
 
 export default exportComponents(import.meta.glob('./**/*.vue'))
