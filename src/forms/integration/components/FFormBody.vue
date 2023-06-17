@@ -4,7 +4,7 @@
     v-bind="$attrs"
   >
     <template
-      v-for="([fieldKey, field]) in fields"
+      v-for="([fieldKey, field]) in computedFields"
       :key="fieldKey"
     >
       <slot :name="`before-${fieldKey}`" />
@@ -29,7 +29,7 @@ const props = defineProps<{
 
 const formManager = new FormManagerHandler(props.formId)
 
-const fields = computed(() => {
+const computedFields = computed(() => {
   const mode = props.settings.mode
   const filteredFields = Object.entries(props.fields).filter(([_, field]) => {
     const isHidden = field.hidden
@@ -46,7 +46,7 @@ const fields = computed(() => {
 })
 
 onMounted(() => {
-  formManager.getForeignKeyValues(Object.fromEntries(fields.value))
+  formManager.getForeignKeyValues(Object.fromEntries(computedFields.value))
 })
 
 function getComponent(field: NormalizedField) {

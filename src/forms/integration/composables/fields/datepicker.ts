@@ -1,7 +1,7 @@
-import type { NormalizedDatepickerField } from '@fancy-crud/core'
 import { FormManagerHandler } from '@fancy-crud/core'
 import type { DefaultProps } from '../../typing'
 import { useHintText, useModelValue } from './utils'
+import type { NormalizedDatepickerField } from '@/forms/integration'
 
 export function useDatepickerField(props: DefaultProps & { field: NormalizedDatepickerField }) {
   const formManager = new FormManagerHandler(props.formId)

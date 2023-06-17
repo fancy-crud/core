@@ -1,7 +1,6 @@
-import type { NormalizedCheckboxField } from '@fancy-crud/core'
 import { FormManagerHandler } from '@fancy-crud/core'
 import { useHintText, useModelValue, useOptions } from './utils'
-import type { DefaultProps } from '@/forms/integration'
+import type { DefaultProps, NormalizedCheckboxField } from '@/forms/integration'
 
 export function useCheckboxField(props: DefaultProps & { field: NormalizedCheckboxField }) {
   const formManager = new FormManagerHandler(props.formId)

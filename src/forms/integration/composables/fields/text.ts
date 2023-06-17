@@ -1,6 +1,6 @@
-import type { NormalizedTextField } from '@fancy-crud/core'
 import { FormManagerHandler } from '@fancy-crud/core'
 import { useHintText, useModelValue } from './utils'
+import type { NormalizedTextField } from '@/forms/integration'
 
 export function useTextField(props: { formId: symbol; field: NormalizedTextField }) {
   const formManager = new FormManagerHandler(props.formId)

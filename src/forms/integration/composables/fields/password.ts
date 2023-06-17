@@ -1,7 +1,7 @@
-import type { NormalizedPasswordField } from '@fancy-crud/core'
 import { FormManagerHandler } from '@fancy-crud/core'
 import type { DefaultProps } from '../../typing'
 import { useHintText, useModelValue } from './utils'
+import type { NormalizedPasswordField } from '@/forms/integration'
 
 export function usePasswordField(props: DefaultProps & { field: NormalizedPasswordField }) {
   const formManager = new FormManagerHandler(props.formId)

@@ -3,7 +3,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
-import { dependencies, name } from './package.json'
+import { name } from './package.json'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -13,13 +13,23 @@ export default defineConfig({
     },
   },
   build: {
+    cssCodeSplit: true,
     lib: {
       name,
       entry: path.resolve(__dirname, 'src/index.ts'),
+      formats: ['es', 'cjs', 'umd'],
+      fileName: format => `fancy-crud-vue.${format}.js`,
+
     },
     rollupOptions: {
-      external: [...Object.keys(dependencies)],
+      external: ['vue', '@fancy-crud/core'],
       output: {
+        assetFileNames: (assetInfo) => {
+          if (!assetInfo.name || assetInfo.name === 'src/index.css')
+            return 'fancy-crud-vue.css'
+          return assetInfo.name
+        },
+        exports: 'named',
         globals: {
           vue: 'Vue',
         },

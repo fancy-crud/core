@@ -1,71 +1,30 @@
-import 'animate.css'
 import type { App, Plugin } from 'vue'
 
-import type { HttpService, RuleOptions } from '@fancy-crud/core'
-import { fields, setDefaultClasses, setFields, setHttpInstance, setHttpPagination, setRuleOptions, setTable, setUtils } from '@fancy-crud/core'
 import './styles/main.sass'
 
-interface Options {
-  http: {
-    service?: Omit<HttpService, 'pagination'>
-    pagination?: HttpService['pagination']
-  }
-  fields: Record<string, any>
-  utils: Record<string, any>
-  ruleOptions: RuleOptions
-  table: Record<string, any>
-  defaultClasses: Record<string, string>
-}
+import * as Forms from './forms/integration/components'
+import type { Options } from './config'
+import { setFancyCrudConfig } from './config'
 
-const components: Record<string, any> = {}
 // install function executed by Vue.use()
-const install: Plugin = function installFancyCrud(app: App, options: Partial<Options>) {
-  const componentsList: [string, any][] = Object.entries(import.meta.glob('@/**/components/*.vue'))
-  componentsList.forEach(([key, value]) => {
-    if (key.includes('/viewer/'))
-      return
-
-    const componentName = key.match(/[\w]+?(?=\.)/g)
-
-    if (componentName) {
-      components[componentName[0]] = value.default
-      app.component(componentName[0], value.default)
-    }
+export const FancyCrud: Plugin = function installFancyCrud(app: App, options: Partial<Options>) {
+  const componentsList: [string, any][] = Object.entries({
+    ...Forms,
   })
 
-  if (options.http?.service)
-    setHttpInstance(options.http.service)
-
-  if (options.http?.pagination)
-    setHttpPagination(options.http.pagination)
+  componentsList.forEach(([key, module]) => {
+    app.component(key, module.default)
+  })
 
   // if (options.statusCodesHandlers)
   //   setStatusCodesHandlers(options.statusCodesHandlers)
 
-  if (options.fields)
-    setFields(options.fields)
-
-  if (options.utils)
-    setUtils(options.utils)
-
-  if (options.table)
-    setTable(options.table)
-
-  if (options.ruleOptions)
-    setRuleOptions(options.ruleOptions)
-
-  if (options.defaultClasses)
-    setDefaultClasses(options.defaultClasses)
-
-  if (Object.keys(fields).length === 0)
-    throw new Error('You should install a ui wrapper, please follow the documentation at: https://fancy-crud.github.io/docs/')
+  setFancyCrudConfig(options)
 }
-
-// Create module definition for Vue.use()
-export default install
 
 // To allow individual component use, export components
 // each can be registered via Vue.component()
+export * from './config'
 export * from './common/integration'
 // export * from './filters'
 export * from './forms/integration'

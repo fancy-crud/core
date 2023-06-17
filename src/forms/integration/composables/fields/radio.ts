@@ -1,7 +1,7 @@
-import type { NormalizedRadioField } from '@fancy-crud/core'
 import { FormManagerHandler } from '@fancy-crud/core'
 import type { DefaultProps } from '../../typing'
 import { useHintText, useModelValue, useOptions } from './utils'
+import type { NormalizedRadioField } from '@/forms/integration'
 
 export function useRadioField(props: DefaultProps & { field: NormalizedRadioField }) {
   const formManager = new FormManagerHandler(props.formId)

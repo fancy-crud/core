@@ -1,7 +1,7 @@
-import type { NormalizedFileField } from '@fancy-crud/core'
 import { FormManagerHandler } from '@fancy-crud/core'
 import type { DefaultProps } from '../../typing'
 import { useHintText, useModelValue } from './utils'
+import type { NormalizedFileField } from '@/forms/integration'
 
 export function useFileField(props: DefaultProps & { field: NormalizedFileField }) {
   const formManager = new FormManagerHandler(props.formId)

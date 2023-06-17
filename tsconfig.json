@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "module": "ESNext",
-    "target": "ESNext",
+    "module": "ES2022",
+    "target": "ES2022",
     "lib": ["DOM", "ESNext"],
     "declaration": true,
     "strict": true,
@@ -14,12 +14,11 @@
     "noUnusedLocals": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist_types",
+    "outDir": "./dist",
     "typeRoots": [
       "vite/client",
       "src/**/typings",
       "./node_modules/zod/lib/external",
-      "./node_modules/@oruga-ui/oruga-next/src/components/**",
       "./node_modules/@fancy-crud/core/dist/src/**"
     ],
     "types": [
@@ -39,6 +38,7 @@
     "**/**/*.md",
     "**/dist",
     "packages/.test",
-    "packages/_docs"
+    "packages/_docs",
+    "demo"
   ]
 }

@@ -1,6 +1,6 @@
-import type { NormalizedSelectField } from '@fancy-crud/core'
 import { FormManagerHandler } from '@fancy-crud/core'
 import { useHintText, useModelValue, useOptions } from './utils'
+import type { NormalizedSelectField } from '@/forms/integration'
 
 export function useSelectField(props: { formId: symbol; field: NormalizedSelectField }) {
   const formManager = new FormManagerHandler(props.formId)
@@ -15,8 +15,11 @@ export function useSelectField(props: { formId: symbol; field: NormalizedSelectF
 
   const attrs = computed(() => {
     const {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       type: _type,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       options: _options,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       wrapper: _wrapper,
       ...attrs
     } = props.field

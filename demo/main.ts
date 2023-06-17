@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import type { ZodAny } from 'zod'
 import axios from 'axios'
-import FancyCrud from '../src/index'
+import { FancyCrud } from '../src/index'
 import App from './App.vue'
 
 import '@mdi/font/css/materialdesignicons.css'
