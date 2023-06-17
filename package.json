@@ -1,5 +1,6 @@
 {
   "name": "@fancy-crud/core",
+  "version": "0.0.0",
   "private": false,
   "author": {
     "name": "Christopher A. Flores",
