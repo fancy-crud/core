@@ -10,7 +10,7 @@ declare global {
   const GenerateFormData: typeof import('./src/forms/capabilities/fields/generate-form-data')['GenerateFormData']
   const GetForeignKeyValues: typeof import('./src/http/axioma/services/get-foreign-key-values')['GetForeignKeyValues']
   const HandleErrors: typeof import('./src/forms/capabilities/fields/handle-errors')['HandleErrors']
-  const LOCALES: typeof import('./src/locales/index')['LOCALES']
+  const LOCALES: typeof import('./src/locales/axioma/constants/index')['LOCALES']
   const NormalizeButtons: typeof import('./src/forms/capabilities/normalizers/normalize-buttons')['NormalizeButtons']
   const NormalizeColumns: typeof import('./src/tables/capabilities/normalizers/normalize-columns')['NormalizeColumns']
   const NormalizeFormFields: typeof import('./src/forms/capabilities/normalizers/normalize-fields')['NormalizeFormFields']

@@ -19,6 +19,7 @@ export class NormalizeButtons {
 
     const defaultMainButton: NormalizedButton = {
       ...main,
+      ...defaults.mainButton,
       class: main?.class || defaults.mainButton?.class,
       isLoading: main?.isLoading || false,
       icon: main?.icon || '',
@@ -30,6 +31,7 @@ export class NormalizeButtons {
 
     const defaultAuxButton: NormalizedButton = {
       ...aux,
+      ...defaults.auxButton,
       isLoading: aux.isLoading || false,
       icon: aux.icon || '',
       class: aux.class || defaults.auxButton?.class,
