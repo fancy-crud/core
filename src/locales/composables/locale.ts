@@ -1,4 +1,4 @@
-import en from '../assets/en.json'
+import { LOCALES } from '../axioma'
 
 export interface Locale {
   locale: string
@@ -8,7 +8,7 @@ export interface Locale {
 export const i18n: Locale = {
   locale: 'en',
   messages: {
-    en,
+    ...LOCALES,
   },
 }
 
