@@ -23,6 +23,9 @@ export default defineConfig({
   plugins: [
     AutoImport({
       dts: true,
+      imports: [
+        'vitest',
+      ],
       dirs: [
         './src/**/*.ts',
       ],
