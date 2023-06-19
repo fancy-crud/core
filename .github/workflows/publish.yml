@@ -42,7 +42,7 @@ jobs:
       - run: yarn run build
       - name: Semantic Release
         run: |
-          yarn add global semantic-release@^19.0.5    \
+          npm i -g semantic-release@^19.0.5    \
           "@semantic-release/changelog"              \
           "@semantic-release/commit-analyzer"        \
           "@semantic-release/github"                 \
