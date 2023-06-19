@@ -6,6 +6,7 @@
     "name": "Christopher A. Flores",
     "url": "https://github.com/cafadev"
   },
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/fancy-crud/vue"
