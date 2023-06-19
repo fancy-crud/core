@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/fancy-crud"
+    "url": "https://github.com/fancy-crud/vue"
   },
   "main": "./dist/fancy-crud-vue.umd.js",
   "module": "./dist/fancy-crud-vue.es.js",
