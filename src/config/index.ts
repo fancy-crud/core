@@ -1,5 +1,5 @@
-import type { HttpService, RuleOptions } from '@fancy-crud/core'
-import { fields, setDefaultClasses, setFields, setHttpInstance, setHttpPagination, setRuleOptions, setTable, setUtils } from '@fancy-crud/core'
+import type { HttpService, Locale, RuleOptions } from '@fancy-crud/core'
+import { fields, setDefaultClasses, setFields, setHttpInstance, setHttpPagination, setLocale, setRuleOptions, setTable, setUtils } from '@fancy-crud/core'
 
 export interface Options {
   http: {
@@ -11,6 +11,7 @@ export interface Options {
   ruleOptions: RuleOptions
   table: Record<string, any>
   defaultClasses: Record<string, string>
+  i18n: Locale
 }
 
 export function setFancyCrudConfig(options: Partial<Options>) {
@@ -34,6 +35,9 @@ export function setFancyCrudConfig(options: Partial<Options>) {
 
   if (options.defaultClasses)
     setDefaultClasses(options.defaultClasses)
+
+  if (options.i18n)
+    setLocale(options.i18n)
 
   if (Object.keys(fields).length === 0)
     throw new Error('You should install a ui wrapper, please follow the documentation at: https://fancy-crud.github.io/docs/')

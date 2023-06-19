@@ -13,7 +13,6 @@ export default defineConfig({
     },
   },
   build: {
-    cssCodeSplit: true,
     lib: {
       name,
       entry: path.resolve(__dirname, 'src/index.ts'),
@@ -25,7 +24,7 @@ export default defineConfig({
       external: ['vue', '@fancy-crud/core'],
       output: {
         assetFileNames: (assetInfo) => {
-          if (!assetInfo.name || assetInfo.name === 'src/index.css')
+          if (!assetInfo.name || assetInfo.name === 'style.css')
             return 'fancy-crud-vue.css'
           return assetInfo.name
         },

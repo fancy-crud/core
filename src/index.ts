@@ -1,8 +1,7 @@
 import type { App, Plugin } from 'vue'
 
-import './styles/main.sass'
-
 import * as Forms from './forms/integration/components'
+import * as Tables from './tables/integration/components'
 import type { Options } from './config'
 import { setFancyCrudConfig } from './config'
 
@@ -10,6 +9,7 @@ import { setFancyCrudConfig } from './config'
 export const FancyCrud: Plugin = function installFancyCrud(app: App, options: Partial<Options>) {
   const componentsList: [string, any][] = Object.entries({
     ...Forms,
+    ...Tables,
   })
 
   componentsList.forEach(([key, module]) => {
@@ -29,6 +29,8 @@ export * from './common/integration'
 // export * from './filters'
 export * from './forms/integration'
 export * from './http/integration'
-export * from './locales'
 // export * from './config'
 export * from './tables/integration'
+
+// eslint-disable-next-line import/first
+import './styles/main.sass'

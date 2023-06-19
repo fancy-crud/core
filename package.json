@@ -29,12 +29,13 @@
   "scripts": {
     "dev": "vite --port 9090 --host 0.0.0.0",
     "build": "node build/exports.js && vite build && tsc --emitDeclarationOnly",
+    "build:watch": "nodemon",
     "typecheck": "vue-tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
   "peerDependencies": {
-    "@fancy-crud/core": "^1.0.1",
+    "@fancy-crud/core": "^1.4.0",
     "@vue/tsconfig": "^0.1.3",
     "@vueuse/core": "^9.9.0",
     "esno": "0.10.0",
@@ -42,7 +43,7 @@
     "vue": "^3.3.2"
   },
   "dependencies": {
-    "@fancy-crud/core": "^1.0.1",
+    "@fancy-crud/core": "^1.4.0",
     "@vue/tsconfig": "^0.1.3",
     "@vueuse/core": "^9.9.0",
     "esno": "0.10.0",
@@ -88,5 +89,20 @@
     "branches": [
       "main"
     ]
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/test/**",
+      "**/demo/**",
+      "dist/",
+      "**node_modules/**",
+      "src/index.ts"
+    ],
+    "watch": [
+      "src/**/*"
+    ],
+    "ext": "vue ts",
+    "verbose": true,
+    "exec": "yarn build"
   }
 }
