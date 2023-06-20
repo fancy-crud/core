@@ -16,8 +16,7 @@ export default defineConfig({
     lib: {
       name,
       entry: path.resolve(__dirname, 'src/index.ts'),
-      formats: ['es', 'cjs', 'umd'],
-      fileName: format => `fancy-crud-vue.${format}.js`,
+      fileName: 'fancy-crud-vue',
 
     },
     rollupOptions: {

@@ -12,10 +12,10 @@
     "url": "https://github.com/fancy-crud/vue"
   },
   "main": "./dist/fancy-crud-vue.umd.js",
-  "module": "./dist/fancy-crud-vue.es.js",
+  "module": "./dist/fancy-crud-vue.mjs",
   "exports": {
     ".": {
-      "import": "./dist/fancy-crud-vue.es.js",
+      "import": "./dist/fancy-crud-vue.mjs",
       "require": "./dist/fancy-crud-vue.umd.js"
     },
     "./dist/fancy-crud-vue.css": {
