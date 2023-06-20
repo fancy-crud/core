@@ -17,7 +17,6 @@ export default defineConfig({
       name,
       entry: path.resolve(__dirname, 'src/index.ts'),
       fileName: 'fancy-crud-vue',
-
     },
     rollupOptions: {
       external: ['vue', '@fancy-crud/core'],
