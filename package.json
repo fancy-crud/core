@@ -59,5 +59,6 @@
     "branches": [
       "main"
     ]
-  }
+  },
+  "keywords": ["form", "table", "datatable", "automation", "crud", "create", "read", "update", "delete"]
 }
