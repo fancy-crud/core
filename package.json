@@ -105,5 +105,6 @@
     "ext": "vue ts",
     "verbose": true,
     "exec": "yarn build"
-  }
+  },
+  "keywords": ["form", "table", "datatable", "automation", "crud", "create", "read", "update", "delete", "vue"]
 }
