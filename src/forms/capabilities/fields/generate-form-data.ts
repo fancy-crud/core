@@ -4,7 +4,7 @@ import type { NormalizedField, NormalizedFields } from '@/forms/axioma'
  * Class responsible for generating form data in the appropriate format.
  */
 export class GenerateFormData {
-  private jsonForm: Record<string, unknown> = {}
+  private jsonForm: Record<string, any> = {}
   private formData: FormData | null = null
 
   /**
@@ -15,49 +15,27 @@ export class GenerateFormData {
    */
   private handleListValues(fieldKey: string, field: NormalizedField) {
     const formKey = field.modelKey || `${fieldKey}_id`
+    const multiple = Array.isArray(field.modelValue)
 
     const addFormDataValue = (value: any) => {
-      const optionValue = String(field.optionValue)
+      const optionValue = String(field.optionValue || '')
+      let parsedValue: any = value
 
-      if (typeof value === 'object') {
-        const formValue = value[optionValue]
+      if (typeof parsedValue === 'object' && !Array.isArray(parsedValue))
+        parsedValue = optionValue ? parsedValue[optionValue] : parsedValue
 
-        if (field.multiple) {
-          if (!Array.isArray(this.jsonForm[formKey]))
-            this.jsonForm[formKey] = [formValue]
+      let jsonFormValue: any = parsedValue
 
-          else
-            (this.jsonForm[formKey] as Array<unknown>).push(formValue)
-        }
-        else {
-          this.jsonForm[formKey] = formValue
-        }
-        return
+      if (multiple) {
+        jsonFormValue = [...this.jsonForm[fieldKey]]
+        jsonFormValue = Array.isArray(parsedValue) ? [...jsonFormValue, ...parsedValue] : [...jsonFormValue, parsedValue]
       }
 
-      if (field.multiple) {
-        if (!Array.isArray(this.jsonForm[formKey]))
-          this.jsonForm[formKey] = [value]
-
-        else
-          (this.jsonForm[formKey] as Array<unknown>).push(value)
-      }
-      else {
-        this.jsonForm[formKey] = value
-      }
+      this.jsonForm[formKey] = jsonFormValue
     }
 
-    if (!field.modelValue) {
-      this.jsonForm[formKey] = field.modelValue
-      return
-    }
-
-    if (field.multiple && Array.isArray(field.modelValue)) {
-      field.modelValue.forEach(addFormDataValue)
-      return
-    }
-
-    addFormDataValue(field.modelValue as any)
+    this.jsonForm[fieldKey] = []
+    ;(field.modelValue as unknown[]).forEach(addFormDataValue)
   }
 
   /**
@@ -90,7 +68,7 @@ export class GenerateFormData {
    * @param fieldKey The key of the field being handled.
    * @param field The field being handled.
    */
-  private handleValue(fieldKey: string, field: NormalizedField) {
+  private handlePlainValue(fieldKey: string, field: NormalizedField) {
     const value: unknown = field.modelValue
     this.jsonForm[field.modelKey || fieldKey] = value
   }
@@ -105,18 +83,18 @@ export class GenerateFormData {
     const entriesFields: [string, NormalizedField][] = Object.entries(fields)
 
     entriesFields.forEach(([fieldKey, field]) => {
-      if (field.url || field.optionValue) {
+      const isFileOrImage = ['file', 'image'].includes(field.type)
+
+      if (Array.isArray(field.modelValue) && !isFileOrImage) {
         this.handleListValues(fieldKey, field)
         return
       }
-
-      const isFileOrImage = ['file', 'image'].includes(field.type)
 
       if (isFileOrImage && field.modelValue)
         this.handleFileValue(fieldKey, field)
 
       else
-        this.handleValue(fieldKey, field)
+        this.handlePlainValue(fieldKey, field)
 
       field.errors = []
     })

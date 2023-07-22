@@ -43,6 +43,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "fast-glob": "^3.2.7",
+    "happy-dom": "^10.3.2",
     "taze": "^0.8.2",
     "tsc": "^2.0.4",
     "tsc-alias": "^1.8.6",
@@ -60,5 +61,15 @@
       "main"
     ]
   },
-  "keywords": ["form", "table", "datatable", "automation", "crud", "create", "read", "update", "delete"]
+  "keywords": [
+    "form",
+    "table",
+    "datatable",
+    "automation",
+    "crud",
+    "create",
+    "read",
+    "update",
+    "delete"
+  ]
 }

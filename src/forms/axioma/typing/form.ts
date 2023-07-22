@@ -21,10 +21,12 @@ export interface BaseRawField extends Record<string, any> {
   updateOnly?: boolean
   hidden?: boolean
   hintText?: string
-  rules?: Rule
   bounceTime?: number
   modelKey?: string
   modelValue?: unknown
+  fileUrl?: string
+  rules?: Rule
+  recordValue?: (value: any) => unknown
 }
 
 export interface DefaultAttributes {
@@ -34,6 +36,7 @@ export interface DefaultAttributes {
   modelValue: unknown
   ref: any
   errors: string[]
+  recordValue: (value: any) => unknown
 }
 
 export type FieldNormalizer<T> = T & DefaultAttributes
@@ -117,4 +120,10 @@ export interface Form<T, U> {
   normalizedTitles: NormalizedTitles
   normalizedSettings: NormalizedSettings
   manager: FormManager
+}
+
+export interface ManagerMap<T> {
+  get(key: symbol): T | undefined
+  set(key: symbol, value: T): void
+  delete(key: symbol): void
 }

@@ -1,15 +1,19 @@
-import type { Handler, ResponseManager, ResponseMap } from '@/forms/axioma'
-
-const responseHandlers = new Map<symbol, ResponseMap>()
+import type { Handler, ManagerMap, ResponseManager, ResponseMap } from '@/forms/axioma'
 
 export class ResponseManagerHandler implements ResponseManager {
+  private static map: ManagerMap<ResponseMap>
+
   constructor(private id: symbol) {}
 
   private getResponseHandlerFromMap() {
-    if (!responseHandlers.get(this.id))
-      responseHandlers.set(this.id, {})
+    if (!ResponseManagerHandler.map.get(this.id))
+      ResponseManagerHandler.map.set(this.id, {})
 
-    return responseHandlers.get(this.id)!
+    return ResponseManagerHandler.map.get(this.id)!
+  }
+
+  static setManagerMap(managerMap: ManagerMap<ResponseMap>) {
+    ResponseManagerHandler.map = managerMap
   }
 
   setResponseHandler(codes: ResponseMap) {
@@ -21,6 +25,6 @@ export class ResponseManagerHandler implements ResponseManager {
   }
 
   removeResponseHandlers() {
-    responseHandlers.delete(this.id)
+    ResponseManagerHandler.map.delete(this.id)
   }
 }

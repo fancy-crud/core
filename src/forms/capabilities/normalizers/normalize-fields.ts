@@ -28,6 +28,7 @@ export class NormalizeFormFields {
       modelKey: fieldKey,
       name: fieldKey,
       errors: [],
+      recordValue: (value: any) => value[fieldKey],
       wasFocused: false,
       modelValue: rawField.multiple ? [] : null,
       class: '',
@@ -59,7 +60,7 @@ export class NormalizeFormFields {
     const normalizedFields = Object.entries(fields).reduce((previousValue, [fieldKey, field]) => {
       return {
         ...previousValue,
-        [fieldKey]: this.createDefaultKeys(fieldKey, field),
+        [fieldKey]: this.createDefaultKeys(field.modelKey || fieldKey, field),
       }
     }, {} as NormalizedFields<T>)
 

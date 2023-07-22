@@ -1,6 +1,11 @@
 import type { Form, ObjectWithRawFields, RawButton, RawSetting, RawTitle } from '../axioma'
 import { NormalizeButtons, NormalizeFormFields, NormalizeSettings, NormalizeTitles } from './normalizers'
 
+FormManagerHandler.setManagerMap(new Map())
+NotificationManagerHandler.setManagerMap(new Map())
+ResponseManagerHandler.setManagerMap(new Map())
+RuleOptionsManagerHandler.setManagerMap(new Map())
+
 /**
  * A class that provides functionality to create a form from raw fields and settings.
  */
@@ -17,7 +22,7 @@ export class CreateForm {
     const id = Symbol(formId)
 
     const originalNormalizedFields = new NormalizeFormFields().execute(rawFields)
-    const clonedNormalizedFields = new NormalizeFormFields().execute(rawFields)
+    const clonedNormalizedFields = structuredClone(originalNormalizedFields)
 
     const normalizedSettings = new NormalizeSettings().execute(rawSettings)
 

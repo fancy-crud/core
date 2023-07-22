@@ -3,16 +3,16 @@ import { ResponseManagerHandler } from './response'
 import { NotificationManagerHandler } from './notification'
 import { RuleOptionsManagerHandler } from './rules'
 import { ValidateFieldRules } from '@/forms/capabilities'
-import type { FieldErrors, FormManager, FormMap, NotificationManager, ObjectWithNormalizedFields, ResponseManager, RuleOptions, RuleOptionsManager } from '@/forms/axioma'
+import type { FieldErrors, FormManager, FormMap, ManagerMap, NotificationManager, ObjectWithNormalizedFields, ResponseManager, RuleOptions, RuleOptionsManager } from '@/forms/axioma'
 import { FormModes, NotificationType } from '@/forms/axioma'
 import { GetForeignKeyValues } from '@/http/axioma'
-
-const forms = new Map<symbol, FormMap>()
 
 export class FormManagerHandler implements FormManager {
   readonly responseManager: ResponseManager
   readonly notificationManager: NotificationManager
   readonly ruleOptionsManager: RuleOptionsManager
+
+  private static map: ManagerMap<FormMap>
 
   constructor(private id: symbol) {
     this.responseManager = new ResponseManagerHandler(id)
@@ -24,8 +24,12 @@ export class FormManagerHandler implements FormManager {
     return this.ruleOptionsManager.getRuleOptions()
   }
 
+  static setManagerMap(managerMap: ManagerMap<FormMap>) {
+    FormManagerHandler.map = managerMap
+  }
+
   getForm(): FormMap {
-    const form = forms.get(this.id)
+    const form = FormManagerHandler.map.get(this.id)
 
     if (!form)
       throw new Error(`Unable to found form id(${String(this.id)})`)
@@ -34,7 +38,7 @@ export class FormManagerHandler implements FormManager {
   }
 
   addForm(form: FormMap) {
-    forms.set(this.id, form)
+    FormManagerHandler.map.set(this.id, form)
 
     // TODO: Create default handlers
     this.responseManager.setResponseHandler({
@@ -43,7 +47,7 @@ export class FormManagerHandler implements FormManager {
   }
 
   removeForm() {
-    forms.delete(this.id)
+    FormManagerHandler.map.delete(this.id)
     this.notificationManager.removeNotificationHandlers()
     this.responseManager.removeResponseHandlers()
   }

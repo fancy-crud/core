@@ -1,15 +1,19 @@
-import type { RuleOptions, RuleOptionsManager } from '@/forms/axioma'
-
-const ruleOptions = new Map<symbol, RuleOptions>()
+import type { ManagerMap, RuleOptions, RuleOptionsManager } from '@/forms/axioma'
 
 export class RuleOptionsManagerHandler implements RuleOptionsManager {
+  private static map: ManagerMap<RuleOptions>
+
   constructor(private id: symbol) {}
 
   private getRuleOptionsFromMap() {
-    if (!ruleOptions.get(this.id))
-      ruleOptions.set(this.id, {})
+    if (!RuleOptionsManagerHandler.map.get(this.id))
+      RuleOptionsManagerHandler.map.set(this.id, {})
 
-    return ruleOptions.get(this.id)!
+    return RuleOptionsManagerHandler.map.get(this.id)!
+  }
+
+  static setManagerMap(managerMap: ManagerMap<RuleOptions>) {
+    RuleOptionsManagerHandler.map = managerMap
   }
 
   setRuleOptions(newRuleOptions: RuleOptions) {
@@ -21,6 +25,6 @@ export class RuleOptionsManagerHandler implements RuleOptionsManager {
   }
 
   removeRuleOptions() {
-    ruleOptions.delete(this.id)
+    RuleOptionsManagerHandler.map.delete(this.id)
   }
 }

@@ -1,19 +1,23 @@
-import type { Notification, NotificationManager, NotificationMap } from '@/forms/axioma'
-
-const notificationHandlers = new Map<symbol, NotificationMap>()
+import type { ManagerMap, Notification, NotificationManager, NotificationMap } from '@/forms/axioma'
 
 export class NotificationManagerHandler implements NotificationManager {
+  private static map: ManagerMap<NotificationMap>
+
   constructor(private id: symbol) {}
 
   private getNotificationHandlerFromMap(): NotificationMap {
-    const handlers = notificationHandlers.get(this.id)
+    const handlers = NotificationManagerHandler.map.get(this.id)
 
     if (!handlers) {
-      notificationHandlers.set(this.id, {})
-      return notificationHandlers.get(this.id)!
+      NotificationManagerHandler.map.set(this.id, {})
+      return NotificationManagerHandler.map.get(this.id)!
     }
 
     return handlers
+  }
+
+  static setManagerMap(managerMap: ManagerMap<NotificationMap>) {
+    NotificationManagerHandler.map = managerMap
   }
 
   setNotificationHandler(handler: NotificationMap) {
@@ -30,6 +34,6 @@ export class NotificationManagerHandler implements NotificationManager {
   }
 
   removeNotificationHandlers() {
-    notificationHandlers.delete(this.id)
+    NotificationManagerHandler.map.delete(this.id)
   }
 }
