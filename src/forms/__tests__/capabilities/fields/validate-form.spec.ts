@@ -1,130 +1,105 @@
-import { ValidateForm } from '@/forms/capabilities'
+import { ValidateFormCommand, ValidateFormHandler } from '@/forms/capabilities'
 
 describe('ValidateForm', () => {
-  let validateForm: ValidateForm
+  let validateForm: ValidateFormHandler
 
   beforeEach(() => {
     const mockValidateFieldInstance: any = {
-      execute: (field: { rules: () => true | string }) => field.rules(),
+      execute: ({ field }: { field: { rules: () => true | string } }) => {
+        if (field.rules)
+          return field.rules()
+
+        return true
+      },
     }
 
-    validateForm = new ValidateForm(mockValidateFieldInstance)
+    validateForm = new ValidateFormHandler(mockValidateFieldInstance)
+  })
+
+  it('should return true if fields does not have rules', () => {
+    const fields = {
+      firstName: {
+        modelKey: 'firstName',
+        errors: [],
+        modelValue: 'John',
+        type: 'text',
+      },
+      lastName: {
+        modelKey: 'lastName',
+        errors: [],
+        modelValue: 'Doe',
+        type: 'text',
+      },
+    }
+
+    const command = new ValidateFormCommand(fields)
+    const result = validateForm.execute(command)
+
+    expect(result).toBeTruthy()
   })
 
   it('should return true if all fields are valid', () => {
     const fields = {
       firstName: {
-        id: 'field-firstName-control',
         modelKey: 'firstName',
-        name: 'firstName',
         errors: [],
-        wasFocused: false,
-        ref: null,
         modelValue: 'John',
-        class: '',
-        wrapper: {
-          class: '',
-        },
         type: 'text',
-        label: 'First Name',
         rules: () => true,
       },
       lastName: {
-        id: 'field-lastName-control',
         modelKey: 'lastName',
-        name: 'lastName',
         errors: [],
-        wasFocused: false,
-        ref: null,
         modelValue: 'Doe',
-        class: '',
-        wrapper: {
-          class: '',
-        },
         type: 'text',
-        label: 'Last Name',
         rules: () => true,
       },
     }
 
-    const result = validateForm.execute(fields)
+    const command = new ValidateFormCommand(fields)
+    const result = validateForm.execute(command)
 
-    expect(result).toBe(true)
+    expect(result).toBeTruthy()
   })
 
   it('should return false if any field is invalid', () => {
     const fields = {
       firstName: {
-        id: 'field-firstName-control',
         modelKey: 'firstName',
-        name: 'firstName',
         errors: [],
-        wasFocused: false,
-        ref: null,
         modelValue: 'John',
-        class: '',
-        wrapper: {
-          class: '',
-        },
         type: 'text',
-        label: 'First Name',
         rules: () => true,
       },
       lastName: {
-        id: 'field-lastName-control',
         modelKey: 'lastName',
-        name: 'lastName',
         errors: [],
-        wasFocused: false,
-        ref: null,
         modelValue: '',
-        class: '',
-        wrapper: {
-          class: '',
-        },
         type: 'text',
-        label: 'Last Name',
         rules: () => 'Last name is required',
       },
     }
 
-    const result = validateForm.execute(fields)
+    const command = new ValidateFormCommand(fields)
+    const result = validateForm.execute(command)
 
-    expect(result).toBe(false)
+    expect(result).toBeFalsy()
   })
 
   it('should pass options to validateField', () => {
     const fields = {
       firstName: {
-        id: 'field-firstName-control',
         modelKey: 'firstName',
-        name: 'firstName',
         errors: [],
-        wasFocused: false,
-        ref: null,
         modelValue: 'John',
-        class: '',
-        wrapper: {
-          class: '',
-        },
         type: 'text',
-        label: 'First Name',
         rules: () => true,
       },
       lastName: {
-        id: 'field-lastName-control',
         modelKey: 'lastName',
-        name: 'lastName',
         errors: [],
-        wasFocused: false,
-        ref: null,
         modelValue: '',
-        class: '',
-        wrapper: {
-          class: '',
-        },
         type: 'text',
-        label: 'Last Name',
         rules: () => 'Last name is required',
       },
     }
@@ -135,8 +110,9 @@ describe('ValidateForm', () => {
       },
     }
 
-    const result = validateForm.execute(fields, options)
+    const command = new ValidateFormCommand(fields, options)
+    const result = validateForm.execute(command)
 
-    expect(result).toBe(false)
+    expect(result).toBeFalsy()
   })
 })

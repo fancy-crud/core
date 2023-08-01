@@ -1,9 +1,15 @@
 import _ from 'lodash'
-import type { HttpService, SameAPIEndpoint } from '../typing'
-import { PaginateResult } from '../value-objects/pagination'
+import type { HttpService, SameAPIEndpoint } from '../axioma/typing'
+import { PaginateResult } from '../axioma/value-objects/pagination'
 
-export class GetForeignKeyValues {
-  constructor(private http: HttpService) {}
+export class GetForeignKeyValuesCommand {
+  constructor(
+    public readonly fields: Record<string, { type: string; options?: any[]; url?: string; filterParams?: Record<string, unknown> }>,
+  ) {}
+}
+
+export class GetForeignKeyValuesHandler {
+  constructor(private http: HttpService = httpService) {}
 
   private getSameAPIEndpoint(fields: Record<string, { url?: string; filterParams?: Record<string, unknown> }>): SameAPIEndpoint {
     const fieldsEntries = Object.entries(fields)
@@ -60,7 +66,7 @@ export class GetForeignKeyValues {
     return options
   }
 
-  execute(fields: Record<string, { type: string; options?: any[]; url?: string; filterParams?: Record<string, unknown> }>) {
+  execute({ fields }: GetForeignKeyValuesCommand) {
     const sameAPIEndpoint: SameAPIEndpoint = this.getSameAPIEndpoint(fields)
 
     Object.entries(sameAPIEndpoint).forEach(([url, fieldKeys]) => {

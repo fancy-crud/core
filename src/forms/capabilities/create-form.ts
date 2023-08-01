@@ -1,5 +1,5 @@
 import type { Form, ObjectWithRawFields, RawButton, RawSetting, RawTitle } from '../axioma'
-import { NormalizeButtons, NormalizeFormFields, NormalizeSettings, NormalizeTitles } from './normalizers'
+import { NormalizeButtonsHandler, NormalizeFormFieldsHandler, NormalizeSettingsHandler, NormalizeTitlesHandler } from './normalizers'
 
 FormManagerHandler.setManagerMap(new Map())
 NotificationManagerHandler.setManagerMap(new Map())
@@ -21,14 +21,14 @@ export class CreateForm {
   execute<T extends ObjectWithRawFields, U extends RawSetting, V extends Record<string, RawButton>>(formId: string, rawFields: T, rawTitles?: RawTitle, rawButtons?: V, rawSettings?: U): Form<T, V> {
     const id = Symbol(formId)
 
-    const originalNormalizedFields = new NormalizeFormFields().execute(rawFields)
+    const originalNormalizedFields = new NormalizeFormFieldsHandler().execute(rawFields)
     const clonedNormalizedFields = structuredClone(originalNormalizedFields)
 
-    const normalizedSettings = new NormalizeSettings().execute(rawSettings)
+    const normalizedSettings = new NormalizeSettingsHandler().execute(rawSettings)
 
-    const normalizedButtons = new NormalizeButtons().execute(rawButtons)
+    const normalizedButtons = new NormalizeButtonsHandler().execute(rawButtons)
 
-    const normalizedTitles = new NormalizeTitles().execute(rawTitles)
+    const normalizedTitles = new NormalizeTitlesHandler().execute(rawTitles)
 
     const manager = new FormManagerHandler(id)
 

@@ -24,7 +24,8 @@ export interface BaseRawField extends Record<string, any> {
   bounceTime?: number
   modelKey?: string
   modelValue?: unknown
-  fileUrl?: string
+  fileUrl?: string | null
+  multiple?: boolean
   rules?: Rule
   recordValue?: (value: any) => unknown
 }
@@ -46,7 +47,7 @@ export type NormalizedField = FieldNormalizer<BaseRawField>
 export type NormalizedFields<T> = { [K in keyof T]: NormalizedField & T[K] }
 
 export interface ObjectWithRawFields extends Record<string, BaseRawField> {}
-export interface ObjectWithNormalizedFields extends Record<string, NormalizedField> {}
+export interface ObjectWithNormalizedFields<T = NormalizedField> extends Record<string, T> {}
 export interface FieldErrors extends Record<string, string[]> {}
 
 export enum NotificationType {

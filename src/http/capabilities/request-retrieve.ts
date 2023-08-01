@@ -2,10 +2,18 @@ import type { HttpService, RetrieveRequestOptions } from '../axioma'
 import { Url } from '../axioma'
 import { onFailed, onFinally, onSuccess } from './common'
 
-export class RequestRetrieve {
-  constructor(private http: HttpService) { }
+export class RequestRetrieveCommand {
+  constructor(
+    public readonly url: string,
+    public readonly lookupValue: string,
+    public readonly options?: RetrieveRequestOptions,
+  ) {}
+}
 
-  execute(url: string, lookupValue: string | number, options?: RetrieveRequestOptions) {
+export class RequestRetrieveHandler {
+  constructor(private http: HttpService = httpService) {}
+
+  execute({ url, lookupValue, options }: RequestRetrieveCommand) {
     if (options?.onInit)
       options.onInit()
 

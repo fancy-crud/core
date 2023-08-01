@@ -1,10 +1,10 @@
-import { NormalizeTitles } from '@/forms/capabilities'
+import { NormalizeTitlesHandler } from '@/forms/capabilities'
 
 describe('NormalizeTitles', () => {
-  let normalizeTitles: NormalizeTitles
+  let normalizeTitles: NormalizeTitlesHandler
 
   beforeEach(() => {
-    normalizeTitles = new NormalizeTitles()
+    normalizeTitles = new NormalizeTitlesHandler()
   })
 
   it('should normalize titles with default values when no titles are provided', () => {

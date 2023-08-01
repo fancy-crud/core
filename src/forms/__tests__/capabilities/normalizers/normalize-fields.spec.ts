@@ -1,11 +1,11 @@
-import { NormalizeFormFields } from '@/forms/capabilities'
+import { NormalizeFormFieldsHandler } from '@/forms/capabilities'
 
 describe('NormalizeFormFields', () => {
-  let normalizeFormFields: NormalizeFormFields
+  let normalizeFormFields: NormalizeFormFieldsHandler
   const recordValue = (_: any) => null
 
   beforeEach(() => {
-    normalizeFormFields = new NormalizeFormFields()
+    normalizeFormFields = new NormalizeFormFieldsHandler()
   })
 
   it('should normalize form fields with default values when no fields are provided', () => {

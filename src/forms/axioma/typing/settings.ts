@@ -1,16 +1,16 @@
-import type { FormModes } from '../constants'
+import type { FormMode } from '../constants'
 
 export interface RawSetting {
   url?: string
   lookupField?: string
   lookupValue?: string
-  mode?: FormModes
+  mode?: FormMode
   disableResponseHandlers?: boolean
   disableNotifications?: boolean
 }
 
 export interface NormalizedSettings extends RawSetting {
-  mode: FormModes
+  mode: FormMode
   url: string
   lookupField: string
 }

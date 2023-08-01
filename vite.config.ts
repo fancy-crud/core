@@ -1,13 +1,16 @@
 import path from 'path'
 import { defineConfig } from 'vite'
 import AutoImport from 'unplugin-auto-import/vite'
+
 import { dependencies, name } from './package.json'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  esbuild: false,
   resolve: {
     alias: {
       '@/': `${path.resolve(__dirname, 'src')}/`,
+      '~/': `${path.resolve(__dirname, 'src')}/`,
     },
   },
   build: {

@@ -1,10 +1,18 @@
 import type { CreateRequestOptions, HttpService, JSONForm } from '../axioma'
 import { onFailed, onFinally, onSuccess } from './common'
 
-export class RequestCreate {
-  constructor(private http: HttpService) { }
+export class RequestCreateCommand {
+  constructor(
+    public readonly url: string,
+    public readonly form: JSONForm | FormData,
+    public readonly options?: CreateRequestOptions,
+  ) {}
+}
 
-  execute(url: string, form: JSONForm | FormData, options?: CreateRequestOptions) {
+export class RequestCreateHandler {
+  constructor(private http: HttpService = httpService) {}
+
+  execute({ url, form, options }: RequestCreateCommand) {
     if (options?.onInit)
       options.onInit()
 

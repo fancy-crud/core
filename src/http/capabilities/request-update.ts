@@ -2,10 +2,19 @@ import type { HttpService, JSONForm, UpdateRequestOptions } from '../axioma'
 import { Url } from '../axioma'
 import { onFailed, onFinally, onSuccess } from './common'
 
-export class RequestUpdate {
-  constructor(private http: HttpService) { }
+export class RequestUpdateCommand {
+  constructor(
+    public readonly url: string,
+    public readonly lookupValue: string | number,
+    public readonly form: JSONForm | FormData,
+    public readonly options?: UpdateRequestOptions,
+  ) {}
+}
 
-  execute(url: string, lookupValue: string | number, form: JSONForm | FormData, options?: UpdateRequestOptions) {
+export class RequestUpdateHandler {
+  constructor(private http: HttpService = httpService) {}
+
+  execute({ url, lookupValue, form, options }: RequestUpdateCommand) {
     if (options?.onInit)
       options.onInit()
 

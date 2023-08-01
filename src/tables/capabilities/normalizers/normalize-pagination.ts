@@ -1,7 +1,15 @@
 import type { NormalizedTablePagination, RawTablePagination } from '@/tables/axioma'
 
-export class NormalizePagination {
-  execute(rawPagination: RawTablePagination): NormalizedTablePagination {
+export type NormalizePaginationCommandOutput = NormalizedTablePagination
+
+export class NormalizePaginationCommand {
+  constructor(
+    public readonly rawPagination: RawTablePagination,
+  ) {}
+}
+
+export class NormalizePaginationHandler {
+  execute({ rawPagination }: NormalizePaginationCommand): NormalizePaginationCommandOutput {
     return {
       page: 1,
       rowsPerPage: 10,

@@ -1,10 +1,10 @@
-import { ResetFields } from '@/forms/capabilities'
+import { ResetFieldsCommand, ResetFieldsHandler } from '@/forms/capabilities'
 
 describe('ResetFields', () => {
-  let resetFields: ResetFields
+  let resetFields: ResetFieldsHandler
 
   beforeEach(() => {
-    resetFields = new ResetFields()
+    resetFields = new ResetFieldsHandler()
   })
 
   it('should reset the model value of fields in a normalized fields object', () => {
@@ -74,7 +74,8 @@ describe('ResetFields', () => {
       },
     }
 
-    resetFields.execute(clonedFields, originalFields)
+    const command = new ResetFieldsCommand(clonedFields, originalFields)
+    resetFields.execute(command)
 
     expect(clonedFields).toMatchObject(originalFields)
   })
@@ -117,7 +118,8 @@ describe('ResetFields', () => {
       },
     }
 
-    resetFields.execute(clonedFields, originalFields)
+    const command = new ResetFieldsCommand(clonedFields, originalFields)
+    resetFields.execute(command)
 
     expect(clonedFields).toMatchObject(originalFields)
   })

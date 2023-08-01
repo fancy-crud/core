@@ -1,6 +1,10 @@
+import { enumGenerator } from '@/common/helpers'
+
 export const DEFAULT_LOOKUP_FIELD = 'id'
 
-export enum FormModes {
-  CREATE_MODE,
-  UPDATE_MODE,
-}
+export const FORM_MODE = enumGenerator([
+  'create',
+  'update',
+])
+
+export type FormMode = keyof typeof FORM_MODE

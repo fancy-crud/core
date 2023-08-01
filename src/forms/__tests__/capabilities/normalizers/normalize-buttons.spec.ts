@@ -1,10 +1,10 @@
-import { NormalizeButtons } from '@/forms/capabilities'
+import { NormalizeButtonsHandler } from '@/forms/capabilities'
 
 describe('NormalizeButtons', () => {
-  let normalizeButtons: NormalizeButtons
+  let normalizeButtons: NormalizeButtonsHandler
 
   beforeEach(() => {
-    normalizeButtons = new NormalizeButtons()
+    normalizeButtons = new NormalizeButtonsHandler()
   })
 
   it('should return normalized buttons when no buttons are provided and no defaults', () => {

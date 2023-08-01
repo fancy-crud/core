@@ -1,61 +1,28 @@
-import { FillWithRecordValues } from '@/forms/capabilities'
+import { FillWithRecordValuesCommand, FillWithRecordValuesHandler } from '@/forms/capabilities'
 
 describe('FillWithRecordValues', () => {
-  let fillWithRecordValues: FillWithRecordValues
+  let fillWithRecordValues: FillWithRecordValuesHandler
 
   beforeEach(() => {
-    fillWithRecordValues = new FillWithRecordValues()
+    fillWithRecordValues = new FillWithRecordValuesHandler()
   })
 
   it('should fill the normalized fields with corresponding values from the record', () => {
     const normalizedFields = {
       firstName: {
-        id: 'field-firstName-control',
-        modelKey: 'firstName',
-        name: 'firstName',
-        errors: [],
-        wasFocused: false,
-        ref: null,
         recordValue: (value: { firstName: string }) => value.firstName,
         modelValue: '',
-        class: '',
-        wrapper: {
-          class: '',
-        },
         type: 'text',
-        label: 'First Name',
       },
       address: {
-        id: 'field-address-control',
-        modelKey: 'address',
-        name: 'address',
-        errors: [],
-        wasFocused: false,
-        ref: null,
         recordValue: (value: { address: string }) => value.address,
         modelValue: '',
-        class: '',
-        wrapper: {
-          class: '',
-        },
         type: 'text',
-        label: 'Address',
       },
       phone: {
-        id: 'field-phone-control',
-        modelKey: 'phone',
-        name: 'phone',
-        ref: null,
         recordValue: (value: { contact: { phone: string } }) => value.contact.phone,
-        errors: [],
-        wasFocused: false,
         modelValue: '',
-        class: '',
-        wrapper: {
-          class: '',
-        },
         type: 'text',
-        label: 'Phone',
       },
     }
 
@@ -67,7 +34,8 @@ describe('FillWithRecordValues', () => {
       },
     }
 
-    fillWithRecordValues.execute(normalizedFields, recordValues)
+    const command = new FillWithRecordValuesCommand(normalizedFields, recordValues)
+    fillWithRecordValues.execute(command)
 
     expect(normalizedFields.firstName.modelValue).toEqual('John')
     expect(normalizedFields.address.modelValue).toEqual('123 Main St')
@@ -77,37 +45,14 @@ describe('FillWithRecordValues', () => {
   it('should handle nested fields that are not present in the record', () => {
     const normalizedFields = {
       firstName: {
-        id: 'field-firstName-control',
-        modelKey: 'firstName',
-        name: 'firstName',
-        errors: [],
-
-        wasFocused: false,
-        modelValue: '',
-        class: '',
-        wrapper: {
-          class: '',
-        },
-        type: 'text',
-        label: 'First Name',
-        ref: null,
         recordValue: (value: { firstName: string }) => value.firstName,
+        modelValue: '',
+        type: 'text',
       },
       phone: {
-        id: 'field-phone-control',
-        modelKey: 'phone',
-        name: 'phone',
-        errors: [],
-        wasFocused: false,
-        modelValue: null,
-        class: '',
-        wrapper: {
-          class: '',
-        },
-        type: 'text',
-        label: 'Phone',
-        ref: null,
         recordValue: (_: unknown) => null,
+        modelValue: null,
+        type: 'text',
       },
     }
 
@@ -115,7 +60,8 @@ describe('FillWithRecordValues', () => {
       firstName: 'John',
     }
 
-    fillWithRecordValues.execute(normalizedFields, recordValues)
+    const command = new FillWithRecordValuesCommand(normalizedFields, recordValues)
+    fillWithRecordValues.execute(command)
 
     expect(normalizedFields.firstName.modelValue).toEqual('John')
     expect(normalizedFields.phone.modelValue).toBeNull()
@@ -124,38 +70,16 @@ describe('FillWithRecordValues', () => {
   it('should handle fields with file types', () => {
     const normalizedFields = {
       avatar: {
-        id: 'field-avatar-control',
-        modelKey: 'avatar',
-        name: 'avatar',
-        errors: [],
-        wasFocused: false,
-        modelValue: '',
-        fileUrl: '',
-        class: '',
-        wrapper: {
-          class: '',
-        },
-        type: 'file',
-        label: 'Avatar',
-        ref: null,
         recordValue: (value: { avatar: string }) => value.avatar,
+        modelValue: '',
+        type: 'file',
+        fileUrl: null,
       },
       backgroundImage: {
-        id: 'field-backgroundImage-control',
-        modelKey: 'backgroundImage',
-        name: 'backgroundImage',
-        errors: [],
-        fileUrl: '',
-        wasFocused: false,
-        modelValue: '',
-        class: '',
-        wrapper: {
-          class: '',
-        },
-        type: 'image',
-        label: 'Background Image',
-        ref: null,
         recordValue: (value: { backgroundImage: string }) => value.backgroundImage,
+        modelValue: '',
+        type: 'image',
+        fileUrl: null,
       },
     }
 
@@ -164,7 +88,8 @@ describe('FillWithRecordValues', () => {
       backgroundImage: '/path/to/background.jpg',
     }
 
-    fillWithRecordValues.execute(normalizedFields, recordValues)
+    const command = new FillWithRecordValuesCommand(normalizedFields, recordValues)
+    fillWithRecordValues.execute(command)
 
     expect(normalizedFields.avatar.fileUrl).toEqual('/path/to/avatar.jpg')
     expect(normalizedFields.backgroundImage.fileUrl).toEqual('/path/to/background.jpg')

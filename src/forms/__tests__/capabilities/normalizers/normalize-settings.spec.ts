@@ -1,11 +1,11 @@
-import { NormalizeSettings } from '@/forms/capabilities'
-import { DEFAULT_LOOKUP_FIELD, FormModes } from '@/forms/axioma'
+import { NormalizeSettingsHandler } from '@/forms/capabilities'
+import { DEFAULT_LOOKUP_FIELD, FormMode } from '@/forms/axioma'
 
 describe('NormalizeSettings', () => {
-  let normalizeSettings: NormalizeSettings
+  let normalizeSettings: NormalizeSettingsHandler
 
   beforeEach(() => {
-    normalizeSettings = new NormalizeSettings()
+    normalizeSettings = new NormalizeSettingsHandler()
   })
 
   it('should normalize settings with default values when no settings are provided', () => {

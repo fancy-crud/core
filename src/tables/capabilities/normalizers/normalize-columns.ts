@@ -1,7 +1,16 @@
 import type { BaseFormField, ObjectWithNormalizedColumns, ObjectWithRawColumns } from '@/tables/axioma'
 
-export class NormalizeColumns {
-  execute(fields: BaseFormField, columns: ObjectWithRawColumns): ObjectWithNormalizedColumns {
+export type NormalizeColumnsCommandOutput = ObjectWithNormalizedColumns
+
+export class NormalizeColumnsCommand {
+  constructor(
+    public readonly fields: BaseFormField,
+    public readonly columns: ObjectWithRawColumns,
+  ) {}
+}
+
+export class NormalizeColumnsHandler {
+  execute({ fields, columns }: NormalizeColumnsCommand): NormalizeColumnsCommandOutput {
     const mappedColumns: ObjectWithNormalizedColumns = {}
 
     const mergeColumns = Object.assign({}, fields, columns)

@@ -1,11 +1,20 @@
 import type { BaseRawField, NormalizedField, NormalizedFields, ObjectWithRawFields } from '@/forms/axioma'
 
+export type NormalizeFormFieldsCommandInputType = ObjectWithRawFields
+export type NormalizeFormFieldsCommandOutputType<T> = NormalizedFields<T>
+
+export class NormalizeFormFieldsCommand<T extends NormalizeFormFieldsCommandInputType> {
+  constructor(
+    public readonly fields: T,
+  ) {}
+}
+
 /**
   A utility class that normalizes form fields by merging them with default keys and values.
   Provides a static execute method that takes an object containing form fields and returns
   a new object with normalized fields.
 **/
-export class NormalizeFormFields {
+export class NormalizeFormFieldsHandler {
   private getDefaultNormalizedField<T extends NormalizedField>(obj: T): NormalizedField & T {
     const field: NormalizedField & T = Object.assign({}, obj)
 
@@ -56,7 +65,7 @@ export class NormalizeFormFields {
     @param {T} fields - An object containing form fields to be normalized.
     @returns {NormalizedFields<T>} - A new object with the normalized form fields.
   **/
-  execute<T extends ObjectWithRawFields = {}>(fields: T): NormalizedFields<T> {
+  execute<T extends NormalizeFormFieldsCommandInputType = {}>({ fields }: NormalizeFormFieldsCommand<T>): NormalizeFormFieldsCommandOutputType<T> {
     const normalizedFields = Object.entries(fields).reduce((previousValue, [fieldKey, field]) => {
       return {
         ...previousValue,

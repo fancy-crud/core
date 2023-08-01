@@ -1,9 +1,25 @@
-import type { NormalizedField, NormalizedFields } from '@/forms/axioma'
+import type { NormalizedField, ObjectWithNormalizedFields } from '@/forms/axioma'
+
+type MinimumNormalizedField =
+  Pick<NormalizedField, 'type' | 'modelValue' | 'errors' | 'modelKey'> & { optionValue?: string; multiple?: boolean }
+
+type JsonForm<T extends ObjectWithNormalizedFields<MinimumNormalizedField>> = { [K in keyof T]: T[K]['modelValue'] }
+
+export interface GenerateFormDataOutput<T extends ObjectWithNormalizedFields<MinimumNormalizedField>> {
+  formData: FormData | null
+  jsonForm: JsonForm<T>
+}
+
+export class GenerateFormDataCommand<T extends ObjectWithNormalizedFields<MinimumNormalizedField> = ObjectWithNormalizedFields<MinimumNormalizedField>> {
+  constructor(
+    public readonly fields: T,
+  ) {}
+}
 
 /**
  * Class responsible for generating form data in the appropriate format.
  */
-export class GenerateFormData {
+export class GenerateFormDataHandler {
   private jsonForm: Record<string, any> = {}
   private formData: FormData | null = null
 
@@ -13,7 +29,7 @@ export class GenerateFormData {
    * @param fieldKey The key of the field being handled.
    * @param field The field being handled.
    */
-  private handleListValues(fieldKey: string, field: NormalizedField) {
+  private handleListValues(fieldKey: string, field: MinimumNormalizedField) {
     const formKey = field.modelKey || `${fieldKey}_id`
     const multiple = Array.isArray(field.modelValue)
 
@@ -44,7 +60,7 @@ export class GenerateFormData {
    * @param fieldKey The key of the field being handled.
    * @param field The field being handled.
    */
-  private handleFileValue(fieldKey: string, field: NormalizedField) {
+  private handleFileValue(fieldKey: string, field: MinimumNormalizedField) {
     const formKey = field.modelKey || fieldKey
 
     if (!this.formData)
@@ -68,7 +84,7 @@ export class GenerateFormData {
    * @param fieldKey The key of the field being handled.
    * @param field The field being handled.
    */
-  private handlePlainValue(fieldKey: string, field: NormalizedField) {
+  private handlePlainValue(fieldKey: string, field: MinimumNormalizedField) {
     const value: unknown = field.modelValue
     this.jsonForm[field.modelKey || fieldKey] = value
   }
@@ -79,8 +95,8 @@ export class GenerateFormData {
    * @param fields The normalized form fields.
    * @returns An object containing the form data in the appropriate format.
    */
-  execute<T = object>(fields: NormalizedFields<T>) {
-    const entriesFields: [string, NormalizedField][] = Object.entries(fields)
+  execute<T extends ObjectWithNormalizedFields<MinimumNormalizedField>>({ fields }: GenerateFormDataCommand<T>): GenerateFormDataOutput<T> {
+    const entriesFields: [string, MinimumNormalizedField][] = Object.entries(fields)
 
     entriesFields.forEach(([fieldKey, field]) => {
       const isFileOrImage = ['file', 'image'].includes(field.type)
@@ -99,6 +115,6 @@ export class GenerateFormData {
       field.errors = []
     })
 
-    return { jsonForm: this.jsonForm, formData: this.formData }
+    return { jsonForm: this.jsonForm as JsonForm<typeof fields>, formData: this.formData }
   }
 }

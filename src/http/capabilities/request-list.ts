@@ -1,10 +1,18 @@
 import type { HttpService, ListRequestOptions } from '../axioma'
 import { onFailed, onFinally, onSuccess } from './common'
 
-export class RequestList {
-  constructor(private http: HttpService) { }
+export class RequestListCommand {
+  constructor(
+    public readonly url: string,
+    public readonly params?: Record<string, unknown>,
+    public readonly options?: ListRequestOptions,
+  ) {}
+}
 
-  execute(url: string, params?: Record<string, unknown>, options?: ListRequestOptions) {
+export class RequestListHandler {
+  constructor(private http: HttpService = httpService) {}
+
+  execute({ url, params, options }: RequestListCommand) {
     if (options?.onInit)
       options.onInit()
 
@@ -14,3 +22,4 @@ export class RequestList {
       .finally(() => onFinally(options))
   }
 }
+

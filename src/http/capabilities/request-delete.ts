@@ -2,10 +2,18 @@ import type { DeleteRequestOptions, HttpService } from '../axioma'
 import { Url } from '../axioma'
 import { onFailed, onFinally, onSuccess } from './common'
 
-export class RequestDelete {
-  constructor(private http: HttpService) { }
+export class RequestDeleteCommand {
+  constructor(
+    public readonly url: string,
+    public readonly lookupValue: string,
+    public readonly options?: DeleteRequestOptions,
+  ) {}
+}
 
-  execute(url: string, lookupValue: string | number, options?: DeleteRequestOptions) {
+export class RequestDeleteHandler {
+  constructor(private http: HttpService = httpService) {}
+
+  execute({ url, lookupValue, options }: RequestDeleteCommand) {
     if (options?.onInit)
       options.onInit()
 
