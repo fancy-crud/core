@@ -1,4 +1,4 @@
-import { NormalizeButtonsHandler } from '@/forms/capabilities'
+import { NormalizeButtonsCommand, NormalizeButtonsHandler } from '@/forms/capabilities'
 
 describe('NormalizeButtons', () => {
   let normalizeButtons: NormalizeButtonsHandler
@@ -8,7 +8,8 @@ describe('NormalizeButtons', () => {
   })
 
   it('should return normalized buttons when no buttons are provided and no defaults', () => {
-    const result = normalizeButtons.execute()
+    const command = new NormalizeButtonsCommand()
+    const result = normalizeButtons.execute(command)
 
     // Assert that the result has the expected properties/values
     expect(result).toEqual({
@@ -43,7 +44,9 @@ describe('NormalizeButtons', () => {
         outlined: true,
       },
     })
-    const result = normalizeButtons.execute()
+
+    const command = new NormalizeButtonsCommand()
+    const result = normalizeButtons.execute(command)
 
     // Assert that the result has the expected properties/values
     expect(result).toEqual({
@@ -92,7 +95,9 @@ describe('NormalizeButtons', () => {
       },
     }
 
-    const result = normalizeButtons.execute(buttons)
+    const command = new NormalizeButtonsCommand(buttons)
+
+    const result = normalizeButtons.execute(command)
 
     expect(result.main.isLoading).toBe(IS_LOADING)
     expect(result.main.label.create).toBe(CREATE_LABEL)
