@@ -6,7 +6,6 @@ import { dependencies, name } from './package.json'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  esbuild: false,
   resolve: {
     alias: {
       '@/': `${path.resolve(__dirname, 'src')}/`,

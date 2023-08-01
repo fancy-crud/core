@@ -1,7 +1,9 @@
+import { Bus } from '@/common/bus/capabilities'
 import type { DeleteRecordOptions, Row, SetupOptions, TableManager, TableMap } from '@/tables/axioma'
 
 export class TableManagerHandler implements TableManager {
   private static readonly tables = new Map<symbol, TableMap>()
+  private bus = new Bus()
 
   constructor(private id: symbol) {}
 
@@ -51,8 +53,7 @@ export class TableManagerHandler implements TableManager {
     if (typeof form.buttons.aux.onClick !== 'function' && options?.onClickAux)
       Object.assign(form.buttons.aux, { onClick: options.onClickAux })
 
-    const request = new RequestRetrieve(httpService)
-    request.execute(settings.url, lookupValue, {
+    const command = new RequestRetrieveCommand(settings.url, lookupValue, {
       onSuccess(response: { data: Record<string, unknown> }) {
         formManager.fillWithRecordValues(response.data || {})
         formManager.switchToUpdateMode()
@@ -61,6 +62,8 @@ export class TableManagerHandler implements TableManager {
           options.onReady()
       },
     })
+
+    this.bus.execute(command)
   }
 
   deleteRecord(row: Row | null, options?: DeleteRecordOptions) {
@@ -81,8 +84,8 @@ export class TableManagerHandler implements TableManager {
     if (Object.prototype.hasOwnProperty.call(row, lookupField))
       lookupValue = String(row[lookupField])
 
-    const request = new RequestDelete(httpService)
-    request.execute(settings.url, lookupValue, options)
+    const command = new RequestDeleteCommand(settings.url, lookupValue, options)
+    this.bus.execute(command)
   }
 
   updateCheckbox(value: { field: string; row: Row }) {
@@ -95,9 +98,9 @@ export class TableManagerHandler implements TableManager {
     if (Object.prototype.hasOwnProperty.call(value.row, lookupField))
       lookupValue = String(value.row[lookupField])
 
-    const request = new RequestUpdate(httpService)
-    request.execute(settings.url, lookupValue, {
+    const command = new RequestUpdateCommand(settings.url, lookupValue, {
       [value.field]: !value.row[value.field],
     })
+    this.bus.execute(command)
   }
 }

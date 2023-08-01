@@ -4,7 +4,6 @@ import { RuleOptionsManagerHandler } from './rules'
 import { Bus } from '@/common/bus/capabilities'
 import type { FieldErrors, FormManager, FormMap, GenerateFormDataOutput, ManagerMap, NotificationManager, ObjectWithNormalizedFields, ResponseManager, RuleOptions, RuleOptionsManager } from '@/forms/axioma'
 import { GetForeignKeyValuesCommand } from '@/http/capabilities'
-import { FormMode } from '@/forms/axioma'
 
 export class FormManagerHandler implements FormManager {
   readonly responseManager: ResponseManager
@@ -108,13 +107,13 @@ export class FormManagerHandler implements FormManager {
   switchToCreateMode() {
     const form = this.getForm()
 
-    form.settings.mode = FormModes.CREATE_MODE
+    form.settings.mode = FORM_MODE.create
   }
 
   switchToUpdateMode() {
     const form = this.getForm()
 
-    form.settings.mode = FormModes.UPDATE_MODE
+    form.settings.mode = FORM_MODE.update
   }
 
   isFormValid(options: RuleOptions = {}) {

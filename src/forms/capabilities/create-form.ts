@@ -1,5 +1,7 @@
 import type { Form, ObjectWithRawFields, RawButton, RawSetting, RawTitle } from '../axioma'
+import { NormalizeTitlesCommand } from './normalizers/normalize-titles'
 import { NormalizeButtonsHandler, NormalizeFormFieldsHandler, NormalizeSettingsHandler, NormalizeTitlesHandler } from './normalizers'
+import { NormalizeSettingsCommand } from '@/forms/capabilities'
 
 FormManagerHandler.setManagerMap(new Map())
 NotificationManagerHandler.setManagerMap(new Map())
@@ -18,17 +20,21 @@ export class CreateForm {
    * @param rawSettings - An optional `RawSettings` object containing the raw settings to be normalized.
    * @returns A `Form` object containing the normalized fields and settings.
    */
-  execute<T extends ObjectWithRawFields, U extends RawSetting, V extends Record<string, RawButton>>(formId: string, rawFields: T, rawTitles?: RawTitle, rawButtons?: V, rawSettings?: U): Form<T, V> {
+  execute<T extends ObjectWithRawFields, U extends RawSetting, V extends Record<'main' | 'aux', RawButton>>(formId: string, rawFields: T, rawTitles?: RawTitle, rawButtons?: V, rawSettings?: U): Form<T, V> {
     const id = Symbol(formId)
 
-    const originalNormalizedFields = new NormalizeFormFieldsHandler().execute(rawFields)
+    const normalizeFieldsCommand = new NormalizeFormFieldsCommand(rawFields)
+    const originalNormalizedFields = new NormalizeFormFieldsHandler().execute(normalizeFieldsCommand)
     const clonedNormalizedFields = structuredClone(originalNormalizedFields)
 
-    const normalizedSettings = new NormalizeSettingsHandler().execute(rawSettings)
+    const normalizeSettingsCommand = new NormalizeSettingsCommand(rawSettings)
+    const normalizedSettings = new NormalizeSettingsHandler().execute(normalizeSettingsCommand)
 
-    const normalizedButtons = new NormalizeButtonsHandler().execute(rawButtons)
+    const normalizeButtonsCommand = new NormalizeButtonsCommand(rawButtons)
+    const normalizedButtons = new NormalizeButtonsHandler().execute(normalizeButtonsCommand)
 
-    const normalizedTitles = new NormalizeTitlesHandler().execute(rawTitles)
+    const normalizeTitlesCommand = new NormalizeTitlesCommand(rawTitles)
+    const normalizedTitles = new NormalizeTitlesHandler().execute(normalizeTitlesCommand)
 
     const manager = new FormManagerHandler(id)
 

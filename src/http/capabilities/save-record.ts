@@ -1,3 +1,4 @@
+import { Bus } from '@/common/bus/capabilities'
 import type { CreateRequestOptions, UpdateRequestOptions } from '@/http/axioma'
 
 export class SaveRecordCommand {
@@ -13,15 +14,16 @@ export class SaveRecordCommand {
 export class SaveRecordHandler {
   private url!: string
   private data!: Record<string, any> | FormData
+  private bus = new Bus()
 
   private createRecord(options?: CreateRequestOptions) {
-    const request = new RequestCreate(httpService)
-    request.execute(this.url, this.data, options)
+    const command = new RequestCreateCommand(this.url, this.data, options)
+    this.bus.execute(command)
   }
 
   private updateRecord(lookupValue: string, options?: UpdateRequestOptions) {
-    const request = new RequestUpdate(httpService)
-    request.execute(this.url, lookupValue, this.data, options)
+    const command = new RequestUpdateCommand(this.url, lookupValue, this.data, options)
+    this.bus.execute(command)
   }
 
   execute({ url, options, mode, lookupValue, data }: SaveRecordCommand) {

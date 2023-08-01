@@ -1,5 +1,3 @@
-import { registerCommand, registerProvider } from './instances'
-
 interface Dependency {
   isCallable(...args: any): void
 }
