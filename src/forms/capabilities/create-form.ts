@@ -25,7 +25,7 @@ export class CreateForm {
 
     const normalizeFieldsCommand = new NormalizeFormFieldsCommand(rawFields)
     const originalNormalizedFields = new NormalizeFormFieldsHandler().execute(normalizeFieldsCommand)
-    const clonedNormalizedFields = structuredClone(originalNormalizedFields)
+    const clonedNormalizedFields = new NormalizeFormFieldsHandler().execute(normalizeFieldsCommand)
 
     const normalizeSettingsCommand = new NormalizeSettingsCommand(rawSettings)
     const normalizedSettings = new NormalizeSettingsHandler().execute(normalizeSettingsCommand)
