@@ -1,5 +1,5 @@
 import type { NormalizedSettings, RawSetting } from '@/forms/axioma'
-import { DEFAULT_LOOKUP_FIELD, FormMode } from '@/forms/axioma'
+import { DEFAULT_LOOKUP_FIELD, FORM_MODE } from '@/forms/axioma'
 
 export type NormalizeSettingsCommandOutputType = NormalizedSettings
 
@@ -25,7 +25,7 @@ export class NormalizeSettingsHandler {
   execute({ settings }: NormalizeSettingsCommand): NormalizeSettingsCommandOutputType {
     const _settings: NormalizedSettings = {
       url: settings?.url || '',
-      mode: settings?.mode || FormModes.CREATE_MODE,
+      mode: settings?.mode || FORM_MODE.create,
       lookupField: settings?.lookupField || DEFAULT_LOOKUP_FIELD,
     }
 

@@ -1,4 +1,4 @@
-import { NormalizeFormFieldsHandler } from '@/forms/capabilities'
+import { NormalizeFormFieldsCommand, NormalizeFormFieldsHandler } from '@/forms/capabilities'
 
 describe('NormalizeFormFields', () => {
   let normalizeFormFields: NormalizeFormFieldsHandler
@@ -9,7 +9,8 @@ describe('NormalizeFormFields', () => {
   })
 
   it('should normalize form fields with default values when no fields are provided', () => {
-    const normalized = normalizeFormFields.execute({})
+    const command = new NormalizeFormFieldsCommand({})
+    const normalized = normalizeFormFields.execute(command)
 
     expect(normalized).toEqual({})
   })
@@ -27,7 +28,9 @@ describe('NormalizeFormFields', () => {
         recordValue,
       },
     }
-    const normalized = normalizeFormFields.execute(fields)
+
+    const command = new NormalizeFormFieldsCommand(fields)
+    const normalized = normalizeFormFields.execute(command)
 
     expect(normalized.firstName).toEqual({
       ...fields.firstName,
@@ -71,7 +74,9 @@ describe('NormalizeFormFields', () => {
         recordValue,
       },
     }
-    const normalized = normalizeFormFields.execute(fields)
+
+    const command = new NormalizeFormFieldsCommand(fields)
+    const normalized = normalizeFormFields.execute(command)
 
     expect(normalized.email).toEqual({
       ...fields.email,
@@ -99,7 +104,9 @@ describe('NormalizeFormFields', () => {
         recordValue,
       },
     }
-    const normalized = normalizeFormFields.execute(fields)
+
+    const command = new NormalizeFormFieldsCommand(fields)
+    const normalized = normalizeFormFields.execute(command)
 
     expect(normalized.password).toEqual({
       ...fields.password,

@@ -1,4 +1,4 @@
-import { NormalizeTitlesHandler } from '@/forms/capabilities'
+import { NormalizeTitlesCommand, NormalizeTitlesHandler } from '@/forms/capabilities'
 
 describe('NormalizeTitles', () => {
   let normalizeTitles: NormalizeTitlesHandler
@@ -8,7 +8,8 @@ describe('NormalizeTitles', () => {
   })
 
   it('should normalize titles with default values when no titles are provided', () => {
-    const normalized = normalizeTitles.execute()
+    const command = new NormalizeTitlesCommand()
+    const normalized = normalizeTitles.execute(command)
 
     expect(normalized.create).toBeTypeOf('string')
     expect(normalized.update).toBeTypeOf('string')
@@ -19,7 +20,8 @@ describe('NormalizeTitles', () => {
       create: 'Create New',
       update: 'Update Existing',
     }
-    const normalized = normalizeTitles.execute(titles)
+    const command = new NormalizeTitlesCommand(titles)
+    const normalized = normalizeTitles.execute(command)
 
     expect(normalized.create).toBe(titles.create)
     expect(normalized.update).toBe(titles.update)
@@ -29,7 +31,8 @@ describe('NormalizeTitles', () => {
     const titles = {
       update: 'Update Now',
     }
-    const normalized = normalizeTitles.execute(titles)
+    const command = new NormalizeTitlesCommand(titles)
+    const normalized = normalizeTitles.execute(command)
 
     expect(normalized.create).toBeTypeOf('string')
     expect(normalized.update).toBe(titles.update)
@@ -40,7 +43,9 @@ describe('NormalizeTitles', () => {
       create: '',
       update: '',
     }
-    const normalized = normalizeTitles.execute(titles)
+
+    const command = new NormalizeTitlesCommand(titles)
+    const normalized = normalizeTitles.execute(command)
 
     expect(normalized.create).toBe('')
     expect(normalized.update).toBe('')
