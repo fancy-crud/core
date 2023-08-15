@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "target": "ES2022",
-    "module": "CommonJS",
+    "module": "ESNext",
     "lib": ["DOM", "ES2022"],
     "declaration": true,
     "sourceMap": true,
@@ -26,7 +26,7 @@
       "vite/client"
     ],
     "paths": {
-      "@/*": ["./src"],
+      "@/*": ["./src/*"],
     }
   },
   "exclude": [
@@ -35,6 +35,7 @@
     "**/**/*.test.ts",
     "**/dist",
     "packages/.test",
-    "packages/_docs"
+    "packages/_docs",
+    // "tests"
   ]
 }

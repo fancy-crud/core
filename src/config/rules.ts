@@ -1,4 +1,4 @@
-import type { RuleOptions } from '@/forms/core'
+import type { RuleOptions } from '@/forms/axioma'
 
 export const ruleOptions: RuleOptions = {}
 

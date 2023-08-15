@@ -1,20 +1,14 @@
-import { handlers } from '../axioma'
-import { MapDependencies } from './map-dependencies'
+import type { BusCommandMeta, BusCommandMetaReturnType, BusHandlerInstance, IBus, Providers } from '../axioma'
 
-export class Bus {
-  private mapDependencies: MapDependencies = new MapDependencies()
+export class Bus implements IBus {
+  execute<U extends BusCommandMeta>(command: U, providers?: Providers<U['meta']['Handler']>): BusCommandMetaReturnType<U> {
+    let handler: BusHandlerInstance<any>
 
-  execute<U>(command: any): U {
-    const handlerObject = handlers.get(command.constructor.name)
+    if (providers && Array.isArray(providers))
+      handler = new command.meta.Handler(...(providers as any[]))
+    else
+      handler = new command.meta.Handler()
 
-    if (!handlerObject)
-      throw new Error(`Unable to find Handler ${command.constructor.name}`)
-
-    const dependencies = this.mapDependencies.execute(handlerObject.dependencies)
-    const Handler = handlerObject.handler
-
-    const handlerInstance = new Handler(...dependencies)
-
-    return handlerInstance.execute(command)
+    return handler.execute(command)
   }
 }

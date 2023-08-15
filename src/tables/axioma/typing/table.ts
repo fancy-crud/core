@@ -1,14 +1,15 @@
-import type { ObjectWithNormalizedColumns } from './column'
-import type { NormalizedTablePagination } from './pagination'
-import type { NormalizedTableSetting } from './settings'
-import type { DeleteRequestOptions } from '@/http/axioma'
-import type { FormManager } from '@/forms/axioma'
+import type { NormalizedTableFilters } from './filters'
+import type { BaseTableForm, FieldAsColumn, MappedRawColumn, NormalizedColumn, ObjectWithNormalizedColumns } from './column'
+import type { NormalizedTablePagination, RawTablePagination } from './pagination'
+import type { NormalizedTableSettings } from './settings'
+import type { DeleteRequestOptions } from '@/common/http/axioma'
 
-export interface TableMap {
+export interface TableStoreState {
+  formId: symbol
   columns: ObjectWithNormalizedColumns
-  formManager: FormManager
-  settings: NormalizedTableSetting
+  settings: NormalizedTableSettings
   pagination: NormalizedTablePagination
+  filterParams: NormalizedTableFilters
 }
 
 export interface Row extends Record<string, unknown> {}
@@ -22,12 +23,20 @@ export interface DeleteRecordOptions extends DeleteRequestOptions {
   onRequestDeleteConfirmation?: (row: Row) => void
 }
 
-export interface TableManager {
-  getTable: () => TableMap
-  addTable: (table: TableMap) => void
-  removeTable: () => void
-  setupFormToCreateRecord: (options?: SetupOptions) => void
-  setupFormToEditRecord: (row: Row, options?: SetupOptions) => void
-  deleteRecord: (row: Row | null, options?: DeleteRecordOptions) => void
-  updateCheckbox: (value: { field: string; row: Row }) => void
+export interface Table<T extends BaseTableForm, U, S, F> {
+  id: symbol
+  form: T
+  columns: FieldAsColumn<T['fields'], NormalizedColumn> & U
+  settings: S
+  pagination: NormalizedTablePagination
+  filterParams: F
+}
+
+export interface RawTable<T extends BaseTableForm, U, S, F> {
+  id?: string
+  form: T
+  columns?: MappedRawColumn<T['fields'], U> & U
+  pagination?: RawTablePagination
+  settings?: S
+  filterParams?: F
 }

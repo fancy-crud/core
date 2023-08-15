@@ -1,15 +1,28 @@
 import type { NormalizedColumn } from '../axioma'
+import type { BaseCommand } from '@/common/bus/axioma'
 
-export function columnValue(row: any, header: NormalizedColumn, rowIndex: number) {
-  let value: any
-  if (typeof row === 'object')
-    value = row[header.value]
+export class GetColumnValueCommand implements BaseCommand {
+  public readonly meta = meta(GetColumnValueHandler)
 
-  if (header.field)
-    value = header.field(row, rowIndex)
+  constructor(
+    public readonly row: any,
+    public readonly column: NormalizedColumn,
+    public readonly rowIndex: number,
+  ) {}
+}
 
-  if (header.format)
-    value = header.format(value)
+class GetColumnValueHandler {
+  execute({ row, column, rowIndex }: GetColumnValueCommand): unknown {
+    let value: any
+    if (typeof row === 'object')
+      value = row[column.value]
 
-  return value
+    if (column.field)
+      value = column.field(row, rowIndex)
+
+    if (column.format)
+      value = column.format(value)
+
+    return value
+  }
 }

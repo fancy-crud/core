@@ -1,4 +1,4 @@
-import type { HandleRequestStatusCodes } from '@/http/core'
+import type { HandleRequestStatusCodes } from '@/common/http/axioma'
 
 const statusCodes: HandleRequestStatusCodes = {}
 

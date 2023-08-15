@@ -1,12 +1,23 @@
 import { providers } from '../axioma'
 
 export class RegisterProvider {
-  public execute(provider: any, dependencies: symbol[] = []) {
-    const providerKey = Symbol(provider.name)
-    providers.set(providerKey, { provider, dependencies })
+  public execute<T>(provider: T extends { name: string } ? T : string, value?: any) {
+    let providerId: string
 
-    return providerKey
+    if (typeof provider === 'string') {
+      if (!value)
+        throw new Error('Should specify a provider for naming providers')
+
+      providerId = provider
+      providers.set(providerId, value)
+    }
+    else {
+      providerId = provider.name
+      providers.set(providerId, provider)
+    }
+
+    return providerId
   }
 }
 
-export const registerProvider = new RegisterProvider()
+export const injectable = new RegisterProvider().execute

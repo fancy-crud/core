@@ -1,15 +1,9 @@
-import type { NormalizedButtons, ObjectWithNormalizedButtons } from './buttons'
+import type { NormalizedButtons } from './buttons'
 import type { NormalizedSettings } from './settings'
 import type { NormalizedTitles } from './titles'
 
 export type RawRuleResult = string | true | unknown
-export type RuleResult = string | true
 export type Rule = (value?: any) => RawRuleResult
-
-export interface RuleOptions {
-  processResult?: (rawResult: any) => RuleResult
-  preventErrorMessage?: boolean
-}
 
 export interface BaseRawField extends Record<string, any> {
   type: string
@@ -50,69 +44,6 @@ export interface ObjectWithRawFields extends Record<string, BaseRawField> {}
 export interface ObjectWithNormalizedFields<T = NormalizedField> extends Record<string, T> {}
 export interface FieldErrors extends Record<string, string[]> {}
 
-export enum NotificationType {
-  success = 'success',
-  warning = 'warning',
-  error = 'error',
-  info = 'info',
-  default = 'default',
-}
-
-export interface Notification {
-  type: NotificationType
-  message?: string
-  data?: any
-}
-
-export interface NotificationMap extends Partial<Record<NotificationType, (notification?: Notification) => void>> {}
-
-export type Handler = (response: any) => void
-export interface ResponseMap extends Record<number, Handler> {}
-
-export interface FormMap {
-  originalNormalizedFields: ObjectWithNormalizedFields
-  fields: ObjectWithNormalizedFields
-  titles: NormalizedTitles
-  settings: NormalizedSettings
-  buttons: ObjectWithNormalizedButtons
-}
-
-export interface ResponseManager {
-  removeResponseHandlers: () => void
-  setResponseHandler: (codes: ResponseMap) => void
-  getResponseHandler: (code: number) => Handler | null
-}
-
-export interface NotificationManager {
-  setNotificationHandler: (handler: NotificationMap) => void
-  pushNotification: (notification: Notification) => void
-  removeNotificationHandlers: () => void
-}
-
-export interface RuleOptionsManager {
-  setRuleOptions(ruleOptions: RuleOptions): void
-  getRuleOptions(): RuleOptions
-  removeRuleOptions(): void
-}
-
-export interface FormManager {
-  readonly responseManager: ResponseManager
-  readonly notificationManager: NotificationManager
-  readonly ruleOptionsManager: RuleOptionsManager
-  fillWithRecordValues: (record: Record<string, unknown>) => void
-  getForeignKeyValues: (fields?: ObjectWithNormalizedFields) => void
-  resetFields: () => void
-  removeForm: () => void
-  addForm: (form: FormMap) => void
-  getFormData: (fields?: ObjectWithNormalizedFields) => { jsonForm: Record<string, unknown>; formData: FormData | null }
-  getForm: () => FormMap
-  setErrors: (errors: FieldErrors) => void
-  switchToCreateMode: () => void
-  switchToUpdateMode: () => void
-  isFormValid: () => boolean
-  setRuleOptions(ruleOptions: RuleOptions): void
-}
-
 export interface Form<T, U> {
   id: symbol
   originalNormalizedFields: NormalizedFields<T>
@@ -120,11 +51,4 @@ export interface Form<T, U> {
   normalizedButtons: NormalizedButtons<U>
   normalizedTitles: NormalizedTitles
   normalizedSettings: NormalizedSettings
-  manager: FormManager
-}
-
-export interface ManagerMap<T> {
-  get(key: symbol): T | undefined
-  set(key: symbol, value: T): void
-  delete(key: symbol): void
 }

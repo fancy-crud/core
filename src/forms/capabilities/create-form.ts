@@ -1,17 +1,38 @@
-import type { Form, ObjectWithRawFields, RawButton, RawSetting, RawTitle } from '../axioma'
-import { NormalizeTitlesCommand } from './normalizers/normalize-titles'
-import { NormalizeButtonsHandler, NormalizeFormFieldsHandler, NormalizeSettingsHandler, NormalizeTitlesHandler } from './normalizers'
-import { NormalizeSettingsCommand } from '@/forms/capabilities'
-
-FormManagerHandler.setManagerMap(new Map())
-NotificationManagerHandler.setManagerMap(new Map())
-ResponseManagerHandler.setManagerMap(new Map())
-RuleOptionsManagerHandler.setManagerMap(new Map())
+import { IFormStore, IRuleOptionsStore } from '../axioma'
+import type { Form, NormalizedButtons, NormalizedFields, ObjectWithRawFields, RawButton, RawSetting, RawTitle } from '../axioma'
+import { INotificationStore } from '@/common/notifications/axioma'
+import { IResponseInterceptorStore } from '@/common/response-interceptor/axioma'
+import type { BaseCommand } from '@/common/bus/axioma'
+import { Bus } from '@/common/bus/capabilities'
+import {
+  NormalizeButtonsCommand, NormalizeFormFieldsCommand,
+  NormalizeSettingsCommand,
+  NormalizeTitlesCommand,
+} from '@/forms/capabilities'
 
 /**
  * A class that provides functionality to create a form from raw fields and settings.
  */
-export class CreateForm {
+export class CreateFormCommand<T extends ObjectWithRawFields, U extends RawSetting, V extends Record<'main' | 'aux', RawButton>> implements BaseCommand {
+  public readonly meta = meta(CreateFormHandler)
+
+  constructor(
+    public readonly id: string,
+    public readonly rawFields: T,
+    public readonly rawTitles?: RawTitle,
+    public readonly rawButtons?: V,
+    public readonly rawSettings?: U,
+  ) {}
+}
+
+class CreateFormHandler {
+  constructor(
+    private formStore: IFormStore = inject(IFormStore),
+    private notificationStore: INotificationStore = inject(INotificationStore),
+    private responseInterceptorStore: IResponseInterceptorStore = inject(IResponseInterceptorStore),
+    private ruleOptionsStore: IRuleOptionsStore = inject(IRuleOptionsStore),
+  ) {}
+
   /**
    * Creates a form from raw fields and settings.
    *
@@ -20,25 +41,25 @@ export class CreateForm {
    * @param rawSettings - An optional `RawSettings` object containing the raw settings to be normalized.
    * @returns A `Form` object containing the normalized fields and settings.
    */
-  execute<T extends ObjectWithRawFields, U extends RawSetting, V extends Record<'main' | 'aux', RawButton>>(formId: string, rawFields: T, rawTitles?: RawTitle, rawButtons?: V, rawSettings?: U): Form<T, V> {
-    const id = Symbol(formId)
+  execute<T extends ObjectWithRawFields, U extends RawSetting, V extends Record<'main' | 'aux', RawButton>>({ id, rawFields, rawSettings, rawButtons, rawTitles }: CreateFormCommand<T, U, V>): Form<T, V> {
+    const formId = Symbol(id)
+    const bus = new Bus()
 
     const normalizeFieldsCommand = new NormalizeFormFieldsCommand(rawFields)
-    const originalNormalizedFields = new NormalizeFormFieldsHandler().execute(normalizeFieldsCommand)
-    const clonedNormalizedFields = new NormalizeFormFieldsHandler().execute(normalizeFieldsCommand)
+
+    const originalNormalizedFields = bus.execute(normalizeFieldsCommand) as NormalizedFields<T>
+    const clonedNormalizedFields = bus.execute(normalizeFieldsCommand) as NormalizedFields<T>
 
     const normalizeSettingsCommand = new NormalizeSettingsCommand(rawSettings)
-    const normalizedSettings = new NormalizeSettingsHandler().execute(normalizeSettingsCommand)
+    const normalizedSettings = bus.execute(normalizeSettingsCommand)
 
     const normalizeButtonsCommand = new NormalizeButtonsCommand(rawButtons)
-    const normalizedButtons = new NormalizeButtonsHandler().execute(normalizeButtonsCommand)
+    const normalizedButtons = bus.execute(normalizeButtonsCommand) as NormalizedButtons<V>
 
     const normalizeTitlesCommand = new NormalizeTitlesCommand(rawTitles)
-    const normalizedTitles = new NormalizeTitlesHandler().execute(normalizeTitlesCommand)
+    const normalizedTitles = bus.execute(normalizeTitlesCommand)
 
-    const manager = new FormManagerHandler(id)
-
-    manager.addForm({
+    this.formStore.save(formId, {
       originalNormalizedFields,
       fields: clonedNormalizedFields,
       titles: normalizedTitles,
@@ -46,14 +67,17 @@ export class CreateForm {
       buttons: normalizedButtons,
     })
 
+    this.notificationStore.save(formId, {})
+    this.responseInterceptorStore.save(formId, {})
+    this.ruleOptionsStore.save(formId, {})
+
     return {
-      id,
+      id: formId,
       originalNormalizedFields,
       clonedNormalizedFields,
       normalizedSettings,
       normalizedButtons,
       normalizedTitles,
-      manager,
     }
   }
 }
