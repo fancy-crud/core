@@ -3,8 +3,6 @@ name: Node.js CI
 on:
   push:
     branches: [main, alpha, beta, next]
-  pull_request:
-    branches: ['*']
 
 jobs:
   quality:
@@ -30,7 +28,6 @@ jobs:
 
   publish:
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/main' }}
     needs: [quality]
     steps:
       - uses: actions/checkout@v2
