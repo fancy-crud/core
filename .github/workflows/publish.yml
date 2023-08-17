@@ -39,7 +39,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn install
-      - run: yarn run build
+      - run: cd packages/core && yarn run build && cd ..
       - name: Semantic Release
         run: |
           npm i -g semantic-release@^19.0.5    \
@@ -47,7 +47,7 @@ jobs:
           "@semantic-release/commit-analyzer"        \
           "@semantic-release/github"                 \
           "@semantic-release/release-notes-generator"
-          npx semantic-release
+          cd packages/core && npx semantic-release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

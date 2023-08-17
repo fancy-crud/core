@@ -66,7 +66,8 @@
     "vitest": "^0.23.4",
     "vue": "^3.3.4",
     "vue-tsc": "^1.0.24",
-    "zod": "^3.21.4"
+    "zod": "^3.21.4",
+    "happy-dom": "^10.3.2"
   },
   "publishConfig": {
     "access": "public"
