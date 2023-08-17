@@ -1,0 +1,65 @@
+{
+  "name": "@fancy-crud/oruga-wrapper",
+  "version": "0.0.0",
+  "private": false,
+  "author": {
+    "name": "Christopher A. Flores",
+    "url": "https://github.com/cafadev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fancy-crud/oruga-wrapper"
+  },
+  "main": "./dist/fancy-crud-oruga-wrapper.umd.js",
+  "module": "./dist/fancy-crud-oruga-wrapper.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/fancy-crud-oruga-wrapper.mjs",
+      "require": "./dist/fancy-crud-oruga-wrapper.umd.js"
+    },
+    "./dist/fancy-crud-oruga-wrapper.css": {
+      "import": "./dist/fancy-crud-oruga-wrapper.css",
+      "require": "./dist/fancy-crud-oruga-wrapper.css"
+    }
+  },
+  "types": "./dist/src/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "@fancy-crud/core": "^2.0.1",
+    "@fancy-crud/vue": "^2.0.1",
+    "@oruga-ui/oruga-next": "^0.6.0",
+    "@vueuse/core": "^9.9.0",
+    "vue": "^3.2.19"
+  },
+  "dependencies": {
+    "@fancy-crud/core": "^2.0.1",
+    "@fancy-crud/vue": "^2.0.1",
+    "@oruga-ui/oruga-next": "^0.6.0",
+    "@vueuse/core": "^9.9.0",
+    "vue": "^3.2.19"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
+  "keywords": [
+    "form",
+    "table",
+    "datatable",
+    "automation",
+    "crud",
+    "create",
+    "read",
+    "update",
+    "delete",
+    "vue",
+    "ui framework",
+    "oruga"
+  ]
+}

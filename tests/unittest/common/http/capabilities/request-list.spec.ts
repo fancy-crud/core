@@ -1,4 +1,4 @@
-import { RequestListCommand } from '@/common/http/capabilities'
+import { RequestListCommand } from '@packages/core/common/http/capabilities'
 
 describe('RequestListHandler', () => {
   it.concurrent('should call onSuccess and onFinally when HTTP request is successful', async () => {

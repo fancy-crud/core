@@ -2,7 +2,7 @@ import { CreateUserCommand } from './factory/create-user'
 import { CreateUserWithDependencyCommand } from './factory/create-user-with-dependency'
 import { CreateUserWithNestedDependencyCommand } from './factory/create-user-with-nested-dependencies'
 import { AsyncCreateUserCommand } from './factory/async-create-user'
-import { Bus } from '@/common/bus/capabilities'
+import { Bus } from '@packages/core/common/bus/capabilities'
 
 describe('Bus', () => {
   let bus: Bus

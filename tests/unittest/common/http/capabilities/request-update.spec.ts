@@ -1,4 +1,4 @@
-import { RequestUpdateCommand } from '@/common/http/capabilities'
+import { RequestUpdateCommand } from '@packages/core/common/http/capabilities'
 
 describe('RequestUpdateHandler', () => {
   it.concurrent('should call onSuccess and onFinally when HTTP request is successful', async () => {

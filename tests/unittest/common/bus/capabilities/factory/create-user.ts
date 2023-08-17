@@ -1,4 +1,4 @@
-import type { BaseCommand } from '@/common/bus/axioma'
+import type { BaseCommand } from '@packages/core/common/bus/axioma'
 
 export class CreateUserCommand implements BaseCommand {
   public readonly meta = meta(CreateUserHandler)

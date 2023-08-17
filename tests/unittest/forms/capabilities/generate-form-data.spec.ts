@@ -1,4 +1,4 @@
-import { GenerateFormDataCommand } from '@/forms/capabilities'
+import { GenerateFormDataCommand } from 'packages/core/forms/capabilities'
 
 describe('GenerateFormData', () => {
   it.concurrent('should generate form data for fields with primitive values', () => {

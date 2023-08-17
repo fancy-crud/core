@@ -1,4 +1,4 @@
-import { RequestCreateCommand } from '@/common/http/capabilities'
+import { RequestCreateCommand } from '@packages/core/common/http/capabilities'
 
 describe('RequestCreateHandler', () => {
   it.concurrent('should call onSuccess and onFinally when HTTP request is successful', async () => {

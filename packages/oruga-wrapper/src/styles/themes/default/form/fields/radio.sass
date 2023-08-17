@@ -1,0 +1,17 @@
+.f-field__radio > .o-radio__check
+  @apply rounded-full bg-inactive-300
+  background-image: none
+
+.f-field__radio > .o-radio__check--checked
+  @apply bg-primary-300 ring-2 ring-blue-700
+
+.radio-group--in-row
+  .f-field__radio
+    &:not(:first-child)
+      @apply px-2
+
+.radio-group--cascade
+  display: grid
+
+  .f-field__radio
+    @apply py-2

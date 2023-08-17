@@ -1,4 +1,4 @@
-import type { BaseCommand } from '@/common/bus/axioma'
+import type { BaseCommand } from '@packages/core/common/bus/axioma'
 
 interface Dependency {
   isCallable(...args: any): void

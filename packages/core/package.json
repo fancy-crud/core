@@ -1,0 +1,45 @@
+{
+  "name": "@fancy-crud/core",
+  "version": "0.0.0",
+  "private": false,
+  "author": {
+    "name": "Christopher A. Flores",
+    "url": "https://github.com/cafadev"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fancy-crud/core.git"
+  },
+  "main": "./dist/core.mjs",
+  "module": "./dist/core.mjs",
+  "types": "./dist/src/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "lodash.isequal": "^4.5.0"
+  },
+  "dependencies": {
+    "lodash.isequal": "^4.5.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
+  "keywords": [
+    "form",
+    "table",
+    "datatable",
+    "automation",
+    "crud",
+    "create",
+    "read",
+    "update",
+    "delete"
+  ]
+}

@@ -1,4 +1,4 @@
-import { enumGenerator } from '@/common/helpers'
+import { enumGenerator } from '@packages/core/common/helpers'
 
 describe('enumGenerator', () => {
   it('should generate an enum object', () => {

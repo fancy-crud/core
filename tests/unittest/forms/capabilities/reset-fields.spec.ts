@@ -1,4 +1,4 @@
-import { ResetFieldsCommand } from '@/forms/capabilities'
+import { ResetFieldsCommand } from 'packages/core/forms/capabilities'
 
 describe('ResetFields', () => {
   it.concurrent('should reset the model value of fields in a normalized fields object', () => {

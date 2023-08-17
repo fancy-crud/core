@@ -1,4 +1,4 @@
-import { NormalizeTitlesCommand } from '@/forms/capabilities'
+import { NormalizeTitlesCommand } from 'packages/core/forms/capabilities'
 
 describe('NormalizeTitles', () => {
   it.concurrent('should normalize titles with default values when no titles are provided', () => {

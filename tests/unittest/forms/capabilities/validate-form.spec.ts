@@ -1,4 +1,4 @@
-import { ValidateFormCommand } from '@/forms/capabilities'
+import { ValidateFormCommand } from 'packages/core/forms/capabilities'
 
 describe('ValidateForm', () => {
   let mockValidateFieldInstance: any

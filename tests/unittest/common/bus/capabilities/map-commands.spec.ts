@@ -1,6 +1,6 @@
 import { CreateUserHandler } from './factory/create-user'
-import { HandlerDoesNotExist } from '@/common/bus/axioma'
-import { MapCommands } from '@/common/bus/capabilities'
+import { HandlerDoesNotExist } from '@packages/core/common/bus/axioma'
+import { MapCommands } from '@packages/core/common/bus/capabilities'
 
 // Mock the handlers map (You should adapt this to your actual implementation)
 const mockHandlers = new Map<string, any>()

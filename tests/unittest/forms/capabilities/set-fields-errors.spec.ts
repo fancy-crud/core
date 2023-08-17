@@ -1,4 +1,4 @@
-import { SetFieldsErrorsCommand } from '@/forms/capabilities'
+import { SetFieldsErrorsCommand } from 'packages/core/forms/capabilities'
 
 describe('SetFieldsErrors', () => {
   it.concurrent('should fill the normalized fields with corresponding errors', () => {

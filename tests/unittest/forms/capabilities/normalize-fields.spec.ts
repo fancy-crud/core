@@ -1,4 +1,4 @@
-import { NormalizeFormFieldsCommand } from '@/forms/capabilities'
+import { NormalizeFormFieldsCommand } from 'packages/core/forms/capabilities'
 
 describe('NormalizeFormFields', () => {
   const recordValue = (_: any) => null

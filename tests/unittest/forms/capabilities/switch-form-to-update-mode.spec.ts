@@ -1,5 +1,5 @@
-import type { FormState, NormalizedButtons, NormalizedSettings } from '@/forms/axioma'
-import type { SwitchFormToUpdateModeCommandInput } from '@/forms/capabilities'
+import type { FormState, NormalizedButtons, NormalizedSettings } from 'packages/core/forms/axioma'
+import type { SwitchFormToUpdateModeCommandInput } from 'packages/core/forms/capabilities'
 
 class MockResetFields {
   constructor(

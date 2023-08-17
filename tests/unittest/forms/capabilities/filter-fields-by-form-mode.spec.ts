@@ -1,5 +1,5 @@
-import { UnknownFormMode } from '@/forms/axioma'
-import { FilterFieldsByFormModeCommand } from '@/forms/capabilities'
+import { UnknownFormMode } from 'packages/core/forms/axioma'
+import { FilterFieldsByFormModeCommand } from 'packages/core/forms/capabilities'
 
 describe('FilterFieldsByFormModeHandler', () => {
   let fields: Record<string, { hidden?: boolean; createOnly?: boolean; updateOnly?: boolean }>

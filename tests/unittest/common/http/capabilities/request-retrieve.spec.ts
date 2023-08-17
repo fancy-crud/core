@@ -1,4 +1,4 @@
-import { RequestRetrieveCommand } from '@/common/http/capabilities'
+import { RequestRetrieveCommand } from '@packages/core/common/http/capabilities'
 
 describe('RequestRetrieveHandler', () => {
   it.concurrent('should call onSuccess and onFinally when HTTP request is successful', async () => {

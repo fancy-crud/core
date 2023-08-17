@@ -1,4 +1,4 @@
-import { SetFieldsValuesCommand } from '@/forms/capabilities'
+import { SetFieldsValuesCommand } from 'packages/core/forms/capabilities'
 
 describe('FillWithRecordValues', () => {
   it.concurrent('should fill the normalized fields with corresponding values from the record', () => {

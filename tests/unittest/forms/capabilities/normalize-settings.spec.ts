@@ -1,5 +1,5 @@
-import { NormalizeSettingsCommand } from '@/forms/capabilities'
-import { DEFAULT_LOOKUP_FIELD, FORM_MODE } from '@/forms/axioma'
+import { NormalizeSettingsCommand } from 'packages/core/forms/capabilities'
+import { DEFAULT_LOOKUP_FIELD, FORM_MODE } from 'packages/core/forms/axioma'
 
 describe('NormalizeSettings', () => {
   it.concurrent('should normalize settings with default values when no settings are provided', () => {

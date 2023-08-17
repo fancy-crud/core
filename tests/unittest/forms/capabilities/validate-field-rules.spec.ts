@@ -1,5 +1,5 @@
-import { UnprocessableValidationResult } from '@/forms/axioma/exceptions/unprocessable-validation-result'
-import { ValidateFieldRulesCommand } from '@/forms/capabilities'
+import { UnprocessableValidationResult } from 'packages/core/forms/axioma/exceptions/unprocessable-validation-result'
+import { ValidateFieldRulesCommand } from 'packages/core/forms/capabilities'
 
 describe('ValidateFieldRules', () => {
   it.concurrent('should return true if no rules are defined for the field', () => {

@@ -1,4 +1,4 @@
-import { NormalizeButtonsCommand } from '@/forms/capabilities'
+import { NormalizeButtonsCommand } from 'packages/core/forms/capabilities'
 
 describe('NormalizeButtons', () => {
   it.concurrent('should return normalized buttons when no buttons are provided and no defaults', () => {

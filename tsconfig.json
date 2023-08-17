@@ -20,13 +20,18 @@
     "outDir": "./dist",
     "typeRoots": [
       "vite/client",
-      "src/**/typing",
+      "packages/**/**/typing",
     ],
     "types": [
       "vite/client"
     ],
     "paths": {
-      "@/*": ["./src/*"],
+      "@packages/core/*": ["packages/core/src/*"],
+      "@packages/vue/*": ["packages/vue/src/*"],
+      "@packages/oruga-wrapper/*": ["packages/oruga-wrapper/src/*"],
+      "@fancy-crud/core": ["packages/core/src/index"],
+      "@fancy-crud/vue": ["packages/vue/src/index"],
+      "@fancy-crud/oruga-wrapper": ["packages/oruga-wrapper/src/index"],
     }
   },
   "exclude": [

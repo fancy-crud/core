@@ -1,4 +1,4 @@
-import { RequestDeleteCommand } from '@/common/http/capabilities'
+import { RequestDeleteCommand } from '@packages/core/common/http/capabilities'
 
 describe('RequestDeleteHandler', () => {
   it.concurrent('should call onSuccess and onFinally when HTTP request is successful', async () => {

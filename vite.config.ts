@@ -1,4 +1,6 @@
 import path from 'path'
+import Components from 'unplugin-vue-components/vite'
+import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 import AutoImport from 'unplugin-auto-import/vite'
 
@@ -8,8 +10,12 @@ import { dependencies, name } from './package.json'
 export default defineConfig({
   resolve: {
     alias: {
-      '@/': `${path.resolve(__dirname, 'src')}/`,
-      '~/': `${path.resolve(__dirname, 'src')}/`,
+      '@fancy-crud/core': `${path.resolve(__dirname, 'packages/core/src')}/`,
+      '@fancy-crud/vue': `${path.resolve(__dirname, 'packages/vue/src')}/`,
+      '@fancy-crud/oruga-wrapper': `${path.resolve(__dirname, 'packages/oruga-wrapper/src')}/`,
+      '@packages/vue': `${path.resolve(__dirname, 'packages/vue/src')}/`,
+      '@packages/core': `${path.resolve(__dirname, 'packages/core/src')}/`,
+      '@packages/oruga-wrapper': `${path.resolve(__dirname, 'packages/oruga-wrapper/src')}/`,
     },
   },
   build: {
@@ -23,14 +29,41 @@ export default defineConfig({
     },
   },
   plugins: [
+    vue(),
     AutoImport({
-      dts: true,
       imports: [
-        'vitest',
+        'vue/macros',
+        '@vueuse/core',
+        {
+          vue: [
+            'h',
+            'reactive',
+            'watch',
+            'computed',
+            'ref',
+            'onMounted',
+            'onUnmounted',
+            'defineComponent',
+            'useSlots',
+            ['inject', 'vueInject'],
+          ],
+        },
       ],
+      dts: true,
       dirs: [
-        './src/**/*.ts',
+        'packages/vue/**/**/*.ts',
       ],
+      vueTemplate: true,
+    }),
+    Components({
+      dirs: [
+        'node_modules/@oruga-ui/oruga-next/src/components/**',
+        'src/**/integration/components',
+      ],
+
+      // allow auto import and register components used in markdown
+      include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+      dts: true,
     }),
   ],
 })
