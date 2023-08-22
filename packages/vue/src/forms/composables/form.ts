@@ -23,8 +23,8 @@ export function useForm<T extends ObjectWithRawFields, U extends Record<string, 
     ruleOptions: customRuleOptions,
   } = args
 
-  const formStore: IFormStore = vueInject(IFormStore.name)!
-  const ruleOptionsStore: IRuleOptionsStore = vueInject(IRuleOptionsStore.name)!
+  const formStore: IFormStore = inject(IFormStore.name)!
+  const ruleOptionsStore: IRuleOptionsStore = inject(IRuleOptionsStore.name)!
   const bus = new Bus()
 
   const {

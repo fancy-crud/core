@@ -3,8 +3,8 @@ import type { NormalizedTextField } from '@packages/vue/forms'
 import { useHintText, useModelValue } from './utils'
 
 export function useTextField(props: { formId: symbol; field: NormalizedTextField }) {
-  const formStore: IFormStore = vueInject(IFormStore.name)!
-  const ruleOptionsStore: IRuleOptionsStore = vueInject(IRuleOptionsStore.name)!
+  const formStore: IFormStore = inject(IFormStore.name)!
+  const ruleOptionsStore: IRuleOptionsStore = inject(IRuleOptionsStore.name)!
 
   const { fields } = formStore.searchById(props.formId)!
   const { modelValue, vmodel } = useModelValue(props)

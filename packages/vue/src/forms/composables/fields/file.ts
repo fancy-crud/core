@@ -4,8 +4,8 @@ import type { DefaultProps } from '../../typing'
 import { useHintText, useModelValue } from './utils'
 
 export function useFileField(props: DefaultProps & { field: NormalizedFileField }) {
-  const formStore: IFormStore = vueInject(IFormStore.name)!
-  const ruleOptionsStore: IRuleOptionsStore = vueInject(IRuleOptionsStore.name)!
+  const formStore: IFormStore = inject(IFormStore.name)!
+  const ruleOptionsStore: IRuleOptionsStore = inject(IRuleOptionsStore.name)!
 
   const { fields } = formStore.searchById(props.formId)!
   const { modelValue, vmodel } = useModelValue(props)

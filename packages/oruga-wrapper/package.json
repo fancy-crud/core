@@ -20,22 +20,30 @@
     "./dist/fancy-crud-oruga-wrapper.css": {
       "import": "./dist/fancy-crud-oruga-wrapper.css",
       "require": "./dist/fancy-crud-oruga-wrapper.css"
+    },
+    "./src/styles/index.sass": {
+      "import": "./src.styles/index.sass",
+      "require": "./src.styles/index.sass"
     }
   },
   "types": "./dist/src/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "src/styles"
   ],
+  "scripts": {
+    "build": "vite build"
+  },
   "peerDependencies": {
-    "@fancy-crud/core": "^2.0.1",
-    "@fancy-crud/vue": "^2.0.1",
+    "@fancy-crud/core": "workspace:^",
+    "@fancy-crud/vue": "workspace:^",
     "@oruga-ui/oruga-next": "^0.6.0",
     "@vueuse/core": "^9.9.0",
     "vue": "^3.2.19"
   },
   "dependencies": {
-    "@fancy-crud/core": "^2.0.1",
-    "@fancy-crud/vue": "^2.0.1",
+    "@fancy-crud/core": "workspace:^",
+    "@fancy-crud/vue": "workspace:^",
     "@oruga-ui/oruga-next": "^0.6.0",
     "@vueuse/core": "^9.9.0",
     "vue": "^3.2.19"

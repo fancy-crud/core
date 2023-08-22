@@ -54,9 +54,9 @@ const emit = defineEmits<{
 const slots = useSlots()
 const bus = new Bus()
 
-const formStore: IFormStore = vueInject(IFormStore.name)!
-const ruleOptionsStore: IRuleOptionsStore = vueInject(IRuleOptionsStore.name)!
-const responseInterceptorStore: IResponseInterceptorStore = vueInject(IResponseInterceptorStore.name)!
+const formStore: IFormStore = inject(IFormStore.name)!
+const ruleOptionsStore: IRuleOptionsStore = inject(IRuleOptionsStore.name)!
+const responseInterceptorStore: IResponseInterceptorStore = inject(IResponseInterceptorStore.name)!
 
 const { isFormValid } = useRules(props.fields, ruleOptionsStore.searchById(props.id))
 

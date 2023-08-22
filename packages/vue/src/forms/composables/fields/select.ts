@@ -3,8 +3,8 @@ import type { NormalizedSelectField } from '@packages/vue'
 import { useHintText, useModelValue, useOptions } from './utils'
 
 export function useSelectField(props: { formId: symbol; field: NormalizedSelectField }) {
-  const formStore: IFormStore = vueInject(IFormStore.name)!
-  const ruleOptionsStore: IRuleOptionsStore = vueInject(IRuleOptionsStore.name)!
+  const formStore: IFormStore = inject(IFormStore.name)!
+  const ruleOptionsStore: IRuleOptionsStore = inject(IRuleOptionsStore.name)!
 
   const { fields } = formStore.searchById(props.formId)!
   const { modelValue, vmodel } = useModelValue(props)

@@ -21,9 +21,10 @@
     "typeRoots": [
       "vite/client",
       "packages/**/**/typing",
+      "@fancy-crud/**/*"
     ],
     "types": [
-      "vite/client"
+      "vite/client",
     ],
     "paths": {
       "@packages/core/*": ["packages/core/src/*"],
@@ -31,7 +32,7 @@
       "@packages/oruga-wrapper/*": ["packages/oruga-wrapper/src/*"],
       "@fancy-crud/core": ["packages/core/src/index"],
       "@fancy-crud/vue": ["packages/vue/src/index"],
-      "@fancy-crud/oruga-wrapper": ["packages/oruga-wrapper/src/index"],
+      "@fancy-crud/oruga-wrapper": ["packages/oruga-wrapper/src/index"]
     }
   },
   "exclude": [

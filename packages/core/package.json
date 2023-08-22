@@ -11,12 +11,15 @@
     "type": "git",
     "url": "https://github.com/fancy-crud/core.git"
   },
-  "main": "./dist/core.mjs",
-  "module": "./dist/core.mjs",
-  "types": "./dist/src/index.d.ts",
+  "main": "dist/core.mjs",
+  "module": "dist/core.mjs",
+  "types": "dist/src/index.d.ts",
   "files": [
     "dist"
   ],
+  "scripts": {
+    "build": "vite build"
+  },
   "peerDependencies": {
     "lodash.isequal": "^4.5.0"
   },

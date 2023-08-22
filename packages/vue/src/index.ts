@@ -39,4 +39,4 @@ export * from './http'
 export * from './tables'
 
 // eslint-disable-next-line import/first
-import './styles/main.sass'
+import './styles/index.sass'

@@ -69,7 +69,7 @@ const emit = defineEmits<{
 }>()
 
 const bus = new Bus()
-const formStore: IFormStore = vueInject(IFormStore.name)!
+const formStore: IFormStore = inject(IFormStore.name)!
 
 const { formId } = bus.execute(
   new GetStoreTableCommand(props.id),
