@@ -49,11 +49,11 @@ jobs:
       - run: pnpm -r build
       - name: Semantic Release
         run: |
-          npm i -g semantic-release@^19.0.5          \
-          "@semantic-release/changelog"              \
-          "@semantic-release/commit-analyzer"        \
-          "@semantic-release/github"                 \
-          "@semantic-release/release-notes-generator"\
+          npm i -g semantic-release@^19.0.5           \
+          "@semantic-release/changelog"               \
+          "@semantic-release/commit-analyzer"         \
+          "@semantic-release/github"                  \
+          "@semantic-release/release-notes-generator" \
           "semantic-release-pnpm"
           pnpm -r exec semantic-release
         env:
