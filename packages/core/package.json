@@ -39,12 +39,8 @@
     ],
     "plugins": [
       "@semantic-release/changelog",
-      [
-        "@semantic-release/npm",
-        {
-          "npmPublish": false
-        }
-      ]
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator"
     ]
   },
   "keywords": [
