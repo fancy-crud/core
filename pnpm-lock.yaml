@@ -177,6 +177,16 @@ importers:
       vue:
         specifier: ^3.2.19
         version: 3.3.4
+    devDependencies:
+      autoprefixer:
+        specifier: ^10.4.15
+        version: 10.4.15(postcss@8.4.28)
+      postcss:
+        specifier: ^8.4.28
+        version: 8.4.28
+      tailwindcss:
+        specifier: ^3.3.3
+        version: 3.3.3(ts-node@10.9.1)
 
   packages/vue:
     dependencies:
