@@ -63,6 +63,10 @@
       "next-major",
       { "name": "beta", "prerelease": true },
       { "name": "alpha", "prerelease": true }
+    ],
+    "plugins": [
+      "@semantic-release/changelog",
+      "semantic-release-pnpm"
     ]
   },
   "keywords": [
