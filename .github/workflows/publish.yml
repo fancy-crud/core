@@ -52,9 +52,9 @@ jobs:
           npm i -g semantic-release@^19.0.5          \
           "@semantic-release/changelog"              \
           "@semantic-release/commit-analyzer"        \
-          "semantic-release-pnpm"                    \
           "@semantic-release/github"                 \
-          "@semantic-release/release-notes-generator"
+          "@semantic-release/release-notes-generator"\
+          "semantic-release-pnpm"
           pnpm -r exec semantic-release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
