@@ -31,7 +31,11 @@
   },
   "release": {
     "branches": [
-      "main"
+      "main",
+      "next",
+      "next-major",
+      { "name": "beta", "prerelease": true },
+      { "name": "alpha", "prerelease": true }
     ]
   },
   "keywords": [
