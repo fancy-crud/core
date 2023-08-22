@@ -51,8 +51,6 @@ jobs:
         run: |
           npm i -g semantic-release@^19.0.5           \
           "@semantic-release/changelog"               \
-          "@semantic-release/error"                  \
-          "semantic-release-pnpm"
           pnpm -r exec semantic-release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
