@@ -46,7 +46,6 @@ jobs:
           version: 8
           run_install: |
             - recursive: true
-      - run: pnpm -r build
       - name: Semantic Release
         run: |
           npm i -g semantic-release@^19.0.5           \

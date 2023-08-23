@@ -34,7 +34,6 @@
     "eslint": "^8.24.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "execa": "^7.2.0",
     "fast-glob": "^3.2.7",
     "happy-dom": "^10.3.2",
     "jsdom": "^20.0.0",
