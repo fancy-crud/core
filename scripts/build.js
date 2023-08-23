@@ -10,8 +10,6 @@ import fs from 'node:fs'
 // import vuePackage from '../packages/vue/package.json' assert { type: 'json' }
 // import orugaWrapperPackage from '../packages/oruga-wrapper/package.json' assert { type: 'json' }
 
-runBuild()
-
 const packages = [
   'core', 'vue', 'oruga-wrapper',
 ]
@@ -51,3 +49,5 @@ async function runBuild() {
     })
   })
 }
+
+runBuild()
