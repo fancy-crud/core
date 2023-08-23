@@ -43,7 +43,8 @@
       "@semantic-release/release-notes-generator",
       "@semantic-release/github",
       ["@semantic-release/exec", {
-        "publishCmd": "pnpm publish --publish-branch ${branch.name} --no-git-checks",
+        "prepareCmd": "pnpm pack",
+        "publishCmd": "pnpm publish --publish-branch ${branch.name} --tag ${nextRelease.version} --no-git-checks",
         "successCmd": "echo ${nextRelease.version}"
       }]
     ]
