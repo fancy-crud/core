@@ -45,7 +45,7 @@
         "publishCmd": "pnpm publish --publish-branch ${branch.name} --tag ${nextRelease.version}",
         "successCmd": "echo ${nextRelease.version}"
       }],
-      "@semantic-release/git"
+      "@semantic-release/github"
     ]
   },
   "keywords": [
