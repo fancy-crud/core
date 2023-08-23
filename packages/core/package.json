@@ -43,7 +43,7 @@
       "@semantic-release/changelog",
       "@semantic-release/git",
       ["@semantic-release/exec", {
-        "publishCmd": "pnpm -r exec publish --publish-branch ${branch.name} --tag ${nextRelease.version}",
+        "publishCmd": "pnpm publish --publish-branch ${branch.name} --tag ${nextRelease.version}",
         "successCmd": "echo ${nextRelease.version}"
       }]
     ]
