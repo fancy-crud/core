@@ -6,7 +6,7 @@
     "dev": "vite --port 9090 --host 0.0.0.0",
     "build": "vite build",
     "build-tsc": "tsc && tsc-alias --verbose -p ./tsconfig.json",
-    "packing": "node scripts/build.js 2.0.0",
+    "packing": "node scripts/build.js",
     "typecheck": "vue-tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
