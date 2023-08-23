@@ -41,11 +41,7 @@
       "@semantic-release/changelog",
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
-      ["@semantic-release/exec", {
-        "prepareCmd": "pnpm pack",
-        "publishCmd": "pnpm publish --no-git-checks",
-        "successCmd": "echo ${nextRelease.version}"
-      }],
+      "semantic-release-pnpm",
       "@semantic-release/github"
     ]
   },
