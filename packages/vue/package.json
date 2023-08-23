@@ -68,8 +68,8 @@
       "@semantic-release/changelog",
       "@semantic-release/git",
       ["@semantic-release/exec", {
-        "verifyConditionsCmd": "./verify.sh",
-        "publishCmd": "pnpm -r exec publish --publish-branch ${branch.name} --tag ${nextRelease.version}"
+        "publishCmd": "pnpm -r exec publish --publish-branch ${branch.name} --tag ${nextRelease.version}",
+        "successCmd": "echo ${nextRelease.version}"
       }]
     ]
   },
