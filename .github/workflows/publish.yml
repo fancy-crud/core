@@ -48,7 +48,7 @@ jobs:
             - recursive: true
       - name: Semantic Release
         run: |
-          npm i -g semantic-release@^19.0.5           \
+          npm i -g semantic-release@19.0.0           \
           "@semantic-release/changelog"               \
           "@semantic-release/error"                   \
           "semantic-release-pnpm"
