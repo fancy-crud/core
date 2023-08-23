@@ -42,7 +42,7 @@
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
       ["@semantic-release/exec", {
-        "publishCmd": "pnpm publish --publish-branch ${branch.name} --tag ${nextRelease.version} --no-git-checks",
+        "publishCmd": "pnpm publish --publish-branch ${branch.name} --no-git-checks",
         "successCmd": "echo ${nextRelease.version}"
       }],
       "@semantic-release/github"
