@@ -52,7 +52,10 @@ jobs:
           npm i -g semantic-release@^19.0.5           \
           "@semantic-release/changelog"               \
           pnpm -r exec semantic-release
-          pnpm -r publish --publish-branch ${GITHUB_REF##*/} --tag ${nextRelease.version}
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Publish package
+        run: pnpm -r publish --publish-branch ${GITHUB_REF##*/} --tag ${{ env.GITHUB_ENV }}
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
