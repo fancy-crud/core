@@ -76,7 +76,6 @@
         }
       ],
       "@semantic-release/github"
-
     ]
   },
   "keywords": [
