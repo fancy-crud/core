@@ -69,8 +69,8 @@
       ["@semantic-release/exec", {
         "verifyConditions": "echo 'Verified'",
         "prepareCmd": "pnpm run -w packing ${nextRelease.version} && pnpm build && pnpm pack",
-        "publishCmd": "pnpm publish --no-git-checks --tag ${branch.channel} --force",
-        "successCmd": "echo ${nextRelease.version}"
+        "publishCmd": "pnpm publish --no-git-checks --tag ${branch.channel}",
+        "successCmd": "echo '\n\n\n ${branch.name} Release completed ${nextRelease.version}'"
       }],
       "@semantic-release/github"
     ]
