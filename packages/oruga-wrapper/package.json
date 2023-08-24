@@ -66,9 +66,6 @@
       { "name": "alpha", "prerelease": true }
     ],
     "plugins": [
-      "@semantic-release/changelog",
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
       ["@semantic-release/exec", {
         "verifyConditions": "echo 'Verified'",
         "prepareCmd": "pnpm build && pnpm pack",
