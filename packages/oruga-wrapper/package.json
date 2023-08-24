@@ -8,7 +8,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/fancy-crud/core"
+    "url": "https://github.com/fancy-crud/core",
+    "directory": "packages/oruga-wrapper"
   },
   "main": "./dist/fancy-crud-oruga-wrapper.umd.js",
   "module": "./dist/fancy-crud-oruga-wrapper.mjs",

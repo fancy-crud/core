@@ -9,7 +9,8 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fancy-crud/core"
+    "url": "https://github.com/fancy-crud/core",
+    "directory": "packages/vue"
   },
   "main": "./dist/fancy-crud-vue.umd.js",
   "module": "./dist/fancy-crud-vue.mjs",
