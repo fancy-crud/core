@@ -67,10 +67,11 @@
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
       ["@semantic-release/exec", {
-        "publishCmd": "pnpm publish --publish-branch ${branch.name} --tag ${nextRelease.version}",
+        "prepareCmd": "pnpm run -w packing ${nextRelease.version} && pnpm build && pnpm pack",
+        "publishCmd": "pnpm publish --no-git-checks --tag ${branch.name}",
         "successCmd": "echo ${nextRelease.version}"
       }],
-      "@semantic-release/git"
+      "@semantic-release/github"
     ]
   },
   "publishConfig": {
