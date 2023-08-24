@@ -62,8 +62,8 @@
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     ["@semantic-release/exec", {
-      "prepareCmd": "pnpm run -w packing ${nextRelease.version} && pnpm -r --filter './packages/**' build && pnpm -r './packages/**' pack",
-      "publishCmd": "pnpm -r './packages/**' publish --no-git-checks --tag ${branch.channel}",
+      "prepareCmd": "pnpm run -w packing ${nextRelease.version} && pnpm --filter './packages/**' build && pnpm --filter './packages/**' pack",
+      "publishCmd": "pnpm --filter './packages/**' publish --no-git-checks --tag ${branch.channel}",
       "successCmd": "echo '\n\n\n ${branch.name} Release completed ${nextRelease.version}'"
     }]
   ]
