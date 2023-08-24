@@ -37,16 +37,6 @@
       "next-major",
       { "name": "beta", "prerelease": true },
       { "name": "alpha", "prerelease": true }
-    ],
-    "plugins": [
-      "@semantic-release/changelog",
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
-      ["@semantic-release/exec", {
-        "prepareCmd": "pnpm run -w packing ${nextRelease.version} && pnpm build && pnpm pack",
-        "publishCmd": "pnpm publish --no-git-checks --tag ${branch.channel}",
-        "successCmd": "echo '\n\n\n ${branch.name} Release completed ${nextRelease.version}'"
-      }]
     ]
   },
   "keywords": [

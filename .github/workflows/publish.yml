@@ -52,7 +52,7 @@ jobs:
           npm i -g semantic-release@^19.0.5           \
           "@semantic-release/changelog"               \
           "@semantic-release/exec"
-          pnpm -r --filter "./packages/**" exec semantic-release
+          pnpm -w exec semantic-release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
