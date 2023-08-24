@@ -6,6 +6,11 @@
     "name": "Christopher A. Flores",
     "url": "https://github.com/cafadev"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fancy-crud/core",
+    "directory": "packages/core"
+  },
   "license": "MIT",
   "main": "dist/core.mjs",
   "module": "dist/core.mjs",

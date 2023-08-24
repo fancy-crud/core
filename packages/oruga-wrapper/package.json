@@ -6,6 +6,11 @@
     "name": "Christopher A. Flores",
     "url": "https://github.com/cafadev"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fancy-crud/core",
+    "directory": "packages/oruga-wrapper"
+  },
   "main": "./dist/fancy-crud-oruga-wrapper.umd.js",
   "module": "./dist/fancy-crud-oruga-wrapper.mjs",
   "exports": {
@@ -62,7 +67,6 @@
     ],
     "plugins": [
       ["@semantic-release/exec", {
-        "verifyConditions": "echo 'Verified'",
         "prepareCmd": "pnpm build && pnpm pack",
         "publishCmd": "pnpm publish --no-git-checks --tag ${branch.channel}",
         "successCmd": "echo '\n\n\n ${branch.name} Release completed ${nextRelease.version}'"
