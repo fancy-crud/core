@@ -44,7 +44,7 @@
       ["@semantic-release/exec", {
         "prepareCmd": "pnpm run -w packing ${nextRelease.version} && pnpm build && pnpm pack",
         "publishCmd": "pnpm publish --no-git-checks --tag ${branch.name}",
-        "successCmd": "echo ${nextRelease.version}"
+        "successCmd": "echo '\n\n\n ${branch.name} Release completed ${nextRelease.version}'"
       }],
       "@semantic-release/github"
     ]
