@@ -65,5 +65,14 @@
       "publishCmd": "pnpm --filter './packages/**' publish --no-git-checks --tag ${branch.channel}",
       "successCmd": "echo '\n\n\n ${branch.name} Release completed ${nextRelease.version}'"
     }]
-  ]
+  ],
+  "release": {
+    "branches": [
+      "main",
+      "next",
+      "next-major",
+      { "name": "beta", "prerelease": true },
+      { "name": "alpha", "prerelease": true }
+    ]
+  },
 }
