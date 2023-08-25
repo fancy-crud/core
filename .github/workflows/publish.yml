@@ -67,4 +67,4 @@ jobs:
       - name: Publishing
         if: steps.changesets.outputs.hasChangesets == 'false'
         # You can do something when a publish should happen.
-        run: pnpm -w packing steps.changesets.outputs.version && pnpm build && pnpm pack
+        run: pnpm -w packing ${{ steps.changesets.outputs.version }} && pnpm build && pnpm pack
