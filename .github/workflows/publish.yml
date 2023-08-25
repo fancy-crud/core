@@ -57,10 +57,14 @@ jobs:
         uses: changesets/action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: create and publish versions
-        uses: changesets/action@v1
-        # with:
-          # version: pnpm changeset pre enter ${{ github.ref_name }} && pnpm -w packing steps.changesets.outputs.version && pnpm build && pnpm pack
-          # publish: pnpm ci:publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: create and publish versions
+      #   uses: changesets/action@v1
+      #   # with:
+      #     # version: pnpm changeset pre enter ${{ github.ref_name }} && pnpm -w packing steps.changesets.outputs.version && pnpm build && pnpm pack
+      #     # publish: pnpm ci:publish
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publishing
+        if: steps.changesets.outputs.hasChangesets == 'true'
+        # You can do something when a publish should happen.
+        run: pnpm -w packing steps.changesets.outputs.version && pnpm build && pnpm pack
