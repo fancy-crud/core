@@ -215,25 +215,25 @@ echo ""
 
 # if tag and branch commit hashes are different, than print info about that
 #echo $HEAD_HASH vs $TAG_HASH
-if [[ "$@" == "" ]]; then
-    if [[ "$TAG_HASH" == "$HEAD_HASH" ]]; then
-      echo "Tag $TAG and HEAD are aligned. We will stay on the TAG version."
-      echo ""
-      NO_ARGS_VALUE='--stay'
-    else
-      PATTERN="(^[0-9]+.[0-9]+(.[0-9]+)*(-(alpha|beta|rc))*$)|(alpha|beta|rc)"
+# if [[ "$@" == "" ]]; then
+if [[ "$TAG_HASH" == "$HEAD_HASH" ]]; then
+  echo "Tag $TAG and HEAD are aligned. We will stay on the TAG version."
+  echo ""
+  NO_ARGS_VALUE='--stay'
+else
+  PATTERN="(^[0-9]+.[0-9]+(.[0-9]+)*(-(alpha|beta|rc))*$)|(alpha|beta|rc)"
 
-      if [[ "$BRANCH" =~ $PATTERN ]]; then
-        echo "Detected version branch '$BRANCH'. We will auto-increment the last version PART."
-        echo ""
-        NO_ARGS_VALUE='--default'
-      else
-        echo "Detected branch name '$BRANCH' than does not match version pattern. We will increase MINOR."
-        echo ""
-        NO_ARGS_VALUE='--minor'
-      fi
-    fi
+  if [[ "$BRANCH" =~ $PATTERN ]]; then
+    echo "Detected version branch '$BRANCH'. We will auto-increment the last version PART."
+    echo ""
+    NO_ARGS_VALUE='--default'
+  else
+    echo "Detected branch name '$BRANCH' than does not match version pattern. We will increase MINOR."
+    echo ""
+    NO_ARGS_VALUE='--minor'
+  fi
 fi
+# fi
 
 #
 # {MAJOR}.{MINOR}[.{PATCH}[.{REVISION}][-(.*)]
