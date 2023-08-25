@@ -7,5 +7,7 @@
     "@fancy-crud/oruga-wrapper": "2.1.0-alpha.30",
     "@fancy-crud/vue": "2.1.0-alpha.30"
   },
-  "changesets": []
+  "changesets": [
+    "tasty-bees-bow"
+  ]
 }
