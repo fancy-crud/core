@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.27.0",
+    "@changesets/cli": "^2.26.2",
     "@mdi/font": "^7.2.96",
     "@oruga-ui/oruga-next": "^0.6.0",
     "@rollup/plugin-typescript": "^11.1.2",
@@ -61,19 +62,28 @@
     "@semantic-release/changelog",
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
-    ["@semantic-release/exec", {
-      "prepareCmd": "node scripts/build.js && pnpm run -w packing ${nextRelease.version} && pnpm --filter './packages/**' build && pnpm --filter './packages/**' pack",
-      "publishCmd": "pnpm --filter './packages/**' publish --no-git-checks --tag ${branch.channel}",
-      "successCmd": "echo '\n\n\n ${branch.name} Release completed ${nextRelease.version}'"
-    }]
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "node scripts/build.js && pnpm run -w packing ${nextRelease.version} && pnpm --filter './packages/**' build && pnpm --filter './packages/**' pack",
+        "publishCmd": "pnpm --filter './packages/**' publish --no-git-checks --tag ${branch.channel}",
+        "successCmd": "echo '\n\n\n ${branch.name} Release completed ${nextRelease.version}'"
+      }
+    ]
   ],
   "release": {
     "branches": [
       "main",
       "next",
       "next-major",
-      { "name": "beta", "prerelease": true },
-      { "name": "alpha", "prerelease": true }
+      {
+        "name": "beta",
+        "prerelease": true
+      },
+      {
+        "name": "alpha",
+        "prerelease": true
+      }
     ]
   }
 }
