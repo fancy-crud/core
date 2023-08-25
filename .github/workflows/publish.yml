@@ -33,26 +33,31 @@ jobs:
   #     # - run: yarn test
 
   publish:
+    timeout-minutes: 15
     runs-on: ubuntu-latest
-    # needs: [quality]
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+      - name: checkout code repository
+        uses: actions/checkout@v3
         with:
-          node-version: ${{ matrix.node-version }}
-      - uses: pnpm/action-setup@v2
+          fetch-depth: 0
+      - name: setup node.js
+        uses: actions/setup-node@v3
         with:
-          version: 8
-          run_install: |
-            - recursive: true
-              args: [--frozen-lockfile, --strict-peer-dependencies]
-      - name: Semantic Release
-        run: |
-          npm i -g semantic-release@^19.0.5           \
-          "@semantic-release/changelog"               \
-          "@semantic-release/exec"
-          pnpm -w exec semantic-release
+          node-version: 14
+      - name: install pnpm
+        run: npm i pnpm@latest -g
+      - name: Setup npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+      - name: setup pnpm config
+        run: pnpm config set store-dir $PNPM_CACHE_FOLDER
+      - name: install dependencies
+        run: pnpm install
+      - name: create and publish versions
+        uses: changesets/action@v1
+        with:
+          version: pnpm ci:version
+          commit: "chore: update versions"
+          title: "chore: update versions"
+          publish: pnpm ci:publish
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
