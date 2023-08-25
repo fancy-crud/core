@@ -6,7 +6,7 @@
     "dev": "vite --port 9090 --host 0.0.0.0",
     "build": "vite build",
     "build-tsc": "tsc && tsc-alias --verbose -p ./tsconfig.json",
-    "ci:publish": "pnpm publish -r",
+    "ci:publish": "pnpm publish -r --no-git-checks",
     "packing": "node scripts/build.js",
     "typecheck": "vue-tsc --noEmit",
     "lint": "eslint .",
