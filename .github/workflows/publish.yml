@@ -53,16 +53,14 @@ jobs:
       - name: install dependencies
         run: pnpm install
       - name: install changesets
-        id: chansets
+        id: changesets
         uses: changesets/action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: set dist-channel
-        run: pnpm changeset pre enter ${{ github.ref_name }}
       - name: create and publish versions
         uses: changesets/action@v1
         with:
-          version: pnpm -w packing steps.changesets.outputs.version
+          version: pnpm changeset pre enter ${{ github.ref_name }} && pnpm -w packing steps.changesets.outputs.version
           commit: "chore: update versions"
           title: "chore: update versions"
           publish: pnpm ci:publish

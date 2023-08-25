@@ -58,33 +58,5 @@
     "vue": "^3.3.4",
     "vue-tsc": "^1.0.24",
     "zod": "^3.21.4"
-  },
-  "plugins": [
-    "@semantic-release/changelog",
-    "@semantic-release/commit-analyzer",
-    "@semantic-release/release-notes-generator",
-    [
-      "@semantic-release/exec",
-      {
-        "prepareCmd": "node scripts/build.js && pnpm run -w packing ${nextRelease.version} && pnpm --filter './packages/**' build && pnpm --filter './packages/**' pack",
-        "publishCmd": "pnpm --filter './packages/**' publish --no-git-checks --tag ${branch.channel}",
-        "successCmd": "echo '\n\n\n ${branch.name} Release completed ${nextRelease.version}'"
-      }
-    ]
-  ],
-  "release": {
-    "branches": [
-      "main",
-      "next",
-      "next-major",
-      {
-        "name": "beta",
-        "prerelease": true
-      },
-      {
-        "name": "alpha",
-        "prerelease": true
-      }
-    ]
   }
 }
