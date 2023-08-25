@@ -43,7 +43,7 @@ jobs:
       - name: setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16.x
       - name: install pnpm
         run: npm i pnpm@latest -g
       - name: Setup npmrc
@@ -52,6 +52,10 @@ jobs:
         run: pnpm config set store-dir $PNPM_CACHE_FOLDER
       - name: install dependencies
         run: pnpm install
+      - name: install changesets
+        uses: changesets/action@v1
+      - name: set dist-channel
+        run: pnpm changeset pre enter next
       - name: create and publish versions
         uses: changesets/action@v1
         with:
