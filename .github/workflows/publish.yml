@@ -54,8 +54,10 @@ jobs:
         run: pnpm install
       - name: install changesets
         uses: changesets/action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: set dist-channel
-        run: pnpm changeset pre enter next
+        run: pnpm changeset pre enter ${{ github.ref_name }}
       - name: create and publish versions
         uses: changesets/action@v1
         with:
