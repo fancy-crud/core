@@ -75,12 +75,12 @@ jobs:
       #     # publish: pnpm ci:publish
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Publishing
-        if: steps.changesets.outputs.hasChangesets == 'false'
-        # You can do something when a publish should happen.
-        run: |
-          pnpm changeset pre enter ${{ github.ref_name }}
-          pnpm changeset version
-          pnpm --filter "./packages/**" build
-          pnpm changeset version
-          pnpm changeset publish
+      # - name: Publishing
+      #   if: steps.changesets.outputs.hasChangesets == 'false'
+      #   # You can do something when a publish should happen.
+      #   run: |
+      #     pnpm changeset pre enter ${{ github.ref_name }}
+      #     pnpm changeset version
+      #     pnpm --filter "./packages/**" build
+      #     pnpm changeset version
+      #     pnpm changeset publish
