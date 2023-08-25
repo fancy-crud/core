@@ -1,7 +1,6 @@
 {
   "packageManager": "pnpm@8.6.2",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "vite --port 9090 --host 0.0.0.0",
     "build": "vite build",
@@ -62,7 +61,7 @@
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     ["@semantic-release/exec", {
-      "prepareCmd": "pnpm run -w packing ${nextRelease.version} && pnpm --filter './packages/**' build && pnpm --filter './packages/**' pack",
+      "prepareCmd": "node scripts/build.js && pnpm run -w packing ${nextRelease.version} && pnpm --filter './packages/**' build && pnpm --filter './packages/**' pack",
       "publishCmd": "pnpm --filter './packages/**' publish --no-git-checks --tag ${branch.channel}",
       "successCmd": "echo '\n\n\n ${branch.name} Release completed ${nextRelease.version}'"
     }]
