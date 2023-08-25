@@ -1,6 +1,5 @@
 // @ts-check
 import fs from 'node:fs'
-import semanticRelease from 'semantic-release'
 // import { execa } from 'execa'
 // import path from 'node:path'
 // import { build } from 'vite'
@@ -14,7 +13,7 @@ const packages = [
   'core', 'vue', 'oruga-wrapper',
 ]
 
-function replace_version(filePath, err, data, version) {
+function replace_version({ filePath, err, data, version, packageName }) {
   if (err) {
     console.error('Error reading the JSON file:', err)
     return
@@ -31,7 +30,7 @@ function replace_version(filePath, err, data, version) {
         console.error('Error writing the updated JSON:', writeErr)
         return
       }
-      console.log('Version updated to', version)
+      console.log(`@fancy-crud/${packageName} version updated to`, version)
     })
   }
   catch (parseError) {
@@ -40,66 +39,20 @@ function replace_version(filePath, err, data, version) {
 }
 
 async function runBuild() {
-  const newVersion = process.argv[2]
+  const version = process.argv[2]
 
   packages.forEach((packageName) => {
     const filePath = `./packages/${packageName}/package.json`
     fs.readFile(filePath, 'utf8', (err, data) => {
-      replace_version(filePath, err, data, newVersion)
+      replace_version({
+        filePath,
+        err,
+        data,
+        version,
+        packageName,
+      })
     })
   })
 }
 
-async function release() {
-  // const stdoutBuffer = new WritableStream()
-  // const stderrBuffer = new WritableStream()
-
-  try {
-    const result = await semanticRelease({
-      // Core options
-      branches: [
-        '+([0-9])?(.{+([0-9]),x}).x',
-        'main',
-        'next',
-        'next-major',
-        { name: 'beta', prerelease: true },
-        { name: 'alpha', prerelease: true },
-      ],
-      // repositoryUrl: 'https://github.com/fancy-crud/core.git',
-      dryRun: true,
-      ci: false,
-      plugins: [
-        '@semantic-release/commit-analyzer',
-        // '@semantic-release/release-notes-generator',
-      ],
-    }, {
-      cwd: 'packages/core',
-    })
-
-    if (result) {
-      const { lastRelease, commits, nextRelease, releases } = result
-
-      console.log(
-      `Published ${nextRelease.type} release version ${nextRelease.version} containing ${commits.length} commits.`,
-      )
-
-      if (lastRelease.version)
-        console.log(`The last release was "${lastRelease.version}".`)
-
-      for (const release of releases)
-        console.log(`The release was published with plugin "${release.pluginName}".`)
-    }
-    else {
-      console.log('No release published.')
-    }
-
-    // Get stdout and stderr content
-    // const logs = stdoutBuffer.getContentsAsString('utf8')
-    // const errors = stderrBuffer.getContentsAsString('utf8')
-  }
-  catch (err) {
-    console.error('The automated release failed with %O', err)
-  }
-}
-
-await release()
+await runBuild()

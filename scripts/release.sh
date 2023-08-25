@@ -210,7 +210,7 @@ fi
 # print current revision number based on number of commits
 echo Current Revision: $REVISION
 echo Current Branch: $BRANCH
-echo Current Tag: $TAG_HASH
+echo Current Tag: $TAG
 echo ""
 
 # if tag and branch commit hashes are different, than print info about that
@@ -221,7 +221,7 @@ if [[ "$@" == "" ]]; then
       echo ""
       NO_ARGS_VALUE='--stay'
     else
-      PATTERN="^[0-9]+.[0-9]+(.[0-9]+)*(-(alpha|beta|rc))*$"
+      PATTERN="(^[0-9]+.[0-9]+(.[0-9]+)*(-(alpha|beta|rc))*$)|(alpha|beta|rc)"
 
       if [[ "$BRANCH" =~ $PATTERN ]]; then
         echo "Detected version branch '$BRANCH'. We will auto-increment the last version PART."
@@ -330,6 +330,8 @@ fi
 # instruct user how to apply new TAG
 echo -e "Proposed TAG: \033[32m$(compose)\033[0m"
 echo ''
+
+pnpm -w release $(compose)
 
 # is proposed tag in conflict with any other TAG
 PROPOSED_HASH=$(tag_hash $(compose))
