@@ -1,8 +1,14 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.3.1/schema.json",
   "changelog": "@changesets/cli/changelog",
-  "commit": false,
-  "fixed": [],
+  "commit": true,
+  "fixed": [
+    [
+      "@fancy-crud/core",
+      "@fancy-crud/vue",
+      "@fancy-crud/oruga-wrapper"
+    ]
+  ],
   "linked": [],
   "access": "restricted",
   "baseBranch": "main",
