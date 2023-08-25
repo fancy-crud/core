@@ -1,6 +1,6 @@
 {
   "name": "@fancy-crud/vue",
-  "version": "2.1.0-alpha.30",
+  "version": "2.1.0-alpha.31",
   "private": false,
   "author": {
     "name": "Christopher A. Flores",
@@ -60,8 +60,14 @@
       "main",
       "next",
       "next-major",
-      { "name": "beta", "prerelease": true },
-      { "name": "alpha", "prerelease": true }
+      {
+        "name": "beta",
+        "prerelease": true
+      },
+      {
+        "name": "alpha",
+        "prerelease": true
+      }
     ]
   },
   "publishConfig": {
