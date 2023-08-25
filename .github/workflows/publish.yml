@@ -53,6 +53,7 @@ jobs:
       - name: install dependencies
         run: pnpm install
       - name: install changesets
+        id: chansets
         uses: changesets/action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -61,7 +62,7 @@ jobs:
       - name: create and publish versions
         uses: changesets/action@v1
         with:
-          version: pnpm ci:version
+          version: pnpm -w packing steps.changesets.outputs.version
           commit: "chore: update versions"
           title: "chore: update versions"
           publish: pnpm ci:publish
