@@ -1,4 +1,4 @@
-name: QA and Publish
+name: Node.js CI
 
 on:
   push:
@@ -70,3 +70,21 @@ jobs:
         run: pnpm -r publish --no-git-checks --tag ${{ github.ref_name }}
         # Apply versioning to specific dist channel
         # run: echo "\n\n\n\n Publishing "
+      - name: Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Printing
+        run: |
+          echo ${{ steps.github_release.outputs.toTag }}
+          echo ${{ github.ref }}
+
+      - name: Create Github Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
+        with:
+          body: ${{ steps.github_release.outputs.changelog }}
+          tag_name: ${{ steps.github_release.outputs.toTag }}
+
