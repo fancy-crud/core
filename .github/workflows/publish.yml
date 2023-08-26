@@ -70,20 +70,3 @@ jobs:
         run: pnpm -r publish --no-git-checks --tag ${{ github.ref_name }}
         # Apply versioning to specific dist channel
         # run: echo "\n\n\n\n Publishing "
-      - name: Build Changelog
-        id: github_release
-        uses: mikepenz/release-changelog-builder-action@v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Printing
-        run: |
-          echo ${{ steps.github_release.outputs.toTag }}
-          echo ${{ github.ref }}
-
-  release:
-    name: Release GitHub Actions
-    runs-on: ubuntu-latest
-    needs: publish
-    steps:
-      - uses: technote-space/release-github-actions@v6
