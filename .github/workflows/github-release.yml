@@ -1,0 +1,27 @@
+name: Github Release Tag
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Printing
+        run: |
+          echo ${{ steps.github_release.outputs.toTag }}
+          echo ${{ github.ref }}
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
