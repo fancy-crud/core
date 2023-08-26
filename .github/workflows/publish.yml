@@ -70,4 +70,14 @@ jobs:
         run: pnpm -r publish --no-git-checks --tag ${{ github.ref_name }}
         # Apply versioning to specific dist channel
         # run: echo "\n\n\n\n Publishing "
+      - name: Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Github Release
+        uses: mikepenz/action-gh-release@v0.2.0-a03 #softprops/action-gh-release
+        with:
+          body: ${{steps.github_release.outputs.changelog}}
 
