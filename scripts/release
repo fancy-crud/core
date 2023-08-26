@@ -226,6 +226,7 @@ proposed_hash=tag_hash(proposed_tag)
 if do_apply:
     print("Applying git repository version up... no push, only local tag assignment!\n")
     subprocess.run(["git", "tag", proposed_tag])
+    subprocess.run(["git", "push", proposed_tag])
 
     # confirm that tag applied
     log_output = subprocess.check_output(
