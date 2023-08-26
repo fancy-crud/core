@@ -68,5 +68,6 @@ jobs:
       
       - name: Publish
         run: pnpm -r publish --no-git-checks --tag ${{ github.ref_name }}
+        # Apply versioning to specific dist channel
         # run: echo "\n\n\n\n Publishing "
 
