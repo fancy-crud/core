@@ -80,7 +80,8 @@ jobs:
         run: echo ${{ steps.github_release.outputs.toTag }}
 
       - name: Create Github Release
+        if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v1
         with:
-          body: ${{steps.github_release.outputs.changelog}}
+          body: ${{ steps.github_release.outputs.changelog }}
 
