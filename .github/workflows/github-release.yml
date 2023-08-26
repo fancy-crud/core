@@ -1,6 +1,9 @@
 name: Github Release Tag
 
-on: create
+# on: create
+on:
+  push:
+    branches: [main, alpha, beta, next]
 
 jobs:
   build:
@@ -9,16 +12,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Build Changelog
-        id: github_release
-        uses: mikepenz/release-changelog-builder-action@v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Build Changelog
+      #   id: github_release
+      #   uses: mikepenz/release-changelog-builder-action@v3
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Printing
-        run: |
-          echo ${{ steps.github_release.outputs.toTag }}
-          echo ${{ github.ref }}
+      # - name: Printing
+      #   run: |
+      #     echo ${{ steps.github_release.outputs.toTag }}
+      #     echo ${{ github.ref }}
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
+      # - name: Release
+      #   uses: softprops/action-gh-release@v1
+      - name: Testing
+        run: echo running
