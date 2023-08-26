@@ -41,6 +41,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
       - name: setup node.js
         uses: actions/setup-node@v3
         with:
@@ -59,7 +64,7 @@ jobs:
         run: pnpm install
 
       - name: Compute version
-        run: ./scripts/release.sh --apply
+        run: ./scripts/release --apply
       
       - name: Publish
         # run: pnpm -r publish --no-git-checks
