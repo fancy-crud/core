@@ -67,6 +67,6 @@ jobs:
         run: ./scripts/release --apply
       
       - name: Publish
-        # run: pnpm -r publish --no-git-checks
-        run: echo "\n\n\n\n Publishing "
+        run: pnpm -r publish --no-git-checks
+        # run: echo "\n\n\n\n Publishing "
 
