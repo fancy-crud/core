@@ -76,8 +76,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Printing
+        run: echo ${{ steps.github_release.outputs.toTag }}
+
       - name: Create Github Release
-        uses: mikepenz/action-gh-release@v0.2.0-a03 #softprops/action-gh-release
+        uses: softprops/action-gh-release
         with:
           body: ${{steps.github_release.outputs.changelog}}
 
