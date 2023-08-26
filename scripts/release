@@ -56,7 +56,10 @@ def head_hash():
 
 # extract tag commit hash code, tag name provided by argument
 def tag_hash(tag):
-    tag_hash = subprocess.check_output(["git", "log", "-1", "--format=format:%H", tag], stderr=subprocess.DEVNULL).decode().strip()
+    try:
+      tag_hash = subprocess.check_output(["git", "log", "-1", "--format=format:%H", tag], stderr=subprocess.DEVNULL).decode().strip()
+    except:
+      return None
     return tag_hash
 
 # get latest tag in specified branch
@@ -173,7 +176,6 @@ if len(sys.argv) == 1 or (len(sys.argv) == 2 and '--apply' in sys.argv):
 
 # parse input parameters
 for i in sys.argv[1:]:
-    print(i)
     if i in ["-a", "--alpha"]:
         parts[4] = "alpha"
     elif i in ["-b", "--beta"]:
@@ -218,8 +220,6 @@ with open(version_file, "w") as f:
 do_apply = "--apply" in sys.argv
 
 proposed_hash=tag_hash(compose(parts))
-print("************************************************")
-print(proposed_hash)
 
 if do_apply:
     print("Applying git repository version up... no push, only local tag assignment!\n")
