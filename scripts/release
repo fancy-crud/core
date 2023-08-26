@@ -227,13 +227,16 @@ if do_apply:
     ).decode().strip()
     log_output = "\n".join([f"  {line}" for line in log_output.split("\n")])
     print(log_output, "\n")
+else:
+  print("To apply changes manually execute the command(s):")
+  print("\033[90m")
+  print(f"  git tag {compose(parts)}")
+  print("\033[0m")
 
-print("To apply changes manually execute the command(s):")
-print("\033[90m")
-print(f"  git tag {compose(parts)}")
-print("\033[0m")
-
-if tag_hash_val and do_apply:
+proposed_hash=tag_hash(compose(parts))
+print("************************************************")
+print(proposed_hash)
+if proposed_hash and do_apply:
     print("\033[31mERROR:\033[0m ")
     print("\033[31mERROR:\033[0m Found conflict with existing tag \033[32m", compose(parts), f"\033[0m / {tag_hash_val}")
     print("\033[31mERROR:\033[0m Only manual resolving is possible now.")
@@ -244,7 +247,8 @@ if tag_hash_val and do_apply:
 
 # compose version override file
 if tag == INIT_VERSION:
-    tag = "0.0"
+    tag = "0.0.0-alpha.0"
+
 version_file = "version.properties"
 
 with open(version_file, "w") as f:
