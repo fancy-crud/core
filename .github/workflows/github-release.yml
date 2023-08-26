@@ -1,9 +1,6 @@
 name: Github Release Tag
 
-on:
-  push:
-    tags:
-      - "v*"
+on: create
 
 jobs:
   build:
