@@ -77,7 +77,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Printing
-        run: echo ${{ steps.github_release.outputs.toTag }}
+        run: |
+          echo ${{ steps.github_release.outputs.toTag }}
+          echo ${{ github.ref }}
 
       - name: Create Github Release
         if: startsWith(github.ref, 'refs/tags/')
