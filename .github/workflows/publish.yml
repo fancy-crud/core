@@ -84,5 +84,6 @@ jobs:
   release:
     name: Release GitHub Actions
     runs-on: ubuntu-latest
+    needs: publish
     steps:
       - uses: technote-space/release-github-actions@v6
