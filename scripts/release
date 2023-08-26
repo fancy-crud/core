@@ -200,7 +200,9 @@ for i in sys.argv[1:]:
         pass
 
 # print proposed version
-print(f"Proposed TAG: {compose(parts)}\n")
+proposed_tag = compose(parts)
+subprocess.run(["pnpm", "-w", "release", proposed_tag])
+
 
 # compose version override file
 if tag == INIT_VERSION:
@@ -209,7 +211,7 @@ version_file = "version.properties"
 
 with open(version_file, "w") as f:
     f.write(f"# {datetime.now()}\n")
-    f.write(f"snapshot.version={compose(parts)}\n")
+    f.write(f"snapshot.version={proposed_tag}\n")
     f.write(f"snapshot.lasttag={tag}\n")
     f.write(f"snapshot.revision={revision}\n")
     f.write(f"snapshot.hightag={top_tag}\n")
@@ -219,11 +221,11 @@ with open(version_file, "w") as f:
 # apply the changes if needed
 do_apply = "--apply" in sys.argv
 
-proposed_hash=tag_hash(compose(parts))
+proposed_hash=tag_hash(proposed_tag)
 
 if do_apply:
     print("Applying git repository version up... no push, only local tag assignment!\n")
-    subprocess.run(["git", "tag", compose(parts)])
+    subprocess.run(["git", "tag", proposed_tag])
 
     # confirm that tag applied
     log_output = subprocess.check_output(
@@ -234,12 +236,12 @@ if do_apply:
 else:
   print("To apply changes manually execute the command(s):")
   print("\033[90m")
-  print(f"  git tag {compose(parts)}")
+  print(f"  git tag {proposed_tag}")
   print("\033[0m")
 
 if proposed_hash and do_apply:
     print("\033[31mERROR:\033[0m ")
-    print("\033[31mERROR:\033[0m Found conflict with existing tag \033[32m", compose(parts), f"\033[0m / {tag_hash_val}")
+    print("\033[31mERROR:\033[0m Found conflict with existing tag \033[32m", proposed_tag, f"\033[0m / {tag_hash_val}")
     print("\033[31mERROR:\033[0m Only manual resolving is possible now.")
     print("\033[31mERROR:\033[0m ")
     print("\033[31mERROR:\033[0m To Resolve try to add --revision or --patch modifier.")
@@ -254,7 +256,7 @@ version_file = "version.properties"
 
 with open(version_file, "w") as f:
     f.write(f"# {datetime.now()}\n")
-    f.write(f"snapshot.version={compose(parts)}\n")
+    f.write(f"snapshot.version={proposed_tag}\n")
     f.write(f"snapshot.lasttag={tag}\n")
     f.write(f"snapshot.revision={revision}\n")
     f.write(f"snapshot.hightag={top_tag}\n")
