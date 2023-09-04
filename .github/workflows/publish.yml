@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Release
 
 on:
   push:
@@ -67,7 +67,7 @@ jobs:
         run: poetry install
 
       - name: Run matic-release
-        run: poetry run python main.py
+        run: poetry run python scripts/main.py
 
       - name: Publish tag
         run: git push --tags
