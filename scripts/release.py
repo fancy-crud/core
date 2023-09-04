@@ -16,9 +16,9 @@ compute_tag = ComputeTag(git, commit_analyzer)
 
 compute_tag.execute(version)
 
-# publish = PublishTag(git)
+publish = PublishTag(git)
 
-# publish.execute(version)
+publish.execute(version)
 
 print(version.future_tag.value)
 
