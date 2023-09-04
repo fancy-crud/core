@@ -1,0 +1,83 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  # quality:
+
+  #   runs-on: ${{ matrix.os }}
+
+  #   strategy:
+  #     matrix:
+  #       # node-version: [10.x, 12.x, 14.x, 15.x, 16.x, 17.x]
+  #       node-version: [16.x]
+  #       # os: [ubuntu-latest, windows-latest]
+  #       os: [ubuntu-latest]
+  #       # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #     - uses: pnpm/action-setup@v2
+  #       with:
+  #         version: 8
+  #         run_install: |
+  #           - recursive: true
+  #             args: [--frozen-lockfile, --strict-peer-dependencies]
+  #           - args: [--global, gulp, prettier, typescript]
+  #     # - run: yarn test
+
+  publish:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: setup node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - name: install pnpm
+        run: npm i pnpm@latest -g
+
+      - name: Setup npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+
+      - name: setup pnpm config
+        run: pnpm config set store-dir $PNPM_CACHE_FOLDER
+
+      - name: install dependencies
+        run: pnpm install
+
+      - name: Compute version
+        run: ./scripts/release --apply
+      
+      - name: Publish
+        run: pnpm -r publish --no-git-checks --tag ${{ github.ref_name }}
+        # Apply versioning to specific dist channel
+        # run: echo "\n\n\n\n Publishing "
+      - name: Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Release
+        uses: mikepenz/action-gh-release@v0.2.0-a03 #softprops/action-gh-release
+        with:
+          body: ${{steps.github_release.outputs.changelog }}
+          tag_name: ${{ steps.github_release.outputs.toTag }}
