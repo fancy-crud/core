@@ -14,6 +14,12 @@ export class Url {
     else
       result = [this.url, String(this.lookupValue || '')].join('/')
 
+    if (result.endsWith('//'))
+      result = result.substring(0, result.length - 1)
+
+    if (!result.endsWith('/'))
+      result = `${result}/`
+
     this._value = result
   }
 

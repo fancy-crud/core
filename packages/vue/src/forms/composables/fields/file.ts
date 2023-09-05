@@ -1,6 +1,6 @@
 import { IFormStore, IRuleOptionsStore } from '@fancy-crud/core'
-import type { NormalizedFileField } from '@packages/vue'
-import type { DefaultProps } from '../../typing'
+import { useRules } from '@packages/vue/forms'
+import type { DefaultProps, NormalizedFileField } from '@packages/vue/forms'
 import { useHintText, useModelValue } from './utils'
 
 export function useFileField(props: DefaultProps & { field: NormalizedFileField }) {

@@ -1,6 +1,6 @@
 import { IFormStore, IRuleOptionsStore } from '@fancy-crud/core'
-import type { NormalizedRadioField } from '@packages/vue'
-import type { DefaultProps } from '../../typing'
+import { useRules } from '@packages/vue/forms/composables'
+import type { DefaultProps, NormalizedRadioField } from '@packages/vue/forms'
 import { useHintText, useModelValue, useOptions } from './utils'
 
 export function useRadioField(props: DefaultProps & { field: NormalizedRadioField }) {

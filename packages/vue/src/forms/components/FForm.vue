@@ -32,6 +32,7 @@
 <script lang="ts" setup>
 import type { NormalizedSettings, NormalizedTitles, ObjectWithNormalizedButtons, ObjectWithNormalizedFields } from '@fancy-crud/core'
 import { Bus, GenerateFormDataCommand, IFormStore, IResponseInterceptorStore, IRuleOptionsStore, SaveRecordCommand } from '@fancy-crud/core'
+import { useRules } from '@packages/vue/forms'
 
 interface StandardResponseStructure { data: any; status: number }
 interface StandardErrorResponseStructure { response: StandardResponseStructure }

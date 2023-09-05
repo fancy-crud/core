@@ -1,5 +1,6 @@
 import { IFormStore, IRuleOptionsStore } from '@fancy-crud/core'
-import type { DefaultProps, NormalizedColorField } from '@packages/vue'
+import { useRules } from '@packages/vue/forms/composables'
+import type { DefaultProps, NormalizedColorField } from '@packages/vue/forms'
 import { useHintText, useModelValue } from './utils'
 
 export function useColorField(props: DefaultProps & { field: NormalizedColorField }) {

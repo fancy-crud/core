@@ -1,5 +1,6 @@
 import { IFormStore, IRuleOptionsStore } from '@fancy-crud/core'
-import type { DefaultProps, NormalizedCheckboxField } from '@packages/vue'
+import type { DefaultProps, NormalizedCheckboxField } from '@packages/vue/forms'
+import { useRules } from '@packages/vue/forms'
 import { useHintText, useModelValue, useOptions } from './utils'
 
 export function useCheckboxField(props: DefaultProps & { field: NormalizedCheckboxField }) {

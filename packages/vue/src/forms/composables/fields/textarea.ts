@@ -1,4 +1,5 @@
 import { IFormStore, IRuleOptionsStore } from '@fancy-crud/core'
+import { useRules } from '@packages/vue/forms'
 import type { NormalizedTextareaField } from '@packages/vue/forms'
 import type { DefaultProps } from '../../typing'
 import { useHintText, useModelValue } from './utils'

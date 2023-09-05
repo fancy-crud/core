@@ -1,6 +1,8 @@
 import type { BaseCommand } from '@packages/core/common/bus/axioma'
 import type { NormalizedField, ObjectWithNormalizedFields } from '@packages/core/forms/axioma'
 
+import { meta } from '@packages/core/common/bus/capabilities'
+
 type MinimumNormalizedField =
   Pick<NormalizedField, 'type' | 'modelValue' | 'errors' | 'modelKey'> & { optionValue?: string; multiple?: boolean }
 

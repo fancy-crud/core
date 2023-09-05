@@ -19,7 +19,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build"
+    "build": "vite build",
+    "test": "vitest"
   },
   "peerDependencies": {
     "lodash.isequal": "^4.5.0"

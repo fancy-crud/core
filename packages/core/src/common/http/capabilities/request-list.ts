@@ -24,7 +24,6 @@ class RequestListHandler {
     if (options?.onInit)
       options.onInit()
 
-    console.log(this.http)
     this.http.request.get(url, params)
       .then(response => onSuccess(response, options))
       .catch(e => onFailed(e, options))

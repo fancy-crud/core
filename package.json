@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --port 9090 --host 0.0.0.0",
+    "demo": "pnpm dlx nx dev @fancy-crud/demo",
     "build": "vite build",
     "build-tsc": "tsc && tsc-alias --verbose -p ./tsconfig.json",
     "ci:publish": "pnpm publish --filter './packages/**' --no-git-checks",

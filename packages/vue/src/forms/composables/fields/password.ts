@@ -1,6 +1,6 @@
 import { IFormStore, IRuleOptionsStore } from '@fancy-crud/core'
-import type { NormalizedPasswordField } from '@packages/vue'
-import type { DefaultProps } from '../../typing'
+import { useRules } from '@packages/vue/forms/composables'
+import type { DefaultProps, NormalizedPasswordField } from '@packages/vue/forms'
 import { useHintText, useModelValue } from './utils'
 
 export function usePasswordField(props: DefaultProps & { field: NormalizedPasswordField }) {

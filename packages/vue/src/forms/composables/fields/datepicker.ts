@@ -1,5 +1,6 @@
 import { IFormStore, IRuleOptionsStore } from '@fancy-crud/core'
-import type { NormalizedDatepickerField } from '@packages/vue'
+import { useRules } from '@packages/vue/forms/composables'
+import type { NormalizedDatepickerField } from '@packages/vue/forms'
 import type { DefaultProps } from '../../typing'
 import { useHintText, useModelValue } from './utils'
 

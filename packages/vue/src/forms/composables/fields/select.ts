@@ -1,5 +1,6 @@
 import { IFormStore, IRuleOptionsStore } from '@fancy-crud/core'
-import type { NormalizedSelectField } from '@packages/vue'
+import { useRules } from '@packages/vue/forms'
+import type { NormalizedSelectField } from '@packages/vue/forms'
 import { useHintText, useModelValue, useOptions } from './utils'
 
 export function useSelectField(props: { formId: symbol; field: NormalizedSelectField }) {

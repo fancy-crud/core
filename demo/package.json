@@ -7,7 +7,7 @@
     "url": "https://github.com/cafadev"
   },
   "scripts": {
-    "dev": "vite dev"
+    "dev": "vite --port 9090 --host 0.0.0.0"
   },
   "repository": {
     "type": "git",
