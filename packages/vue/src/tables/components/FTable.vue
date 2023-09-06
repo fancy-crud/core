@@ -148,6 +148,8 @@ function openEditModal(row: Row) {
       onClickAux: closeModal,
     }),
   )
+
+  openModal()
 }
 
 function onDelete(row: Row | null, skipDeleteConfirmation?: boolean) {
