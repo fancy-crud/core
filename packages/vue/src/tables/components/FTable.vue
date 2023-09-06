@@ -50,7 +50,8 @@
 
 <script lang="ts" setup generic="DataType = unknown">
 import type { BaseTableForm, DeleteRecordOptions, NormalizedTablePagination, NormalizedTableSettings, ObjectWithNormalizedColumns, Row } from '@fancy-crud/core'
-import { Bus, DeleteRecordCommand, GetStoreTableCommand, IFormStore, PrepareFormToCreateCommand, PrepareFormToUpdateCommand, RequestRetrieveCommand, SetFieldsValuesCommand } from '@fancy-crud/core'
+import { Bus, DeleteRecordCommand, GetStoreTableCommand, IFormStore, PrepareFormToCreateCommand, PrepareFormToUpdateCommand } from '@fancy-crud/core'
+import { useRequestList } from '@packages/vue/http'
 
 const props = defineProps<{
   id: symbol
@@ -111,9 +112,7 @@ function triggerFetchItems() {
 }
 
 function exportData() {
-  // const xlsx = useXLSX(props.table)
-  // xlsx.triggerRequest()
-
+  // TODO: implement excel export
   emit('export')
 }
 
@@ -144,26 +143,11 @@ function openCreateModal() {
 }
 
 function openEditModal(row: Row) {
-  let lookupValue = ''
-
-  if (Object.prototype.hasOwnProperty.call(row, tableForm.settings.lookupField))
-    lookupValue = String(row[tableForm.settings.lookupField])
-
-  const command = new RequestRetrieveCommand(props.settings.url, lookupValue, {
-    onSuccess(response: { data: Record<string, unknown> }) {
-      bus.execute(
-        new PrepareFormToUpdateCommand(formId, row, props.settings, {
-          onClickAux: closeModal,
-        }),
-      )
-
-      bus.execute(
-        new SetFieldsValuesCommand(tableForm.fields, tableForm.settings, response.data || {}),
-      )
-    },
-  })
-
-  bus.execute(command)
+  bus.execute(
+    new PrepareFormToUpdateCommand(formId, row, props.settings, {
+      onClickAux: closeModal,
+    }),
+  )
 }
 
 function onDelete(row: Row | null, skipDeleteConfirmation?: boolean) {

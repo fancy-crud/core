@@ -5,7 +5,7 @@
     {{ form.fields.file.modelValue }}
   </div>
 
-  <button @click="openEditModal({ id: 8 })">
+  <button @click.prevent="openEditModal({ id: 8 })">
     Load id
   </button>
 
@@ -48,25 +48,10 @@ const form = useForm({
 })
 
 function openEditModal(row: Record<string, any>) {
-  let lookupValue = ''
-
-  if (Object.prototype.hasOwnProperty.call(row, form.settings.lookupField))
-    lookupValue = String(row[form.settings.lookupField])
-
-  const command = new RequestRetrieveCommand(form.settings.url, lookupValue, {
-    onSuccess(response: { data: Record<string, unknown> }) {
-      bus.execute(
-        new PrepareFormToUpdateCommand(form.id, row, form.settings, {
-          onClickAux: () => {},
-        }),
-      )
-
-      bus.execute(
-        new SetFieldsValuesCommand(form.fields, form.settings, response.data || {}),
-      )
-    },
-  })
-
-  bus.execute(command)
+  bus.execute(
+    new PrepareFormToUpdateCommand(form.id, row, form.settings, {
+      onClickAux: () => {},
+    }),
+  )
 }
 </script>
