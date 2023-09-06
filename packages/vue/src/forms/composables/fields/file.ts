@@ -26,8 +26,20 @@ export function useFileField(props: DefaultProps & { field: NormalizedFileField 
 
   onMounted(() => validate(props.field))
 
+  function onFileChanged($event: Event) {
+    const target = $event.target as HTMLInputElement
+    if (target && target.files) {
+      const files = Array.from(target.files)
+      if (props.field.multiple)
+        vmodel.value['onUpdate:modelValue'](files)
+      else
+        vmodel.value['onUpdate:modelValue'](files[0])
+    }
+  }
+
   return {
     validate,
+    onFileChanged,
     modelValue,
     vmodel,
     hasFieldErrors,

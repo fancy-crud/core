@@ -94,6 +94,15 @@ class GenerateFormDataHandler {
     this.jsonForm[field.modelKey || fieldKey] = value
   }
 
+  private syncData() {
+    if (!this.formData)
+      return
+
+    Object.entries(this.jsonForm).forEach(([key, value]) => {
+      this.formData?.append(key, value ?? '')
+    })
+  }
+
   /**
    * Generates the form data in the appropriate format.
    *
@@ -119,6 +128,8 @@ class GenerateFormDataHandler {
 
       field.errors = []
     })
+
+    this.syncData()
 
     return { jsonForm: this.jsonForm as JsonForm<typeof fields>, formData: this.formData }
   }

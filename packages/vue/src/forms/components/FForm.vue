@@ -98,7 +98,7 @@ function onMainClick() {
   )
 
   const { url, mode, lookupValue } = props.settings
-  const data = jsonForm || formData
+  const data = formData || jsonForm
 
   bus.execute(
     new SaveRecordCommand(url, data, mode, lookupValue, {

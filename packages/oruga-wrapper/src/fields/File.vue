@@ -16,14 +16,14 @@ export default defineComponent({
     },
   },
   setup(props, { attrs, slots }) {
-    const { vmodel, hasFieldErrors, hintText, fileNames } = useFileField(props)
+    const { onFileChanged, hasFieldErrors, hintText, fileNames } = useFileField(props)
 
     const variant = computed(() => hasFieldErrors.value ? 'danger' : '')
 
     return () =>
       h(OField, { ...props.field.wrapper, label: props.field.label, variant: variant.value, message: hintText.value }, {
         default: () => [
-          h(OUpload, { ...attrs, ...props.field, ...vmodel }, {
+          h(OUpload, { ...attrs, ...props.field, onChange: onFileChanged }, {
             default: () =>
               h(OButton, { tag: 'a', variant: 'primary', labelClass: 'flex items-center' }, {
                 default: () => [
