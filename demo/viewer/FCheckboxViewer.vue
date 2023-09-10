@@ -8,10 +8,14 @@
   <button @click="resetFields" class="px-8 py-4 bg-primary-500 text-white font-bold">
     Reset
   </button>
+
+  <div class="pt-10">
+    <f-checkbox :form-id="form.id" :field="form.fields.checkbox" />
+  </div>
 </template>
 
 <script lang='ts' setup>
-import { useForm } from '@fancy-crud/vue'
+import { FCheckbox, useForm } from '@fancy-crud/vue'
 import { Bus, ResetFieldsByFormIdCommand } from '@fancy-crud/core'
 
 const options = [
