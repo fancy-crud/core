@@ -1,4 +1,13 @@
-export * as FForm from './FForm.vue'
-export * as FFormBody from './FFormBody.vue'
-export * as FFormFooter from './FFormFooter.vue'
-export * as FFormHeader from './FFormHeader.vue'
+import FForm from './FForm.vue'
+import FFormBody from './FFormBody.vue'
+import FFormFooter from './FFormFooter.vue'
+import FFormHeader from './FFormHeader.vue'
+import FFileList from './FFileList.vue'
+
+export {
+  FForm,
+  FFormBody,
+  FFormFooter,
+  FFormHeader,
+  FFileList,
+}

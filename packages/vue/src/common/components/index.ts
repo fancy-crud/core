@@ -1,2 +1,7 @@
-export * as FButton from './FButton.vue'
-export * as FModal from './FModal.vue'
+import FButton from './FButton.vue'
+import FModal from './FModal.vue'
+
+export {
+  FButton,
+  FModal,
+}

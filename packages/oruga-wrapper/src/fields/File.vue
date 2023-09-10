@@ -1,44 +1,58 @@
-<script lang="ts">
-import { OButton, OField, OIcon, OUpload } from '@oruga-ui/oruga-next'
+<template>
+  <o-field
+    v-bind="{ ...props.field.wrapper }"
+    :label="props.field.label"
+    :variant="variant"
+    :message="hintText"
+    grouped
+  >
+    <o-upload
+      @update:modelValue="vmodel['onUpdate:modelValue']"
+      :modelValue="vmodel.modelValue"
+      :multiple="props.field.multiple"
+    >
+      <f-button v-bind="{ ...defaults.mainButton, ...props.field }" icon="upload" tag="a" class="text-primary-500 border-primary-500 hover:bg-primary-500 ease-in duration-300">
+        <span>{{ props.field.placeholder }}</span>
+      </f-button>
+    </o-upload>
+
+    <f-file-list @remove="removeFile" :items="filesList" />
+  </o-field>
+</template>
+
+<script lang="ts" setup>
+import { OField, OUpload } from '@oruga-ui/oruga-next'
 import type { NormalizedFileField } from '@fancy-crud/vue'
-import type { PropType } from 'vue'
-import { useFileField } from '@fancy-crud/vue'
+import { FButton, FFileList, useFileField } from '@fancy-crud/vue'
+import { getDefaults } from '@fancy-crud/core'
 
-export default defineComponent({
-  props: {
-    formId: {
-      type: Symbol,
-      required: true,
-    },
-    field: {
-      type: Object as PropType<NormalizedFileField>,
-      required: true,
-    },
-  },
-  setup(props, { attrs, slots }) {
-    const { onFileChanged, hasFieldErrors, hintText, fileNames } = useFileField(props)
+const props = defineProps<{
+  formId: symbol
+  field: NormalizedFileField
+}>()
 
-    const variant = computed(() => hasFieldErrors.value ? 'danger' : '')
+const defaults = getDefaults()
 
-    return () =>
-      h(OField, { ...props.field.wrapper, label: props.field.label, variant: variant.value, message: hintText.value }, {
-        default: () => [
-          h(OUpload, { ...attrs, ...props.field, onChange: onFileChanged }, {
-            default: () =>
-              h(OButton, { tag: 'a', variant: 'primary', labelClass: 'flex items-center' }, {
-                default: () => [
-                  h(OIcon, { icon: 'upload' }),
-                  h('span', { class: 'pl-4' }, { default: () => props.field.label }),
-                ],
-              }),
-            ...slots,
-          }),
-          h('span', { class: 'file-name pl-4 flex items-center' }, {
-            default: () => fileNames.value.join(', '),
-          }),
-        ],
-      })
-  },
-})
+const { vmodel, hasFieldErrors, hintText, filesList } = useFileField(props)
+const variant = computed(() => (hasFieldErrors.value ? 'danger' : ''))
+
+function removeFile(file: File) {
+  if (!vmodel.value.modelValue)
+    return
+
+  if (Array.isArray(vmodel.value.modelValue)) {
+    vmodel.value['onUpdate:modelValue'](vmodel.value.modelValue.filter(f => f.name !== file.name))
+    return
+  }
+
+  vmodel.value['onUpdate:modelValue'](null)
+}
 </script>
 
+<style lang="sass" scoped>
+.placeholder
+  @apply pl-3
+
+:deep(.o-field)
+  flex-flow: row wrap
+</style>

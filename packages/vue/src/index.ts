@@ -16,7 +16,10 @@ export const FancyCrud: Plugin = function installFancyCrud(app: App, options: Pa
   })
 
   componentsList.forEach(([key, module]) => {
-    app.component(key, module.default)
+    if (module.default)
+      app.component(key, module.default)
+    else
+      app.component(key, module)
   })
 
   // if (options.statusCodesHandlers)

@@ -24,6 +24,16 @@ export function useFileField(props: DefaultProps & { field: NormalizedFileField 
     return []
   })
 
+  const filesList = computed(() => {
+    if (Array.isArray(modelValue.value))
+      return modelValue.value
+
+    if (modelValue.value)
+      return [modelValue.value]
+
+    return []
+  })
+
   onMounted(() => validate(props.field))
 
   function onFileChanged($event: Event) {
@@ -45,5 +55,6 @@ export function useFileField(props: DefaultProps & { field: NormalizedFileField 
     hasFieldErrors,
     hintText,
     fileNames,
+    filesList,
   }
 }

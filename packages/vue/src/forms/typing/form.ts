@@ -79,10 +79,6 @@ export interface RawSelectField extends BaseRawField {
   filterParams?: Record<string, unknown>
 }
 
-export interface File {
-  name: string
-}
-
 export interface RawFileField extends BaseRawField {
   type: FieldType.file
   fileUrl?: string

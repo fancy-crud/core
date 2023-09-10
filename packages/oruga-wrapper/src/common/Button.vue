@@ -26,8 +26,12 @@ export default defineComponent({
       return {}
     })
 
+    const borderlessClass = computed(() => {
+      return props.borderless ? 'border-transparent' : ''
+    })
+
     return () =>
-      h(OButton, { ...attrs, pack, iconRight: props.icon, inverted: props.borderless }, {
+      h(OButton, { ...attrs, pack, iconRight: props.icon, inverted: props.borderless, invertedClass: borderlessClass.value }, {
         ...defaultSlot.value,
         ...slots,
       })

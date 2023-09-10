@@ -33,7 +33,6 @@ import FRadioViewer from './viewer/FRadioViewer.vue'
 import FColor from './viewer/FColorViewer.vue'
 import FTextareaViewer from './viewer/FTextareaViewer.vue'
 import FFileViewer from './viewer/FFileViewer.vue'
-import FImageViewer from './viewer/FImageViewer.vue'
 import FTableViewer from './viewer/FTableViewer.vue'
 
 const inputs = {
@@ -46,7 +45,6 @@ const inputs = {
   color: FColor,
   textarea: FTextareaViewer,
   file: FFileViewer,
-  image: FImageViewer,
   genreForm: FFormViewer,
   table: FTableViewer,
 }

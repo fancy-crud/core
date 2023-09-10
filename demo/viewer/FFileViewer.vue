@@ -1,22 +1,24 @@
 <template>
   <f-form v-bind="form" />
 
-  <div class="p-10 mt-10 border">
+  <div class="p-10 mt-10 border mb-4">
     {{ form.fields.file.modelValue }}
   </div>
 
-  <button @click.prevent="openEditModal({ id: 8 })">
+  <f-button @click.prevent="openEditModal({ id: 8 })" class="bg-primary-500 text-white" borderless>
     Load id
-  </button>
+  </f-button>
 
-  <button @click="form.fields.description.modelValue = null">
-    Nullish
-  </button>
+  <span class="pl-4">
+    <f-button @click="form.fields.description.modelValue = null" class="bg-primary-500 text-white" borderless>
+      Nullish
+    </f-button>
+  </span>
 </template>
 
 <script lang='ts' setup>
 import { useForm } from '@fancy-crud/vue'
-import { Bus, PrepareFormToUpdateCommand, RequestRetrieveCommand, SetFieldsValuesCommand } from '@fancy-crud/core'
+import { Bus, PrepareFormToUpdateCommand } from '@fancy-crud/core'
 
 const bus = new Bus()
 
@@ -26,6 +28,8 @@ const form = useForm({
     file: {
       label: 'File',
       type: 'file',
+      placeholder: 'Subir archivo',
+      multiple: true,
     },
     gender: {
       type: 'text',
