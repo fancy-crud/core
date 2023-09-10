@@ -69,7 +69,7 @@ jobs:
         run: poetry install
 
       - name: Run matic-release
-        run: poetry run python scripts/release.py
+        run: poetry run python scripts/release.py --ci
 
       - name: Publish tag
         run: git push --tags
