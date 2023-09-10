@@ -1,6 +1,6 @@
 <script lang="ts">
 import { OButton } from '@oruga-ui/oruga-next'
-import LoadingIcon from './LoadingIcon.vue'
+import OwLoadingIcon from './OwLoadingIcon.vue'
 
 export default defineComponent({
   props: {
@@ -20,7 +20,7 @@ export default defineComponent({
     const defaultSlot = computed(() => {
       if (props.isLoading) {
         return {
-          default: () => h(LoadingIcon, { isLoading: props.isLoading }),
+          default: () => h(OwLoadingIcon, { isLoading: props.isLoading }),
         }
       }
       return {}

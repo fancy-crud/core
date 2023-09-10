@@ -1,10 +1,10 @@
 import { ReturnObject } from '@fancy-crud/vue'
-import TableBody from './TableBody.vue'
+import OwTableBody from './OwTableBody.vue'
 
 export const table = ReturnObject({
-  body: TableBody,
+  body: OwTableBody,
 })
 
 export {
-  TableBody,
+  OwTableBody,
 }
