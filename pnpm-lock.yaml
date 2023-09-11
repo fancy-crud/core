@@ -134,6 +134,9 @@ importers:
       '@fancy-crud/oruga-wrapper':
         specifier: workspace:^
         version: link:../packages/oruga-wrapper
+      '@fancy-crud/rules-processors':
+        specifier: workspace:^
+        version: link:../packages/rules-processors
       '@fancy-crud/vue':
         specifier: workspace:^
         version: link:../packages/vue
@@ -190,6 +193,12 @@ importers:
       tailwindcss:
         specifier: ^3.3.3
         version: 3.3.3(ts-node@10.9.1)
+
+  packages/rules-processors:
+    devDependencies:
+      zod:
+        specifier: ^3.21.4
+        version: 3.21.4
 
   packages/vue:
     dependencies:

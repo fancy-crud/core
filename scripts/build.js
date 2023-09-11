@@ -1,16 +1,8 @@
 // @ts-check
 import fs from 'node:fs'
-// import { execa } from 'execa'
-// import path from 'node:path'
-// import { build } from 'vite'
-
-// import typescript from '@rollup/plugin-typescript'
-// import corePackage from '../packages/core/package.json' assert { type: 'json' }
-// import vuePackage from '../packages/vue/package.json' assert { type: 'json' }
-// import orugaWrapperPackage from '../packages/oruga-wrapper/package.json' assert { type: 'json' }
 
 const packages = [
-  'core', 'vue', 'oruga-wrapper',
+  'core', 'vue', 'oruga-wrapper', 'rules-processors',
 ]
 
 function replace_version({ filePath, err, data, version, packageName }) {
@@ -30,6 +22,7 @@ function replace_version({ filePath, err, data, version, packageName }) {
         console.error('Error writing the updated JSON:', writeErr)
         return
       }
+      // eslint-disable-next-line no-console
       console.log(`@fancy-crud/${packageName} version updated to`, version)
     })
   }

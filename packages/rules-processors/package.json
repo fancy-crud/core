@@ -1,6 +1,7 @@
 {
-  "name": "@fancy-crud/core",
+  "name": "@fancy-crud/rules-processors",
   "version": "0.0.0",
+  "description": "",
   "private": false,
   "author": {
     "name": "Christopher A. Flores",
@@ -9,42 +10,32 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/fancy-crud/core",
-    "directory": "packages/core"
+    "directory": "packages/rules-processors"
   },
   "license": "MIT",
-  "main": "dist/core.mjs",
-  "module": "dist/core.mjs",
+  "main": "dist/fancy-crud-rules-processors.mjs",
+  "module": "dist/fancy-crud-rules-processors.mjs",
   "types": "dist/src/index.d.ts",
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/fancy-crud-rules-processors.mjs",
+      "require": "./dist/fancy-crud-rules-processors.umd.js"
+    }
+  },
   "scripts": {
-    "build": "vite build",
-    "test": "vitest"
+    "build": "vite build"
   },
   "peerDependencies": {
-    "lodash.isequal": "^4.5.0"
+    "zod": "^3.21.4"
   },
-  "dependencies": {
-    "lodash.isequal": "^4.5.0"
+  "devDependencies": {
+    "zod": "^3.21.4"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "release": {
-    "branches": [
-      "main",
-      "next",
-      "next-major",
-      {
-        "name": "beta",
-        "prerelease": true
-      },
-      {
-        "name": "alpha",
-        "prerelease": true
-      }
-    ]
   },
   "keywords": [
     "form",
@@ -55,6 +46,7 @@
     "create",
     "read",
     "update",
-    "delete"
+    "delete",
+    "vue"
   ]
 }

@@ -12,6 +12,7 @@ export default defineConfig(() => {
         '@fancy-crud/vue': `${path.resolve(__dirname, '../packages/vue/src')}/`,
         '@fancy-crud/core': `${path.resolve(__dirname, '../packages/core/src')}/`,
         '@fancy-crud/oruga-wrapper': `${path.resolve(__dirname, '../packages/oruga-wrapper/src')}/`,
+        '@fancy-crud/rules-processors': `${path.resolve(__dirname, '../packages/rules-processors/src')}/`,
 
         '@packages/core/': `${path.resolve(__dirname, '../packages/core/src')}/`,
         '@packages/vue/': `${path.resolve(__dirname, '../packages/vue/src')}/`,

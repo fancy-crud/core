@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
-import type { ZodAny } from 'zod'
 import axios from 'axios'
 import { FancyCrud } from '@fancy-crud/vue'
+import { processResult } from '@fancy-crud/rules-processors'
 import Oruga from '@oruga-ui/oruga-next'
 
 import { defaultCustomization, fields, table, utils } from '@fancy-crud/oruga-wrapper'
@@ -23,15 +23,7 @@ app.use(FancyCrud, {
   table,
   defaultClasses: defaultCustomization,
   ruleOptions: {
-    processResult: (raw: { value: unknown; rule: ZodAny }) => {
-      const { value, rule } = raw
-      const result = rule.safeParse(value)
-
-      if (result.success)
-        return result.success
-
-      return result.error.issues[0].message
-    },
+    processResult,
   },
 })
 
