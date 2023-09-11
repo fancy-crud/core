@@ -48,5 +48,5 @@ function onAuxClick() { emit('aux-click') }
 
 <style lang="sass">
 .form-footer
-  @apply py-8
+  @apply pt-8
 </style>
