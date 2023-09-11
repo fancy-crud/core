@@ -1,11 +1,11 @@
-import { NormalizeSettingsCommand } from '@packages/core/forms/capabilities'
-import { DEFAULT_LOOKUP_FIELD, FORM_MODE } from '@packages/core/forms/axioma'
+import '@packages/core/forms/integration/load-commands'
+import { DEFAULT_LOOKUP_FIELD, FORM_MODE, NormalizeSettingsCommand } from '@packages/core/forms/axioma'
 import { describe, expect, it } from 'vitest'
 
 describe('NormalizeSettings', () => {
   it.concurrent('should normalize settings with default values when no settings are provided', () => {
     const command = new NormalizeSettingsCommand()
-    const normalized = new command.meta.Handler().execute(command)
+    const normalized = command.meta.Handler().execute(command)
 
     expect(normalized.url).toBe('')
     expect(normalized.mode).toBe(FORM_MODE.create)
@@ -19,7 +19,7 @@ describe('NormalizeSettings', () => {
     }
 
     const command = new NormalizeSettingsCommand(settings)
-    const normalized = new command.meta.Handler().execute(command)
+    const normalized = command.meta.Handler().execute(command)
 
     expect(normalized.url).toBe(settings.url)
     expect(normalized.mode).toBe(settings.mode)
@@ -33,7 +33,7 @@ describe('NormalizeSettings', () => {
     }
 
     const command = new NormalizeSettingsCommand(settings)
-    const normalized = new command.meta.Handler().execute(command)
+    const normalized = command.meta.Handler().execute(command)
 
     expect(normalized.url).toBe(settings.url)
     expect(normalized.mode).toBe(FORM_MODE.create)

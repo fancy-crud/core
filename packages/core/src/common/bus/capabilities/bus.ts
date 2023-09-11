@@ -1,13 +1,13 @@
-import type { BusCommandMeta, BusCommandMetaReturnType, BusHandlerInstance, IBus, Providers } from '../axioma'
+import type { BusCommand, BusHandlerInstance, CommandReturn, IBus, Providers } from '../axioma'
 
 export class Bus implements IBus {
-  execute<U extends BusCommandMeta>(command: U, providers?: Providers<U['meta']['Handler']>): BusCommandMetaReturnType<U> {
-    let handler: BusHandlerInstance<any>
+  execute<U extends BusCommand>(command: U, providers?: Providers<U['meta']['Handler']>): CommandReturn<U> {
+    let handler: BusHandlerInstance
 
     if (providers && Array.isArray(providers))
-      handler = new command.meta.Handler(...(providers as any[]))
-    else
-      handler = new command.meta.Handler()
+      handler = command.meta.Handler(...(providers as any[]))
+
+    else handler = command.meta.Handler()
 
     return handler.execute(command)
   }

@@ -1,4 +1,5 @@
-import { RequestUpdateCommand } from '@packages/core/common/http/capabilities'
+import '@packages/core/common/http/integration'
+import { RequestUpdateCommand } from '@packages/core/common/http/axioma'
 import { describe, expect, it, vi } from 'vitest'
 
 describe('RequestUpdateHandler', () => {
@@ -22,7 +23,7 @@ describe('RequestUpdateHandler', () => {
     }
 
     const command = new RequestUpdateCommand(url, 'fakeId', form, options)
-    const handler = new command.meta.Handler(httpService)
+    const handler = command.meta.Handler(httpService)
 
     handler.execute(command)
     await new Promise(resolve => setTimeout(resolve))
@@ -50,7 +51,7 @@ describe('RequestUpdateHandler', () => {
       },
     }
     const command = new RequestUpdateCommand(url, 'fakeId', form, options)
-    const handler = new command.meta.Handler(httpService)
+    const handler = command.meta.Handler(httpService)
 
     handler.execute(command)
     await new Promise(resolve => setTimeout(resolve))

@@ -1,30 +1,7 @@
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import type { NormalizedField, ObjectWithNormalizedFields } from '@packages/core/forms/axioma'
+import type { ObjectWithNormalizedFields } from '@packages/core/forms/axioma'
+import type { GenerateFormDataCommand, GenerateFormDataOutput, IGenerateFormDataHandler, JsonForm, MinimumNormalizedField } from '../axioma'
 
-import { meta } from '@packages/core/common/bus/capabilities'
-
-type MinimumNormalizedField =
-  Pick<NormalizedField, 'type' | 'modelValue' | 'errors' | 'modelKey'> & { optionValue?: string; multiple?: boolean }
-
-type JsonForm<T extends ObjectWithNormalizedFields<MinimumNormalizedField>> = { [K in keyof T]: T[K]['modelValue'] }
-
-export interface GenerateFormDataOutput<T extends ObjectWithNormalizedFields<MinimumNormalizedField>> {
-  formData: FormData | null
-  jsonForm: JsonForm<T>
-}
-
-export class GenerateFormDataCommand<T extends ObjectWithNormalizedFields<MinimumNormalizedField> = ObjectWithNormalizedFields<MinimumNormalizedField>> implements BaseCommand {
-  public readonly meta = meta(GenerateFormDataHandler)
-
-  constructor(
-    public readonly fields: T,
-  ) {}
-}
-
-/**
- * Class responsible for generating form data in the appropriate format.
- */
-class GenerateFormDataHandler {
+export class GenerateFormDataHandler implements IGenerateFormDataHandler {
   private jsonForm: Record<string, any> = {}
   private formData: FormData | null = null
 

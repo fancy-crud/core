@@ -1,27 +1,8 @@
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import { inject, injectable, meta } from '@packages/core/common/bus/capabilities'
-import type { HttpRequestGet, RetrieveRequestOptions } from '../axioma'
-import { IHttp, Url } from '../axioma'
-import { onFailed, onFinally, onSuccess } from './common'
+import { inject } from '@packages/core/common/bus/capabilities'
+import type { HttpRequestGet, IRequestRetrieveHandler, RequestRetrieveCommand } from '../axioma'
+import { IHttp, onFailed, onFinally, onSuccess } from '../axioma'
 
-export class RequestRetrieveCommand implements BaseCommand {
-  public readonly meta = meta(RequestRetrieveHandler)
-  public readonly url: string
-
-  constructor(
-    url: string,
-    lookupValue: string,
-    public readonly options?: RetrieveRequestOptions,
-  ) {
-    this.url = new Url(url, lookupValue).value
-  }
-}
-
-export abstract class IRequestRetrieveHandler {
-  abstract execute(command: RequestRetrieveCommand): void
-}
-
-class RequestRetrieveHandler implements IRequestRetrieveHandler {
+export class RequestRetrieveHandler implements IRequestRetrieveHandler {
   constructor(private http: HttpRequestGet = inject(IHttp)) {}
 
   execute({ url, options }: RequestRetrieveCommand): void {
@@ -34,5 +15,3 @@ class RequestRetrieveHandler implements IRequestRetrieveHandler {
       .finally(() => onFinally(options))
   }
 }
-
-injectable(IRequestRetrieveHandler.name, RequestRetrieveHandler)

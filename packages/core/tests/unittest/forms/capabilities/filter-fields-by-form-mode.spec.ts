@@ -1,5 +1,5 @@
-import { UnknownFormMode } from '@packages/core/forms/axioma'
-import { FilterFieldsByFormModeCommand } from '@packages/core/forms/capabilities'
+import '@packages/core/forms/integration/load-commands'
+import { FilterFieldsByFormModeCommand, UnknownFormMode } from '@packages/core/forms/axioma'
 import { beforeEach, describe, expect, it } from 'vitest'
 
 describe('FilterFieldsByFormModeHandler', () => {
@@ -19,7 +19,7 @@ describe('FilterFieldsByFormModeHandler', () => {
     const formMode = 'create' // Assuming that FORM_MODE.create is defined somewhere
 
     const command = new FilterFieldsByFormModeCommand(fields, formMode)
-    const handler = new command.meta.Handler()
+    const handler = command.meta.Handler()
     const result = handler.execute(command)
 
     // The result should only contain field1 because it is not hidden, not createOnly, and not updateOnly.
@@ -34,7 +34,7 @@ describe('FilterFieldsByFormModeHandler', () => {
     const formMode = 'update' // Assuming that FORM_MODE.update is defined somewhere
 
     const command = new FilterFieldsByFormModeCommand(fields, formMode)
-    const handler = new command.meta.Handler()
+    const handler = command.meta.Handler()
     const result = handler.execute(command)
 
     expect(result).toEqual([

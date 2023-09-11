@@ -1,21 +1,11 @@
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import type { NormalizedField, ObjectWithNormalizedFields, RuleOptions } from '@packages/core/forms/axioma'
-import { inject, meta } from '@packages/core/common/bus/capabilities'
-import { IValidateFieldRulesHandler, ValidateFieldRulesCommand } from './validate-field-rules'
+import { inject } from '@packages/core/common/bus/capabilities'
+import type { IValidateFormHandler, ValidateFormCommand } from '../axioma'
+import { IValidateFieldRulesHandler, ValidateFieldRulesCommand } from '../axioma'
 
-type MinimumNormalizedField = Pick<NormalizedField, 'rules' | 'errors' | 'modelValue' | 'modelKey'>
-
-export class ValidateFormCommand implements BaseCommand {
-  public readonly meta = meta(ValidateFormHandler)
-
+export class ValidateFormHandler implements IValidateFormHandler {
   constructor(
-    public readonly fields: ObjectWithNormalizedFields<MinimumNormalizedField>,
-    public readonly options?: RuleOptions,
+    private validateFieldRules: IValidateFieldRulesHandler = inject(IValidateFieldRulesHandler),
   ) {}
-}
-
-class ValidateFormHandler {
-  constructor(private validateFieldRules: IValidateFieldRulesHandler = inject(IValidateFieldRulesHandler)) {}
 
   execute({ fields, options }: ValidateFormCommand): boolean {
     const isValid = Object.values(fields).every((field) => {

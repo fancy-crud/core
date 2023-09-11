@@ -33,7 +33,7 @@ export class CapabilityCommand implements BaseCommand {
   ) {}
 }
 
-class CapabilityHandler {
+export class CapabilityHandler {
   constructor(
     private logger: InjectableAbstract = inject(InjectableAbstract),
   ) {}
@@ -44,6 +44,6 @@ class CapabilityHandler {
 }
 
 export function execute(command: { meta: { Handler: any } }) {
-  const handler = new command.meta.Handler()
+  const handler = command.meta.Handler()
   return handler.execute(command)
 }

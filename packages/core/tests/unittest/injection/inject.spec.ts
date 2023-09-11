@@ -1,5 +1,8 @@
 import { describe, expect, it } from 'vitest'
-import { CapabilityCommand, execute } from './factory/injectable'
+import { handlers } from '@packages/core/index'
+import { CapabilityCommand, CapabilityHandler, execute } from './factory/injectable'
+
+handlers.set(CapabilityHandler.name, CapabilityHandler)
 
 describe('Injectable', () => {
   it('should inject services into class', () => {

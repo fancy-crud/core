@@ -1,5 +1,6 @@
-import { RequestListCommand } from '@packages/core/common/http/capabilities'
+import '@packages/core/common/http/integration'
 import { describe, expect, it, vi } from 'vitest'
+import { RequestListCommand } from '@packages/core/common/http/axioma'
 
 describe('RequestListHandler', () => {
   it.concurrent('should call onSuccess and onFinally when HTTP request is successful', async () => {
@@ -21,7 +22,7 @@ describe('RequestListHandler', () => {
     }
 
     const command = new RequestListCommand(url, {}, options)
-    const handler = new command.meta.Handler(httpService)
+    const handler = command.meta.Handler(httpService)
 
     handler.execute(command)
     await new Promise(resolve => setTimeout(resolve))
@@ -48,7 +49,7 @@ describe('RequestListHandler', () => {
       },
     }
     const command = new RequestListCommand(url, {}, options)
-    const handler = new command.meta.Handler(httpService)
+    const handler = command.meta.Handler(httpService)
 
     handler.execute(command)
     await new Promise(resolve => setTimeout(resolve))

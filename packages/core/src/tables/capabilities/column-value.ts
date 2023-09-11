@@ -1,18 +1,6 @@
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import { meta } from '@packages/core/common/bus/capabilities'
-import type { NormalizedColumn } from '../axioma'
+import type { GetColumnValueCommand, IGetColumnValueHandler } from '../axioma'
 
-export class GetColumnValueCommand implements BaseCommand {
-  public readonly meta = meta(GetColumnValueHandler)
-
-  constructor(
-    public readonly row: any,
-    public readonly column: NormalizedColumn,
-    public readonly rowIndex: number,
-  ) {}
-}
-
-class GetColumnValueHandler {
+export class GetColumnValueHandler implements IGetColumnValueHandler {
   execute({ row, column, rowIndex }: GetColumnValueCommand): unknown {
     let value: any
     if (typeof row === 'object')

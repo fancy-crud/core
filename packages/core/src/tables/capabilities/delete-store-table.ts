@@ -1,16 +1,7 @@
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import { meta } from '@packages/core/common/bus/capabilities'
+import type { DeleteStoreTableCommand, IDeleteStoreTableHandler } from '../axioma'
 import { TableStore } from '../axioma'
 
-export class DeleteStoreTableCommand implements BaseCommand {
-  public readonly meta = meta(DeleteStoreTableHandler)
-
-  constructor(
-    public readonly id: symbol,
-  ) {}
-}
-
-class DeleteStoreTableHandler {
+export class DeleteStoreTableHandler implements IDeleteStoreTableHandler {
   execute({ id }: DeleteStoreTableCommand): void {
     TableStore.map.delete(id)
   }

@@ -1,17 +1,8 @@
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import { inject, meta } from '@packages/core/common/bus/capabilities'
-import { ISwitchFormToCreateModeHandler, SwitchFormToCreateModeCommand } from '@packages/core/forms/capabilities'
+import { inject } from '@packages/core/common/bus/capabilities'
+import { ISwitchFormToCreateModeHandler, SwitchFormToCreateModeCommand } from '@packages/core/forms/axioma'
+import type { IPrepareFormToCreateHandler, PrepareFormToCreateCommand } from '../axioma'
 
-export class PrepareFormToCreateCommand implements BaseCommand {
-  public readonly meta = meta(PrepareFormToCreateHandler)
-
-  constructor(
-    public readonly formId: symbol,
-    public readonly options?: { onClickAux?: () => void },
-  ) {}
-}
-
-class PrepareFormToCreateHandler {
+export class PrepareFormToCreateHandler implements IPrepareFormToCreateHandler {
   constructor(
     private switchFormToCreateMode: ISwitchFormToCreateModeHandler = inject(ISwitchFormToCreateModeHandler),
   ) {}

@@ -1,10 +1,11 @@
-import { NormalizeTitlesCommand } from '@packages/core/forms/capabilities'
+import '@packages/core/forms/integration/load-commands'
+import { NormalizeTitlesCommand } from '@packages/core/forms/axioma'
 import { describe, expect, it } from 'vitest'
 
 describe('NormalizeTitles', () => {
   it.concurrent('should normalize titles with default values when no titles are provided', () => {
     const command = new NormalizeTitlesCommand()
-    const normalized = new command.meta.Handler().execute(command)
+    const normalized = command.meta.Handler().execute(command)
 
     expect(normalized.create).toBeTypeOf('string')
     expect(normalized.update).toBeTypeOf('string')
@@ -16,7 +17,7 @@ describe('NormalizeTitles', () => {
       update: 'Update Existing',
     }
     const command = new NormalizeTitlesCommand(titles)
-    const normalized = new command.meta.Handler().execute(command)
+    const normalized = command.meta.Handler().execute(command)
 
     expect(normalized.create).toBe(titles.create)
     expect(normalized.update).toBe(titles.update)
@@ -27,7 +28,7 @@ describe('NormalizeTitles', () => {
       update: 'Update Now',
     }
     const command = new NormalizeTitlesCommand(titles)
-    const normalized = new command.meta.Handler().execute(command)
+    const normalized = command.meta.Handler().execute(command)
 
     expect(normalized.create).toBeTypeOf('string')
     expect(normalized.update).toBe(titles.update)
@@ -40,7 +41,7 @@ describe('NormalizeTitles', () => {
     }
 
     const command = new NormalizeTitlesCommand(titles)
-    const normalized = new command.meta.Handler().execute(command)
+    const normalized = command.meta.Handler().execute(command)
 
     expect(normalized.create).toBe('')
     expect(normalized.update).toBe('')

@@ -1,17 +1,6 @@
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import { meta } from '@packages/core/common/bus/capabilities'
-import type { BaseFormField, ObjectWithNormalizedColumns, ObjectWithRawColumns } from '@packages/core/tables/axioma'
+import type { INormalizeColumnsHandler, NormalizeColumnsCommand, ObjectWithNormalizedColumns } from '@packages/core/tables/axioma'
 
-export class NormalizeColumnsCommand implements BaseCommand {
-  public readonly meta = meta(NormalizeColumnsHandler)
-
-  constructor(
-    public readonly fields: BaseFormField,
-    public readonly columns: ObjectWithRawColumns,
-  ) {}
-}
-
-class NormalizeColumnsHandler {
+export class NormalizeColumnsHandler implements INormalizeColumnsHandler {
   execute({ fields, columns }: NormalizeColumnsCommand): ObjectWithNormalizedColumns {
     const mappedColumns: ObjectWithNormalizedColumns = {}
 

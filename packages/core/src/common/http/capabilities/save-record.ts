@@ -1,22 +1,8 @@
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import type { CreateRequestOptions, UpdateRequestOptions } from '@packages/core/common/http/axioma'
-import { inject, meta } from '@packages/core/common/bus/capabilities'
-import { IRequestCreateHandler, RequestCreateCommand } from './request-create'
-import { IRequestUpdateHandler, RequestUpdateCommand } from './request-update'
+import { inject } from '@packages/core/common/bus/capabilities'
+import type { CreateRequestOptions, ISaveRecordHandler, SaveRecordCommand, UpdateRequestOptions } from '../axioma'
+import { IRequestCreateHandler, IRequestUpdateHandler, RequestCreateCommand, RequestUpdateCommand } from '../axioma'
 
-export class SaveRecordCommand implements BaseCommand {
-  public readonly meta = meta(SaveRecordHandler)
-
-  constructor(
-    public readonly url: string,
-    public readonly data: Record<string, any> | FormData,
-    public readonly mode: 'create' | 'update',
-    public readonly lookupValue?: string,
-    public readonly options?: CreateRequestOptions | UpdateRequestOptions,
-  ) {}
-}
-
-class SaveRecordHandler {
+export class SaveRecordHandler implements ISaveRecordHandler {
   private url!: string
   private data!: Record<string, any> | FormData
 

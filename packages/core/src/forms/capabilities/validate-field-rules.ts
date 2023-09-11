@@ -1,25 +1,9 @@
-import { injectable, meta } from '@packages/core/common/bus/capabilities'
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import type { NormalizedField, Rule, RuleOptions, RuleResult } from '@packages/core/forms/axioma'
+import type { RuleOptions, RuleResult } from '@packages/core/forms/axioma'
 import { UnprocessableValidationResult } from '@packages/core/forms/axioma'
+import type { IValidateFieldRulesHandler, NormalizedFieldToValidate, ValidateFieldRulesCommand } from '../axioma'
 
-type MinimumNormalizedField = Pick<NormalizedField, 'errors' | 'modelValue' | 'modelKey'> & { rules?: Rule }
-
-export class ValidateFieldRulesCommand implements BaseCommand {
-  public readonly meta = meta(ValidateFieldRulesHandler)
-
-  constructor(
-    public readonly field: MinimumNormalizedField,
-    public readonly options?: RuleOptions,
-  ) {}
-}
-
-export abstract class IValidateFieldRulesHandler {
-  abstract execute(command: ValidateFieldRulesCommand): RuleResult
-}
-
-class ValidateFieldRulesHandler implements IValidateFieldRulesHandler {
-  private setErrorsIfExist(field: MinimumNormalizedField, result: RuleResult, options?: RuleOptions) {
+export class ValidateFieldRulesHandler implements IValidateFieldRulesHandler {
+  private setErrorsIfExist(field: NormalizedFieldToValidate, result: RuleResult, options?: RuleOptions) {
     if (result === true || options?.preventErrorMessage) {
       field.errors = []
       return
@@ -56,5 +40,3 @@ class ValidateFieldRulesHandler implements IValidateFieldRulesHandler {
     return result
   }
 }
-
-injectable(IValidateFieldRulesHandler.name, ValidateFieldRulesHandler)

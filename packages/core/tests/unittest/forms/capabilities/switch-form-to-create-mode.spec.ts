@@ -1,6 +1,6 @@
-import type { FormState, NormalizedButtons, NormalizedSettings } from '@packages/core/forms/axioma'
-import { FORM_MODE, formStore } from '@packages/core/forms/axioma'
-import { SwitchFormToCreateModeCommand, type SwitchFormToCreateModeCommandInput } from '@packages/core/forms/capabilities'
+import '@packages/core/forms/integration/load-commands'
+import type { FormState, NormalizedButtons, NormalizedSettings, SwitchFormToCreateModeCommandInput } from '@packages/core/forms/axioma'
+import { FORM_MODE, SwitchFormToCreateModeCommand, formStore } from '@packages/core/forms/axioma'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 class MockResetFields {
@@ -41,7 +41,7 @@ describe('SwitchFormToCreateModeHandler', () => {
     const mockFormStore = new MockFormStore()
 
     const command = new SwitchFormToCreateModeCommand(formId)
-    const handler = new command.meta.Handler(mockResetFields, mockFormStore)
+    const handler = command.meta.Handler(mockResetFields, mockFormStore)
 
     handler.execute(command)
 
@@ -58,7 +58,7 @@ describe('SwitchFormToCreateModeHandler', () => {
     const mockResetFields = new MockResetFields(formId)
     const mockFormStore = new MockFormStore()
     const command = new SwitchFormToCreateModeCommand(form)
-    const handler = new command.meta.Handler(mockResetFields, mockFormStore)
+    const handler = command.meta.Handler(mockResetFields, mockFormStore)
 
     handler.execute(command)
 
@@ -77,7 +77,7 @@ describe('SwitchFormToCreateModeHandler', () => {
 
     const options = { onClickAux }
     const command = new SwitchFormToCreateModeCommand(formId, { ...options })
-    const handler = new command.meta.Handler(mockResetFields, mockFormStore)
+    const handler = command.meta.Handler(mockResetFields, mockFormStore)
 
     handler.execute(command)
 

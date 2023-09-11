@@ -1,8 +1,12 @@
-import type { FormState, NormalizedButtons, NormalizedSettings } from '@packages/core/forms/axioma'
-import { FORM_MODE, formStore } from '@packages/core/forms/axioma'
-import { SwitchFormToUpdateModeCommand, type SwitchFormToUpdateModeCommandInput } from '@packages/core/forms/capabilities'
+import '@packages/core/forms/integration/load-commands'
+import { handlers } from '@packages/core/common/bus/axioma'
+import type { FormState, NormalizedButtons, NormalizedSettings, SwitchFormToUpdateModeCommandInput } from '@packages/core/forms/axioma'
+import { FORM_MODE, ISwitchFormToUpdateModeHandler, SwitchFormToUpdateModeCommand, formStore } from '@packages/core/forms/axioma'
+import { SwitchFormToUpdateModeHandler } from '@packages/core/forms/capabilities'
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+
+handlers.set(ISwitchFormToUpdateModeHandler.name, SwitchFormToUpdateModeHandler)
 
 class MockResetFields {
   constructor(
@@ -42,7 +46,7 @@ describe('SwitchFormToUpdateModeHandler', () => {
     const mockFormStore = new MockFormStore()
 
     const command = new SwitchFormToUpdateModeCommand(formId)
-    const handler = new command.meta.Handler(mockResetFields, mockFormStore)
+    const handler = command.meta.Handler(mockResetFields, mockFormStore)
 
     handler.execute(command)
 
@@ -59,7 +63,7 @@ describe('SwitchFormToUpdateModeHandler', () => {
     const mockResetFields = new MockResetFields(formId)
     const mockFormStore = new MockFormStore()
     const command = new SwitchFormToUpdateModeCommand(form)
-    const handler = new command.meta.Handler(mockResetFields, mockFormStore)
+    const handler = command.meta.Handler(mockResetFields, mockFormStore)
 
     handler.execute(command)
 
@@ -79,7 +83,7 @@ describe('SwitchFormToUpdateModeHandler', () => {
 
     const options = { onClickAux }
     const command = new SwitchFormToUpdateModeCommand(formId, { ...options })
-    const handler = new command.meta.Handler(mockResetFields, mockFormStore)
+    const handler = command.meta.Handler(mockResetFields, mockFormStore)
 
     handler.execute(command)
 

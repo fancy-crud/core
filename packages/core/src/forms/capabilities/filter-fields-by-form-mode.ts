@@ -1,23 +1,8 @@
-import { meta } from '@packages/core/common/bus/capabilities'
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import type { FormMode, NormalizedField, ObjectWithNormalizedFields } from '@packages/core/forms/axioma'
-import { FORM_MODE, UnknownFormMode } from '@packages/core/forms/axioma'
+import type { NormalizedField, ObjectWithNormalizedFields } from '@packages/core/forms/axioma'
+import { FORM_MODE } from '@packages/core/forms/axioma'
+import type { FilterFieldsByFormModeCommand, FilterFieldsByFormModeCommandInput, IFilterFieldsByFormModeHandler } from '../axioma'
 
-export type FilterFieldsByFormModeCommandInput = Pick<NormalizedField, 'hidden' | 'createOnly' | 'updateOnly'>
-
-export class FilterFieldsByFormModeCommand<T extends FilterFieldsByFormModeCommandInput> implements BaseCommand {
-  public readonly meta = meta(FilterFieldsByFormModeHandler)
-
-  constructor(
-    public readonly fields: ObjectWithNormalizedFields<T>,
-    public readonly mode: FormMode,
-  ) {
-    if (mode !== FORM_MODE.create && mode !== FORM_MODE.update)
-      throw new UnknownFormMode()
-  }
-}
-
-class FilterFieldsByFormModeHandler {
+export class FilterFieldsByFormModeHandler implements IFilterFieldsByFormModeHandler {
   private filter<T extends FilterFieldsByFormModeCommandInput>(fields: ObjectWithNormalizedFields<T>, omit: 'createOnly' | 'updateOnly') {
     const filteredFields = Object.entries(fields).filter(([_, field]) => {
       if (field.hidden)

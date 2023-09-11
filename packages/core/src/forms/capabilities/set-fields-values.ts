@@ -1,28 +1,7 @@
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import { injectable, meta } from '@packages/core/common/bus/capabilities'
-import type { NormalizedField, NormalizedSettings, ObjectWithNormalizedFields } from '@packages/core/forms/axioma'
+import type { ISetFieldsValuesHandler, NormalizedFieldToAssignValues, SetFieldsValuesCommand } from '../axioma'
 
-type RecordValues = Record<string, unknown>
-type MinimumNormalizedField =
-  Pick<NormalizedField, 'type' | 'modelValue' | 'fileUrl' | 'recordValue'> |
-  Pick<NormalizedField, 'type' | 'modelValue' | 'fileUrl' | 'recordValue'> & { type: 'image' | 'file'; fileUrl: string | null }
-
-export class SetFieldsValuesCommand implements BaseCommand {
-  public readonly meta = meta(SetFieldsValuesHandler)
-
-  constructor(
-    public readonly fields: ObjectWithNormalizedFields<MinimumNormalizedField>,
-    public readonly settings: Pick<NormalizedSettings, 'lookupField' | 'lookupValue'>,
-    public readonly recordValues: RecordValues,
-  ) {}
-}
-
-export abstract class ISetFieldsValuesHandler {
-  abstract execute(command: SetFieldsValuesCommand): void
-}
-
-class SetFieldsValuesHandler implements ISetFieldsValuesHandler {
-  private setFieldValue(field: MinimumNormalizedField, value: unknown): void {
+export class SetFieldsValuesHandler implements ISetFieldsValuesHandler {
+  private setFieldValue(field: NormalizedFieldToAssignValues, value: unknown): void {
     if (field.type !== 'file' && field.type !== 'image')
       field.modelValue = value
 
@@ -42,4 +21,3 @@ class SetFieldsValuesHandler implements ISetFieldsValuesHandler {
   }
 }
 
-injectable(ISetFieldsValuesHandler.name, SetFieldsValuesHandler)

@@ -1,31 +1,22 @@
-import { Bus, inject, meta } from '@packages/core/common/bus/capabilities'
+import { Bus, inject } from '@packages/core/common/bus/capabilities'
 import { INotificationStore } from '@packages/core/common/notifications/axioma'
 import { IResponseInterceptorStore } from '@packages/core/common/response-interceptor/axioma'
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
+
+import type {
+  CreateFormCommand,
+  ICreateFormHandler,
+} from '@packages/core/forms/axioma'
 import {
-  NormalizeButtonsCommand, NormalizeFormFieldsCommand,
+  NormalizeButtonsCommand,
+  NormalizeFormFieldsCommand,
   NormalizeSettingsCommand,
+
   NormalizeTitlesCommand,
-} from '@packages/core/forms/capabilities'
-import type { Form, NormalizedButtons, NormalizedFields, ObjectWithRawFields, RawButton, RawSetting, RawTitle } from '../axioma'
+} from '@packages/core/forms/axioma'
+import type { Form, NormalizedButtons, NormalizedFields, ObjectWithRawFields, RawButton, RawSetting } from '../axioma'
 import { IFormStore, IRuleOptionsStore } from '../axioma'
 
-/**
- * A class that provides functionality to create a form from raw fields and settings.
- */
-export class CreateFormCommand<T extends ObjectWithRawFields, U extends RawSetting, V extends Record<'main' | 'aux', RawButton>> implements BaseCommand {
-  public readonly meta = meta(CreateFormHandler)
-
-  constructor(
-    public readonly id: string,
-    public readonly rawFields: T,
-    public readonly rawTitles?: RawTitle,
-    public readonly rawButtons?: V,
-    public readonly rawSettings?: U,
-  ) {}
-}
-
-class CreateFormHandler {
+export class CreateFormHandler implements ICreateFormHandler {
   constructor(
     private formStore: IFormStore = inject(IFormStore),
     private notificationStore: INotificationStore = inject(INotificationStore),

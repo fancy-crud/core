@@ -1,4 +1,5 @@
-import { NormalizeFormFieldsCommand } from '@packages/core/forms/capabilities'
+import '@packages/core/forms/integration/load-commands'
+import { NormalizeFormFieldsCommand } from '@packages/core/forms/axioma'
 import { describe, expect, it } from 'vitest'
 
 describe('NormalizeFormFields', () => {
@@ -6,7 +7,7 @@ describe('NormalizeFormFields', () => {
 
   it.concurrent('should normalize form fields with default values when no fields are provided', () => {
     const command = new NormalizeFormFieldsCommand({})
-    const normalized = new command.meta.Handler().execute(command)
+    const normalized = command.meta.Handler().execute(command)
 
     expect(normalized).toEqual({})
   })
@@ -26,7 +27,7 @@ describe('NormalizeFormFields', () => {
     }
 
     const command = new NormalizeFormFieldsCommand(fields)
-    const normalized = new command.meta.Handler().execute(command)
+    const normalized = command.meta.Handler().execute(command)
 
     expect(normalized.firstName).toEqual({
       ...fields.firstName,
@@ -72,7 +73,7 @@ describe('NormalizeFormFields', () => {
     }
 
     const command = new NormalizeFormFieldsCommand(fields)
-    const normalized = new command.meta.Handler().execute(command)
+    const normalized = command.meta.Handler().execute(command)
 
     expect(normalized.email).toEqual({
       ...fields.email,
@@ -102,7 +103,7 @@ describe('NormalizeFormFields', () => {
     }
 
     const command = new NormalizeFormFieldsCommand(fields)
-    const normalized = new command.meta.Handler().execute(command)
+    const normalized = command.meta.Handler().execute(command)
 
     expect(normalized.password).toEqual({
       ...fields.password,

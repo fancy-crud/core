@@ -1,19 +1,8 @@
-import type { DeleteRecordOptions, NormalizedTableSettings, Row } from '@packages/core/tables/axioma'
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import { IRequestDeleteHandler, RequestDeleteCommand } from '@packages/core/common/http/capabilities'
-import { inject, meta } from '@packages/core/common/bus/capabilities'
+import { IRequestDeleteHandler, RequestDeleteCommand } from '@packages/core/common/http/axioma'
+import { inject } from '@packages/core/common/bus/capabilities'
+import type { DeleteRecordCommand, IDeleteRecordHandler } from '../axioma'
 
-export class DeleteRecordCommand implements BaseCommand {
-  public readonly meta = meta(DeleteRecordHandler)
-
-  constructor(
-    public readonly row: Row | null,
-    public readonly tableSettings: NormalizedTableSettings,
-    public readonly options?: DeleteRecordOptions,
-  ) {}
-}
-
-class DeleteRecordHandler {
+export class DeleteRecordHandler implements IDeleteRecordHandler {
   constructor(
     private requestDelete: IRequestDeleteHandler = inject(IRequestDeleteHandler),
   ) {}

@@ -1,31 +1,9 @@
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import { inject, injectable, meta } from '@packages/core/common/bus/capabilities'
-import type { NormalizedSettings, ObjectWithNormalizedButtons, ObjectWithNormalizedFields } from '@packages/core/forms/axioma'
+import { inject } from '@packages/core/common/bus/capabilities'
 import { StoreStateDoesNotExist } from '@packages/core/common/store/axioma'
-import { FORM_MODE, IFormStore } from '../axioma'
-import { IResetFieldsHandler, ResetFieldsCommand } from './reset-fields'
+import { FORM_MODE, IFormStore, IResetFieldsHandler, ResetFieldsCommand } from '../axioma'
+import type { ISwitchFormToCreateModeHandler, SwitchFormToCreateModeCommand, SwitchFormToCreateModeCommandInput } from '../axioma'
 
-export type SwitchFormToCreateModeCommandInput = symbol | {
-  originalNormalizedFields: ObjectWithNormalizedFields
-  fields: ObjectWithNormalizedFields
-  buttons: ObjectWithNormalizedButtons
-  settings: NormalizedSettings
-}
-
-export class SwitchFormToCreateModeCommand implements BaseCommand {
-  public readonly meta = meta(SwitchFormToCreateModeHandler)
-
-  constructor(
-    public readonly formOrId: SwitchFormToCreateModeCommandInput,
-    public readonly options?: { onClickAux?: () => void },
-  ) {}
-}
-
-export abstract class ISwitchFormToCreateModeHandler {
-  abstract execute(command: SwitchFormToCreateModeCommand): void
-}
-
-class SwitchFormToCreateModeHandler implements ISwitchFormToCreateModeHandler {
+export class SwitchFormToCreateModeHandler implements ISwitchFormToCreateModeHandler {
   constructor(
     private resetFields: IResetFieldsHandler = inject(IResetFieldsHandler),
     private formStore: Pick<IFormStore, 'searchById'> = inject(IFormStore),
@@ -58,5 +36,3 @@ class SwitchFormToCreateModeHandler implements ISwitchFormToCreateModeHandler {
     form.settings.mode = FORM_MODE.create
   }
 }
-
-injectable(ISwitchFormToCreateModeHandler.name, SwitchFormToCreateModeHandler)

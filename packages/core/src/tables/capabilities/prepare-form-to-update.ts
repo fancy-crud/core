@@ -1,23 +1,10 @@
-import type { Row } from '@packages/core/tables/axioma'
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import { ISetFieldsValuesHandler, ISwitchFormToUpdateModeHandler, SetFieldsValuesCommand, SwitchFormToUpdateModeCommand } from '@packages/core/forms/capabilities'
-import { IRequestRetrieveHandler, RequestRetrieveCommand } from '@packages/core/common/http/capabilities'
-import { IFormStore } from '@packages/core/forms/axioma'
-import { inject, meta } from '@packages/core/common/bus/capabilities'
+import { IFormStore, ISetFieldsValuesHandler, ISwitchFormToUpdateModeHandler, SetFieldsValuesCommand, SwitchFormToUpdateModeCommand } from '@packages/core/forms/axioma'
+import { IRequestRetrieveHandler, RequestRetrieveCommand } from '@packages/core/common/http/axioma'
+import { inject } from '@packages/core/common/bus/capabilities'
 import { StoreStateDoesNotExist } from '@packages/core/common/store/axioma'
+import type { IPrepareFormToUpdateHandler, PrepareFormToUpdateCommand } from '../axioma'
 
-export class PrepareFormToUpdateCommand implements BaseCommand {
-  public readonly meta = meta(PrepareFormToUpdateHandler)
-
-  constructor(
-    public readonly formId: symbol,
-    public readonly row: Row,
-    public readonly tableSettings: { url: string; lookupField: string },
-    public readonly options?: { onClickAux?: () => void; onReady?: () => void },
-  ) {}
-}
-
-class PrepareFormToUpdateHandler {
+export class PrepareFormToUpdateHandler implements IPrepareFormToUpdateHandler {
   constructor(
     private switchFormToUpdateMode: ISwitchFormToUpdateModeHandler = inject(ISwitchFormToUpdateModeHandler),
     private setFieldsValues: ISetFieldsValuesHandler = inject(ISetFieldsValuesHandler),

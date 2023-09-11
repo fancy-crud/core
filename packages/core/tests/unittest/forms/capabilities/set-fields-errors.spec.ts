@@ -1,4 +1,5 @@
-import { SetFieldsErrorsCommand } from '@packages/core/forms/capabilities'
+import '@packages/core/forms/integration/load-commands'
+import { SetFieldsErrorsCommand } from '@packages/core/forms/axioma'
 import { describe, expect, it } from 'vitest'
 
 describe('SetFieldsErrors', () => {
@@ -19,7 +20,7 @@ describe('SetFieldsErrors', () => {
 
     const command = new SetFieldsErrorsCommand(normalizedFields, errors)
 
-    new command.meta.Handler().execute(command)
+    command.meta.Handler().execute(command)
 
     expect(normalizedFields.firstName.errors).toEqual(['First name is required.'])
     expect(normalizedFields.lastName.errors).toEqual(['Last name is required.'])
@@ -38,7 +39,7 @@ describe('SetFieldsErrors', () => {
     }
 
     const command = new SetFieldsErrorsCommand(normalizedFields, errors)
-    new command.meta.Handler().execute(command)
+    command.meta.Handler().execute(command)
 
     expect(normalizedFields.firstName.errors).toEqual(['First name is required.'])
     expect((normalizedFields as any).lastName?.errors).toBeUndefined()

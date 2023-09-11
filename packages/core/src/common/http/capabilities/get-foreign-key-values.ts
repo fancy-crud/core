@@ -1,19 +1,11 @@
 import isEqual from 'lodash.isequal'
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import { inject, meta } from '@packages/core/common/bus/capabilities'
+import { inject } from '@packages/core/common/bus/capabilities'
 import { IHttp } from '../axioma/typing'
 import type { HttpRequestGet, SameAPIEndpoint } from '../axioma/typing'
 import { PaginateResult } from '../axioma/value-objects/pagination'
+import type { GetForeignKeyValuesCommand, IGetForeignKeyValuesHandler } from '../axioma'
 
-export class GetForeignKeyValuesCommand implements BaseCommand {
-  public readonly meta = meta(GetForeignKeyValuesHandler)
-
-  constructor(
-    public readonly fields: Record<string, { type: string; options?: any[]; url?: string; filterParams?: Record<string, unknown> }>,
-  ) {}
-}
-
-class GetForeignKeyValuesHandler {
+export class GetForeignKeyValuesHandler implements IGetForeignKeyValuesHandler {
   constructor(private http: Pick<IHttp, 'pagination'> & HttpRequestGet = inject(IHttp)) {}
 
   private getSameAPIEndpoint(fields: Record<string, { url?: string; filterParams?: Record<string, unknown> }>): SameAPIEndpoint {
@@ -84,3 +76,4 @@ class GetForeignKeyValuesHandler {
     })
   }
 }
+

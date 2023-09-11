@@ -1,5 +1,10 @@
-import { ValidateFormCommand } from '@packages/core/forms/capabilities'
+import '@packages/core/forms/integration/load-commands'
+import { handlers } from '@packages/core/common/bus/axioma'
+import { IValidateFormHandler, ValidateFormCommand } from '@packages/core/forms/axioma'
+import { ValidateFormHandler } from '@packages/core/forms/capabilities'
 import { beforeEach, describe, expect, it } from 'vitest'
+
+handlers.set(IValidateFormHandler.name, ValidateFormHandler)
 
 describe('ValidateForm', () => {
   let mockValidateFieldInstance: any
@@ -32,7 +37,7 @@ describe('ValidateForm', () => {
     }
 
     const command = new ValidateFormCommand(fields)
-    const result = new command.meta.Handler(mockValidateFieldInstance).execute(command)
+    const result = command.meta.Handler(mockValidateFieldInstance).execute(command)
 
     expect(result).toBeTruthy()
   })
@@ -56,7 +61,7 @@ describe('ValidateForm', () => {
     }
 
     const command = new ValidateFormCommand(fields)
-    const result = new command.meta.Handler(mockValidateFieldInstance).execute(command)
+    const result = command.meta.Handler(mockValidateFieldInstance).execute(command)
 
     expect(result).toBeTruthy()
   })
@@ -80,7 +85,7 @@ describe('ValidateForm', () => {
     }
 
     const command = new ValidateFormCommand(fields)
-    const result = new command.meta.Handler(mockValidateFieldInstance).execute(command)
+    const result = command.meta.Handler(mockValidateFieldInstance).execute(command)
 
     expect(result).toBeFalsy()
   })
@@ -110,7 +115,7 @@ describe('ValidateForm', () => {
     }
 
     const command = new ValidateFormCommand(fields, options)
-    const result = new command.meta.Handler(mockValidateFieldInstance).execute(command)
+    const result = command.meta.Handler(mockValidateFieldInstance).execute(command)
 
     expect(result).toBeFalsy()
   })

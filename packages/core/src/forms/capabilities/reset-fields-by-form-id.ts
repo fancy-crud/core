@@ -1,17 +1,8 @@
-import { inject, meta } from '@packages/core/common/bus/capabilities'
-import { IFormStore } from '@packages/core/forms/axioma'
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import { IResetFieldsHandler, ResetFieldsCommand } from './reset-fields'
+import { inject } from '@packages/core/common/bus/capabilities'
+import type { ResetFieldsByFormIdCommand } from '../axioma'
+import { IFormStore, IResetFieldsHandler, ResetFieldsCommand } from '../axioma'
 
-export class ResetFieldsByFormIdCommand implements BaseCommand {
-  public readonly meta = meta(ResetFieldsByFormIdHandler)
-
-  constructor(
-    public readonly formId: symbol,
-  ) {}
-}
-
-class ResetFieldsByFormIdHandler {
+export class ResetFieldsByFormIdHandler {
   constructor(
     private resetFields: IResetFieldsHandler = inject(IResetFieldsHandler),
     private formStore: IFormStore = inject(IFormStore),
@@ -35,3 +26,4 @@ class ResetFieldsByFormIdHandler {
     )
   }
 }
+

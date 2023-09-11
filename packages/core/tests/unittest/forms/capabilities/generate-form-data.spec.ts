@@ -1,4 +1,5 @@
-import { GenerateFormDataCommand } from '@packages/core/forms/capabilities'
+import '@packages/core/forms/integration/load-commands'
+import { GenerateFormDataCommand } from '@packages/core/forms/axioma'
 import { describe, expect, it } from 'vitest'
 
 describe('GenerateFormData', () => {
@@ -37,7 +38,7 @@ describe('GenerateFormData', () => {
     }
 
     const command = new GenerateFormDataCommand(fields)
-    const result = new command.meta.Handler().execute(command)
+    const result = command.meta.Handler().execute(command)
 
     expect(result.jsonForm).toEqual({
       firstName: 'John',
@@ -73,7 +74,7 @@ describe('GenerateFormData', () => {
     }
 
     const command = new GenerateFormDataCommand(fields)
-    const result = new command.meta.Handler().execute(command)
+    const result = command.meta.Handler().execute(command)
 
     expect(result.jsonForm).toEqual({
       roles: ['admin', 'user'],
@@ -101,7 +102,7 @@ describe('GenerateFormData', () => {
     }
 
     const command = new GenerateFormDataCommand(fields)
-    const result = new command.meta.Handler().execute(command)
+    const result = command.meta.Handler().execute(command)
 
     expect(result.jsonForm).toEqual({})
     expect(result.formData).toBeInstanceOf(FormData)
@@ -131,7 +132,7 @@ describe('GenerateFormData', () => {
     }
 
     const command = new GenerateFormDataCommand(fields)
-    const result = new command.meta.Handler().execute(command)
+    const result = command.meta.Handler().execute(command)
 
     expect(result.jsonForm).toEqual({
       firstName: null,

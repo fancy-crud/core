@@ -1,4 +1,5 @@
-import { SetFieldsValuesCommand } from '@packages/core/forms/capabilities'
+import '@packages/core/forms/integration/load-commands'
+import { SetFieldsValuesCommand } from '@packages/core/forms/axioma'
 import { describe, expect, it } from 'vitest'
 
 describe('FillWithRecordValues', () => {
@@ -35,7 +36,7 @@ describe('FillWithRecordValues', () => {
     }
 
     const command = new SetFieldsValuesCommand(normalizedFields, settings, recordValues)
-    new command.meta.Handler().execute(command)
+    command.meta.Handler().execute(command)
 
     expect(normalizedFields.firstName.modelValue).toEqual('John')
     expect(normalizedFields.address.modelValue).toEqual('123 Main St')
@@ -67,7 +68,7 @@ describe('FillWithRecordValues', () => {
     }
 
     const command = new SetFieldsValuesCommand(normalizedFields, settings, recordValues)
-    new command.meta.Handler().execute(command)
+    command.meta.Handler().execute(command)
 
     expect(normalizedFields.firstName.modelValue).toEqual('John')
     expect(normalizedFields.phone.modelValue).toBeNull()
@@ -100,7 +101,7 @@ describe('FillWithRecordValues', () => {
     }
 
     const command = new SetFieldsValuesCommand(normalizedFields, settings, recordValues)
-    new command.meta.Handler().execute(command)
+    command.meta.Handler().execute(command)
 
     expect(normalizedFields.avatar.fileUrl).toEqual('/path/to/avatar.jpg')
     expect(normalizedFields.backgroundImage.fileUrl).toEqual('/path/to/background.jpg')

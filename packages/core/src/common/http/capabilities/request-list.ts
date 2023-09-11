@@ -1,23 +1,8 @@
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import { inject, meta } from '@packages/core/common/bus/capabilities'
-import type { HttpRequestGet, ListRequestOptions } from '../axioma'
-import { IHttp, Url } from '../axioma'
-import { onFailed, onFinally, onSuccess } from './common'
+import { inject } from '@packages/core/common/bus/capabilities'
+import type { HttpRequestGet, IRequestListHandler, RequestListCommand } from '../axioma'
+import { IHttp, onFailed, onFinally, onSuccess } from '../axioma'
 
-export class RequestListCommand implements BaseCommand {
-  public readonly meta = meta(RequestListHandler)
-  public readonly url: string
-
-  constructor(
-    url: string,
-    public readonly params?: Record<string, unknown>,
-    public readonly options?: ListRequestOptions,
-  ) {
-    this.url = new Url(url).value
-  }
-}
-
-class RequestListHandler {
+export class RequestListHandler implements IRequestListHandler {
   constructor(private http: HttpRequestGet = inject(IHttp)) {}
 
   execute({ url, params, options }: RequestListCommand): void {
@@ -30,4 +15,3 @@ class RequestListHandler {
       .finally(() => onFinally(options))
   }
 }
-

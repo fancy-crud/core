@@ -1,4 +1,5 @@
-import { RequestCreateCommand } from '@packages/core/common/http/capabilities'
+import '@packages/core/common/http/integration'
+import { RequestCreateCommand } from '@packages/core/common/http/axioma'
 import { describe, expect, it, vi } from 'vitest'
 
 describe('RequestCreateHandler', () => {
@@ -22,7 +23,7 @@ describe('RequestCreateHandler', () => {
     }
 
     const command = new RequestCreateCommand(url, form, options)
-    const handler = new command.meta.Handler(httpService)
+    const handler = command.meta.Handler(httpService)
 
     handler.execute(command)
     await new Promise(resolve => setTimeout(resolve))
@@ -50,7 +51,7 @@ describe('RequestCreateHandler', () => {
       },
     }
     const command = new RequestCreateCommand(url, form, options)
-    const handler = new command.meta.Handler(httpService)
+    const handler = command.meta.Handler(httpService)
 
     handler.execute(command)
     await new Promise(resolve => setTimeout(resolve))

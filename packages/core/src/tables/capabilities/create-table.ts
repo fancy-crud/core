@@ -1,23 +1,8 @@
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import type { BaseTableForm, FieldAsColumn, MappedRawColumn, NormalizedColumn, NormalizedTableSettings, ObjectWithRawColumns, RawTableFilters, RawTablePagination, RawTableSettings, Table } from '@packages/core/tables/axioma'
-import { NormalizeColumnsCommand, NormalizePaginationCommand, SetStoreTableCommand } from '@packages/core/tables/capabilities'
-import { Bus, meta } from '@packages/core/common/bus/capabilities'
-import { NormalizeTableFiltersCommand } from './normalize-table-filters'
-import { NormalizeTableSettingsCommand } from './normalize-table-settings'
+import { Bus } from '@packages/core/common/bus/capabilities'
+import type { BaseTableForm, CreateTableCommand, FieldAsColumn, ICreateTableHandler, NormalizedColumn, NormalizedTableSettings, ObjectWithRawColumns, RawTableFilters, RawTableSettings, Table } from '../axioma'
+import { NormalizeColumnsCommand, NormalizePaginationCommand, NormalizeTableFiltersCommand, NormalizeTableSettingsCommand, SetStoreTableCommand } from '../axioma'
 
-export class CreateTableCommand<T extends BaseTableForm, U extends ObjectWithRawColumns, S extends RawTableSettings, F extends RawTableFilters> implements BaseCommand {
-  public readonly meta = meta(CreateTableHandler)
-
-  constructor(
-    public readonly form: T,
-    public readonly columns?: MappedRawColumn<T['fields'], U> & U,
-    public readonly pagination?: RawTablePagination,
-    public readonly settings?: S,
-    public readonly filterParams?: F,
-  ) {}
-}
-
-class CreateTableHandler {
+export class CreateTableHandler implements ICreateTableHandler {
   execute<T extends BaseTableForm, U extends ObjectWithRawColumns, S extends RawTableSettings, F extends RawTableFilters>(command: CreateTableCommand<T, U, S, F>): Table<T, U, S, F> {
     const {
       form,
@@ -68,3 +53,4 @@ class CreateTableHandler {
     }
   }
 }
+

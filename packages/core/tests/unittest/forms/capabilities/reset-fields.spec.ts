@@ -1,4 +1,5 @@
-import { ResetFieldsCommand } from '@packages/core/forms/capabilities'
+import '@packages/core/forms/integration/load-commands'
+import { ResetFieldsCommand } from '@packages/core/forms/axioma'
 import { describe, expect, it } from 'vitest'
 
 describe('ResetFields', () => {
@@ -70,7 +71,7 @@ describe('ResetFields', () => {
     }
 
     const command = new ResetFieldsCommand(clonedFields, originalFields)
-    new command.meta.Handler().execute(command)
+    command.meta.Handler().execute(command)
 
     expect(clonedFields).toMatchObject(originalFields)
   })
@@ -114,7 +115,7 @@ describe('ResetFields', () => {
     }
 
     const command = new ResetFieldsCommand(clonedFields, originalFields)
-    new command.meta.Handler().execute(command)
+    command.meta.Handler().execute(command)
 
     expect(clonedFields).toMatchObject(originalFields)
   })

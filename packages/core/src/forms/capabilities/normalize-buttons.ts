@@ -1,33 +1,9 @@
-import { meta } from '@packages/core/common/bus/capabilities'
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import type { NormalizedButton, NormalizedButtons, RawButton } from '@packages/core/forms/axioma'
+import type { NormalizedButton, NormalizedButtons } from '@packages/core/forms/axioma'
 import { getDefaults } from '@packages/core/config'
 import { t } from '@packages/core/locales'
+import type { INormalizeButtonsHandler, NormalizeButtonsCommand, NormalizeButtonsInputType } from '../axioma'
 
-export type NormalizeButtonsInputType = Record<'main' | 'aux', RawButton>
-
-export class NormalizeButtonsCommand<T extends NormalizeButtonsInputType> implements BaseCommand {
-  public readonly meta = meta(NormalizeButtonsHandler)
-
-  constructor(
-    public readonly buttons?: T,
-  ) {}
-}
-
-/**
- * A utility class that normalizes button configurations by merging them with default properties.
- * Provides an `execute` method that takes an optional object containing button configurations
- * and returns a new object with normalized button properties.
-**/
-class NormalizeButtonsHandler {
-  /**
-   * Normalizes an optional object containing button configurations by merging each configuration
-   * with the default properties. Returns a new object with normalized button properties.
-   *
-   * @template T - A generic type for the button configurations object.
-   * @param {T} buttons - An optional object containing button configurations to be normalized.
-   * @returns {NormalizedButtons<T>} - A new object with the normalized button properties.
-  **/
+export class NormalizeButtonsHandler implements INormalizeButtonsHandler {
   execute<T extends NormalizeButtonsInputType>({ buttons }: NormalizeButtonsCommand<T>): NormalizedButtons<T> {
     const { main = {}, aux = {} } = buttons || {}
     const defaults = getDefaults()
@@ -65,3 +41,4 @@ class NormalizeButtonsHandler {
     return normalizedButtons
   }
 }
+

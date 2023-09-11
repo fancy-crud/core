@@ -1,6 +1,5 @@
 import { IHttp } from '@packages/core/common/http/axioma'
-import { injectable } from '@packages/core/common/bus/capabilities'
-import type { HttpRequest, PaginationStructure, RequestDefaultOptions } from '../axioma'
+import type { HttpRequest, PaginationStructure } from '../axioma'
 
 const httpService: IHttp = {
   pagination: {
@@ -9,21 +8,6 @@ const httpService: IHttp = {
   },
   request: {},
 } as IHttp
-
-export function onSuccess(response: unknown, options?: RequestDefaultOptions) {
-  if (typeof options?.onSuccess === 'function')
-    options?.onSuccess(response)
-}
-
-export function onFailed(error: unknown, options?: RequestDefaultOptions) {
-  if (typeof options?.onFailed === 'function')
-    options?.onFailed(error)
-}
-
-export function onFinally(options?: RequestDefaultOptions) {
-  if (typeof options?.onFinally === 'function')
-    options?.onFinally()
-}
 
 export function setHttpRequest(request: HttpRequest) {
   Object.assign(httpService.request, request)
@@ -42,5 +26,3 @@ export class HttpService extends IHttp {
     return httpService.request
   }
 }
-
-injectable(IHttp.name, HttpService)

@@ -1,22 +1,13 @@
-import { meta } from '@packages/core/common/bus/capabilities'
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import type { NormalizedSettings, RawSetting } from '@packages/core/forms/axioma'
+import type { NormalizedSettings } from '@packages/core/forms/axioma'
 import { DEFAULT_LOOKUP_FIELD, FORM_MODE } from '@packages/core/forms/axioma'
-
-export class NormalizeSettingsCommand implements BaseCommand {
-  public readonly meta = meta(NormalizeSettingsHandler)
-
-  constructor(
-    public readonly settings?: RawSetting,
-  ) {}
-}
+import type { INormalizeSettingsHandler, NormalizeSettingsCommand } from '../axioma'
 
 /**
  * A utility class that normalizes form settings configurations by merging them with default properties.
  * Provides an `execute` method that takes an optional object containing settings configurations
  * and returns a new object with normalized settings properties.
  */
-class NormalizeSettingsHandler {
+export class NormalizeSettingsHandler implements INormalizeSettingsHandler {
   /**
    * Normalizes an optional object containing settings configurations by merging each configuration
    * with the default properties. Returns a new object with normalized settings properties.

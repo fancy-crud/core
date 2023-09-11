@@ -1,17 +1,7 @@
-import { FORM_MODE, type FormMode, type NormalizedTitles } from '@packages/core/forms/axioma'
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import { meta } from '@packages/core/common/bus/capabilities'
+import { FORM_MODE } from '@packages/core/forms/axioma'
+import type { GetTitleByFormModeCommand, IGetTitleByFomModeHandler } from '../axioma'
 
-export class GetTitleByFormModeCommand implements BaseCommand {
-  public readonly meta = meta(GetTitleByFomModeHandler)
-
-  constructor(
-    public readonly mode: FormMode,
-    public readonly titles: NormalizedTitles,
-  ) {}
-}
-
-class GetTitleByFomModeHandler {
+export class GetTitleByFomModeHandler implements IGetTitleByFomModeHandler {
   execute({ mode, titles }: GetTitleByFormModeCommand) {
     return mode === FORM_MODE.create ? titles.create : titles.update
   }

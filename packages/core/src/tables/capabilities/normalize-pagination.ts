@@ -1,16 +1,6 @@
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import { meta } from '@packages/core/common/bus/capabilities'
-import type { NormalizedTablePagination, RawTablePagination } from '@packages/core/tables/axioma'
+import type { INormalizePaginationHandler, NormalizePaginationCommand, NormalizedTablePagination } from '../axioma'
 
-export class NormalizePaginationCommand implements BaseCommand {
-  public readonly meta = meta(NormalizePaginationHandler)
-
-  constructor(
-    public readonly rawPagination: RawTablePagination,
-  ) {}
-}
-
-class NormalizePaginationHandler {
+export class NormalizePaginationHandler implements INormalizePaginationHandler {
   execute({ rawPagination }: NormalizePaginationCommand): NormalizedTablePagination {
     return {
       page: 1,

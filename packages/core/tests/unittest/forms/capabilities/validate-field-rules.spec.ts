@@ -1,6 +1,11 @@
+import '@packages/core/forms/integration/load-commands'
 import { UnprocessableValidationResult } from '@packages/core/forms/axioma/exceptions/unprocessable-validation-result'
-import { ValidateFieldRulesCommand } from '@packages/core/forms/capabilities'
+import { IValidateFieldRulesHandler, ValidateFieldRulesCommand } from '@packages/core/forms/axioma'
+import { handlers } from '@packages/core/index'
 import { describe, expect, it } from 'vitest'
+import { ValidateFieldRulesHandler } from '@packages/core/forms/capabilities'
+
+handlers.set(IValidateFieldRulesHandler.name, ValidateFieldRulesHandler)
 
 describe('ValidateFieldRules', () => {
   it.concurrent('should return true if no rules are defined for the field', () => {
@@ -12,7 +17,7 @@ describe('ValidateFieldRules', () => {
     }
 
     const command = new ValidateFieldRulesCommand(field)
-    const result = new command.meta.Handler().execute(command)
+    const result = command.meta.Handler().execute(command)
 
     expect(result).toBe(true)
     expect(field.errors).toEqual([])
@@ -33,7 +38,7 @@ describe('ValidateFieldRules', () => {
     }
 
     const command = new ValidateFieldRulesCommand(field)
-    const result = new command.meta.Handler().execute(command)
+    const result = command.meta.Handler().execute(command)
 
     expect(result).toBeTruthy()
     expect(field.errors).toEqual([])
@@ -51,7 +56,7 @@ describe('ValidateFieldRules', () => {
     }
 
     const command = new ValidateFieldRulesCommand(field)
-    const result = new command.meta.Handler().execute(command)
+    const result = command.meta.Handler().execute(command)
 
     expect(result).toBeTruthy()
     expect(field.errors).toEqual([])
@@ -76,7 +81,7 @@ describe('ValidateFieldRules', () => {
     }
 
     const command = new ValidateFieldRulesCommand(field, options)
-    const result = new command.meta.Handler().execute(command)
+    const result = command.meta.Handler().execute(command)
 
     expect(result).toBe(true)
     expect(field.errors).toEqual([])
@@ -106,7 +111,7 @@ describe('ValidateFieldRules', () => {
     }
 
     const command = new ValidateFieldRulesCommand(field, options)
-    const result = new command.meta.Handler().execute(command)
+    const result = command.meta.Handler().execute(command)
 
     expect(result).toBeTruthy()
     expect(field.errors).toEqual([])
@@ -125,7 +130,7 @@ describe('ValidateFieldRules', () => {
     const command = new ValidateFieldRulesCommand(field)
 
     expect(() => {
-      new command.meta.Handler().execute(command)
+      command.meta.Handler().execute(command)
     }).toThrowError(UnprocessableValidationResult)
 
     expect(field.errors).toEqual([])

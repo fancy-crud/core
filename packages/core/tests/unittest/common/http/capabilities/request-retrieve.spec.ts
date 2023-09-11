@@ -1,4 +1,5 @@
-import { RequestRetrieveCommand } from '@packages/core/common/http/capabilities'
+import '@packages/core/common/http/integration'
+import { RequestRetrieveCommand } from '@packages/core/common/http/axioma'
 import { describe, expect, it, vi } from 'vitest'
 
 describe('RequestRetrieveHandler', () => {
@@ -26,7 +27,7 @@ describe('RequestRetrieveHandler', () => {
     }
 
     const command = new RequestRetrieveCommand(url, 'fakeId', options)
-    const handler = new command.meta.Handler(httpService)
+    const handler = command.meta.Handler(httpService)
 
     handler.execute(command)
     await new Promise(resolve => setTimeout(resolve))
@@ -54,7 +55,7 @@ describe('RequestRetrieveHandler', () => {
       },
     }
     const command = new RequestRetrieveCommand(url, 'fakeId', options)
-    const handler = new command.meta.Handler(httpService)
+    const handler = command.meta.Handler(httpService)
 
     handler.execute(command)
     await new Promise(resolve => setTimeout(resolve))

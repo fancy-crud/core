@@ -1,31 +1,10 @@
 import { FORM_MODE, IFormStore } from '@packages/core/forms/axioma'
-import { inject, injectable, meta } from '@packages/core/common/bus/capabilities'
-import type { NormalizedSettings, ObjectWithNormalizedButtons, ObjectWithNormalizedFields } from '@packages/core/forms/axioma'
-import { IResetFieldsHandler, ResetFieldsCommand } from '@packages/core/forms/capabilities'
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
+import { inject } from '@packages/core/common/bus/capabilities'
 import { StoreStateDoesNotExist } from '@packages/core/common/store/axioma'
+import type { ISwitchFormToUpdateModeHandler, SwitchFormToUpdateModeCommand, SwitchFormToUpdateModeCommandInput } from '../axioma'
+import { IResetFieldsHandler, ResetFieldsCommand } from '../axioma'
 
-export type SwitchFormToUpdateModeCommandInput = symbol | {
-  originalNormalizedFields: ObjectWithNormalizedFields
-  fields: ObjectWithNormalizedFields
-  buttons: ObjectWithNormalizedButtons
-  settings: NormalizedSettings
-}
-
-export class SwitchFormToUpdateModeCommand implements BaseCommand {
-  public readonly meta = meta(SwitchFormToUpdateModeHandler)
-
-  constructor(
-    public readonly formOrId: SwitchFormToUpdateModeCommandInput,
-    public readonly options?: { onClickAux?: () => void },
-  ) {}
-}
-
-export abstract class ISwitchFormToUpdateModeHandler {
-  abstract execute(command: SwitchFormToUpdateModeCommand): void
-}
-
-class SwitchFormToUpdateModeHandler implements ISwitchFormToUpdateModeHandler {
+export class SwitchFormToUpdateModeHandler implements ISwitchFormToUpdateModeHandler {
   constructor(
     private resetFields: IResetFieldsHandler = inject(IResetFieldsHandler),
     private formStore: Pick<IFormStore, 'searchById'> = inject(IFormStore),
@@ -58,5 +37,3 @@ class SwitchFormToUpdateModeHandler implements ISwitchFormToUpdateModeHandler {
     form.settings.mode = FORM_MODE.update
   }
 }
-
-injectable(ISwitchFormToUpdateModeHandler.name, SwitchFormToUpdateModeHandler)
