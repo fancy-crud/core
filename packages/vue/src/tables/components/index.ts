@@ -1,6 +1,15 @@
-export * as FDeleteConfirmationModal from './FDeleteConfirmationModal.vue'
-export * as FTable from './FTable.vue'
-export * as FTableBody from './FTableBody.vue'
-export * as FTableHeaderActions from './FTableHeaderActions.vue'
-export * as FTableRowActions from './FTableRowActions.vue'
-export * as FTableRowFilePreview from './FTableRowFilePreview.vue'
+import FDeleteConfirmationModal from './FDeleteConfirmationModal.vue'
+import FTable from './FTable.vue'
+import FTableBody from './FTableBody.vue'
+import FTableHeaderActions from './FTableHeaderActions.vue'
+import FTableRowActions from './FTableRowActions.vue'
+import FTableRowFilePreview from './FTableRowFilePreview.vue'
+
+export {
+  FDeleteConfirmationModal,
+  FTable,
+  FTableBody,
+  FTableHeaderActions,
+  FTableRowActions,
+  FTableRowFilePreview,
+}

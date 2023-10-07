@@ -1,3 +1,5 @@
+import type { UnwrapRef } from 'vue'
+
 interface Props<T = unknown> {
   field: {
     modelValue: T
@@ -8,7 +10,7 @@ export function useModelValue<T = unknown>(props: Props<T>) {
   const modelValue = useVModel(props.field, 'modelValue', undefined, { passive: true })
   const vmodel = computed(() => ({
     'modelValue': modelValue.value,
-    'onUpdate:modelValue': (e: T) => {
+    'onUpdate:modelValue': (e: UnwrapRef<T>) => {
       modelValue.value = e
     },
   }))
@@ -19,7 +21,7 @@ export function useModelValue<T = unknown>(props: Props<T>) {
 
   watch(() => props.field.modelValue, (value) => {
     if (value !== modelValue.value)
-      modelValue.value = value
+      modelValue.value = value as UnwrapRef<T>
   })
 
   return {
