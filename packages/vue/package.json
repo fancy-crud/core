@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "@fancy-crud/core": "workspace:^",
-    "@vueuse/core": "^9.9.0",
+    "@vueuse/core": "^10.4.1",
     "esno": "0.10.0",
     "lodash.isequal": "^4.5.0",
     "vue": "^3.3.2"
