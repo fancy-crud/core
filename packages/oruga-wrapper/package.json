@@ -13,20 +13,7 @@
   },
   "main": "./dist/fancy-crud-oruga-wrapper.umd.js",
   "module": "./dist/fancy-crud-oruga-wrapper.mjs",
-  "exports": {
-    ".": {
-      "import": "./dist/fancy-crud-oruga-wrapper.mjs",
-      "require": "./dist/fancy-crud-oruga-wrapper.umd.js"
-    },
-    "./dist/fancy-crud-oruga-wrapper.css": {
-      "import": "./dist/fancy-crud-oruga-wrapper.css",
-      "require": "./dist/fancy-crud-oruga-wrapper.css"
-    },
-    "./src/styles/index.sass": {
-      "import": "./src.styles/index.sass",
-      "require": "./src.styles/index.sass"
-    }
-  },
+
   "types": "./dist/src/index.d.ts",
   "files": [
     "dist",
