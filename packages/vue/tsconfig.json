@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "module": "ES2022",
     "target": "ES2022",
-    "module": "ESNext",
-    "lib": ["DOM", "ES2022"],
+    "lib": ["DOM", "ESNext"],
+    "emitDeclarationOnly": true,
     "declaration": true,
-    "sourceMap": true,
     "strict": true,
     "esModuleInterop": true,
     "jsx": "preserve",
@@ -18,28 +18,26 @@
     "outDir": "./dist",
     "typeRoots": [
       "vite/client",
-      "packages/**/**/typing",
-      "@fancy-crud/**/*"
+      "./node_modules/zod/lib/external",
+      "./node_modules/@fancy-crud/core/dist/src/**"
     ],
     "types": [
-      "vite/client",
+      "vite/client"
     ],
     "paths": {
-      "@packages/core/*": ["packages/core/src/*"],
-      "@packages/vue/*": ["packages/vue/src/*"],
-      "@packages/oruga-wrapper/*": ["packages/oruga-wrapper/src/*"],
-      "@fancy-crud/core": ["packages/core/src/index"],
-      "@fancy-crud/vue": ["packages/vue/src/index"],
-      "@fancy-crud/oruga-wrapper": ["packages/oruga-wrapper/src/index"]
+      "@packages/vue/*": ["src/*"],
     }
   },
   "exclude": [
     "dist",
     "node_modules",
+    "cypress",
     "**/**/*.test.ts",
+    "**/**/*.spec.ts",
+    "**/**/*.stories.tsx",
+    "**/**/*.md",
     "**/dist",
     "packages/.test",
     "packages/_docs",
-    // "tests"
   ]
 }

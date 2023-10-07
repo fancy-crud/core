@@ -8,7 +8,8 @@ export interface BaseCommand {
 
 export type HandlerDefinition = abstract new (...args: any[]) => { execute(command: any): any }
 
-export type MetaReturn<T> = T extends abstract new (...args: any[]) => { execute(command: infer Args): infer A } ? { Handler: (...providers: any[]) => { execute(command: Args): A } } : unknown
+export type MetaReturnHandler<T> = T extends abstract new (...args: any[]) => { execute(command: infer Args): infer A } ? { execute(command: Args): A } : { execute(command: any): any }
+export interface MetaReturn<T> { Handler: (...providers: any[]) => MetaReturnHandler<T> }
 
 export interface BusCommand extends BaseCommand { }
 export interface BusHandler { new (...args: any): { execute(command: any): any } }

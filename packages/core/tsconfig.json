@@ -4,6 +4,7 @@
     "target": "ES2022",
     "module": "ESNext",
     "lib": ["DOM", "ES2022"],
+    "emitDeclarationOnly": true,
     "declaration": true,
     "sourceMap": true,
     "strict": true,
@@ -17,20 +18,12 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
     "typeRoots": [
-      "vite/client",
-      "packages/**/**/typing",
-      "@fancy-crud/**/*"
+      "src/**/*",
     ],
     "types": [
-      "vite/client",
     ],
     "paths": {
-      "@packages/core/*": ["packages/core/src/*"],
-      "@packages/vue/*": ["packages/vue/src/*"],
-      "@packages/oruga-wrapper/*": ["packages/oruga-wrapper/src/*"],
-      "@fancy-crud/core": ["packages/core/src/index"],
-      "@fancy-crud/vue": ["packages/vue/src/index"],
-      "@fancy-crud/oruga-wrapper": ["packages/oruga-wrapper/src/index"]
+      "@packages/core/*": ["src/*"],
     }
   },
   "exclude": [
@@ -40,6 +33,6 @@
     "**/dist",
     "packages/.test",
     "packages/_docs",
-    // "tests"
+    "tests"
   ]
 }

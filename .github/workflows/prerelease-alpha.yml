@@ -105,9 +105,11 @@ jobs:
       - name: install dependencies
         run: pnpm install
 
-      - name: Do something when a new release published
+      - name: Build and publish
         run: |
           pnpm -w run release ${{ needs.compute-new-tag-version.outputs.toTag }}
+          pnpm dlx nx build @fancy-crud/oruga-wrapper
+          pnpm dlx nx build @fancy-crud/rules-processors
           pnpm --filter "./packages/**" publish --no-git-checks --tag ${{ github.ref_name }}
 
   generate-release:

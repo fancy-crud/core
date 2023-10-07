@@ -19,7 +19,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build",
+    "build-tsc": "tsc && tsc-alias --verbose -p ./tsconfig.json",
+    "build": "vite build && tsc && tsc-alias --verbose -p ./tsconfig.json",
     "test": "vitest"
   },
   "peerDependencies": {

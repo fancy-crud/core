@@ -1,6 +1,6 @@
 import { meta } from '@packages/core/common/bus/capabilities'
 import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import type { Form, ObjectWithRawFields, RawButton, RawSetting, RawTitle } from '.'
+import type { Form, ObjectWithRawFields, RawButton, RawSetting, RawTitle } from './typing'
 
 /**
  * A class that provides functionality to create a form from raw fields and settings.

@@ -9,7 +9,7 @@ import { name } from './package.json'
 export default defineConfig({
   resolve: {
     alias: {
-      '@package/oruga-wrapper/': `${path.resolve(__dirname, 'src')}/`,
+      '@packages/oruga-wrapper/': `${path.resolve(__dirname, 'src')}/`,
       // '@fancy-crud/vue': `${path.resolve(__dirname, '../vue/src')}/`,
       // '@fancy-crud/core': `${path.resolve(__dirname, '../core/src')}/`,
     },
@@ -53,8 +53,8 @@ export default defineConfig({
     }),
     Components({
       dirs: [
-        'node_modules/@oruga-ui/oruga-next/src/components/**',
         'src/**/integration/components',
+        'node_modules/@oruga-ui/oruga-next/src/components/**',
       ],
 
       // allow auto import and register components used in markdown

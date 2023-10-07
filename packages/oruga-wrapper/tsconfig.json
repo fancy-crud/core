@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "ES2022",
+    "target": "ES2022",
+    "lib": ["DOM", "ESNext"],
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "strict": true,
+    "maxNodeModuleJsDepth": 0,
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "typeRoots": [],
+    "types": [
+      "vite/client",
+    ],
+    "paths": {
+      "@packages/oruga-wrapper/*": ["src/*"],
+    }
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules",
+  ]
+}

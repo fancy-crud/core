@@ -1,11 +1,11 @@
-import type { HandlerDefinition, MetaReturn } from '../axioma'
+import type { HandlerDefinition, MetaReturn, MetaReturnHandler } from '../axioma'
 import { HandlerDoesNotExist, handlers } from '../axioma'
 
 export function meta<T extends HandlerDefinition>(handlerDefinition: T): MetaReturn<T> {
-  return Object.freeze({
-    Handler: (...providers: any[]) => {
+  return {
+    Handler(...providers: any[]): MetaReturnHandler<T> {
       const HandlerInstanceGenerator = handlers.get(handlerDefinition.name)
-      let handlerInstance: any
+      let handlerInstance: MetaReturnHandler<T>
 
       if (!HandlerInstanceGenerator)
         throw new HandlerDoesNotExist(handlerDefinition.name)
@@ -18,5 +18,5 @@ export function meta<T extends HandlerDefinition>(handlerDefinition: T): MetaRet
 
       return handlerInstance
     },
-  }) as MetaReturn<T>
+  }
 }

@@ -9,7 +9,7 @@ import { name } from './package.json'
 export default defineConfig({
   resolve: {
     alias: {
-      '@package/vue/': `${path.resolve(__dirname, 'src')}/`,
+      '@packages/vue/': `${path.resolve(__dirname, 'src')}/`,
     },
   },
   build: {

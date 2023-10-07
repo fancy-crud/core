@@ -9,6 +9,21 @@ declare global {
   const $shallowRef: typeof import('vue/macros')['$shallowRef']
   const $toRef: typeof import('vue/macros')['$toRef']
   const EffectScope: typeof import('vue')['EffectScope']
+  const FButton: typeof import('./src/common/components/index')['FButton']
+  const FCheckbox: typeof import('./src/forms/components/index')['FCheckbox']
+  const FColor: typeof import('./src/forms/components/index')['FColor']
+  const FDatepicker: typeof import('./src/forms/components/index')['FDatepicker']
+  const FFile: typeof import('./src/forms/components/index')['FFile']
+  const FFileList: typeof import('./src/forms/components/index')['FFileList']
+  const FForm: typeof import('./src/forms/components/index')['FForm']
+  const FFormBody: typeof import('./src/forms/components/index')['FFormBody']
+  const FFormFooter: typeof import('./src/forms/components/index')['FFormFooter']
+  const FFormHeader: typeof import('./src/forms/components/index')['FFormHeader']
+  const FModal: typeof import('./src/common/components/index')['FModal']
+  const FRadio: typeof import('./src/forms/components/index')['FRadio']
+  const FSelect: typeof import('./src/forms/components/index')['FSelect']
+  const FTextVue: typeof import('./src/forms/components/index')['FTextVue']
+  const FTextarea: typeof import('./src/forms/components/index')['FTextarea']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const computed: typeof import('vue')['computed']
@@ -282,6 +297,21 @@ declare module '@vue/runtime-core' {
     readonly $shallowRef: UnwrapRef<typeof import('vue/macros')['$shallowRef']>
     readonly $toRef: UnwrapRef<typeof import('vue/macros')['$toRef']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly FButton: UnwrapRef<typeof import('./src/common/components/index')['FButton']>
+    readonly FCheckbox: UnwrapRef<typeof import('./src/forms/components/index')['FCheckbox']>
+    readonly FColor: UnwrapRef<typeof import('./src/forms/components/index')['FColor']>
+    readonly FDatepicker: UnwrapRef<typeof import('./src/forms/components/index')['FDatepicker']>
+    readonly FFile: UnwrapRef<typeof import('./src/forms/components/index')['FFile']>
+    readonly FFileList: UnwrapRef<typeof import('./src/forms/components/index')['FFileList']>
+    readonly FForm: UnwrapRef<typeof import('./src/forms/components/index')['FForm']>
+    readonly FFormBody: UnwrapRef<typeof import('./src/forms/components/index')['FFormBody']>
+    readonly FFormFooter: UnwrapRef<typeof import('./src/forms/components/index')['FFormFooter']>
+    readonly FFormHeader: UnwrapRef<typeof import('./src/forms/components/index')['FFormHeader']>
+    readonly FModal: UnwrapRef<typeof import('./src/common/components/index')['FModal']>
+    readonly FRadio: UnwrapRef<typeof import('./src/forms/components/index')['FRadio']>
+    readonly FSelect: UnwrapRef<typeof import('./src/forms/components/index')['FSelect']>
+    readonly FTextVue: UnwrapRef<typeof import('./src/forms/components/index')['FTextVue']>
+    readonly FTextarea: UnwrapRef<typeof import('./src/forms/components/index')['FTextarea']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>

@@ -48,7 +48,7 @@
   </f-delete-confirmation-modal>
 </template>
 
-<script lang="ts" setup generic="DataType = unknown">
+<script lang="ts" generic="DataType = unknown" setup>
 import type { BaseTableForm, DeleteRecordOptions, NormalizedTablePagination, NormalizedTableSettings, ObjectWithNormalizedColumns, Row } from '@fancy-crud/core'
 import { Bus, DeleteRecordCommand, GetStoreTableCommand, IFormStore, PrepareFormToCreateCommand, PrepareFormToUpdateCommand } from '@fancy-crud/core'
 import { useRequestList } from '@packages/vue/http'

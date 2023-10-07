@@ -34,7 +34,7 @@
     "src/styles"
   ],
   "scripts": {
-    "build": "vite build"
+    "build": "vite build && vite build && vue-tsc --declaration --emitDeclarationOnly && tsc-alias --verbose -p ./tsconfig.json"
   },
   "peerDependencies": {
     "@fancy-crud/core": "workspace:^",
