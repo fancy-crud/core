@@ -10,8 +10,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@packages/oruga-wrapper/': `${path.resolve(__dirname, 'src')}/`,
-      // '@fancy-crud/vue': `${path.resolve(__dirname, '../vue/src')}/`,
-      // '@fancy-crud/core': `${path.resolve(__dirname, '../core/src')}/`,
     },
   },
   build: {
@@ -53,8 +51,7 @@ export default defineConfig({
     }),
     Components({
       dirs: [
-        'src/**/integration/components',
-        'node_modules/@oruga-ui/oruga-next/src/components/**',
+        'src/**',
       ],
 
       // allow auto import and register components used in markdown

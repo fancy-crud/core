@@ -17,7 +17,9 @@
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
-    "typeRoots": [],
+    "typeRoots": [
+      "vite/client",
+    ],
     "types": [
       "vite/client",
     ],
@@ -25,9 +27,9 @@
       "@packages/oruga-wrapper/*": ["src/*"],
     }
   },
-  "include": [
-    "src/**/*"
-  ],
+  // "include": [
+  //   "src/*"
+  // ],
   "exclude": [
     "dist",
     "node_modules",
