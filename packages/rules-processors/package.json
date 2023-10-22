@@ -20,7 +20,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build"
+    "build": "vite build && tsc && tsc-alias --verbose -p ./tsconfig.json"
   },
   "peerDependencies": {
     "zod": "^3.21.4"
