@@ -1,7 +1,7 @@
 {
   "name": "@fancy-crud/vue-toastify-plugin",
   "version": "0.0.0",
-  "description": "",
+  "description": "Utility to add vue3-toastify support for fancy-crud",
   "private": false,
   "author": {
     "name": "Christopher A. Flores",
