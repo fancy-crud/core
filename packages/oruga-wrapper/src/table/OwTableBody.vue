@@ -4,23 +4,30 @@
     backend-pagination
     paginated
   >
-    <template v-for="(column, _columnIndex) in headers" :key="_columnIndex">
-      <o-table-column v-if="column.value === 'actions'" v-slot="{ row }">
-        <f-table-row-actions
-          @edit="emit('edit', row)"
-          @delete="emit('delete', row)"
-        />
-      </o-table-column>
-      <o-table-column
-        v-else
-        v-slot="{ row, index }"
-        v-bind="column"
-        :label="column.label"
-        :field="column.value"
-      >
-        {{ getValue(row, column, index) }}
-      </o-table-column>
-    </template>
+    <slot>
+      <template v-for="(column, _columnIndex) in headers" :key="_columnIndex">
+        <o-table-column v-if="column.value === 'actions'" v-slot="{ row, index }">
+          <slot name="column-actions" v-bind="{ row, index }">
+            <f-table-row-actions
+              @edit="emit('edit', row)"
+              @delete="emit('delete', row)"
+            />
+          </slot>
+        </o-table-column>
+
+        <o-table-column
+          v-else
+          v-slot="{ row, index }"
+          v-bind="column"
+          :label="column.label"
+          :field="column.value"
+        >
+          <slot :name="`column-${column.value}`" v-bind="{ row, index }">
+            {{ getValue(row, column, index) }}
+          </slot>
+        </o-table-column>
+      </template>
+    </slot>
   </o-table>
 </template>
 

@@ -231,6 +231,12 @@ importers:
         specifier: ^3.3.3
         version: 3.3.3(ts-node@10.9.1)
 
+  packages/vue-toastify-plugin:
+    devDependencies:
+      vue3-toastify:
+        specifier: ^0.1.14
+        version: 0.1.14(vue@3.3.4)
+
 packages:
 
   /@aashutoshrathi/word-wrap@1.2.6:
@@ -7876,6 +7882,18 @@ packages:
       '@vue/typescript': 1.8.11(typescript@4.8.3)
       semver: 7.5.4
       typescript: 4.8.3
+    dev: true
+
+  /vue3-toastify@0.1.14(vue@3.3.4):
+    resolution: {integrity: sha512-2wyzMhWq8IjTclL25tqKWknDFdFI1vPueMGZpHNlPWf6TBfxBycBANS+2n4W1xD7tHhX4G6HhCe31sle6OpwYQ==}
+    engines: {node: '>=16', npm: '>=7'}
+    peerDependencies:
+      vue: '>=3.2.0'
+    peerDependenciesMeta:
+      vue:
+        optional: true
+    dependencies:
+      vue: 3.3.4
     dev: true
 
   /vue@3.3.4:

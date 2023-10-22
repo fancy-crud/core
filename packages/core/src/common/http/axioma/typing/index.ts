@@ -2,8 +2,6 @@ import type { Pagination } from './pagination'
 export * from './pagination'
 export * from './http'
 
-export interface HandleRequestStatusCodes extends Record<number, (form: any, data: any) => void> {}
-
 export interface SameAPIEndpoint extends Record<string, string[]> {}
 
 export interface Params {

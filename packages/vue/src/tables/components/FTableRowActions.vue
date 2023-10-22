@@ -1,19 +1,21 @@
 <template>
-  <f-button
-    v-if="!props.hideEdit"
-    @click="emit('edit')"
-    icon="pencil"
-    class="text-primary"
-    borderless
-  />
+  <slot>
+    <f-button
+      v-if="!props.hideEdit"
+      @click="emit('edit')"
+      icon="pencil"
+      class="text-primary"
+      borderless
+    />
 
-  <f-button
-    v-if="!props.hideDelete"
-    @click="emit('delete')"
-    icon="delete"
-    class="text-danger"
-    borderless
-  />
+    <f-button
+      v-if="!props.hideDelete"
+      @click="emit('delete')"
+      icon="delete"
+      class="text-danger"
+      borderless
+    />
+  </slot>
 </template>
 
 <script lang="ts" setup>

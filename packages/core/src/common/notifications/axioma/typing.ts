@@ -16,7 +16,9 @@ export interface Notification {
   payload?: any
 }
 
-export interface NotificationState extends Partial<Record<NotificationType, (notification?: Notification) => void>> {}
+export interface NotificationState {
+  handler?: (notification?: Notification) => void
+}
 
 export abstract class INotificationStore {
   abstract save(id: symbol, payload: NotificationState): void

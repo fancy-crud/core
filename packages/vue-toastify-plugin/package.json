@@ -1,5 +1,5 @@
 {
-  "name": "@fancy-crud/rules-processors",
+  "name": "@fancy-crud/vue-toastify-plugin",
   "version": "0.0.0",
   "description": "",
   "private": false,
@@ -10,11 +10,11 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/fancy-crud/core",
-    "directory": "packages/rules-processors"
+    "directory": "packages/vue-toastify-plugin"
   },
   "license": "MIT",
-  "main": "dist/fancy-crud-rules-processors.mjs",
-  "module": "dist/fancy-crud-rules-processors.mjs",
+  "main": "dist/fancy-crud-vue-toastify-plugin.mjs",
+  "module": "dist/fancy-crud-vue-toastify-plugin.mjs",
   "types": "dist/src/index.d.ts",
   "files": [
     "dist"
@@ -23,10 +23,10 @@
     "build": "vite build"
   },
   "peerDependencies": {
-    "zod": "^3.21.4"
+    "vue3-toastify": "^0.1.14"
   },
   "devDependencies": {
-    "zod": "^3.21.4"
+    "vue3-toastify": "^0.1.14"
   },
   "publishConfig": {
     "access": "public"
@@ -41,6 +41,8 @@
     "read",
     "update",
     "delete",
-    "vue"
+    "vue",
+    "toast",
+    "notifications"
   ]
 }

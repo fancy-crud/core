@@ -6,7 +6,6 @@
       <slot name="form-header" v-bind="{ title }" />
     </f-form-header>
 
-    <!-- <f-form-body :fields="props.fields" :settings="props.settings" :style="insetScrollStyles"> -->
     <f-form-body :fields="props.fields" :settings="props.settings" :form-id="props.id">
       <template
         v-for="([slotName]) in beforeAndAfterFieldSlots"
@@ -30,8 +29,20 @@
 </template>
 
 <script lang="ts" setup>
-import type { NormalizedSettings, NormalizedTitles, ObjectWithNormalizedButtons, ObjectWithNormalizedFields } from '@fancy-crud/core'
-import { Bus, GenerateFormDataCommand, IFormStore, IResponseInterceptorStore, IRuleOptionsStore, SaveRecordCommand } from '@fancy-crud/core'
+import type { BaseObjectWithNormalizedFields, NormalizedSettings, NormalizedTitles, NotificationType, ObjectWithNormalizedButtons } from '@fancy-crud/core'
+import {
+  Bus,
+  FORM_MODE,
+  GenerateFormDataCommand,
+  IFormStore,
+  INotificationStore,
+  IResponseInterceptorStore,
+  IRuleOptionsStore,
+  NOTIFICATION_TYPE,
+  SaveRecordCommand,
+  getDefaultNotifications,
+  inject as injecting,
+} from '@fancy-crud/core'
 import { useRules } from '@packages/vue/forms'
 
 interface StandardResponseStructure { data: any; status: number }
@@ -39,12 +50,11 @@ interface StandardErrorResponseStructure { response: StandardResponseStructure }
 
 const props = defineProps<{
   id: symbol
-  fields: ObjectWithNormalizedFields
+  fields: BaseObjectWithNormalizedFields
   titles: NormalizedTitles
   buttons: ObjectWithNormalizedButtons
   settings: NormalizedSettings
   noInsetScroll?: boolean
-  disableNotifications?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -55,9 +65,10 @@ const emit = defineEmits<{
 const slots = useSlots()
 const bus = new Bus()
 
-const formStore: IFormStore = inject(IFormStore.name)!
-const ruleOptionsStore: IRuleOptionsStore = inject(IRuleOptionsStore.name)!
-const responseInterceptorStore: IResponseInterceptorStore = inject(IResponseInterceptorStore.name)!
+const formStore: IFormStore = injecting(IFormStore.name)!
+const ruleOptionsStore: IRuleOptionsStore = injecting(IRuleOptionsStore.name)!
+const responseInterceptorStore: IResponseInterceptorStore = injecting(IResponseInterceptorStore.name)!
+const notificationService: INotificationStore = injecting(INotificationStore.name)!
 
 const { isFormValid } = useRules(props.fields, ruleOptionsStore.searchById(props.id))
 
@@ -69,20 +80,14 @@ const beforeAndAfterFieldSlots = computed(() => {
 
 function onSuccess(response?: StandardResponseStructure) {
   emit('success', response)
-
-  if (props.settings.disableResponseHandlers || !response)
-    return
-
-  responseInterceptorStore.intercept(props.id, response.status, response)
+  triggerResponseInterceptor({ response })
+  triggerNotification(NOTIFICATION_TYPE.success)
 }
 
 function onFailed(error?: StandardErrorResponseStructure) {
   emit('error', error)
-
-  if (props.settings.disableResponseHandlers || !error)
-    return
-
-  responseInterceptorStore.intercept(props.id, error.response.status, error)
+  triggerResponseInterceptor(error, true)
+  triggerNotification(NOTIFICATION_TYPE.error)
 }
 
 function onMainClick() {
@@ -119,5 +124,32 @@ function onMainClick() {
 function onAuxClick() {
   if (typeof props.buttons.aux.onClick === 'function')
     props.buttons.aux.onClick()
+}
+
+function triggerResponseInterceptor(response?: Partial<StandardErrorResponseStructure>, isError?: boolean) {
+  if (props.settings.disableResponseHandlers || !response)
+    return
+
+  const interceptorId = props.id
+  const formId = props.id
+
+  const responseOrError = isError ? response : response.response
+  const statusCode = response.response?.status || 0
+  responseInterceptorStore.intercept(interceptorId, formId, statusCode, responseOrError)
+}
+
+function triggerNotification(notificationType: NotificationType) {
+  if (props.settings.disableNotifications)
+    return
+
+  const notifications = getDefaultNotifications()
+
+  const notificationAction = props.settings.mode === FORM_MODE.create ? notifications.onCreateRecord : notifications.onUpdateRecord
+  const notification = notificationAction[notificationType]
+
+  if (!notification)
+    return
+
+  notificationService.pushNotification(props.id, notification)
 }
 </script>

@@ -1,7 +1,7 @@
-import type { NormalizedField, ObjectWithNormalizedFields, RuleOptions } from '@fancy-crud/core'
+import type { NormalizedField, BaseObjectWithNormalizedFields, RuleOptions } from '@fancy-crud/core'
 import { Bus, ValidateFieldRulesCommand, ValidateFormCommand, ruleOptions } from '@fancy-crud/core'
 
-export function useRules(fields: ObjectWithNormalizedFields, options: RuleOptions = {}) {
+export function useRules(fields: BaseObjectWithNormalizedFields, options: RuleOptions = {}) {
   const bus = new Bus()
 
   const isFormValid = computed((): boolean => {

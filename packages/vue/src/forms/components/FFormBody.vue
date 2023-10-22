@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { FormMode, NormalizedField, NormalizedSettings, ObjectWithNormalizedFields } from '@fancy-crud/core'
+import type { BaseObjectWithNormalizedFields, FormMode, NormalizedField, NormalizedSettings } from '@fancy-crud/core'
 import { Bus, FilterFieldsByFormModeCommand, GetForeignKeyValuesCommand, fields as controls } from '@fancy-crud/core'
 
 import FCheckbox from './FCheckbox.vue'
@@ -32,7 +32,7 @@ import FText from './FText.vue'
 
 const props = defineProps<{
   formId: symbol
-  fields: ObjectWithNormalizedFields
+  fields: BaseObjectWithNormalizedFields
   settings: NormalizedSettings
 }>()
 
@@ -66,7 +66,7 @@ function getComponent(field: NormalizedField) {
   return control ?? (controls[field.type as ControlType] ?? controls.text)
 }
 
-function filterFields(fields: ObjectWithNormalizedFields, mode: FormMode): [string, NormalizedField][] {
+function filterFields(fields: BaseObjectWithNormalizedFields, mode: FormMode): [string, NormalizedField][] {
   const filteredFields = bus.execute(
     new FilterFieldsByFormModeCommand(fields, mode),
   ) as [string, NormalizedField][]

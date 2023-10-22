@@ -4,12 +4,16 @@
 
 @import '@mdi/font/css/materialdesignicons.css'
 @import '@oruga-ui/oruga-next/dist/oruga-full.css'
-@import '../node_modules/@fancy-crud/vue/src/styles/index.sass'
-// @import '@fancy-crud/oruga-wrapper/dist/fancy-crud-oruga-wrapper.css'
-@import '../node_modules/@fancy-crud/oruga-wrapper/src/styles/index.sass'
+@import '@fancy-crud/vue/dist/fancy-crud-vue.css'
+@import '@fancy-crud/oruga-wrapper/dist/fancy-crud-oruga-wrapper.css'
+// @import '../node_modules/@fancy-crud/oruga-wrapper/src/styles/index.sass'
 
 :root
   --oruga-variant-danger: red
+  --oruga-primary-color: blue
+
+button, [type='button']
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity))
 
 .f-form > *::-webkit-scrollbar-track
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3)
@@ -25,6 +29,3 @@
 .f-form > *::-webkit-scrollbar-thumb
   border-radius: 10px
   background-color: #555
-  
-// .f-form-footer__button--main
-//   background-color: black

@@ -1,19 +1,19 @@
 import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import type { NormalizedField, ObjectWithNormalizedFields } from '@packages/core/forms/axioma'
+import type { BaseObjectWithNormalizedFields, NormalizedField } from '@packages/core/forms/axioma'
 
 import { meta } from '@packages/core/common/bus/capabilities'
 
 export type MinimumNormalizedField =
   Pick<NormalizedField, 'type' | 'modelValue' | 'errors' | 'modelKey'> & { optionValue?: string; multiple?: boolean }
 
-export type JsonForm<T extends ObjectWithNormalizedFields<MinimumNormalizedField>> = { [K in keyof T]: T[K]['modelValue'] }
+export type JsonForm<T extends BaseObjectWithNormalizedFields<MinimumNormalizedField>> = { [K in keyof T]: T[K]['modelValue'] }
 
-export interface GenerateFormDataOutput<T extends ObjectWithNormalizedFields<MinimumNormalizedField>> {
+export interface GenerateFormDataOutput<T extends BaseObjectWithNormalizedFields<MinimumNormalizedField>> {
   formData: FormData | null
   jsonForm: JsonForm<T>
 }
 
-export class GenerateFormDataCommand<T extends ObjectWithNormalizedFields<MinimumNormalizedField> = ObjectWithNormalizedFields<MinimumNormalizedField>> implements BaseCommand {
+export class GenerateFormDataCommand<T extends BaseObjectWithNormalizedFields<MinimumNormalizedField> = BaseObjectWithNormalizedFields<MinimumNormalizedField>> implements BaseCommand {
   public readonly meta = meta(IGenerateFormDataHandler)
 
   constructor(
@@ -31,5 +31,5 @@ export abstract class IGenerateFormDataHandler {
    * @param fields The normalized form fields.
    * @returns An object containing the form data in the appropriate format.
    */
-  abstract execute<T extends ObjectWithNormalizedFields<MinimumNormalizedField>>({ fields }: GenerateFormDataCommand<T>): GenerateFormDataOutput<T>
+  abstract execute<T extends BaseObjectWithNormalizedFields<MinimumNormalizedField>>({ fields }: GenerateFormDataCommand<T>): GenerateFormDataOutput<T>
 }

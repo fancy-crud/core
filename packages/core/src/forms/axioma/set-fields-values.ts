@@ -1,6 +1,6 @@
 import type { BaseCommand } from '@packages/core/common/bus/axioma'
 import { meta } from '@packages/core/common/bus/capabilities'
-import type { NormalizedField, NormalizedSettings, ObjectWithNormalizedFields } from '@packages/core/forms/axioma'
+import type { BaseObjectWithNormalizedFields, NormalizedField, NormalizedSettings } from '@packages/core/forms/axioma'
 
 export type RecordValues = Record<string, unknown>
 export type NormalizedFieldToAssignValues =
@@ -11,7 +11,7 @@ export class SetFieldsValuesCommand implements BaseCommand {
   public readonly meta = meta(ISetFieldsValuesHandler)
 
   constructor(
-    public readonly fields: ObjectWithNormalizedFields<NormalizedFieldToAssignValues>,
+    public readonly fields: BaseObjectWithNormalizedFields<NormalizedFieldToAssignValues>,
     public readonly settings: Pick<NormalizedSettings, 'lookupField' | 'lookupValue'>,
     public readonly recordValues: RecordValues,
   ) {}

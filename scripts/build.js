@@ -2,7 +2,7 @@
 import fs from 'node:fs'
 
 const packages = [
-  'core', 'vue', 'oruga-wrapper', 'rules-processors',
+  'core', 'vue', 'oruga-wrapper', 'rules-processors', 'vue-toastify-plugin',
 ]
 
 function replace_version({ filePath, err, data, version, packageName }) {

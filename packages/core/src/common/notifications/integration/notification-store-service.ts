@@ -27,14 +27,12 @@ export class NotificationStoreService implements INotificationStore {
       return
     }
 
-    const handler = state[notification.type]
-
-    if (!handler) {
+    if (!state.handler) {
       console.error('Unable to push notification. Notification handler does not exist')
       return
     }
 
-    handler(notification)
+    state.handler(notification)
   }
 }
 

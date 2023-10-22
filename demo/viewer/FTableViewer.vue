@@ -1,6 +1,10 @@
 <template>
   <div class="pb-5">
-    <f-table v-bind="table" />
+    <f-table v-bind="table">
+      <!-- <template #column-actions="{ row, index }">
+        <a href="https://google.com" target="_blank">Abrime</a>
+      </template> -->
+    </f-table>
   </div>
 </template>
 
@@ -53,7 +57,7 @@ const table = useTable({
       format: (value: unknown) => value === 'm' ? 'Male' : 'Female',
     },
     created_at: {
-      // format: (value: unknown) => formats.dateTimeFormat(value as string),
+      format: (value: unknown) => 'Lo que sea',
     },
     actions: { value: 'actions', label: '' },
   },

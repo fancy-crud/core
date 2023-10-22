@@ -1,6 +1,6 @@
 import type { App, Plugin } from 'vue'
 
-import { IFormStore, IResponseInterceptorStore, IRuleOptionsStore, inject as fancyInjection } from '@fancy-crud/core'
+import { IFormStore, IResponseInterceptorStore, IRuleOptionsStore, inject as injecting } from '@fancy-crud/core'
 import * as Forms from './forms/components'
 import * as Tables from './tables/components'
 import * as Utils from './common/components'
@@ -26,13 +26,14 @@ export const FancyCrud: Plugin = function installFancyCrud(app: App, options: Pa
   //   setStatusCodesHandlers(options.statusCodesHandlers)
 
   setFancyCrudConfig(options)
-  app.provide(IRuleOptionsStore.name, fancyInjection(IRuleOptionsStore))
-  app.provide(IResponseInterceptorStore.name, fancyInjection(IResponseInterceptorStore))
-  app.provide(IFormStore.name, fancyInjection(IFormStore))
+  app.provide(IRuleOptionsStore.name, injecting(IRuleOptionsStore))
+  app.provide(IResponseInterceptorStore.name, injecting(IResponseInterceptorStore))
+  app.provide(IFormStore.name, injecting(IFormStore))
 }
 
 // To allow individual component use, export components
 // each can be registered via Vue.component()
+export * from '@fancy-crud/core'
 export * from './config'
 export * from './common'
 // export * from './filters'

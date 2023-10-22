@@ -18,7 +18,7 @@
 <script lang='ts' setup>
 import { z } from 'zod'
 import { FieldType, useForm } from '@fancy-crud/vue'
-import { Bus, ResetFieldsByFormIdCommand } from '@fancy-crud/core'
+import { Bus, FORM_MODE, ResetFieldsByFormIdCommand } from '@fancy-crud/core'
 // import { NotificationType, useForm } from '@/forms/integration'
 
 // const { rules } = useRules()
@@ -46,6 +46,7 @@ import { Bus, ResetFieldsByFormIdCommand } from '@fancy-crud/core'
 const bus = new Bus()
 const settings = {
   url: 'artists/',
+  mode: FORM_MODE.update,
 }
 
 const form = useForm({
@@ -54,27 +55,39 @@ const form = useForm({
       type: FieldType.text,
       label: 'First name',
       placeholder: 'Como asi pues?',
-      rules: (value: string) => ({ value, rule: z.string().min(1).max(5).nullable() }),
+      rules: value => ({ value, rule: z.string().min(1).max(3) }),
       wrapper: {
         class: 'col-span-6',
       },
     },
-    gender: {
-      type: FieldType.select,
+
+    password: {
+      type: FieldType.text,
       label: 'Last name',
       class: 'w-full',
-      optionLabel: 'label',
-      optionValue: 'value',
-      options: [
-        { label: 'Male', value: 'm' },
-        { label: 'Female', value: 'f' },
-      ],
       wrapper: {
         class: 'col-span-6',
+      },
+    },
+
+    third: {
+      type: FieldType.text,
+      label: 'Last name',
+      class: 'w-full bg-blue-300',
+      wrapper: {
+        class: 'col-span-3 bg-blue-500',
       },
     },
   },
   settings,
+  buttons: {
+    main: {
+      label: {
+        create: 'Lanzar',
+        update: 'Modificar',
+      },
+    },
+  },
 })
 
 function resetFields() {

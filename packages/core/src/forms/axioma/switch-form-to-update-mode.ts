@@ -1,10 +1,10 @@
 import { meta } from '@packages/core/common/bus/capabilities'
-import type { NormalizedSettings, ObjectWithNormalizedButtons, ObjectWithNormalizedFields } from '@packages/core/forms/axioma'
+import type { NormalizedSettings, ObjectWithNormalizedButtons, BaseObjectWithNormalizedFields } from '@packages/core/forms/axioma'
 import type { BaseCommand } from '@packages/core/common/bus/axioma'
 
 export type SwitchFormToUpdateModeCommandInput = symbol | {
-  originalNormalizedFields: ObjectWithNormalizedFields
-  fields: ObjectWithNormalizedFields
+  originalNormalizedFields: BaseObjectWithNormalizedFields
+  fields: BaseObjectWithNormalizedFields
   buttons: ObjectWithNormalizedButtons
   settings: NormalizedSettings
 }

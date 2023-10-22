@@ -30,7 +30,8 @@
       "@packages/oruga-wrapper/*": ["packages/oruga-wrapper/src/*"],
       "@fancy-crud/core": ["packages/core/src/index"],
       "@fancy-crud/vue": ["packages/vue/src/index"],
-      "@fancy-crud/oruga-wrapper": ["packages/oruga-wrapper/src/index"]
+      "@fancy-crud/oruga-wrapper": ["packages/oruga-wrapper/src/index"],
+      "@fancy-crud/vue-toastify-plugin": ["packages/vue-toastify-plugin/src/index"]
     }
   },
   "exclude": [

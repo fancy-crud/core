@@ -9,10 +9,13 @@ export default defineConfig(() => {
   return {
     resolve: {
       alias: {
+        '@fancy-crud/vue/dist': `${path.resolve(__dirname, '../packages/vue/dist')}/`,
+        '@fancy-crud/oruga-wrapper/dist': `${path.resolve(__dirname, '../packages/oruga-wrapper/dist')}/`,
         '@fancy-crud/vue': `${path.resolve(__dirname, '../packages/vue/src')}/`,
         '@fancy-crud/core': `${path.resolve(__dirname, '../packages/core/src')}/`,
         '@fancy-crud/oruga-wrapper': `${path.resolve(__dirname, '../packages/oruga-wrapper/src')}/`,
         '@fancy-crud/rules-processors': `${path.resolve(__dirname, '../packages/rules-processors/src')}/`,
+        '@fancy-crud/vue-toastify-plugin': `${path.resolve(__dirname, '../packages/vue-toastify-plugin/src')}/`,
 
         '@packages/core/': `${path.resolve(__dirname, '../packages/core/src')}/`,
         '@packages/vue/': `${path.resolve(__dirname, '../packages/vue/src')}/`,

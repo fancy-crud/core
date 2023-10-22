@@ -19,8 +19,8 @@ export class ResponseInterceptorStoreService implements IResponseInterceptorStor
     responseInterceptorStore.delete(id)
   }
 
-  intercept(id: symbol, code: number, payload: unknown): ResponseInterceptorState | undefined {
-    const state = this.searchById(id)
+  intercept(interceptorId: symbol, formId: symbol, code: number, payload: unknown): void {
+    const state = this.searchById(interceptorId)
 
     if (!state) {
       console.error('Response interceptor state does not exist')
@@ -30,11 +30,13 @@ export class ResponseInterceptorStoreService implements IResponseInterceptorStor
     const interceptor = state[code]
 
     if (!interceptor) {
-      console.error('Unable to intercept response. Response interceptor code does not exist')
+      console.error(
+        `Unable to intercept response. Response interceptor of code ${code} does not exist`,
+      )
       return
     }
 
-    interceptor(payload)
+    interceptor(formId, payload)
   }
 }
 

@@ -1,5 +1,11 @@
-import type { HttpRequest, Locale, PaginationStructure, RuleOptions } from '@fancy-crud/core'
-import { fields, setDefaultClasses, setFields, setHttpPagination, setHttpRequest, setLocale, setRuleOptions, setTable, setUtils } from '@fancy-crud/core'
+import type {
+  HttpRequest,
+  Locale,
+  NotificationState,
+  PaginationStructure,
+  RuleOptions,
+} from '@fancy-crud/core'
+import { fields, setDefaultClasses, setDefaultNotificationHandler, setFields, setHttpPagination, setHttpRequest, setLocale, setRuleOptions, setTable, setUtils } from '@fancy-crud/core'
 
 export interface Options {
   http: {
@@ -12,6 +18,7 @@ export interface Options {
   table: Record<string, any>
   defaultClasses: Record<string, string>
   i18n: Locale
+  notificationHandler: NotificationState
 }
 
 export function setFancyCrudConfig(options: Partial<Options>) {
@@ -38,6 +45,9 @@ export function setFancyCrudConfig(options: Partial<Options>) {
 
   if (options.i18n)
     setLocale(options.i18n)
+
+  if (options.notificationHandler)
+    setDefaultNotificationHandler(options.notificationHandler)
 
   if (Object.keys(fields).length === 0)
     throw new Error('You should install a ui wrapper, please follow the documentation at: https://fancy-crud.github.io/docs/')

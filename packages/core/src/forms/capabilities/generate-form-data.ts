@@ -1,4 +1,4 @@
-import type { ObjectWithNormalizedFields } from '@packages/core/forms/axioma'
+import type { BaseObjectWithNormalizedFields } from '@packages/core/forms/axioma'
 import type { GenerateFormDataCommand, GenerateFormDataOutput, IGenerateFormDataHandler, JsonForm, MinimumNormalizedField } from '../axioma'
 
 export class GenerateFormDataHandler implements IGenerateFormDataHandler {
@@ -86,7 +86,7 @@ export class GenerateFormDataHandler implements IGenerateFormDataHandler {
    * @param fields The normalized form fields.
    * @returns An object containing the form data in the appropriate format.
    */
-  execute<T extends ObjectWithNormalizedFields<MinimumNormalizedField>>({ fields }: GenerateFormDataCommand<T>): GenerateFormDataOutput<T> {
+  execute<T extends BaseObjectWithNormalizedFields<MinimumNormalizedField>>({ fields }: GenerateFormDataCommand<T>): GenerateFormDataOutput<T> {
     const entriesFields: [string, MinimumNormalizedField][] = Object.entries(fields)
 
     entriesFields.forEach(([fieldKey, field]) => {

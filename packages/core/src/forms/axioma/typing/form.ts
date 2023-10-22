@@ -40,8 +40,8 @@ export type NormalizedField = FieldNormalizer<BaseRawField>
 
 export type NormalizedFields<T> = { [K in keyof T]: NormalizedField & T[K] }
 
-export interface ObjectWithRawFields extends Record<string, BaseRawField> {}
-export interface ObjectWithNormalizedFields<T = NormalizedField> extends Record<string, T> {}
+export interface BaseObjectWithRawFields extends Record<string, BaseRawField> {}
+export interface BaseObjectWithNormalizedFields<T = NormalizedField> extends Record<string, T> {}
 export interface FieldErrors extends Record<string, string[]> {}
 
 export interface Form<T, U> {

@@ -1,9 +1,9 @@
-import type { NormalizedField, ObjectWithNormalizedFields } from '@packages/core/forms/axioma'
+import type { NormalizedField, BaseObjectWithNormalizedFields } from '@packages/core/forms/axioma'
 import { FORM_MODE } from '@packages/core/forms/axioma'
 import type { FilterFieldsByFormModeCommand, FilterFieldsByFormModeCommandInput, IFilterFieldsByFormModeHandler } from '../axioma'
 
 export class FilterFieldsByFormModeHandler implements IFilterFieldsByFormModeHandler {
-  private filter<T extends FilterFieldsByFormModeCommandInput>(fields: ObjectWithNormalizedFields<T>, omit: 'createOnly' | 'updateOnly') {
+  private filter<T extends FilterFieldsByFormModeCommandInput>(fields: BaseObjectWithNormalizedFields<T>, omit: 'createOnly' | 'updateOnly') {
     const filteredFields = Object.entries(fields).filter(([_, field]) => {
       if (field.hidden)
         return false

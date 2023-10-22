@@ -110,6 +110,7 @@ jobs:
           pnpm -w run release ${{ needs.compute-new-tag-version.outputs.toTag }}
           pnpm dlx nx build @fancy-crud/oruga-wrapper
           pnpm dlx nx build @fancy-crud/rules-processors
+          pnpm dlx nx build @fancy-crud/vue-toastify-plugin
           pnpm --filter "./packages/**" publish --no-git-checks --tag ${{ github.ref_name }}
 
   generate-release:

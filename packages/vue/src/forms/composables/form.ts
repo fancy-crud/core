@@ -1,4 +1,4 @@
-import type { NormalizedButtons, NormalizedFields, ObjectWithRawFields, RawButton } from '@fancy-crud/core'
+import type { NormalizedButtons, NormalizedFields, BaseObjectWithRawFields, RawButton } from '@fancy-crud/core'
 import { Bus, CreateFormCommand, IFormStore, IRuleOptionsStore, ruleOptions } from '@fancy-crud/core'
 import type { Args, UseForm } from '../typing'
 
@@ -13,7 +13,7 @@ import type { Args, UseForm } from '../typing'
  * @param rawSettings - An optional `RawSettings` object containing the raw settings to be normalized.
  * @returns A `UseForm` object containing the reactive fields, titles, buttons, and settings.
  */
-export function useForm<T extends ObjectWithRawFields, U extends Record<string, RawButton>>(args: Args<T, U>): UseForm<T, U> {
+export function useForm<T extends BaseObjectWithRawFields, U extends Record<string, RawButton>>(args: Args<T, U>): UseForm<T, U> {
   const {
     id: _id = '',
     fields: rawFields,

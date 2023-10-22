@@ -1,6 +1,6 @@
 import { meta } from '@packages/core/common/bus/capabilities'
 import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import type { FieldErrors, NormalizedField, ObjectWithNormalizedFields } from '@packages/core/forms/axioma'
+import type { BaseObjectWithNormalizedFields, FieldErrors, NormalizedField } from '@packages/core/forms/axioma'
 
 type MinimumNormalizedField = Pick<NormalizedField, 'errors'>
 
@@ -8,7 +8,7 @@ export class SetFieldsErrorsCommand implements BaseCommand {
   public readonly meta = meta(ISetFieldsErrorsHandler)
 
   constructor(
-    public readonly normalizedFields: ObjectWithNormalizedFields<MinimumNormalizedField>,
+    public readonly normalizedFields: BaseObjectWithNormalizedFields<MinimumNormalizedField>,
     public readonly errors: FieldErrors,
   ) {}
 }

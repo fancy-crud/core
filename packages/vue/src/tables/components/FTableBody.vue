@@ -1,5 +1,9 @@
 <template>
-  <component :is="table.body" v-bind="$attrs" :headers="props.headers" :items="props.items" />
+  <component :is="table.body" v-bind="$attrs" :headers="props.headers" :items="props.items">
+    <template v-for="(_, slotName) in slots" #[`${slotName}`]="bind" :key="slotName">
+      <slot :name="slotName" v-bind="bind" />
+    </template>
+  </component>
 </template>
 
 <script lang="ts" setup>
@@ -10,4 +14,6 @@ const props = defineProps<{
   headers: NormalizedColumn[]
   items: any[]
 }>()
+
+const slots = useSlots()
 </script>

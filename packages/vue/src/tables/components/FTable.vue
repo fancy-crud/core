@@ -5,16 +5,11 @@
 
   <slot name="table-form" v-bind="{ onSuccess, form: tableForm, formModal }">
     <f-modal v-model="formModal">
-      <div
-        class="p-5 bg-white"
-        max-width="max-w-3xl"
-      >
-        <f-form
-          @success="onSuccess"
-          v-bind="tableForm"
-          :id="props.form.id"
-        />
-      </div>
+      <f-form
+        @success="onSuccess"
+        v-bind="tableForm"
+        :id="props.form.id"
+      />
     </f-modal>
   </slot>
 
@@ -30,7 +25,11 @@
       :loading="isFetching"
       :per-page="pagination.rowsPerPage"
       :total="pagination.count"
-    />
+    >
+      <template v-for="(_, slotName) in slots" #[`${slotName}`]="bind" :key="slotName">
+        <slot :name="slotName" v-bind="bind" />
+      </template>
+    </f-table-body>
   </slot>
 
   <slot name="table-footer" />
@@ -68,6 +67,8 @@ const emit = defineEmits<{
   (e: 'update:formModal', value: boolean): void
   (e: 'export'): void
 }>()
+
+const slots = useSlots()
 
 const bus = new Bus()
 const formStore: IFormStore = inject(IFormStore.name)!

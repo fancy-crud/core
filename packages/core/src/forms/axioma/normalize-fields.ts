@@ -1,8 +1,8 @@
 import { meta } from '@packages/core/common/bus/capabilities'
 import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import type { NormalizedFields, ObjectWithRawFields } from '@packages/core/forms/axioma'
+import type { BaseObjectWithRawFields, NormalizedFields } from '@packages/core/forms/axioma'
 
-export type NormalizeFormFieldsCommandInputType = ObjectWithRawFields
+export type NormalizeFormFieldsCommandInputType = BaseObjectWithRawFields
 
 export class NormalizeFormFieldsCommand<T extends NormalizeFormFieldsCommandInputType> implements BaseCommand {
   public readonly meta = meta(INormalizeFormFieldsHandler)

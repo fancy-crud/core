@@ -1,11 +1,11 @@
 import { meta } from '@packages/core/common/bus/capabilities'
 import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import type { Form, ObjectWithRawFields, RawButton, RawSetting, RawTitle } from './typing'
+import type { BaseObjectWithRawFields, Form, RawButton, RawSetting, RawTitle } from './typing'
 
 /**
  * A class that provides functionality to create a form from raw fields and settings.
  */
-export class CreateFormCommand<T extends ObjectWithRawFields, U extends RawSetting, V extends Record<'main' | 'aux', RawButton>> implements BaseCommand {
+export class CreateFormCommand<T extends BaseObjectWithRawFields, U extends RawSetting, V extends Record<'main' | 'aux', RawButton>> implements BaseCommand {
   public readonly meta = meta(ICreateFormHandler)
 
   constructor(
@@ -26,5 +26,5 @@ export abstract class ICreateFormHandler {
    * @param rawSettings - An optional `RawSettings` object containing the raw settings to be normalized.
    * @returns A `Form` object containing the normalized fields and settings.
    */
-  abstract execute<T extends ObjectWithRawFields, U extends RawSetting, V extends Record<'main' | 'aux', RawButton>>({ id, rawFields, rawSettings, rawButtons, rawTitles }: CreateFormCommand<T, U, V>): Form<T, V>
+  abstract execute<T extends BaseObjectWithRawFields, U extends RawSetting, V extends Record<'main' | 'aux', RawButton>>({ id, rawFields, rawSettings, rawButtons, rawTitles }: CreateFormCommand<T, U, V>): Form<T, V>
 }

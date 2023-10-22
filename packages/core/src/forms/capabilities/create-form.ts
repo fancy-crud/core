@@ -13,7 +13,8 @@ import {
 
   NormalizeTitlesCommand,
 } from '@packages/core/forms/axioma'
-import type { Form, NormalizedButtons, NormalizedFields, ObjectWithRawFields, RawButton, RawSetting } from '../axioma'
+import { getDefaultInterceptors, getDefaultNotificationHandler } from '@packages/core/config'
+import type { BaseObjectWithRawFields, Form, NormalizedButtons, NormalizedFields, RawButton, RawSetting } from '../axioma'
 import { IFormStore, IRuleOptionsStore } from '../axioma'
 
 export class CreateFormHandler implements ICreateFormHandler {
@@ -32,7 +33,7 @@ export class CreateFormHandler implements ICreateFormHandler {
    * @param rawSettings - An optional `RawSettings` object containing the raw settings to be normalized.
    * @returns A `Form` object containing the normalized fields and settings.
    */
-  execute<T extends ObjectWithRawFields, U extends RawSetting, V extends Record<'main' | 'aux', RawButton>>({ id, rawFields, rawSettings, rawButtons, rawTitles }: CreateFormCommand<T, U, V>): Form<T, V> {
+  execute<T extends BaseObjectWithRawFields, U extends RawSetting, V extends Record<'main' | 'aux', RawButton>>({ id, rawFields, rawSettings, rawButtons, rawTitles }: CreateFormCommand<T, U, V>): Form<T, V> {
     const formId = Symbol(id)
     const bus = new Bus()
 
@@ -58,8 +59,8 @@ export class CreateFormHandler implements ICreateFormHandler {
       buttons: normalizedButtons,
     })
 
-    this.notificationStore.save(formId, {})
-    this.responseInterceptorStore.save(formId, {})
+    this.notificationStore.save(formId, getDefaultNotificationHandler())
+    this.responseInterceptorStore.save(formId, getDefaultInterceptors())
     this.ruleOptionsStore.save(formId, {})
 
     return {
