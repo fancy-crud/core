@@ -33,7 +33,7 @@ export default defineComponent({
 
     return () =>
       h(OField, { ...props.field.wrapper, label: props.field.label, message: hintText.value, variant: variant.value }, {
-        default: () => h(OSelect, { ...vAttrs, attrs, ...vmodel.value, expanded: true }, {
+        default: () => h(OSelect, { ...vAttrs, ...attrs, ...vmodel.value, expanded: true }, {
           default: () => renderOptions(),
         }),
       })
