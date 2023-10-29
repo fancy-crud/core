@@ -108,6 +108,8 @@ jobs:
       - name: Build and publish
         run: |
           pnpm -w run release ${{ needs.compute-new-tag-version.outputs.toTag }}
+          pnpm build:core
+          pnpm build:vue
           pnpm build:wo
           pnpm build:wv
           pnpm build:p-rule-parsers
