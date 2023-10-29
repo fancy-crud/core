@@ -20,7 +20,7 @@ export default defineComponent({
     const { vmodel, hintText, attrs } = useSelectField(props)
 
     return () =>
-      h(VSelect, {
+      h(VSelect as any, {
         ...props.field.wrapper,
         ...attrs.value,
         ...vmodel.value,

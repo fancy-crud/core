@@ -27,7 +27,7 @@ const { modelValue, hintText, options } = useRadioField(props)
 
 function getAttributes() {
   const { modelValue, inRow, wrapper, ...attrs } = props.field
-  return attrs
+  return attrs as any
 }
 
 function getLabel(label: unknown): string {

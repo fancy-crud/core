@@ -9,7 +9,7 @@
     "build:p-rule-parsers": "pnpm --filter='./packages/rules-processors' build",
     "build:p-vue3-toastify": "pnpm --filter='./packages/vue-toastify-plugin' build",
     "build:wo": "pnpm --filter='./packages/wrapper-oruga-ui' build",
-    "build:wv": "pnpm --filter='./packages/wrapper-vuetify' build",
+    "build:wv": "pnpm --filter='./packages/wrapper-vuetify' build:no-ts",
     "ci:publish": "pnpm publish --filter './packages/**' --no-git-checks",
     "release": "node scripts/build.js",
     "typecheck": "vue-tsc --noEmit",

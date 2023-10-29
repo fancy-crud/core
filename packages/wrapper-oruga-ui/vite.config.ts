@@ -31,6 +31,8 @@ export default defineConfig({
         exports: 'named',
         globals: {
           vue: 'Vue',
+          '@fancy-crud/core': 'fancyCrudCore',
+          '@fancy-crud/vue': 'fancyCrudVue',
         },
       },
     },

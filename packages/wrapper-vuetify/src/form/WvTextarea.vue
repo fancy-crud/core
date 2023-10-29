@@ -19,7 +19,7 @@ export default defineComponent({
     const { modelValue, hintText } = useTextareaField(props)
 
     return () =>
-      h(VTextarea, {
+      h(VTextarea as any, {
         ...props.field.wrapper,
         ...attrs,
         ...props.field,

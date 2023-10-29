@@ -1,6 +1,6 @@
 <template>
   <v-file-input
-    v-bind="{ ...props.field.wrapper, ...props.field, ...vmodel }"
+    v-bind="computedAttrs"
     :label="props.field.label"
     :hint="props.field.hintText"
     :error-messages="props.field.errors"
@@ -20,6 +20,12 @@ const props = defineProps<{
 }>()
 
 const { vmodel, filesList } = useFileField(props)
+
+const computedAttrs = computed(() => {
+  return {
+    ...props.field.wrapper, ...props.field, ...vmodel
+  } as any
+})
 
 function removeFile(file: File) {
   if (!vmodel.value.modelValue)
