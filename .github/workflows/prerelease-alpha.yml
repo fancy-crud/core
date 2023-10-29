@@ -31,7 +31,14 @@ jobs:
               args: [--frozen-lockfile, --strict-peer-dependencies]
             - args: [--global, gulp, prettier, typescript]
       - name: Run tests
-        run: pnpm test
+        run: |
+          pnpm test
+          pnpm build:core
+          pnpm build:vue
+          pnpm build:wo
+          pnpm build:wv
+          pnpm build:p-rule-parsers
+          pnpm build:p-vue3-toastify
 
   compute-new-tag-version:
     needs: quality
@@ -71,6 +78,9 @@ jobs:
       - name: Run matic-release
         run: poetry run python scripts/release.py --ci
 
+      - name: Publish tag
+        run: git push --tags
+
       - name: 'Get lastest tag'
         id: toTag
         uses: "WyriHaximus/github-action-get-previous-tag@v1"
@@ -102,7 +112,7 @@ jobs:
       - name: install dependencies
         run: pnpm install
 
-      - name: Build packages
+      - name: Build and publish
         run: |
           pnpm -w run release ${{ needs.compute-new-tag-version.outputs.toTag }}
           pnpm build:core
@@ -111,10 +121,6 @@ jobs:
           pnpm build:wv
           pnpm build:p-rule-parsers
           pnpm build:p-vue3-toastify
-      
-      - name: Publish packages
-        run: |
-          git push --tags
           pnpm --filter "./packages/**" publish --no-git-checks --tag ${{ github.ref_name }}
 
   generate-release:
