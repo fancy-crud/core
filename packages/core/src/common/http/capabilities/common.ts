@@ -9,7 +9,7 @@ const httpService: IHttp = {
   request: {},
 } as IHttp
 
-export function setHttpRequest(request: HttpRequest) {
+export function setHttpRequest(request: HttpRequest['request']) {
   Object.assign(httpService.request, request)
 }
 

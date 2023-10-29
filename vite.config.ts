@@ -23,20 +23,9 @@ export default defineConfig(({ command }) => {
     }
   }
 
-  const dependencies = {}
   return {
     resolve: {
       alias,
-    },
-    build: {
-      lib: {
-        name,
-        entry: path.resolve(__dirname, 'src/index.ts'),
-        formats: ['es', 'cjs', 'umd'],
-      },
-      rollupOptions: {
-        external: [...Object.keys(dependencies)],
-      },
     },
     plugins: [
       vue(),

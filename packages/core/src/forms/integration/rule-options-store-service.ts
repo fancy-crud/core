@@ -1,27 +1,27 @@
 import { injectable } from '@packages/core/common/bus/capabilities'
-import type { RuleOptionsState } from '../axioma'
-import { IRuleOptionsStore, ruleOptionsStore } from '../axioma'
+import type { RuleConfigState } from '../axioma'
+import { IRuleConfigStore, rulesConfigStore } from '../axioma'
 
-export class RuleOptionsStoreService implements IRuleOptionsStore {
-  private assign<T extends {}>(target: T, source: RuleOptionsState): asserts target is T & RuleOptionsState {
+export class ruleConfigStoreService implements IRuleConfigStore {
+  private assign<T extends {}>(target: T, source: RuleConfigState): asserts target is T & RuleConfigState {
     Object.assign(target, source)
   }
 
-  save(id: symbol, payload: RuleOptionsState): void {
+  save(id: symbol, payload: RuleConfigState): void {
     const state = this.searchById(id) || {}
 
     this.assign(state, payload)
 
-    ruleOptionsStore.set(id, state)
+    rulesConfigStore.set(id, state)
   }
 
-  searchById(id: symbol): RuleOptionsState | undefined {
-    return ruleOptionsStore.get(id)
+  searchById(id: symbol): RuleConfigState | undefined {
+    return rulesConfigStore.get(id)
   }
 
   deleteById(id: symbol): void {
-    ruleOptionsStore.delete(id)
+    rulesConfigStore.delete(id)
   }
 }
 
-injectable(IRuleOptionsStore.name, RuleOptionsStoreService)
+injectable(IRuleConfigStore.name, ruleConfigStoreService)

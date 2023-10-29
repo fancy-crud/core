@@ -1,25 +1,27 @@
 <template>
   <main
-    class="f-form-body"
+    class="f-form__body"
     v-bind="$attrs"
   >
     <template
       v-for="([fieldKey, field]) in computedFields"
       :key="fieldKey"
     >
-      <slot :name="`before-${fieldKey}`" />
-      <component
-        :is="getComponent(field)"
-        v-bind="{ formId: props.formId, field }"
-      />
-      <slot :name="`after-${fieldKey}`" />
+      <slot :name="`before-field-${fieldKey}`" v-bind="{ field }" />
+      <slot :name="`field-${fieldKey}`" v-bind="{ field }">
+        <component
+          :is="getComponent(field)"
+          v-bind="{ formId: props.formId, field, class: 'f-form__body__field col-span-12' }"
+        />
+      </slot>
+      <slot :name="`before-field-after-${fieldKey}`" v-bind="{ field }" />
     </template>
   </main>
 </template>
 
 <script lang="ts" setup>
 import type { BaseObjectWithNormalizedFields, FormMode, NormalizedField, NormalizedSettings } from '@fancy-crud/core'
-import { Bus, FilterFieldsByFormModeCommand, GetForeignKeyValuesCommand, fields as controls } from '@fancy-crud/core'
+import { Bus, FilterFieldsByFormModeCommand, GetForeignKeyValuesCommand, components } from '@fancy-crud/core'
 
 import FCheckbox from './FCheckbox.vue'
 import FPassword from './FPassword.vue'
@@ -49,6 +51,7 @@ const defaultControls: Record<string, any> = {
   file: FFile,
   datepicker: FDatepicker,
   text: FText,
+  ...components,
 }
 
 onMounted(() => {
@@ -59,11 +62,11 @@ onMounted(() => {
 })
 
 function getComponent(field: NormalizedField) {
-  type ControlType = keyof typeof controls
+  type ControlType = keyof typeof defaultControls
 
   const control = defaultControls[field.type]
 
-  return control ?? (controls[field.type as ControlType] ?? controls.text)
+  return control ?? (defaultControls[field.type as ControlType] ?? defaultControls.text)
 }
 
 function filterFields(fields: BaseObjectWithNormalizedFields, mode: FormMode): [string, NormalizedField][] {
@@ -74,8 +77,3 @@ function filterFields(fields: BaseObjectWithNormalizedFields, mode: FormMode): [
   return filteredFields
 }
 </script>
-
-<style lang="sass">
-.f-form-body
-  @apply grid grid-cols-12 gap-x-8 gap-y-4
-</style>

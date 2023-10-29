@@ -20,7 +20,7 @@
     "src/styles"
   ],
   "scripts": {
-    "build": "vite build && vue-tsc --declaration --emitDeclarationOnly && tsc-alias --verbose -p ./tsconfig.json"
+    "build": "vite build && vue-tsc -p ./tsconfig.build.json --declaration --emitDeclarationOnly && tsc-alias --verbose -p ./tsconfig.build.json"
   },
   "peerDependencies": {
     "@fancy-crud/core": "workspace:^",
@@ -39,7 +39,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.15",
     "postcss": "^8.4.28",
-    "tailwindcss": "^3.3.3"
+    "tailwindcss": "^3.3.4"
   },
   "release": {
     "branches": [

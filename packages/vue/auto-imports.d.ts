@@ -519,7 +519,6 @@ declare module 'vue' {
     readonly useFileDialog: UnwrapRef<typeof import('@vueuse/core')['useFileDialog']>
     readonly useFileField: UnwrapRef<typeof import('./src/forms/composables/fields/file')['useFileField']>
     readonly useFileSystemAccess: UnwrapRef<typeof import('@vueuse/core')['useFileSystemAccess']>
-    readonly useFilters: UnwrapRef<typeof import('./src/filters/composables/index')['useFilters']>
     readonly useFocus: UnwrapRef<typeof import('@vueuse/core')['useFocus']>
     readonly useFocusWithin: UnwrapRef<typeof import('@vueuse/core')['useFocusWithin']>
     readonly useForm: UnwrapRef<typeof import('./src/forms/composables/form')['useForm']>
@@ -838,7 +837,6 @@ declare module '@vue/runtime-core' {
     readonly useFileDialog: UnwrapRef<typeof import('@vueuse/core')['useFileDialog']>
     readonly useFileField: UnwrapRef<typeof import('./src/forms/composables/fields/file')['useFileField']>
     readonly useFileSystemAccess: UnwrapRef<typeof import('@vueuse/core')['useFileSystemAccess']>
-    readonly useFilters: UnwrapRef<typeof import('./src/filters/composables/index')['useFilters']>
     readonly useFocus: UnwrapRef<typeof import('@vueuse/core')['useFocus']>
     readonly useFocusWithin: UnwrapRef<typeof import('@vueuse/core')['useFocusWithin']>
     readonly useForm: UnwrapRef<typeof import('./src/forms/composables/form')['useForm']>

@@ -2,8 +2,8 @@
   <form
     class="f-form"
   >
-    <f-form-header v-slot="{ title }" :titles="props.titles" :settings="props.settings">
-      <slot name="form-header" v-bind="{ title }" />
+    <f-form-header v-slot="{ formModeTitle }" :title="props.settings.title" :settings="props.settings">
+      <slot name="form-header" v-bind="{ formModeTitle }" />
     </f-form-header>
 
     <f-form-body :fields="props.fields" :settings="props.settings" :form-id="props.id">
@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { BaseObjectWithNormalizedFields, NormalizedSettings, NormalizedTitles, NotificationType, ObjectWithNormalizedButtons } from '@fancy-crud/core'
+import type { BaseObjectWithNormalizedFields, NormalizedSettings, NotificationType, ObjectWithNormalizedButtons } from '@fancy-crud/core'
 import {
   Bus,
   FORM_MODE,
@@ -37,7 +37,7 @@ import {
   IFormStore,
   INotificationStore,
   IResponseInterceptorStore,
-  IRuleOptionsStore,
+  IRuleConfigStore,
   NOTIFICATION_TYPE,
   SaveRecordCommand,
   getDefaultNotifications,
@@ -51,7 +51,6 @@ interface StandardErrorResponseStructure { response: StandardResponseStructure }
 const props = defineProps<{
   id: symbol
   fields: BaseObjectWithNormalizedFields
-  titles: NormalizedTitles
   buttons: ObjectWithNormalizedButtons
   settings: NormalizedSettings
   noInsetScroll?: boolean
@@ -66,11 +65,11 @@ const slots = useSlots()
 const bus = new Bus()
 
 const formStore: IFormStore = injecting(IFormStore.name)!
-const ruleOptionsStore: IRuleOptionsStore = injecting(IRuleOptionsStore.name)!
+const ruleConfigStore: IRuleConfigStore = injecting(IRuleConfigStore.name)!
 const responseInterceptorStore: IResponseInterceptorStore = injecting(IResponseInterceptorStore.name)!
 const notificationService: INotificationStore = injecting(INotificationStore.name)!
 
-const { isFormValid } = useRules(props.fields, ruleOptionsStore.searchById(props.id))
+const { isFormValid } = useRules(props.fields, ruleConfigStore.searchById(props.id))
 
 const beforeAndAfterFieldSlots = computed(() => {
   return Object.entries(slots).filter(
@@ -153,3 +152,10 @@ function triggerNotification(notificationType: NotificationType) {
   notificationService.pushNotification(props.id, notification)
 }
 </script>
+
+<style lang="sass" scoped>
+.f-form
+  height: 100%
+  display: grid
+  grid-template-rows: auto 1fr auto
+</style>

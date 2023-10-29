@@ -1,33 +1,25 @@
 <template>
-  <header class="f-form-header">
-    <slot v-bind="{ title }">
-      <h3 class="f-form-header__title">
-        {{ title }}
+  <header class="f-form__header">
+    <slot v-bind="{ formModeTitle }">
+      <h3 class="f-form__header__title">
+        {{ formModeTitle }}
       </h3>
     </slot>
   </header>
 </template>
 
 <script lang="ts" setup>
-import type { NormalizedSettings, NormalizedTitles } from '@fancy-crud/core'
+import type { NormalizedSettings } from '@fancy-crud/core'
 import { Bus, GetTitleByFormModeCommand } from '@fancy-crud/core'
 
 const props = defineProps<{
-  titles: NormalizedTitles
+  title?: string
   settings: NormalizedSettings
 }>()
 
 const bus = new Bus()
 
-const title = computed(() => bus.execute(
-  new GetTitleByFormModeCommand(props.settings.mode, props.titles),
+const formModeTitle = computed(() => bus.execute(
+  new GetTitleByFormModeCommand(props.settings.mode, props.title),
 ))
 </script>
-
-<style lang="sass">
-.f-form-header
-  @apply pb-8
-
-  &__title
-    @apply text-2xl
-</style>

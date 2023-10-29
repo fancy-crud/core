@@ -1,12 +1,12 @@
-import type { NormalizedField, BaseObjectWithNormalizedFields, RuleOptions } from '@fancy-crud/core'
-import { Bus, ValidateFieldRulesCommand, ValidateFormCommand, ruleOptions } from '@fancy-crud/core'
+import type { BaseObjectWithNormalizedFields, NormalizedField, RuleConfig } from '@fancy-crud/core'
+import { Bus, ValidateFieldRulesCommand, ValidateFormCommand, rulesConfig } from '@fancy-crud/core'
 
-export function useRules(fields: BaseObjectWithNormalizedFields, options: RuleOptions = {}) {
+export function useRules(fields: BaseObjectWithNormalizedFields, options: RuleConfig = {}) {
   const bus = new Bus()
 
   const isFormValid = computed((): boolean => {
     const validateFormCommand = new ValidateFormCommand(fields, {
-      ...ruleOptions,
+      ...rulesConfig,
       ...options,
       preventErrorMessage: true,
     })
@@ -19,7 +19,7 @@ export function useRules(fields: BaseObjectWithNormalizedFields, options: RuleOp
       () => field.modelValue,
       () => {
         const validateFieldCommand = new ValidateFieldRulesCommand(field, {
-          ...ruleOptions,
+          ...rulesConfig,
           ...options,
         })
         bus.execute(validateFieldCommand)

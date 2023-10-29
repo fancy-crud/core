@@ -5,6 +5,7 @@ export interface RawSetting {
   lookupField?: string
   lookupValue?: string
   mode?: FormMode
+  title?: string
   disableResponseHandlers?: boolean
   disableNotifications?: boolean
 }
@@ -13,4 +14,5 @@ export interface NormalizedSettings extends RawSetting {
   mode: FormMode
   url: string
   lookupField: string
+  title: string
 }

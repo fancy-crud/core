@@ -1,6 +1,6 @@
 import { meta } from '@packages/core/common/bus/capabilities'
 import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import type { NormalizedField, Rule, RuleOptions, RuleResult } from '@packages/core/forms/axioma'
+import type { NormalizedField, Rule, RuleConfig, RuleResult } from '@packages/core/forms/axioma'
 
 export type NormalizedFieldToValidate = Pick<NormalizedField, 'errors' | 'modelValue' | 'modelKey'> & { rules?: Rule }
 
@@ -9,7 +9,7 @@ export class ValidateFieldRulesCommand implements BaseCommand {
 
   constructor(
     public readonly field: NormalizedFieldToValidate,
-    public readonly options?: RuleOptions,
+    public readonly options?: RuleConfig,
   ) {}
 }
 

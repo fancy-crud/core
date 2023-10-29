@@ -1,5 +1,5 @@
 <template>
-  <f-modal v-model="modelValue" :can-cancel="false">
+  <f-modal v-model="modelValue">
     <slot v-bind="{ accept, cancel }">
       <div max-width="bg-white max-w-md">
         <div class="p-6 text-center">
@@ -21,13 +21,14 @@
           <f-button
             @click="accept"
             class="f-button f-modal__button--accept"
+            v-bind="defaults.confirmButton"
           >
             Yes, I'm sure
           </f-button>
           <f-button
             @click="cancel"
-            class="f-button f-modal__button--cancel"
-            outlined
+            class="f-button f-modal__button--cancel ml-4"
+            v-bind="defaults.cancelButton"
           >
             No, cancel
           </f-button>
@@ -38,6 +39,8 @@
 </template>
 
 <script lang="ts" setup>
+import { getDefaults } from '@fancy-crud/core'
+
 const props = defineProps<{
   modelValue: boolean
 }>()
@@ -49,6 +52,8 @@ const emit = defineEmits<{
 }>()
 
 const modelValue = ref(props.modelValue)
+
+const defaults = computed(getDefaults)
 
 watch(modelValue, (value: boolean) => {
   emit('update:modelValue', value)

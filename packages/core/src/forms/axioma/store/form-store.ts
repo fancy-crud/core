@@ -1,9 +1,8 @@
-import type { BaseObjectWithNormalizedFields, NormalizedSettings, NormalizedTitles, ObjectWithNormalizedButtons } from '../typing'
+import type { BaseObjectWithNormalizedFields, NormalizedSettings, ObjectWithNormalizedButtons } from '../typing'
 
 export interface FormState {
   originalNormalizedFields: BaseObjectWithNormalizedFields
   fields: BaseObjectWithNormalizedFields
-  titles: NormalizedTitles
   settings: NormalizedSettings
   buttons: ObjectWithNormalizedButtons
 }

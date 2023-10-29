@@ -1,30 +1,47 @@
 <template>
-  <slot>
+  <slot name="edit-button">
     <f-button
-      v-if="!props.hideEdit"
+      v-if="!editButton.hide"
       @click="emit('edit')"
-      icon="pencil"
-      class="text-primary"
-      borderless
+      v-bind="{ ...editButton }"
     />
+  </slot>
 
+  <slot name="delete-button">
     <f-button
-      v-if="!props.hideDelete"
+      v-if="!deleteButton.hide"
       @click="emit('delete')"
-      icon="delete"
-      class="text-danger"
-      borderless
+      v-bind="{ ...deleteButton }"
     />
   </slot>
 </template>
 
 <script lang="ts" setup>
+import { getDefaults } from '@fancy-crud/core'
+
 const props = defineProps<{
-  hideEdit?: boolean
-  hideDelete?: boolean
+  edit?: Record<string, any>
+  delete?: Record<string, any>
 }>()
+
 const emit = defineEmits<{
   (e: 'edit'): void
   (e: 'delete'): void
 }>()
+
+const defaults = computed(getDefaults)
+
+const editButton = computed(() => ({
+  hide: props.edit?.hide,
+  ...defaults.value.editButton,
+  ...(props.edit || {}),
+
+}))
+
+const deleteButton = computed(() => ({
+  hide: props.delete?.hide,
+  ...defaults.value.removeButton,
+  ...(props.delete || {}),
+
+}))
 </script>

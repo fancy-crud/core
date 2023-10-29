@@ -1,20 +1,22 @@
 <template>
-  <footer class="form-footer">
-    <slot v-bind="{ mainButton, auxButton, getLabel, onMainClick, onAuxClick }">
+  <footer class="f-form__footer">
+    <slot v-bind="{ mainButton, auxButton, getLabel, onMainClick, onAuxClick, isMainButtonDisabled }">
       <f-button
-        @click="onMainClick"
+        @click.prevent="onMainClick"
         v-bind="mainButton"
-        :label="getLabel(mainButton)"
-        :disabled="mainButton?.isDisabled || !props.isFormValid"
-        type="button"
-      />
+        :disabled="isMainButtonDisabled"
+        class="f-button f-form__footer__button f-form__footer__button--main"
+      >
+        {{ getLabel(mainButton) }}
+      </f-button>
 
       <f-button
-        @click="onAuxClick"
+        @click.prevent="onAuxClick"
         v-bind="auxButton"
-        :label="getLabel(auxButton)"
-        type="button"
-      />
+        class="f-button f-form__footer__button f-form__footer__button--aux"
+      >
+        {{ getLabel(auxButton) }}
+      </f-button>
     </slot>
   </footer>
 </template>
@@ -39,14 +41,11 @@ const mainButton = computed(() => props.buttons.main)
 const auxButton = computed(() => props.buttons.aux)
 
 const getLabel = computed(() => (button: NormalizedButton) => bus.execute(
-  new GetButtonLabelByFormModeCommand(props.settings.mode, button),
+  new GetButtonLabelByFormModeCommand(props.settings.mode, button.label),
 ))
+
+const isMainButtonDisabled = computed(() => mainButton.value?.isDisabled || !props.isFormValid)
 
 function onMainClick() { emit('main-click') }
 function onAuxClick() { emit('aux-click') }
 </script>
-
-<style lang="sass">
-.form-footer
-  @apply pt-8
-</style>

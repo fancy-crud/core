@@ -1,9 +1,9 @@
-import type { RuleOptions, RuleResult } from '@packages/core/forms/axioma'
+import type { RuleConfig, RuleResult } from '@packages/core/forms/axioma'
 import { UnprocessableValidationResult } from '@packages/core/forms/axioma'
 import type { IValidateFieldRulesHandler, NormalizedFieldToValidate, ValidateFieldRulesCommand } from '../axioma'
 
 export class ValidateFieldRulesHandler implements IValidateFieldRulesHandler {
-  private setErrorsIfExist(field: NormalizedFieldToValidate, result: RuleResult, options?: RuleOptions) {
+  private setErrorsIfExist(field: NormalizedFieldToValidate, result: RuleResult, options?: RuleConfig) {
     if (result === true || options?.preventErrorMessage) {
       field.errors = []
       return
@@ -26,8 +26,8 @@ export class ValidateFieldRulesHandler implements IValidateFieldRulesHandler {
     let result: RuleResult
     const rawResult = field.rules(field.modelValue)
 
-    if (options?.processResult) {
-      result = options.processResult(rawResult)
+    if (options?.parser) {
+      result = options.parser(rawResult)
       result = this.isValidReturn(result, field.modelKey)
       this.setErrorsIfExist(field, result, options)
 

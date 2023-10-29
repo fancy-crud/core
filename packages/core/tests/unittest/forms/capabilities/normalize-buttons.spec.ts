@@ -1,5 +1,5 @@
 import '@packages/core/forms/integration/load-commands'
-import { setDefaultClasses } from '@packages/core/config'
+import { setDefaults } from '@packages/core/config'
 import { NormalizeButtonsCommand } from '@packages/core/forms/axioma'
 import { describe, expect, it } from 'vitest'
 
@@ -36,7 +36,7 @@ describe('NormalizeButtons', () => {
   })
 
   it.concurrent('should return normalized buttons with defaults when no buttons are provided', () => {
-    setDefaultClasses({
+    setDefaults({
       auxButton: {
         outlined: true,
       },

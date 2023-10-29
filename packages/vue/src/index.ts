@@ -1,14 +1,20 @@
+import './styles/index.sass'
 import type { App, Plugin } from 'vue'
 
-import { IFormStore, IResponseInterceptorStore, IRuleOptionsStore, inject as injecting } from '@fancy-crud/core'
+import type { Config } from '@fancy-crud/core'
+import {
+  IFormStore,
+  IResponseInterceptorStore,
+  IRuleConfigStore,
+  inject as injecting,
+  setupConfig,
+} from '@fancy-crud/core'
 import * as Forms from './forms/components'
 import * as Tables from './tables/components'
 import * as Utils from './common/components'
-import type { Options } from './config'
-import { setFancyCrudConfig } from './config'
 
 // install function executed by Vue.use()
-export const FancyCrud: Plugin = function installFancyCrud(app: App, options: Partial<Options>) {
+export const FancyCrud: Plugin = function install(app: App, options: Config) {
   const componentsList: [string, any][] = Object.entries({
     ...Forms,
     ...Tables,
@@ -22,11 +28,8 @@ export const FancyCrud: Plugin = function installFancyCrud(app: App, options: Pa
       app.component(key, module)
   })
 
-  // if (options.statusCodesHandlers)
-  //   setStatusCodesHandlers(options.statusCodesHandlers)
-
-  setFancyCrudConfig(options)
-  app.provide(IRuleOptionsStore.name, injecting(IRuleOptionsStore))
+  setupConfig(options)
+  app.provide(IRuleConfigStore.name, injecting(IRuleConfigStore))
   app.provide(IResponseInterceptorStore.name, injecting(IResponseInterceptorStore))
   app.provide(IFormStore.name, injecting(IFormStore))
 }
@@ -34,13 +37,8 @@ export const FancyCrud: Plugin = function installFancyCrud(app: App, options: Pa
 // To allow individual component use, export components
 // each can be registered via Vue.component()
 export * from '@fancy-crud/core'
-export * from './config'
 export * from './common'
 // export * from './filters'
 export * from './forms'
 export * from './http'
-// export * from './config'
 export * from './tables'
-
-// eslint-disable-next-line import/first
-import './styles/index.sass'

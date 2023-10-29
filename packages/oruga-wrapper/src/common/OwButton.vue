@@ -10,13 +10,6 @@ export default defineComponent({
   },
 
   setup(props, { attrs, slots }) {
-    const pack = computed(() => {
-      if (attrs.pack)
-        return attrs.pack
-
-      return 'mdi'
-    })
-
     const defaultSlot = computed(() => {
       if (props.isLoading) {
         return {
@@ -26,12 +19,8 @@ export default defineComponent({
       return {}
     })
 
-    const borderlessClass = computed(() => {
-      return props.borderless ? 'border-transparent' : ''
-    })
-
     return () =>
-      h(OButton, { ...attrs, pack, iconRight: props.icon, inverted: props.borderless, invertedClass: borderlessClass.value }, {
+      h(OButton, { ...attrs }, {
         ...defaultSlot.value,
         ...slots,
       })

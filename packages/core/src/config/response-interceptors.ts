@@ -7,7 +7,6 @@ const bus = new Bus()
 
 const interceptors: ResponseInterceptorState = {
   400: (formId: symbol, error: { response?: { data: any } }) => {
-    console.log('🚀 ~ file: response-interceptors.ts:28 ~ interceptors: ResponseInterceptorState.error:', error)
     const formStore: IFormStore = inject(IFormStore)
     const form = formStore.searchById(formId)
 

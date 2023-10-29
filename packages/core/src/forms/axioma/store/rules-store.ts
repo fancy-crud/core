@@ -1,16 +1,16 @@
 export type RuleResult = string | true
 
-export interface RuleOptions {
-  processResult?: (rawResult: any) => RuleResult
+export interface RuleConfig {
+  parser?: (rawResult: any) => RuleResult
   preventErrorMessage?: boolean
 }
 
-export interface RuleOptionsState extends RuleOptions {}
+export interface RuleConfigState extends RuleConfig {}
 
-export abstract class IRuleOptionsStore {
-  abstract save(id: symbol, payload: RuleOptionsState): void
-  abstract searchById(id: symbol): RuleOptionsState | undefined
+export abstract class IRuleConfigStore {
+  abstract save(id: symbol, payload: RuleConfigState): void
+  abstract searchById(id: symbol): RuleConfigState | undefined
   abstract deleteById(id: symbol): void
 }
 
-export const ruleOptionsStore = new Map<symbol, RuleOptionsState>()
+export const rulesConfigStore = new Map<symbol, RuleConfigState>()

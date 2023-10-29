@@ -3,7 +3,7 @@ import OwButton from './OwButton.vue'
 import OwModal from './OwModal.vue'
 import OwLoadingIcon from './OwLoadingIcon.vue'
 
-export const utils = ReturnObject({
+export const common = ReturnObject({
   button: OwButton,
   modal: OwModal,
 })

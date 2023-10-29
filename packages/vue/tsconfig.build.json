@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.common.json",
+  "exclude": [
+    "dist",
+    "node_modules",
+    "cypress",
+    "**/**/*.test.ts",
+    "**/**/*.spec.ts",
+    "**/**/*.stories.tsx",
+    "**/**/*.md",
+    "**/dist",
+    "packages/.test",
+    "packages/_docs",
+  ]
+}

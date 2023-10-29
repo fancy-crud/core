@@ -1,9 +1,9 @@
 <script lang="ts">
-import { fields } from '@fancy-crud/core'
+import { components } from '@fancy-crud/core'
 
 export default defineComponent({
   setup(_, { attrs, slots }) {
-    return () => h(fields.text, attrs, slots)
+    return () => h(components.text, attrs, slots)
   },
 })
 </script>

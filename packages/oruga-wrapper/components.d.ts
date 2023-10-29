@@ -8,17 +8,18 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     OwButton: typeof import('./src/common/OwButton.vue')['default']
-    OwCheckbox: typeof import('./src/fields/OwCheckbox.vue')['default']
-    OwColor: typeof import('./src/fields/OwColor.vue')['default']
-    OwDatepicker: typeof import('./src/fields/OwDatepicker.vue')['default']
-    OwFile: typeof import('./src/fields/OwFile.vue')['default']
+    OwCheckbox: typeof import('./src/form/OwCheckbox.vue')['default']
+    OwColor: typeof import('./src/form/OwColor.vue')['default']
+    OwDatepicker: typeof import('./src/form/OwDatepicker.vue')['default']
+    OwField: typeof import('./src/form/OwField.vue')['default']
+    OwFile: typeof import('./src/form/OwFile.vue')['default']
     OwLoadingIcon: typeof import('./src/common/OwLoadingIcon.vue')['default']
     OwModal: typeof import('./src/common/OwModal.vue')['default']
-    OwPassword: typeof import('./src/fields/OwPassword.vue')['default']
-    OwRadio: typeof import('./src/fields/OwRadio.vue')['default']
-    OwSelect: typeof import('./src/fields/OwSelect.vue')['default']
+    OwPassword: typeof import('./src/form/OwPassword.vue')['default']
+    OwRadio: typeof import('./src/form/OwRadio.vue')['default']
+    OwSelect: typeof import('./src/form/OwSelect.vue')['default']
     OwTableBody: typeof import('./src/table/OwTableBody.vue')['default']
-    OwText: typeof import('./src/fields/OwText.vue')['default']
-    OwTextarea: typeof import('./src/fields/OwTextarea.vue')['default']
+    OwText: typeof import('./src/form/OwText.vue')['default']
+    OwTextarea: typeof import('./src/form/OwTextarea.vue')['default']
   }
 }

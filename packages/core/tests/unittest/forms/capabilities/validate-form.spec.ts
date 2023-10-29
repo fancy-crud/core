@@ -109,7 +109,7 @@ describe('ValidateForm', () => {
     }
 
     const options = {
-      processResult: (result: any) => {
+      parser: (result: any) => {
         return result
       },
     }

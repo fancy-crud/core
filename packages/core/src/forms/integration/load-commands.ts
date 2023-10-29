@@ -4,7 +4,7 @@ import {
   IGenerateFormDataHandler, IGetButtonLabelByFormModeHandler,
   IGetTitleByFomModeHandler, INormalizeButtonsHandler,
   INormalizeFormFieldsHandler, INormalizeSettingsHandler,
-  INormalizeTitlesHandler, IResetFieldsByFormIdHandler,
+  IResetFieldsByFormIdHandler,
   IResetFieldsHandler, ISetFieldsErrorsHandler,
   ISetFieldsValuesHandler, ISwitchFormToCreateModeHandler,
   ISwitchFormToUpdateModeHandler, IValidateFieldRulesHandler,
@@ -18,7 +18,6 @@ import { GetTitleByFomModeHandler } from '../capabilities/get-title-by-form-mode
 import { NormalizeButtonsHandler } from '../capabilities/normalize-buttons'
 import { NormalizeFormFieldsHandler } from '../capabilities/normalize-fields'
 import { NormalizeSettingsHandler } from '../capabilities/normalize-settings'
-import { NormalizeTitlesHandler } from '../capabilities/normalize-titles'
 import { ResetFieldsHandler } from '../capabilities/reset-fields'
 import { ResetFieldsByFormIdHandler } from '../capabilities/reset-fields-by-form-id'
 import { SetFieldsErrorsHandler } from '../capabilities/set-fields-errors'
@@ -36,7 +35,6 @@ register(IGetTitleByFomModeHandler.name, GetTitleByFomModeHandler)
 register(INormalizeButtonsHandler.name, NormalizeButtonsHandler)
 register(INormalizeFormFieldsHandler.name, NormalizeFormFieldsHandler)
 register(INormalizeSettingsHandler.name, NormalizeSettingsHandler)
-register(INormalizeTitlesHandler.name, NormalizeTitlesHandler)
 register(IResetFieldsByFormIdHandler.name, ResetFieldsByFormIdHandler)
 register(IResetFieldsHandler.name, ResetFieldsHandler)
 register(ISetFieldsErrorsHandler.name, SetFieldsErrorsHandler)

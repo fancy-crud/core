@@ -1,5 +1,5 @@
-import type { NormalizedButtons, NormalizedFields, BaseObjectWithRawFields, RawButton } from '@fancy-crud/core'
-import { Bus, CreateFormCommand, IFormStore, IRuleOptionsStore, ruleOptions } from '@fancy-crud/core'
+import type { BaseObjectWithRawFields, NormalizedButtons, NormalizedFields, RawButton } from '@fancy-crud/core'
+import { Bus, CreateFormCommand, IFormStore, IRuleConfigStore, rulesConfig } from '@fancy-crud/core'
 import type { Args, UseForm } from '../typing'
 
 /**
@@ -17,49 +17,44 @@ export function useForm<T extends BaseObjectWithRawFields, U extends Record<stri
   const {
     id: _id = '',
     fields: rawFields,
-    titles: rawTitles,
     buttons: rawButtons,
     settings: rawSettings,
-    ruleOptions: customRuleOptions,
+    rulesConfig: customRulesConfig,
   } = args
 
   const formStore: IFormStore = inject(IFormStore.name)!
-  const ruleOptionsStore: IRuleOptionsStore = inject(IRuleOptionsStore.name)!
+  const ruleConfigStore: IRuleConfigStore = inject(IRuleConfigStore.name)!
   const bus = new Bus()
 
   const {
     id,
     originalNormalizedFields,
     clonedNormalizedFields,
-    normalizedTitles,
     normalizedButtons,
     normalizedSettings,
   } = bus.execute(
-    new CreateFormCommand(_id, rawFields, rawTitles, rawButtons, rawSettings),
+    new CreateFormCommand(_id, rawFields, rawButtons, rawSettings),
   )
 
   const fields = reactive(clonedNormalizedFields) as NormalizedFields<T>
   const buttons = reactive(normalizedButtons) as NormalizedButtons<U>
-  const titles = reactive(normalizedTitles)
   const settings = reactive(normalizedSettings)
 
   formStore.save(id, {
     originalNormalizedFields,
     fields,
-    titles,
     settings,
     buttons,
   })
 
-  ruleOptionsStore.save(id, {
-    ...ruleOptions,
-    ...customRuleOptions,
+  ruleConfigStore.save(id, {
+    ...rulesConfig,
+    ...customRulesConfig,
   })
 
   return {
     id,
     fields,
-    titles,
     buttons,
     settings,
     bus,

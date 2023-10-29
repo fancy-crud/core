@@ -13,23 +13,15 @@ export class NormalizeButtonsHandler implements INormalizeButtonsHandler {
       ...main,
       class: main?.class || defaults.mainButton?.class,
       isLoading: main?.isLoading || false,
-      icon: main?.icon || '',
-      label: {
-        create: main?.label?.create || t('create-new'),
-        update: main?.label?.update || t('update-record'),
-      },
+      label: main?.label ?? `{{ ${t('create-new')} | ${t('update-record')} }}`,
     }
 
     const defaultAuxButton: NormalizedButton = {
       ...defaults.auxButton,
       ...aux,
       isLoading: aux.isLoading || false,
-      icon: aux.icon || '',
       class: aux.class || defaults.auxButton?.class,
-      label: {
-        create: aux.label?.create || t('cancel'),
-        update: aux.label?.update || t('cancel'),
-      },
+      label: aux.label ?? t('cancel'),
     }
 
     const defaultButtons = {

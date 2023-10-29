@@ -10,19 +10,17 @@ import {
   NormalizeButtonsCommand,
   NormalizeFormFieldsCommand,
   NormalizeSettingsCommand,
-
-  NormalizeTitlesCommand,
 } from '@packages/core/forms/axioma'
 import { getDefaultInterceptors, getDefaultNotificationHandler } from '@packages/core/config'
 import type { BaseObjectWithRawFields, Form, NormalizedButtons, NormalizedFields, RawButton, RawSetting } from '../axioma'
-import { IFormStore, IRuleOptionsStore } from '../axioma'
+import { IFormStore, IRuleConfigStore } from '../axioma'
 
 export class CreateFormHandler implements ICreateFormHandler {
   constructor(
     private formStore: IFormStore = inject(IFormStore),
     private notificationStore: INotificationStore = inject(INotificationStore),
     private responseInterceptorStore: IResponseInterceptorStore = inject(IResponseInterceptorStore),
-    private ruleOptionsStore: IRuleOptionsStore = inject(IRuleOptionsStore),
+    private ruleConfigStore: IRuleConfigStore = inject(IRuleConfigStore),
   ) {}
 
   /**
@@ -33,7 +31,7 @@ export class CreateFormHandler implements ICreateFormHandler {
    * @param rawSettings - An optional `RawSettings` object containing the raw settings to be normalized.
    * @returns A `Form` object containing the normalized fields and settings.
    */
-  execute<T extends BaseObjectWithRawFields, U extends RawSetting, V extends Record<'main' | 'aux', RawButton>>({ id, rawFields, rawSettings, rawButtons, rawTitles }: CreateFormCommand<T, U, V>): Form<T, V> {
+  execute<T extends BaseObjectWithRawFields, U extends RawSetting, V extends Record<'main' | 'aux', RawButton>>({ id, rawFields, rawSettings, rawButtons }: CreateFormCommand<T, U, V>): Form<T, V> {
     const formId = Symbol(id)
     const bus = new Bus()
 
@@ -48,20 +46,16 @@ export class CreateFormHandler implements ICreateFormHandler {
     const normalizeButtonsCommand = new NormalizeButtonsCommand(rawButtons)
     const normalizedButtons = bus.execute(normalizeButtonsCommand) as NormalizedButtons<V>
 
-    const normalizeTitlesCommand = new NormalizeTitlesCommand(rawTitles)
-    const normalizedTitles = bus.execute(normalizeTitlesCommand)
-
     this.formStore.save(formId, {
       originalNormalizedFields,
       fields: clonedNormalizedFields,
-      titles: normalizedTitles,
       settings: normalizedSettings,
       buttons: normalizedButtons,
     })
 
     this.notificationStore.save(formId, getDefaultNotificationHandler())
     this.responseInterceptorStore.save(formId, getDefaultInterceptors())
-    this.ruleOptionsStore.save(formId, {})
+    this.ruleConfigStore.save(formId, {})
 
     return {
       id: formId,
@@ -69,7 +63,6 @@ export class CreateFormHandler implements ICreateFormHandler {
       clonedNormalizedFields,
       normalizedSettings,
       normalizedButtons,
-      normalizedTitles,
     }
   }
 }

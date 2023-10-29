@@ -9,7 +9,7 @@ export class RequestListHandler implements IRequestListHandler {
     if (options?.onInit)
       options.onInit()
 
-    this.http.request.get(url, params)
+    this.http.request.get(url, { params })
       .then(response => onSuccess(response, options))
       .catch(e => onFailed(e, options))
       .finally(() => onFinally(options))

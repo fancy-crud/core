@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
-import { blue, gray, red } from 'tailwindcss/colors'
+import { blue, gray, red, slate } from 'tailwindcss/colors'
 
 export const content = [
-  './src/**/*.{vue,js,ts,jsx,tsx}',
+  './src/**/*.{vue,js,ts}',
 ]
 export const theme = {
   extend: {
@@ -10,6 +10,7 @@ export const theme = {
       primary: blue,
       danger: red,
       inactive: gray,
+      default: slate,
     },
   },
 }

@@ -3,12 +3,12 @@ import {
   ICreateTableHandler, IDeleteRecordHandler,
   IDeleteStoreTableHandler, IGetColumnValueHandler,
   IGetStoreTableHandler, INormalizeColumnsHandler,
-  INormalizePaginationHandler, INormalizeTableFiltersHandler,
+  INormalizePaginationHandler, INormalizeTableButtonsHandler, INormalizeTableFiltersHandler,
   INormalizeTableSettingsHandler, IPrepareFormToCreateHandler,
   IPrepareFormToUpdateHandler, ISetStoreTableHandler,
   ISetStoreTableManagerHandler, IUpdateRowValueHandler,
 } from '../axioma'
-import { CreateTableHandler, DeleteRecordHandler, DeleteStoreTableHandler, GetColumnValueHandler, GetStoreTableHandler, NormalizeColumnsHandler, NormalizePaginationHandler, NormalizeTableFiltersHandler, NormalizeTableSettingsHandler, PrepareFormToCreateHandler, PrepareFormToUpdateHandler, SetStoreTableHandler, SetStoreTableManagerHandler, UpdateRowValueHandler } from '../capabilities'
+import { CreateTableHandler, DeleteRecordHandler, DeleteStoreTableHandler, GetColumnValueHandler, GetStoreTableHandler, NormalizeColumnsHandler, NormalizePaginationHandler, NormalizeTableButtonsHandler, NormalizeTableFiltersHandler, NormalizeTableSettingsHandler, PrepareFormToCreateHandler, PrepareFormToUpdateHandler, SetStoreTableHandler, SetStoreTableManagerHandler, UpdateRowValueHandler } from '../capabilities'
 
 register(IGetColumnValueHandler.name, GetColumnValueHandler)
 register(ICreateTableHandler.name, CreateTableHandler)
@@ -19,6 +19,7 @@ register(INormalizeColumnsHandler.name, NormalizeColumnsHandler)
 register(INormalizePaginationHandler.name, NormalizePaginationHandler)
 register(INormalizeTableFiltersHandler.name, NormalizeTableFiltersHandler)
 register(INormalizeTableSettingsHandler.name, NormalizeTableSettingsHandler)
+register(INormalizeTableButtonsHandler.name, NormalizeTableButtonsHandler)
 register(IPrepareFormToCreateHandler.name, PrepareFormToCreateHandler)
 register(IPrepareFormToUpdateHandler.name, PrepareFormToUpdateHandler)
 register(ISetStoreTableManagerHandler.name, SetStoreTableManagerHandler)

@@ -16,9 +16,12 @@
   "dependencies": {
     "@fancy-crud/core": "workspace:^",
     "@fancy-crud/vue": "workspace:^",
-    "@fancy-crud/oruga-wrapper": "workspace:^",
-    "@fancy-crud/rules-processors": "workspace:^",
+    "@fancy-crud/wrapper-oruga-ui": "workspace:^",
+    "@fancy-crud/wrapper-vuetify": "workspace:^",
+    "@fancy-crud/plugin-rule-parsers": "workspace:^",
     "@oruga-ui/oruga-next": "^0.6.0",
+    "@oruga-ui/theme-oruga": "^0.0.1",
+    "@oruga-ui/theme-bulma": "^0.2.11",
     "@vueuse/core": "^9.9.0",
     "vue": "^3.2.19"
   },

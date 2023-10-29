@@ -1,7 +1,7 @@
-import type { RuleOptions } from '@packages/core/forms/axioma'
+import type { RuleConfig } from '@packages/core/forms/axioma'
 
-export const ruleOptions: RuleOptions = {}
+export const rulesConfig: RuleConfig = {}
 
-export function setRuleOptions(options: RuleOptions = {}) {
-  Object.assign(ruleOptions, options)
+export function setRuleConfig(config: RuleConfig = {}) {
+  Object.assign(rulesConfig, config)
 }

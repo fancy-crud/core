@@ -9,7 +9,11 @@
         @success="onSuccess"
         v-bind="tableForm"
         :id="props.form.id"
-      />
+      >
+        <template v-for="(_, slotName) in slots" #[`${slotName}`]="bind" :key="slotName">
+          <slot :name="slotName" v-bind="bind" />
+        </template>
+      </f-form>
     </f-modal>
   </slot>
 

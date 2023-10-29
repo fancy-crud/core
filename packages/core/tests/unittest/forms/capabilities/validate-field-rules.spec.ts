@@ -87,7 +87,7 @@ describe('ValidateFieldRules', () => {
     expect(field.errors).toEqual([])
   })
 
-  it.concurrent('should process the result using the custom processResult function', () => {
+  it.concurrent('should process the result using the custom rule parser function', () => {
     const field = {
       modelKey: 'age',
       errors: [],
@@ -102,7 +102,7 @@ describe('ValidateFieldRules', () => {
     }
 
     const options = {
-      processResult: (result: unknown) => {
+      parser: (result: unknown) => {
         if (typeof result === 'string')
           return result
 

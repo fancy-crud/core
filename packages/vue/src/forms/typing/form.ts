@@ -1,10 +1,9 @@
-import type { BaseRawField, Bus, FieldNormalizer, NormalizedButtons, NormalizedFields, NormalizedSettings, NormalizedTitles, RawSetting, RawTitle, RuleOptions } from '@fancy-crud/core'
+import type { BaseRawField, Bus, FieldNormalizer, NormalizedButtons, NormalizedFields, NormalizedSettings, RawSetting, RuleConfig } from '@fancy-crud/core'
 
 export interface UseForm<T, U> {
   id: symbol
   fields: NormalizedFields<T>
   buttons: NormalizedButtons<U>
-  titles: NormalizedTitles
   settings: NormalizedSettings
   bus: Bus
 }
@@ -12,10 +11,9 @@ export interface UseForm<T, U> {
 export interface Args<T, U> {
   fields: T
   id?: string
-  titles?: RawTitle
   buttons?: U
   settings?: RawSetting
-  ruleOptions?: RuleOptions
+  rulesConfig?: RuleConfig
 }
 
 export interface DefaultProps {

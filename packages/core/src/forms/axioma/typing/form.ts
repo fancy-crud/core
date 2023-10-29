@@ -1,6 +1,5 @@
 import type { NormalizedButtons } from './buttons'
 import type { NormalizedSettings } from './settings'
-import type { NormalizedTitles } from './titles'
 
 export type RawRuleResult = string | true | unknown
 export type Rule = (value?: any) => RawRuleResult
@@ -49,6 +48,5 @@ export interface Form<T, U> {
   originalNormalizedFields: NormalizedFields<T>
   clonedNormalizedFields: NormalizedFields<T>
   normalizedButtons: NormalizedButtons<U>
-  normalizedTitles: NormalizedTitles
   normalizedSettings: NormalizedSettings
 }
