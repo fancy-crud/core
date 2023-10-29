@@ -13,20 +13,12 @@ describe('NormalizeButtons', () => {
       main: {
         class: '',
         isLoading: false,
-        icon: '',
-        label: {
-          create: 'Create new',
-          update: 'Update record',
-        },
+        label: '{{ Create new | Update record }}',
       },
       aux: {
         class: '',
         isLoading: false,
-        icon: '',
-        label: {
-          create: 'Cancel',
-          update: 'Cancel',
-        },
+        label: 'Cancel',
       },
     })
 
@@ -50,21 +42,13 @@ describe('NormalizeButtons', () => {
       main: {
         class: '',
         isLoading: false,
-        icon: '',
-        label: {
-          create: 'Create new',
-          update: 'Update record',
-        },
+        label: '{{ Create new | Update record }}',
       },
       aux: {
         class: '',
         isLoading: false,
-        icon: '',
         outlined: true,
-        label: {
-          create: 'Cancel',
-          update: 'Cancel',
-        },
+        label: 'Cancel',
       },
     })
 
@@ -74,18 +58,14 @@ describe('NormalizeButtons', () => {
   })
 
   it.concurrent('should return normalized buttons with overridden properties', () => {
-    const CREATE_LABEL = 'Create'
-    const UPDATE_LABEL = 'Update'
+    const LABEL = '{{ Create | Update }}'
     const CANCEL_ICON = 'cancel-icon'
     const IS_LOADING = true
 
     const buttons = {
       main: {
         isLoading: IS_LOADING,
-        label: {
-          create: CREATE_LABEL,
-          update: UPDATE_LABEL,
-        },
+        label: LABEL
       },
       aux: {
         icon: CANCEL_ICON,
@@ -97,7 +77,7 @@ describe('NormalizeButtons', () => {
     const result = command.meta.Handler().execute(command)
 
     expect(result.main.isLoading).toBe(IS_LOADING)
-    expect(result.main.label?.create).toBe(CREATE_LABEL)
+    expect(result.main.label).toBe(LABEL)
     expect(result.aux.icon).toBe(CANCEL_ICON)
   })
 })
