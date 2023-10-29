@@ -109,8 +109,9 @@ jobs:
         run: |
           pnpm -w run release ${{ needs.compute-new-tag-version.outputs.toTag }}
           pnpm build:wo
-          pnpm dlx nx build @fancy-crud/rules-processors
-          pnpm dlx nx build @fancy-crud/vue-toastify-plugin
+          pnpm build:wv
+          pnpm build:p-rule-parsers
+          pnpm build:p-vue3-toastify
           pnpm --filter "./packages/**" publish --no-git-checks --tag ${{ github.ref_name }}
 
   generate-release:
