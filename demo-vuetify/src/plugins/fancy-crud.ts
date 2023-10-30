@@ -2,8 +2,8 @@ import { defineConfig } from '@fancy-crud/vue'
 import axios from 'axios'
 
 import components, { styles } from '@fancy-crud/wrapper-vuetify'
-import { zodSafeParser as parser } from '@fancy-crud/rules-processors'
-import { vueToastifyPlugin } from '@fancy-crud/vue-toastify-plugin'
+import { zodSafeParser as parser } from '@fancy-crud/plugin-rule-parsers'
+import { vueToastifyPlugin } from '@fancy-crud/plugin-vue3-toastify'
 
 axios.defaults.baseURL = 'http://localhost:9000/api/'
 
