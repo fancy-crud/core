@@ -30,9 +30,9 @@ jobs:
             - args: [--global, gulp, prettier, typescript]
       - name: Run tests
         run: |
-          pnpm test
           pnpm build:bus
           pnpm build:core
+          pnpm test
           pnpm build:vue
           pnpm build:wo
           pnpm build:wv
