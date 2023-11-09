@@ -1,4 +1,4 @@
-import { injectable } from '@packages/core/common/bus/capabilities'
+import { injectable } from '@fancy-crud/bus'
 import type { Notification, NotificationState } from '../axioma'
 import { INotificationStore, notificationStore } from '../axioma'
 

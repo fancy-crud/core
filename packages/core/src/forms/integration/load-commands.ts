@@ -1,4 +1,4 @@
-import { register } from '@packages/core/common/bus/capabilities'
+import { register } from '@fancy-crud/bus'
 import {
   ICreateFormHandler, IFilterFieldsByFormModeHandler,
   IGenerateFormDataHandler, IGetButtonLabelByFormModeHandler,

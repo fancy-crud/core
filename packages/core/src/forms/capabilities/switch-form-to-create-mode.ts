@@ -1,4 +1,4 @@
-import { inject } from '@packages/core/common/bus/capabilities'
+import { inject } from '@fancy-crud/bus'
 import { StoreStateDoesNotExist } from '@packages/core/common/store/axioma'
 import { FORM_MODE, IFormStore, IResetFieldsHandler, ResetFieldsCommand } from '../axioma'
 import type { ISwitchFormToCreateModeHandler, SwitchFormToCreateModeCommand, SwitchFormToCreateModeCommandInput } from '../axioma'

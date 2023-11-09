@@ -1,4 +1,4 @@
-import { inject } from '@packages/core/common/bus/capabilities'
+import { inject } from '@fancy-crud/bus'
 import type { CreateRequestOptions, ISaveRecordHandler, SaveRecordCommand, UpdateRequestOptions } from '../axioma'
 import { IRequestCreateHandler, IRequestUpdateHandler, RequestCreateCommand, RequestUpdateCommand } from '../axioma'
 

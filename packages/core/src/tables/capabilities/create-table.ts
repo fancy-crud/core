@@ -1,4 +1,4 @@
-import { Bus } from '@packages/core/common/bus/capabilities'
+import { Bus } from '@fancy-crud/bus'
 import type { BaseTableForm, CreateTableCommand, FieldAsColumn, ICreateTableHandler, NormalizedColumn, NormalizedTableSettings, ObjectWithRawColumns, RawTableFilters, RawTableSettings, Table } from '../axioma'
 import { NormalizeColumnsCommand, NormalizePaginationCommand, NormalizeTableFiltersCommand, NormalizeTableSettingsCommand, SetStoreTableCommand } from '../axioma'
 

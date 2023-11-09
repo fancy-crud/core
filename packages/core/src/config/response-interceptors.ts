@@ -1,6 +1,6 @@
 import { IFormStore, SetFieldsErrorsCommand } from '@packages/core/forms/axioma'
 
-import { Bus, inject } from '@packages/core/common/bus/capabilities'
+import { Bus, inject } from '@fancy-crud/bus'
 import type { ResponseInterceptorState } from '@packages/core/common/response-interceptor/axioma'
 
 const bus = new Bus()

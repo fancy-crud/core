@@ -1,4 +1,4 @@
-import { register } from '@packages/core/common/bus/capabilities'
+import { register } from '@fancy-crud/bus'
 import { IGetForeignKeyValuesHandler, IHttp, IRequestCreateHandler, IRequestDeleteHandler, IRequestListHandler, IRequestRetrieveHandler, IRequestUpdateHandler, ISaveRecordHandler } from '../axioma'
 import { GetForeignKeyValuesHandler, HttpService, RequestCreateHandler, RequestDeleteHandler, RequestListHandler, RequestRetrieveHandler, RequestUpdateHandler, SaveRecordHandler } from '../capabilities'
 

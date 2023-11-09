@@ -1,4 +1,4 @@
-import { injectable } from '@packages/core/common/bus/capabilities'
+import { injectable } from '@fancy-crud/bus'
 import type { RuleConfigState } from '../axioma'
 import { IRuleConfigStore, rulesConfigStore } from '../axioma'
 

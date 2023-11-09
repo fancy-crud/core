@@ -2,7 +2,7 @@
   <footer class="f-form__footer">
     <slot v-bind="{ mainButton, auxButton, getLabel, onMainClick, onAuxClick, isMainButtonDisabled }">
       <f-button
-        @click.prevent="onMainClick"
+        @click="onMainClick"
         v-bind="mainButton"
         :disabled="isMainButtonDisabled"
         class="f-button f-form__footer__button f-form__footer__button--main"
@@ -11,7 +11,7 @@
       </f-button>
 
       <f-button
-        @click.prevent="onAuxClick"
+        @click="onAuxClick"
         v-bind="auxButton"
         class="f-button f-form__footer__button f-form__footer__button--aux"
       >

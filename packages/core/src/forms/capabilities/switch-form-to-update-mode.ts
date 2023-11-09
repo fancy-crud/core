@@ -1,5 +1,5 @@
 import { FORM_MODE, IFormStore } from '@packages/core/forms/axioma'
-import { inject } from '@packages/core/common/bus/capabilities'
+import { inject } from '@fancy-crud/bus'
 import { StoreStateDoesNotExist } from '@packages/core/common/store/axioma'
 import type { ISwitchFormToUpdateModeHandler, SwitchFormToUpdateModeCommand, SwitchFormToUpdateModeCommandInput } from '../axioma'
 import { IResetFieldsHandler, ResetFieldsCommand } from '../axioma'

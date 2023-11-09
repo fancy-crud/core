@@ -16,7 +16,7 @@ export function useCheckboxField(props: DefaultProps & { field: NormalizedCheckb
   const { hintText, hasFieldErrors } = useHintText(props)
 
   const inRowDisplay = computed(() => {
-    return props.field.inRow ? 'checkbox-group--in-row' : ''
+    return props.field.inRow ? 'checkbox-group--row' : 'checkbox-group--column'
   })
 
   normalizeModelValue()

@@ -1,5 +1,5 @@
 import '@packages/core/forms/integration/load-commands'
-import { handlers } from '@packages/core/common/bus/axioma'
+import { handlers } from '@fancy-crud/bus'
 import { IValidateFormHandler, ValidateFormCommand } from '@packages/core/forms/axioma'
 import { ValidateFormHandler } from '@packages/core/forms/capabilities'
 import { beforeEach, describe, expect, it } from 'vitest'

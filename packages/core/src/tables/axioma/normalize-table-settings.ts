@@ -1,6 +1,6 @@
 import type { NormalizedTableSettings, RawTableSettings } from '@packages/core/tables/axioma'
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import { meta } from '@packages/core/common/bus/capabilities'
+import type { BaseCommand } from '@fancy-crud/bus'
+import { meta } from '@fancy-crud/bus'
 
 export class NormalizeTableSettingsCommand<T extends RawTableSettings> implements BaseCommand {
   public readonly meta = meta(INormalizeTableSettingsHandler)

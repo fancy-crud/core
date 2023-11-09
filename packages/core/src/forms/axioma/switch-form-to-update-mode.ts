@@ -1,6 +1,6 @@
-import { meta } from '@packages/core/common/bus/capabilities'
-import type { NormalizedSettings, ObjectWithNormalizedButtons, BaseObjectWithNormalizedFields } from '@packages/core/forms/axioma'
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
+import { meta } from '@fancy-crud/bus'
+import type { BaseObjectWithNormalizedFields, NormalizedSettings, ObjectWithNormalizedButtons } from '@packages/core/forms/axioma'
+import type { BaseCommand } from '@fancy-crud/bus'
 
 export type SwitchFormToUpdateModeCommandInput = symbol | {
   originalNormalizedFields: BaseObjectWithNormalizedFields

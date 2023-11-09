@@ -25,14 +25,19 @@
       "vite/client",
     ],
     "paths": {
+      "@packages/bus/*": ["packages/bus/src/*"],
       "@packages/core/*": ["packages/core/src/*"],
       "@packages/vue/*": ["packages/vue/src/*"],
       "@packages/wrapper-oruga-ui/*": ["packages/wrapper-oruga-ui/src/*"],
+      "@packages/wrapper-vuetify/*": ["packages/wrapper-vuetify/src/*"],
+      "@packages/wrapper-quasar/*": ["packages/wrapper-quasar/src/*"],
       "@packages/plugin-rule-parsers/*": ["packages/plugin-rule-parsers/src/*"],
 
       "@fancy-crud/core": ["packages/core/src/index"],
       "@fancy-crud/vue": ["packages/vue/src/index"],
       "@fancy-crud/wrapper-oruga-ui": ["packages/wrapper-oruga-ui/src/index"],
+      "@fancy-crud/wrapper-vuetify": ["packages/wrapper-vuetify/src/index"],
+      "@fancy-crud/wrapper-quasar": ["packages/wrapper-quasar/src/index"],
       "@fancy-crud/plugin-vue3-toastify": ["packages/plugin-vue3-toastify/src/index"],
       "@fancy-crud/plugin-rule-parsers": ["packages/plugin-rule-parsers/src/index"]
     }

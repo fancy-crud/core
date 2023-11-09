@@ -1,5 +1,5 @@
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import { inject, injectable, meta } from '@packages/core/common/bus/capabilities'
+import type { BaseCommand } from '@packages/bus/axioma'
+import { inject, injectable, meta } from '@packages/bus/capabilities'
 
 interface Dependency {
   isCallable(...args: any): void

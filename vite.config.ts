@@ -10,6 +10,7 @@ export default defineConfig(({ command }) => {
     '@packages/vue': `${path.resolve(__dirname, 'packages/vue/src')}/`,
     '@packages/core': `${path.resolve(__dirname, 'packages/core/src')}/`,
     '@packages/oruga-wrapper': `${path.resolve(__dirname, 'packages/oruga-wrapper/src')}/`,
+    '@packages/bus': `${path.resolve(__dirname, 'packages/bus/src')}/`,
     // '@fancy-crud/vue': `${path.resolve(__dirname, 'packages/vue/src')}/`,
     // '@fancy-crud/core': `${path.resolve(__dirname, 'packages/core/src')}/`,
     // '@fancy-crud/oruga-wrapper': `${path.resolve(__dirname, 'packages/oruga-wrapper/src')}/`,

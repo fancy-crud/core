@@ -1,5 +1,5 @@
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import { meta } from '@packages/core/common/bus/capabilities'
+import type { BaseCommand } from '@fancy-crud/bus'
+import { meta } from '@fancy-crud/bus'
 import { Url } from '../axioma'
 import type { CreateRequestOptions, JSONForm } from '../axioma'
 

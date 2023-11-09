@@ -1,4 +1,4 @@
-import { inject } from '@packages/core/common/bus/capabilities'
+import { inject } from '@fancy-crud/bus'
 import type { HttpRequestGet, IRequestListHandler, RequestListCommand } from '../axioma'
 import { IHttp, onFailed, onFinally, onSuccess } from '../axioma'
 

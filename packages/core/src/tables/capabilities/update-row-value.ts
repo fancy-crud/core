@@ -1,6 +1,6 @@
 import type { IUpdateRowValueHandler, UpdateRowValueCommand } from '@packages/core/tables/axioma'
 import { IRequestUpdateHandler, RequestUpdateCommand } from '@packages/core/common/http/axioma'
-import { inject } from '@packages/core/common/bus/capabilities'
+import { inject } from '@fancy-crud/bus'
 
 export class UpdateRowValueHandler implements IUpdateRowValueHandler {
   constructor(

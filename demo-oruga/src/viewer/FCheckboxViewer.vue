@@ -45,7 +45,7 @@ const form = useForm({
       optionLabel: 'label',
       optionValue: 'value',
       options,
-      inRowDisplay: true,
+      inRow: true,
     },
   },
   settings: {

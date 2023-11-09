@@ -1,7 +1,7 @@
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
+import type { BaseCommand } from '@fancy-crud/bus'
 import type { BaseObjectWithNormalizedFields, NormalizedField } from '@packages/core/forms/axioma'
 
-import { meta } from '@packages/core/common/bus/capabilities'
+import { meta } from '@fancy-crud/bus'
 
 export type MinimumNormalizedField =
   Pick<NormalizedField, 'type' | 'modelValue' | 'errors' | 'modelKey'> & { optionValue?: string; multiple?: boolean }

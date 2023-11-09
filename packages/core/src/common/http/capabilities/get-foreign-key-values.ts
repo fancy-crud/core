@@ -1,5 +1,5 @@
 import isEqual from 'lodash.isequal'
-import { inject } from '@packages/core/common/bus/capabilities'
+import { inject } from '@fancy-crud/bus'
 import { IHttp } from '../axioma/typing'
 import type { HttpRequestGet, SameAPIEndpoint } from '../axioma/typing'
 import { PaginateResult } from '../axioma/value-objects/pagination'

@@ -1,5 +1,4 @@
-export * from './common/bus/axioma'
-export * from './common/bus/capabilities'
+export * from '@fancy-crud/bus'
 
 export * from './common/store/axioma'
 

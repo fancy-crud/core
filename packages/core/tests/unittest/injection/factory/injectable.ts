@@ -1,5 +1,5 @@
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import { inject, injectable, meta } from '@packages/core/common/bus/capabilities'
+import type { BaseCommand } from '@fancy-crud/bus'
+import { inject, injectable, meta } from '@fancy-crud/bus'
 
 export class Log {
   print() {

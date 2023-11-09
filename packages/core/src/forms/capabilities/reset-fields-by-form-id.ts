@@ -1,4 +1,4 @@
-import { inject } from '@packages/core/common/bus/capabilities'
+import { inject } from '@fancy-crud/bus'
 import type { ResetFieldsByFormIdCommand } from '../axioma'
 import { IFormStore, IResetFieldsHandler, ResetFieldsCommand } from '../axioma'
 

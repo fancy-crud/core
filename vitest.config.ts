@@ -6,6 +6,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@packages/core': `${path.resolve(__dirname, 'packages/core/src')}/`,
+      '@packages/bus': `${path.resolve(__dirname, 'packages/bus/src')}/`,
     },
   },
   plugins: [

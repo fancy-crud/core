@@ -1,12 +1,12 @@
 import type { UnwrapRef } from 'vue'
 
-interface Props<T = unknown> {
+interface Props<T = any> {
   field: {
     modelValue: T
   }
 }
 
-export function useModelValue<T = unknown>(props: Props<T>) {
+export function useModelValue<T = any>(props: Props<T>) {
   const modelValue = useVModel(props.field, 'modelValue', undefined, { passive: true })
   const vmodel = computed(() => ({
     'modelValue': modelValue.value,

@@ -1,6 +1,6 @@
 import type { DeleteRecordOptions, NormalizedTableSettings, Row } from '@packages/core/tables/axioma'
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import { meta } from '@packages/core/common/bus/capabilities'
+import type { BaseCommand } from '@fancy-crud/bus'
+import { meta } from '@fancy-crud/bus'
 
 export class DeleteRecordCommand implements BaseCommand {
   public readonly meta = meta(IDeleteRecordHandler)

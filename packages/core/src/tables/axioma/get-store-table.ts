@@ -1,5 +1,5 @@
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import { meta } from '@packages/core/common/bus/capabilities'
+import type { BaseCommand } from '@fancy-crud/bus'
+import { meta } from '@fancy-crud/bus'
 import type { TableStoreState } from '../axioma'
 
 export class GetStoreTableCommand implements BaseCommand {

@@ -1,6 +1,6 @@
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
+import type { BaseCommand } from '@fancy-crud/bus'
 import type { CreateRequestOptions, UpdateRequestOptions } from '@packages/core/common/http/axioma'
-import { meta } from '@packages/core/common/bus/capabilities'
+import { meta } from '@fancy-crud/bus'
 
 export class SaveRecordCommand implements BaseCommand {
   public readonly meta = meta(ISaveRecordHandler)

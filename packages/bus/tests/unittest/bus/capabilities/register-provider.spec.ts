@@ -1,5 +1,5 @@
-import { RegisterProvider } from '@packages/core/common/bus/capabilities'
-import { providers } from '@packages/core/common/bus/axioma'
+import { RegisterProvider } from '@packages/bus/capabilities'
+import { providers } from '@packages/bus/axioma'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 describe('RegisterProvider', () => {

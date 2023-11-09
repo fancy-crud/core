@@ -1,5 +1,5 @@
-import { meta } from '@packages/core/common/bus/capabilities'
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
+import { meta } from '@fancy-crud/bus'
+import type { BaseCommand } from '@fancy-crud/bus'
 import type { NormalizedField, Rule, RuleConfig, RuleResult } from '@packages/core/forms/axioma'
 
 export type NormalizedFieldToValidate = Pick<NormalizedField, 'errors' | 'modelValue' | 'modelKey'> & { rules?: Rule }

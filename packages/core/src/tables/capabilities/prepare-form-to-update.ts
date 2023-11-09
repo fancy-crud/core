@@ -1,6 +1,6 @@
 import { IFormStore, ISetFieldsValuesHandler, ISwitchFormToUpdateModeHandler, SetFieldsValuesCommand, SwitchFormToUpdateModeCommand } from '@packages/core/forms/axioma'
 import { IRequestRetrieveHandler, RequestRetrieveCommand } from '@packages/core/common/http/axioma'
-import { inject } from '@packages/core/common/bus/capabilities'
+import { inject } from '@fancy-crud/bus'
 import { StoreStateDoesNotExist } from '@packages/core/common/store/axioma'
 import type { IPrepareFormToUpdateHandler, PrepareFormToUpdateCommand } from '../axioma'
 

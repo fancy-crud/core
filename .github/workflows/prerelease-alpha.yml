@@ -31,6 +31,7 @@ jobs:
       - name: Run tests
         run: |
           pnpm test
+          pnpm build:bus
           pnpm build:core
           pnpm build:vue
           pnpm build:wo
@@ -113,6 +114,7 @@ jobs:
       - name: Build and publish
         run: |
           pnpm -w run release ${{ needs.compute-new-tag-version.outputs.toTag }}
+          pnpm build:bus
           pnpm build:core
           pnpm build:vue
           pnpm build:wo

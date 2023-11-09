@@ -1,7 +1,7 @@
 import type { NormalizedTableSettings, Row } from '@packages/core/tables/axioma'
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
+import type { BaseCommand } from '@fancy-crud/bus'
 import type { RetrieveRequestOptions } from '@packages/core/common/http/axioma'
-import { meta } from '@packages/core/common/bus/capabilities'
+import { meta } from '@fancy-crud/bus'
 
 export class UpdateRowValueCommand<T extends Row = Row> implements BaseCommand {
   public readonly meta = meta(IUpdateRowValueHandler)

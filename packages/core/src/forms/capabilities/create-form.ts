@@ -1,4 +1,4 @@
-import { Bus, inject } from '@packages/core/common/bus/capabilities'
+import { Bus, inject } from '@fancy-crud/bus'
 import { INotificationStore } from '@packages/core/common/notifications/axioma'
 import { IResponseInterceptorStore } from '@packages/core/common/response-interceptor/axioma'
 

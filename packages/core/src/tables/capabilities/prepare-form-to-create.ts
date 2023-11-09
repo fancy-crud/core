@@ -1,4 +1,4 @@
-import { inject } from '@packages/core/common/bus/capabilities'
+import { inject } from '@fancy-crud/bus'
 import { ISwitchFormToCreateModeHandler, SwitchFormToCreateModeCommand } from '@packages/core/forms/axioma'
 import type { IPrepareFormToCreateHandler, PrepareFormToCreateCommand } from '../axioma'
 

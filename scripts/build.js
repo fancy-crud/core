@@ -2,12 +2,13 @@
 import fs from 'node:fs'
 
 const packages = [
+  'bus',
   'core',
   'vue',
   'plugin-rule-parsers',
   'plugin-vue3-toastify',
   'wrapper-oruga-ui',
-  'wrapper-vuetify'
+  'wrapper-vuetify',
 ]
 
 function replace_version({ filePath, err, data, version, packageName }) {

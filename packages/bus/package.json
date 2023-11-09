@@ -1,0 +1,48 @@
+{
+  "name": "@fancy-crud/bus",
+  "version": "0.0.0",
+  "description": "Utility package to use command responsibility segregation",
+  "private": false,
+  "author": {
+    "name": "Christopher A. Flores",
+    "url": "https://github.com/cafadev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fancy-crud/core",
+    "directory": "packages/bus"
+  },
+  "license": "MIT",
+  "main": "dist/fancy-crud-bus.mjs",
+  "module": "dist/fancy-crud-bus.mjs",
+  "types": "dist/src/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build && tsc && tsc-alias --verbose -p ./tsconfig.json"
+  },
+  "peerDependencies": {
+  },
+  "devDependencies": {
+    "vitest": "^0.34.6"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "form",
+    "table",
+    "datatable",
+    "automation",
+    "crud",
+    "create",
+    "read",
+    "update",
+    "delete",
+    "vue",
+    "command",
+    "segregation",
+    "responsibility"
+  ]
+}

@@ -1,5 +1,5 @@
-import { HandlerDoesNotExist, handlers } from '@packages/core/common/bus/axioma'
-import { MapCommands } from '@packages/core/common/bus/capabilities'
+import { HandlerDoesNotExist, handlers } from '@packages/bus/axioma'
+import { MapCommands } from '@packages/bus/capabilities'
 import { describe, expect, it } from 'vitest'
 import { CreateUserHandler } from './factory/create-user'
 

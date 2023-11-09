@@ -1,5 +1,5 @@
-import { meta } from '@packages/core/common/bus/capabilities'
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
+import { meta } from '@fancy-crud/bus'
+import type { BaseCommand } from '@fancy-crud/bus'
 import type { BaseObjectWithNormalizedFields, FieldErrors, NormalizedField } from '@packages/core/forms/axioma'
 
 type MinimumNormalizedField = Pick<NormalizedField, 'errors'>

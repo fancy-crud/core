@@ -1,5 +1,5 @@
-import { handlers } from '@packages/core/common/bus/axioma'
-import { Bus } from '@packages/core/common/bus/capabilities'
+import { handlers } from '@packages/bus/axioma'
+import { Bus } from '@packages/bus/capabilities'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { CreateUserCommand, CreateUserHandler } from './factory/create-user'
 import { CreateUserWithDependencyCommand, CreateUserWithDependencyHandler } from './factory/create-user-with-dependency'

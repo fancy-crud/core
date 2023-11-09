@@ -1,4 +1,4 @@
-import { register } from '../..'
+import { register } from '@fancy-crud/bus'
 import {
   ICreateTableHandler, IDeleteRecordHandler,
   IDeleteStoreTableHandler, IGetColumnValueHandler,

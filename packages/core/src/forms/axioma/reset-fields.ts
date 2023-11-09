@@ -1,6 +1,6 @@
-import { meta } from '@packages/core/common/bus/capabilities'
+import { meta } from '@fancy-crud/bus'
 import type { BaseObjectWithNormalizedFields } from '@packages/core/forms/axioma'
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
+import type { BaseCommand } from '@fancy-crud/bus'
 
 type ObjectRecord = Record<string, unknown>
 

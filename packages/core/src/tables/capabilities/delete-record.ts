@@ -1,5 +1,5 @@
 import { IRequestDeleteHandler, RequestDeleteCommand } from '@packages/core/common/http/axioma'
-import { inject } from '@packages/core/common/bus/capabilities'
+import { inject } from '@fancy-crud/bus'
 import type { DeleteRecordCommand, IDeleteRecordHandler } from '../axioma'
 
 export class DeleteRecordHandler implements IDeleteRecordHandler {

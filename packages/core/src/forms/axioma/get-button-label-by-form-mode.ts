@@ -1,6 +1,6 @@
 import type { FormMode } from '@packages/core/forms/axioma'
-import type { BaseCommand } from '@packages/core/common/bus/axioma'
-import { meta } from '@packages/core/common/bus/capabilities'
+import type { BaseCommand } from '@fancy-crud/bus'
+import { meta } from '@fancy-crud/bus'
 
 export class GetButtonLabelByFormModeCommand implements BaseCommand {
   public readonly meta = meta(IGetButtonLabelByFormModeHandler)
