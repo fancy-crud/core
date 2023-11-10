@@ -8,7 +8,7 @@ export function useColorField(props: DefaultProps & { field: NormalizedColorFiel
   const ruleConfigStore: IRuleConfigStore = inject(IRuleConfigStore.name)!
 
   const { fields } = formStore.searchById(props.formId)!
-  const { modelValue, vmodel } = useModelValue<string>(props)
+  const { modelValue, vmodel } = useModelValue(props)
 
   const { validate } = useRules(fields, ruleConfigStore.searchById(props.formId))
 

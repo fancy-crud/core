@@ -33,6 +33,7 @@
       "@packages/wrapper-quasar/*": ["packages/wrapper-quasar/src/*"],
       "@packages/plugin-rule-parsers/*": ["packages/plugin-rule-parsers/src/*"],
 
+      "@fancy-crud/bus": ["packages/bus/src/index"],
       "@fancy-crud/core": ["packages/core/src/index"],
       "@fancy-crud/vue": ["packages/vue/src/index"],
       "@fancy-crud/wrapper-oruga-ui": ["packages/wrapper-oruga-ui/src/index"],

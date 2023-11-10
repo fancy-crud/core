@@ -3,6 +3,7 @@
   "compilerOptions": {
     "paths": {
       "@fancy-crud/core": ["../core/src/index.ts"],
+      "@packages/vue/*": ["src/*"],
     }
   },
 }

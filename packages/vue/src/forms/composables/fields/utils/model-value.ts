@@ -6,7 +6,7 @@ interface Props<T = any> {
   }
 }
 
-export function useModelValue<T = any>(props: Props<T>) {
+export function useModelValue<T>(props: Props<T>) {
   const modelValue = useVModel(props.field, 'modelValue', undefined, { passive: true })
   const vmodel = computed(() => ({
     'modelValue': modelValue.value,

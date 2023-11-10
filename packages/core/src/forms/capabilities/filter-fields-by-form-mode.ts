@@ -1,4 +1,4 @@
-import type { NormalizedField, BaseObjectWithNormalizedFields } from '@packages/core/forms/axioma'
+import type { BaseObjectWithNormalizedFields, NormalizedField } from '@packages/core/forms/axioma'
 import { FORM_MODE } from '@packages/core/forms/axioma'
 import type { FilterFieldsByFormModeCommand, FilterFieldsByFormModeCommandInput, IFilterFieldsByFormModeHandler } from '../axioma'
 
