@@ -116,7 +116,7 @@ function triggerFetchItems() {
 }
 
 function exportData() {
-  // TODO: implement excel export
+  // TODO: Create a plugin to export data
   emit('export')
 }
 
@@ -126,7 +126,6 @@ function onSuccess() {
 }
 
 function setPagination(newPagination: Pagination) {
-  console.log('🚀 ~ file: FTable.vue:129 ~ setPagination ~ newPagination:', newPagination)
   Object.assign(pagination, newPagination)
 }
 
