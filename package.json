@@ -13,6 +13,8 @@
     "build:p-vue3-toastify": "pnpm --filter='./packages/vue-toastify-plugin' build",
     "build:wo": "pnpm --filter='./packages/wrapper-oruga-ui' build",
     "build:wv": "pnpm --filter='./packages/wrapper-vuetify' build:no-ts",
+    "build:wq": "pnpm --filter='./packages/wrapper-quasar' build",
+    "build": "pnpm build:bus && pnpm build:core && pnpm build:vue && pnpm build:wv && pnpm build:wo && pnpm build:wq",
     "ci:publish": "pnpm publish --filter './packages/**' --no-git-checks",
     "release": "node scripts/build.js",
     "typechecking": "vue-tsc --noEmit",

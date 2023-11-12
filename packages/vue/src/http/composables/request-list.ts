@@ -23,13 +23,23 @@ export function useRequestList<T, F = any>(url: string, filterParams?: F, pagina
 
   const _filterParams = reactive(Object.assign({}, filterParams))
   const _pagination = reactive(
-    Object.assign({ page: 1, count: 10, rowsPerPage: 10 }, pagination),
+    Object.assign({
+      page: 1,
+      count: 10,
+      rowsPerPage: 10,
+      rowsPerPageOptions: [10, 25, 50, 100],
+    }, pagination),
   )
 
   const list = computed(() => mutableList.value)
 
   watch(() => _filterParams, () => resetPagination(), { deep: true })
   watch(() => _pagination.page, () => {
+    if (options?.hotFetch !== false)
+      triggerRequest(_pagination.page)
+  })
+
+  watch(() => _pagination.rowsPerPage, () => {
     if (options?.hotFetch !== false)
       triggerRequest(_pagination.page)
   })
@@ -79,7 +89,7 @@ export function useRequestList<T, F = any>(url: string, filterParams?: F, pagina
   function triggerRequest(page = 1): void {
     isFetching.value = true
     const params = {
-      limit: 10,
+      limit: _pagination.rowsPerPage,
       offset: 0,
       ..._filterParams,
     }

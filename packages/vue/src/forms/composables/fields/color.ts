@@ -3,12 +3,12 @@ import { useRules } from '@packages/vue/forms/composables'
 import type { DefaultProps, NormalizedColorField } from '@packages/vue/forms'
 import { useHintText, useModelValue } from './utils'
 
-export function useColorField(props: DefaultProps & { field: NormalizedColorField }) {
+export function useColorField<T>(props: DefaultProps & { field: NormalizedColorField & { modelValue: T } }) {
   const formStore: IFormStore = inject(IFormStore.name)!
   const ruleConfigStore: IRuleConfigStore = inject(IRuleConfigStore.name)!
 
   const { fields } = formStore.searchById(props.formId)!
-  const { modelValue, vmodel } = useModelValue(props)
+  const { modelValue, vmodel } = useModelValue<T>(props)
 
   const { validate } = useRules(fields, ruleConfigStore.searchById(props.formId))
 

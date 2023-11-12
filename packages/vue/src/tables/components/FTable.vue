@@ -17,18 +17,17 @@
     </f-modal>
   </slot>
 
-  <slot name="table-body" v-bind="{ openEditModal, onDelete, updateCheckbox, setPage }">
+  <slot name="table-body" v-bind="{ openEditModal, onDelete, updateCheckbox, setPagination }">
     <f-table-body
       @edit="openEditModal"
       @delete="onDelete"
       @hot-update="updateCheckbox"
-      @page-change="setPage"
+      @update:pagination="setPagination"
       v-bind="$attrs"
       :headers="headers"
       :items="computedData"
       :loading="isFetching"
-      :per-page="pagination.rowsPerPage"
-      :total="pagination.count"
+      :pagination="pagination"
     >
       <template v-for="(_, slotName) in slots" #[`${slotName}`]="bind" :key="slotName">
         <slot :name="slotName" v-bind="bind" />
@@ -52,7 +51,7 @@
 </template>
 
 <script lang="ts" generic="DataType = unknown" setup>
-import type { BaseTableForm, DeleteRecordOptions, NormalizedTablePagination, NormalizedTableSettings, ObjectWithNormalizedColumns, Row } from '@fancy-crud/core'
+import type { BaseTableForm, DeleteRecordOptions, NormalizedTablePagination, NormalizedTableSettings, ObjectWithNormalizedColumns, Pagination, Row } from '@fancy-crud/core'
 import { Bus, DeleteRecordCommand, GetStoreTableCommand, IFormStore, PrepareFormToCreateCommand, PrepareFormToUpdateCommand } from '@fancy-crud/core'
 import { useRequestList } from '@packages/vue/http'
 
@@ -126,8 +125,9 @@ function onSuccess() {
   closeModal()
 }
 
-function setPage(page: number) {
-  pagination.page = page
+function setPagination(newPagination: Pagination) {
+  console.log('🚀 ~ file: FTable.vue:129 ~ setPagination ~ newPagination:', newPagination)
+  Object.assign(pagination, newPagination)
 }
 
 function closeModal() {

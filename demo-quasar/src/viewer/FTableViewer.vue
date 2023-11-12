@@ -5,6 +5,8 @@
         <a href="https://google.com" class="underline text-primary-500" target="_blank">Haz click</a>
       </template>
     </f-table>
+
+    <q-btn icon="plus" />
   </div>
 </template>
 

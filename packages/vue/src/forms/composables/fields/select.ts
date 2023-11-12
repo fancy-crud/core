@@ -3,12 +3,12 @@ import { useRules } from '@packages/vue/forms'
 import type { NormalizedSelectField } from '@packages/vue/forms'
 import { useHintText, useModelValue, useOptions } from './utils'
 
-export function useSelectField(props: { formId: symbol; field: NormalizedSelectField }) {
+export function useSelectField<T>(props: { formId: symbol; field: NormalizedSelectField & { modelValue: T } }) {
   const formStore: IFormStore = inject(IFormStore.name)!
   const ruleConfigStore: IRuleConfigStore = inject(IRuleConfigStore.name)!
 
   const { fields } = formStore.searchById(props.formId)!
-  const { modelValue, vmodel } = useModelValue(props)
+  const { modelValue, vmodel } = useModelValue<T>(props)
 
   const { validate } = useRules(fields, ruleConfigStore.searchById(props.formId))
 

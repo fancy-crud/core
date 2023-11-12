@@ -9,6 +9,7 @@ const packages = [
   'plugin-vue3-toastify',
   'wrapper-oruga-ui',
   'wrapper-vuetify',
+  'wrapper-quasar',
 ]
 
 function replace_version({ filePath, err, data, version, packageName }) {

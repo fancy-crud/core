@@ -34,10 +34,11 @@ export const styles = {
 
   confirmButton: {
     color: 'error',
+    variant: 'outlined',
   },
 
   cancelButton: {
-    color: 'default',
+    color: 'primary',
   },
 
   modal: {

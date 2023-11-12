@@ -1,5 +1,5 @@
 <template>
-  <component :is="components.tableBody" v-bind="$attrs" :headers="props.headers" :items="props.items">
+  <component :is="components.tableBody" v-bind="$attrs" :headers="props.headers" :items="props.items" :pagination="props.pagination">
     <template v-for="(_, slotName) in slots" #[`${slotName}`]="bind" :key="slotName">
       <slot :name="slotName" v-bind="bind" />
     </template>
@@ -7,12 +7,13 @@
 </template>
 
 <script lang="ts" setup>
-import type { NormalizedColumn } from '@fancy-crud/core'
+import type { NormalizedColumn, NormalizedTablePagination } from '@fancy-crud/core'
 import { components } from '@fancy-crud/core'
 
 const props = defineProps<{
   headers: NormalizedColumn[]
   items: any[]
+  pagination: NormalizedTablePagination
 }>()
 
 const slots = useSlots()

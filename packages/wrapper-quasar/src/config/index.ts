@@ -3,42 +3,47 @@ export const styles = {
     color: 'primary',
   },
 
-  // auxButton: {
-  //   color: 'default',
-  //   variant: 'tonal',
-  // },
+  auxButton: {
+    color: 'primary',
+    outline: true,
+  },
 
-  // addButton: {
-  //   color: 'primary',
-  //   icon: 'mdi-plus',
-  //   variant: 'text',
-  // },
+  addButton: {
+    color: 'primary',
+    icon: 'add',
+    round: true,
+    flat: true,
+  },
 
-  // editButton: {
-  //   color: 'primary',
-  //   icon: 'mdi-pencil',
-  //   variant: 'text',
-  // },
+  editButton: {
+    color: 'primary',
+    icon: 'edit',
+    round: true,
+    flat: true,
+  },
 
-  // removeButton: {
-  //   color: 'pink',
-  //   icon: 'mdi-delete',
-  //   variant: 'text',
-  // },
+  removeButton: {
+    color: 'negative',
+    icon: 'delete',
+    round: true,
+    flat: true,
+  },
 
-  // exportButton: {
-  //   color: 'primary',
-  //   icon: 'mdi-microsoft-excel',
-  //   variant: 'text',
-  // },
+  exportButton: {
+    color: 'primary',
+    icon: 'save_alt',
+    round: true,
+    flat: true,
+  },
 
-  // confirmButton: {
-  //   color: 'error',
-  // },
+  confirmButton: {
+    color: 'negative',
+    outline: true,
+  },
 
-  // cancelButton: {
-  //   color: 'default',
-  // },
+  cancelButton: {
+    color: 'primary',
+  },
 
   // modal: {
   //   width: '600',

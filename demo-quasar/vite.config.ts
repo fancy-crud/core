@@ -4,6 +4,8 @@ import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 
+import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
+
 // https://vitejs.dev/config/
 export default defineConfig(() => {
   return {
@@ -25,7 +27,10 @@ export default defineConfig(() => {
       },
     },
     plugins: [
-      vue(),
+      vue({
+        template: { transformAssetUrls },
+      }),
+      quasar(),
       AutoImport({
         imports: [
           'vue',

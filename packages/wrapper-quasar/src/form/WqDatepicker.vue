@@ -24,6 +24,6 @@ const props = defineProps<{
   field: NormalizedDatepickerField
 }>()
 
-const { hintText, modelValue, hasFieldErrors } = useDatepickerField<string | null>(props)
+const { hintText, modelValue, hasFieldErrors } = useDatepickerField<any>(props)
 </script>
 

@@ -1,11 +1,12 @@
 <template>
   <v-data-table-server
+    v-model:items-per-page="state.pagination.perPage"
     @update:page="setPage"
     v-bind="$attrs"
     :headers="parseHeaders"
     :items="props.items"
-    :items-length="props.total"
-    :items-per-page="props.perPage"
+    :items-length="props.pagination.count"
+    :items-per-page-options="props.pagination.rowsPerPageOptions"
     :loading="props.loading"
     class="elevation-1"
     item-value="name"
@@ -28,28 +29,35 @@
 
 <script lang="ts" setup>
 import { VDataTableServer } from 'vuetify/labs/VDataTable'
-import type { NormalizedColumn } from '@fancy-crud/core'
+import type { NormalizedColumn, NormalizedTablePagination, Pagination } from '@fancy-crud/core'
 import { Bus, GetColumnValueCommand } from '@fancy-crud/core'
 import { FTableRowActions } from '@fancy-crud/vue'
 
 const props = defineProps<{
   items: any[]
   headers: NormalizedColumn[]
-  perPage: number
-  total: number
+  pagination: NormalizedTablePagination
   loading: boolean
 }>()
 
 const emit = defineEmits<{
   (e: 'edit', row: any): void
   (e: 'delete', row: any): void
-  (e: 'page-change', page: number): void
+  (e: 'update:pagination', pagination: Pagination): void
 }>()
+
+const state = reactive({
+  pagination: {
+    perPage: props.pagination.rowsPerPage,
+  },
+})
 
 const bus = new Bus()
 
 const parseHeaders = computed(() => props.headers.map(header => ({ ...header, title: header.label, key: header.value })))
 const excludeActionsHeaders = computed(() => parseHeaders.value.filter(header => header.key !== 'actions'))
+
+watch(() => state.pagination.perPage, rowsPerPage => updatePagination({ rowsPerPage }))
 
 function getValue(row: any, column: NormalizedColumn, rowIndex: number) {
   return bus.execute(
@@ -58,6 +66,11 @@ function getValue(row: any, column: NormalizedColumn, rowIndex: number) {
 }
 
 function setPage(page: number) {
-  emit('page-change', page)
+  updatePagination({
+    page,
+  })
+}
+function updatePagination(pagination: Pagination) {
+  emit('update:pagination', pagination)
 }
 </script>

@@ -2,7 +2,7 @@
   <q-input
     v-model="modelValue"
     @focus="state.popup = true"
-    v-bind="props.field.wrapper"
+    v-bind="{ ...props.field.wrapper, rules: undefined }"
     :hint="hintText"
     :error="hasFieldErrors"
     :error-message="hintText"
@@ -26,7 +26,7 @@ const props = defineProps<{
   formId: symbol
   field: NormalizedColorField
 }>()
-const { hintText, hasFieldErrors, modelValue } = useColorField(props)
+const { hintText, hasFieldErrors, modelValue } = useColorField<any>(props)
 
 const state = reactive({
   popup: false,

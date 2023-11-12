@@ -214,6 +214,9 @@ importers:
         specifier: ^3.2.19
         version: 3.3.4
     devDependencies:
+      '@quasar/vite-plugin':
+        specifier: ^1.6.0
+        version: 1.6.0(@vitejs/plugin-vue@4.4.0)(quasar@2.13.0)(vite@4.5.0)(vue@3.3.4)
       autoprefixer:
         specifier: ^10.4.15
         version: 10.4.15(postcss@8.4.28)
@@ -1477,6 +1480,21 @@ packages:
 
   /@quasar/extras@1.16.7:
     resolution: {integrity: sha512-nYF3gVE/si1YJ/D4qmAiHGwxoJIDCvTT8NI6ZmbTMPrur4J8xBKhfhfhyLoQ4k2jJZP6Rx0rUcB71FBNC2C8vQ==}
+
+  /@quasar/vite-plugin@1.6.0(@vitejs/plugin-vue@4.4.0)(quasar@2.13.0)(vite@4.5.0)(vue@3.3.4):
+    resolution: {integrity: sha512-LmbV76G1CwWZbrEQhqyZpkRQTJyO3xpW55aXY1zWN+JhyUeG77CcMCEWteBVnJ6I6ehUPFDC9ONd2+WlwH6rNQ==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      '@vitejs/plugin-vue': ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0-beta.0
+      quasar: ^2.8.0
+      vite: ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0-beta.0
+      vue: ^3.0.0
+    dependencies:
+      '@vitejs/plugin-vue': 4.4.0(vite@4.5.0)(vue@3.3.4)
+      quasar: 2.13.0
+      vite: 4.5.0(@types/node@18.7.23)(sass@1.56.0)
+      vue: 3.3.4
+    dev: true
 
   /@rollup/plugin-typescript@11.1.2(typescript@4.8.3):
     resolution: {integrity: sha512-0ghSOCMcA7fl1JM+0gYRf+Q/HWyg+zg7/gDSc+fRLmlJWcW5K1I+CLRzaRhXf4Y3DRyPnnDo4M2ktw+a6JcDEg==}

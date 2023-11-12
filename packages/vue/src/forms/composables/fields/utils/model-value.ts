@@ -1,6 +1,6 @@
 import type { UnwrapRef } from 'vue'
 
-interface Props<T = any> {
+interface Props<T> {
   field: {
     modelValue: T
   }
