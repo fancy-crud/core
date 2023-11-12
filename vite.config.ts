@@ -7,10 +7,10 @@ import AutoImport from 'unplugin-auto-import/vite'
 // https:// vitejs.dev/config/
 export default defineConfig(({ command }) => {
   let alias: Record<string, string> = {
+    '@packages/bus': `${path.resolve(__dirname, 'packages/bus/src')}/`,
     '@packages/vue': `${path.resolve(__dirname, 'packages/vue/src')}/`,
     '@packages/core': `${path.resolve(__dirname, 'packages/core/src')}/`,
-    '@packages/oruga-wrapper': `${path.resolve(__dirname, 'packages/oruga-wrapper/src')}/`,
-    '@packages/bus': `${path.resolve(__dirname, 'packages/bus/src')}/`,
+    '@packages/oruga-wrapper': `${path.resolve(__dirname, 'packages/wrapper-oruga-ui/src')}/`,
     // '@fancy-crud/vue': `${path.resolve(__dirname, 'packages/vue/src')}/`,
     // '@fancy-crud/core': `${path.resolve(__dirname, 'packages/core/src')}/`,
     // '@fancy-crud/oruga-wrapper': `${path.resolve(__dirname, 'packages/oruga-wrapper/src')}/`,
@@ -20,7 +20,7 @@ export default defineConfig(({ command }) => {
     alias = {
       '@packages/vue': `${path.resolve(__dirname, 'packages/vue/src')}/`,
       '@packages/core': `${path.resolve(__dirname, 'packages/core/src')}/`,
-      '@packages/oruga-wrapper': `${path.resolve(__dirname, 'packages/oruga-wrapper/src')}/`,
+      '@packages/wrapper-oruga-ui': `${path.resolve(__dirname, 'packages/oruga-wrapper/src')}/`,
     }
   }
 
