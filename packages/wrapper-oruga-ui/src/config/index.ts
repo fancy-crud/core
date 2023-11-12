@@ -25,8 +25,18 @@ export const styles = {
     tag: 'a',
   },
   exportButton: {
+    variant: 'primary',
     iconRight: 'microsoft-excel',
     inverted: true,
+    tag: 'a',
+  },
+  confirmButton: {
+    variant: 'danger',
+    outlined: true,
+  },
+
+  cancelButton: {
+    variant: 'primary',
     tag: 'a',
   },
 }
