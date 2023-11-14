@@ -4,7 +4,7 @@ import type { NormalizedDatepickerField } from '@packages/vue/forms'
 import type { DefaultProps } from '../../typing'
 import { useHintText, useModelValue } from './utils'
 
-export function useDatepickerField<T>(props: DefaultProps & { field: NormalizedDatepickerField & { modelValue: T } }) {
+export function useDatepickerField<T = any>(props: DefaultProps & { field: NormalizedDatepickerField & { modelValue: T } }) {
   const formStore: IFormStore = inject(IFormStore.name)!
   const ruleConfigStore: IRuleConfigStore = inject(IRuleConfigStore.name)!
 

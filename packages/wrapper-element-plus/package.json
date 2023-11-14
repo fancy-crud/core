@@ -1,0 +1,77 @@
+{
+  "name": "@fancy-crud/wrapper-element-plus",
+  "version": "0.0.0",
+  "private": false,
+  "author": {
+    "name": "Christopher A. Flores",
+    "url": "https://github.com/cafadev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fancy-crud/core",
+    "directory": "packages/wrapper-element-plus"
+  },
+  "main": "./dist/fancy-crud-wrapper-element-plus.umd.js",
+  "module": "./dist/fancy-crud-wrapper-element-plus.mjs",
+  "types": "./dist/src/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build && vue-tsc -p ./tsconfig.build.json --declaration --emitDeclarationOnly && tsc-alias --verbose -p ./tsconfig.build.json",
+    "build:no-ts": "vite build"
+  },
+  "peerDependencies": {
+    "@fancy-crud/core": "workspace:^",
+    "@fancy-crud/vue": "workspace:^",
+    "@vueuse/core": "^10.4.1",
+    "element-plus": "^2.4.2",
+    "vue": "^3.2.19"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.1.0",
+    "@fancy-crud/core": "workspace:^",
+    "@fancy-crud/vue": "workspace:^",
+    "@vueuse/core": "^10.4.1",
+    "element-plus": "^2.4.2",
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.15",
+    "postcss": "^8.4.28",
+    "tailwindcss": "^3.3.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "release": {
+    "branches": [
+      "main",
+      "next",
+      "next-major",
+      {
+        "name": "beta",
+        "prerelease": true
+      },
+      {
+        "name": "alpha",
+        "prerelease": true
+      }
+    ]
+  },
+  "keywords": [
+    "form",
+    "table",
+    "datatable",
+    "automation",
+    "crud",
+    "create",
+    "read",
+    "update",
+    "delete",
+    "vue",
+    "ui framework",
+    "element-plus"
+  ]
+}

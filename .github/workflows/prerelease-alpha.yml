@@ -34,8 +34,12 @@ jobs:
           pnpm build:core
           pnpm test
           pnpm build:vue
-          pnpm build:wo
-          pnpm build:wv
+
+          pnpm build:w-oruga
+          pnpm build:w-vuetify
+          pnpm build:w-quasar
+          pnpm build:w-element
+
           pnpm build:p-rule-parsers
           pnpm build:p-vue3-toastify
 
@@ -117,8 +121,12 @@ jobs:
           pnpm build:bus
           pnpm build:core
           pnpm build:vue
-          pnpm build:wo
-          pnpm build:wv
+
+          pnpm build:w-oruga
+          pnpm build:w-vuetify
+          pnpm build:w-quasar
+          pnpm build:w-element
+
           pnpm build:p-rule-parsers
           pnpm build:p-vue3-toastify
           pnpm --filter "./packages/**" publish --no-git-checks --tag ${{ github.ref_name }}

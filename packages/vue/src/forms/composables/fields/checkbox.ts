@@ -3,12 +3,12 @@ import type { DefaultProps, NormalizedCheckboxField } from '@packages/vue/forms'
 import { useRules } from '@packages/vue/forms'
 import { useHintText, useModelValue, useOptions } from './utils'
 
-export function useCheckboxField(props: DefaultProps & { field: NormalizedCheckboxField }) {
+export function useCheckboxField<T = any>(props: DefaultProps & { field: NormalizedCheckboxField & { modelValue: T } }) {
   const formStore: IFormStore = inject(IFormStore.name)!
   const ruleConfigStore: IRuleConfigStore = inject(IRuleConfigStore.name)!
 
   const { fields } = formStore.searchById(props.formId)!
-  const { modelValue, vmodel } = useModelValue(props)
+  const { modelValue, vmodel } = useModelValue<T>(props)
 
   const { validate } = useRules(fields, ruleConfigStore.searchById(props.formId))
 
@@ -30,12 +30,12 @@ export function useCheckboxField(props: DefaultProps & { field: NormalizedCheckb
     const isArray = Array.isArray(modelValue.value)
 
     if (props.field.multiple && !isArray) {
-      modelValue.value = []
+      modelValue.value = [] as any
       return
     }
 
     if (!props.field.multiple && isArray)
-      modelValue.value = null
+      modelValue.value = null as any
   }
 
   return {

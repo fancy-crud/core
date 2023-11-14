@@ -10,6 +10,7 @@ const packages = [
   'wrapper-oruga-ui',
   'wrapper-vuetify',
   'wrapper-quasar',
+  'wrapper-element-plus',
 ]
 
 function replace_version({ filePath, err, data, version, packageName }) {
