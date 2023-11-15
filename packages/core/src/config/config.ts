@@ -1,17 +1,19 @@
 import type {
+  HttpHooks,
   HttpRequest,
   Locale,
   NotificationState,
   PaginationStructure,
   RuleConfig,
 } from '@packages/core/index'
-import { setDefaults, setDefaultNotificationHandler, setHttpPagination, setHttpRequest, setLocale, setRuleConfig } from '@packages/core/index'
+import { setDefaultNotificationHandler, setDefaults, setHttpHooks, setHttpPagination, setHttpRequest, setLocale, setRuleConfig } from '@packages/core/index'
 import { components, setComponents } from './components'
 
 export interface Config {
   http?: {
     request?: HttpRequest['request']
     pagination?: PaginationStructure
+    hooks?: HttpHooks
   }
   components: Record<string, any>
   rules?: RuleConfig
@@ -21,6 +23,9 @@ export interface Config {
 }
 
 export function setupConfig(config: Config) {
+  if (config.http?.hooks)
+    setHttpHooks(config.http.hooks)
+
   if (config.http?.request)
     setHttpRequest(config.http.request)
 

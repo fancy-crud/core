@@ -20,7 +20,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build"
+    "build": "vite build && tsc && tsc-alias --verbose -p ./tsconfig.json"
   },
   "peerDependencies": {
     "vue3-toastify": "^0.1.14"
