@@ -16,7 +16,7 @@
         {{ getValue(bind.item, column, bind.index) }}
       </slot>
     </template>
-    <template #[`item.actions`]="bind">
+    <template v-if="hasActionHeader" #[`item.actions`]="bind">
       <slot name="column-actions" v-bind="{ ...bind, row: bind.item }">
         <f-table-row-actions
           @edit="emit('edit', bind.item)"
@@ -59,6 +59,7 @@ const bus = new Bus()
 
 const parseHeaders = computed(() => props.headers.map(header => ({ ...header, title: header.label, key: header.value })))
 const excludeActionsHeaders = computed(() => parseHeaders.value.filter(header => header.key !== 'actions'))
+const hasActionHeader = computed(() => props.headers.some(header => header.key === 'actions'))
 
 watch(() => state.pagination.perPage, rowsPerPage => updatePagination({ rowsPerPage }))
 

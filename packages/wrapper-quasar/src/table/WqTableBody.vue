@@ -16,7 +16,7 @@
         </slot>
       </q-td>
     </template>
-    <template #[`body-cell-actions`]="bind">
+    <template v-if="hasActionHeader" #[`body-cell-actions`]="bind">
       <q-td key="actions" :props="bind">
         <slot name="column-actions" v-bind="bind">
           <f-table-row-actions
@@ -76,6 +76,8 @@ const parseHeaders = computed((): QuasarColumn[] => props.headers.map((header) =
     name: header.value,
   }
 }))
+
+const hasActionHeader = computed(() => props.headers.some(header => header.key === 'actions'))
 
 const computedPagination = computed({
   get() {

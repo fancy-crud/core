@@ -12,16 +12,18 @@
       </slot>
     </el-table-column>
 
-    <el-table-column v-slot="bind" prop="actions" label="Actions">
-      <slot name="column-actions" v-bind="bind">
-        <f-table-row-actions
-          @edit="emit('edit', bind.row)"
-          @delete="emit('delete', bind.row)"
-          :edit="props.buttons.edit"
-          :delete="props.buttons.remove"
-        />
-      </slot>
-    </el-table-column>
+    <template v-if="hasActionHeader">
+      <el-table-column v-slot="bind" prop="actions" label="Actions">
+        <slot name="column-actions" v-bind="bind">
+          <f-table-row-actions
+            @edit="emit('edit', bind.row)"
+            @delete="emit('delete', bind.row)"
+            :edit="props.buttons.edit"
+            :delete="props.buttons.remove"
+          />
+        </slot>
+      </el-table-column>
+    </template>
   </el-table>
   <div class="flex justify-between">
     <el-dropdown>
@@ -85,6 +87,7 @@ const bus = new Bus()
 
 const parseHeaders = computed(() => props.headers.map(header => ({ ...header, title: header.label, key: header.value })))
 const excludeActionsHeaders = computed(() => parseHeaders.value.filter(header => header.key !== 'actions'))
+const hasActionHeader = computed(() => parseHeaders.value.some(header => header.key === 'actions'))
 
 watch(() => state.pagination.perPage, rowsPerPage => updatePagination({ rowsPerPage }))
 watch(() => state.pagination.page, page => updatePagination({ page }))
@@ -95,11 +98,6 @@ function getValue(row: any, column: NormalizedColumn, rowIndex: number) {
   )
 }
 
-// function setPage(page: number) {
-//   updatePagination({
-//     page,
-//   })
-// }
 function updatePagination(pagination: Pagination) {
   emit('update:pagination', pagination)
 }

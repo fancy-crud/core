@@ -20,16 +20,19 @@
             {{ getValue(row, column, index) }}
           </slot>
         </o-table-column>
-        <o-table-column v-else v-slot="{ row, index }">
-          <slot name="column-actions" v-bind="{ row, index }">
-            <f-table-row-actions
-              @edit="emit('edit', row)"
-              @delete="emit('delete', row)"
-              :edit="props.buttons.edit"
-              :delete="props.buttons.remove"
-            />
-          </slot>
-        </o-table-column>
+
+        <template v-else>
+          <o-table-column v-if="hasActionHeader" v-slot="{ row, index }">
+            <slot name="column-actions" v-bind="{ row, index }">
+              <f-table-row-actions
+                @edit="emit('edit', row)"
+                @delete="emit('delete', row)"
+                :edit="props.buttons.edit"
+                :delete="props.buttons.remove"
+              />
+            </slot>
+          </o-table-column>
+        </template>
       </template>
     </slot>
 
@@ -70,6 +73,7 @@ const state = reactive({
   },
 })
 
+const hasActionHeader = computed(() => props.headers.some(header => header.key === 'actions'))
 watch(() => state.pagination.perPage, rowsPerPage => updatePagination({ rowsPerPage }))
 
 function getValue(row: any, column: NormalizedColumn, rowIndex: number) {

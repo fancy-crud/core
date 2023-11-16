@@ -66,16 +66,5 @@ const table = useTable({
   pagination: {
     rowsPerPage: 10,
   },
-  buttons: {
-    dump: {
-      hidden: true,
-    },
-    edit: {
-      hidden: true,
-    },
-    remove: {
-      hidden: true,
-    },
-  },
 })
 </script>
