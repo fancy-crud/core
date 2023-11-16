@@ -11,8 +11,6 @@
 <script lang='ts' setup>
 import { FieldType, useForm, useTable } from '@fancy-crud/vue'
 
-// const formats = useFormats()
-
 const form = useForm({
   id: 'formulario',
   fields: {
