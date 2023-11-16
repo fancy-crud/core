@@ -13,11 +13,13 @@ describe('NormalizeButtons', () => {
       main: {
         class: '',
         isLoading: false,
+        hidden: false,
         label: '{{ Create new | Update record }}',
       },
       aux: {
         class: '',
         isLoading: false,
+        hidden: false,
         label: 'Cancel',
       },
     })
@@ -42,10 +44,12 @@ describe('NormalizeButtons', () => {
       main: {
         class: '',
         isLoading: false,
+        hidden: false,
         label: '{{ Create new | Update record }}',
       },
       aux: {
         class: '',
+        hidden: false,
         isLoading: false,
         outlined: true,
         label: 'Cancel',
@@ -65,9 +69,11 @@ describe('NormalizeButtons', () => {
     const buttons = {
       main: {
         isLoading: IS_LOADING,
-        label: LABEL
+        hidden: false,
+        label: LABEL,
       },
       aux: {
+        hidden: false,
         icon: CANCEL_ICON,
       },
     }
