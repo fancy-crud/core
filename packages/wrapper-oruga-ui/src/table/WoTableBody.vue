@@ -25,6 +25,8 @@
             <f-table-row-actions
               @edit="emit('edit', row)"
               @delete="emit('delete', row)"
+              :edit="props.buttons.edit"
+              :delete="props.buttons.remove"
             />
           </slot>
         </o-table-column>
@@ -43,13 +45,15 @@
 
 <script lang="ts" setup>
 import { OSelect, OTable, OTableColumn } from '@oruga-ui/oruga-next'
-import type { NormalizedColumn, NormalizedTablePagination, Pagination } from '@fancy-crud/core'
+import type { NormalizedColumn, NormalizedTableButtons, NormalizedTablePagination, Pagination } from '@fancy-crud/core'
 import { Bus, GetColumnValueCommand } from '@fancy-crud/core'
+import { FTableRowActions } from '@fancy-crud/vue'
 
 const props = defineProps<{
   items: any[]
   headers: NormalizedColumn[]
   pagination: NormalizedTablePagination
+  buttons: NormalizedTableButtons
 }>()
 
 const emit = defineEmits<{

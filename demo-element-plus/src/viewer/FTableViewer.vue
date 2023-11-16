@@ -57,7 +57,7 @@ const table = useTable({
     created_at: {
       format: (value: unknown) => 'Lo que sea',
     },
-    actions: { value: 'actions', label: '' },
+    actions: { value: 'actions', label: '', exclude: true },
   },
   settings: {
     url: form.settings.url,
@@ -65,6 +65,17 @@ const table = useTable({
   },
   pagination: {
     rowsPerPage: 10,
+  },
+  buttons: {
+    dump: {
+      hidden: true,
+    },
+    edit: {
+      hidden: true,
+    },
+    remove: {
+      hidden: true,
+    },
   },
 })
 </script>

@@ -17,6 +17,8 @@
         <f-table-row-actions
           @edit="emit('edit', bind.row)"
           @delete="emit('delete', bind.row)"
+          :edit="props.buttons.edit"
+          :delete="props.buttons.remove"
         />
       </slot>
     </el-table-column>
@@ -54,7 +56,7 @@
 <script lang="ts" setup>
 import { ElButton, ElDropdown, ElDropdownItem, ElDropdownMenu, ElPagination, ElTable, ElTableColumn } from 'element-plus'
 import { ArrowDown } from '@element-plus/icons-vue'
-import type { NormalizedColumn, NormalizedTablePagination, Pagination } from '@fancy-crud/core'
+import type { NormalizedColumn, NormalizedTableButtons, NormalizedTablePagination, Pagination } from '@fancy-crud/core'
 import { Bus, GetColumnValueCommand } from '@fancy-crud/core'
 import { FTableRowActions } from '@fancy-crud/vue'
 
@@ -63,6 +65,7 @@ const props = defineProps<{
   headers: NormalizedColumn[]
   pagination: NormalizedTablePagination
   loading: boolean
+  buttons: NormalizedTableButtons
 }>()
 
 const emit = defineEmits<{

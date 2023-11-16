@@ -22,6 +22,8 @@
           <f-table-row-actions
             @edit="emit('edit', bind.row)"
             @delete="emit('delete', bind.row)"
+            :edit="props.buttons.edit"
+            :delete="props.buttons.remove"
           />
         </slot>
       </q-td>
@@ -31,7 +33,7 @@
 
 <script lang="ts" setup>
 import { QTable, QTd } from 'quasar'
-import type { NormalizedColumn, NormalizedTablePagination, Pagination } from '@fancy-crud/core'
+import type { NormalizedColumn, NormalizedTableButtons, NormalizedTablePagination, Pagination } from '@fancy-crud/core'
 import { Bus, GetColumnValueCommand } from '@fancy-crud/core'
 import { FTableRowActions } from '@fancy-crud/vue'
 
@@ -52,6 +54,7 @@ const props = defineProps<{
   headers: NormalizedColumn[]
   loading: boolean
   pagination: NormalizedTablePagination
+  buttons: NormalizedTableButtons
 }>()
 
 const emit = defineEmits<{

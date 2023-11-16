@@ -1,6 +1,6 @@
 <template>
   <slot name="table-header" v-bind="{ openCreateModal, exportData }">
-    <f-table-header-actions @create="openCreateModal" @export="exportData" />
+    <f-table-header-actions @create="openCreateModal" @export="exportData" :add="props.buttons.add" :dump="props.buttons.dump" />
   </slot>
 
   <slot name="table-form" v-bind="{ onSuccess, form: tableForm, formModal }">
@@ -28,6 +28,7 @@
       :items="computedData"
       :loading="isFetching"
       :pagination="pagination"
+      :buttons="props.buttons"
     >
       <template v-for="(_, slotName) in slots" #[`${slotName}`]="bind" :key="slotName">
         <slot :name="slotName" v-bind="bind" />
@@ -51,7 +52,7 @@
 </template>
 
 <script lang="ts" generic="DataType = unknown" setup>
-import type { BaseTableForm, DeleteRecordOptions, NormalizedTablePagination, NormalizedTableSettings, ObjectWithNormalizedColumns, Pagination, Row } from '@fancy-crud/core'
+import type { BaseTableForm, DeleteRecordOptions, NormalizedTableButtons, NormalizedTablePagination, NormalizedTableSettings, ObjectWithNormalizedColumns, Pagination, Row } from '@fancy-crud/core'
 import { Bus, DeleteRecordCommand, GetStoreTableCommand, IFormStore, PrepareFormToCreateCommand, PrepareFormToUpdateCommand } from '@fancy-crud/core'
 import { useRequestList } from '@packages/vue/http'
 
@@ -61,6 +62,7 @@ const props = defineProps<{
   form: BaseTableForm
   settings: NormalizedTableSettings
   pagination: NormalizedTablePagination
+  buttons: NormalizedTableButtons
   formModal?: boolean
   skipDeleteConfirmation?: boolean
   data?: DataType[]

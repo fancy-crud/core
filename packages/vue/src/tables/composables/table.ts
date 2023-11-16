@@ -1,10 +1,10 @@
-import type { BaseTableForm, FieldAsColumn, NormalizedColumn, NormalizedSettings, ObjectWithRawColumns, RawTableFilters, RawTableSettings } from '@fancy-crud/core'
+import type { BaseTableForm, FieldAsColumn, NormalizedColumn, NormalizedSettings, NormalizedTableButtons, ObjectWithRawColumns, RawTableButtons, RawTableFilters, RawTableSettings } from '@fancy-crud/core'
 import { Bus, CreateTableCommand, DeleteStoreTableCommand, SetStoreTableCommand } from '@fancy-crud/core'
 import type { TableArgs, UseTable } from '../typing'
 
-export function useTable<T extends BaseTableForm, U extends ObjectWithRawColumns, S extends RawTableSettings, F extends RawTableFilters>(
-  args: TableArgs<T, U, S, F>,
-): UseTable<T, U, S, F> {
+export function useTable<T extends BaseTableForm, U extends ObjectWithRawColumns, S extends RawTableSettings, F extends RawTableFilters, B extends RawTableButtons>(
+  args: TableArgs<T, U, S, F, B>,
+): UseTable<T, U, S, F, B> {
   const {
     id: _id,
     form,
@@ -12,6 +12,7 @@ export function useTable<T extends BaseTableForm, U extends ObjectWithRawColumns
     settings: rawSettings = {},
     pagination: rawPagination = {},
     filterParams: rawFilterParams = {},
+    buttons: rawButtons = {},
   } = args
 
   const bus = new Bus()
@@ -19,7 +20,7 @@ export function useTable<T extends BaseTableForm, U extends ObjectWithRawColumns
 
   const table = bus.execute(
     new CreateTableCommand(
-      form, rawColumns, rawPagination, rawSettings, rawFilterParams,
+      form, rawColumns, rawPagination, rawSettings, rawFilterParams, rawButtons,
     ),
   )
 
@@ -27,6 +28,7 @@ export function useTable<T extends BaseTableForm, U extends ObjectWithRawColumns
   const settings = reactive(table.settings) as S & NormalizedSettings
   const pagination = reactive(table.pagination)
   const filterParams = reactive(table.filterParams) as F
+  const buttons = reactive(table.buttons) as B & NormalizedTableButtons
 
   bus.execute(
     new SetStoreTableCommand(id, {
@@ -35,6 +37,7 @@ export function useTable<T extends BaseTableForm, U extends ObjectWithRawColumns
       pagination,
       filterParams,
       formId: form.id,
+      buttons,
     }),
   )
 
@@ -49,5 +52,6 @@ export function useTable<T extends BaseTableForm, U extends ObjectWithRawColumns
     settings,
     pagination,
     filterParams,
+    buttons,
   }
 }

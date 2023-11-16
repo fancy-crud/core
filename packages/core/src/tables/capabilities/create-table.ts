@@ -1,9 +1,11 @@
 import { Bus } from '@fancy-crud/bus'
 import type { BaseTableForm, CreateTableCommand, FieldAsColumn, ICreateTableHandler, NormalizedColumn, NormalizedTableSettings, ObjectWithRawColumns, RawTableFilters, RawTableSettings, Table } from '../axioma'
-import { NormalizeColumnsCommand, NormalizePaginationCommand, NormalizeTableFiltersCommand, NormalizeTableSettingsCommand, SetStoreTableCommand } from '../axioma'
+import { NormalizeColumnsCommand, NormalizePaginationCommand, NormalizeTableButtonsCommand, NormalizeTableFiltersCommand, NormalizeTableSettingsCommand, SetStoreTableCommand } from '../axioma'
+import type { ConvertToNormalizedTableButtons, RawTableButtons } from '../axioma/typing/buttons'
 
 export class CreateTableHandler implements ICreateTableHandler {
-  execute<T extends BaseTableForm, U extends ObjectWithRawColumns, S extends RawTableSettings, F extends RawTableFilters>(command: CreateTableCommand<T, U, S, F>): Table<T, U, S, F> {
+  execute
+  <T extends BaseTableForm, U extends ObjectWithRawColumns, S extends RawTableSettings, F extends RawTableFilters, B extends RawTableButtons>(command: CreateTableCommand<T, U, S, F, B>): Table<T, U, S, F, B> {
     const {
       form,
       columns: rawColumns = {},
@@ -12,6 +14,7 @@ export class CreateTableHandler implements ICreateTableHandler {
       },
       pagination: rawPagination = {},
       filterParams: rawFilterParams = {},
+      buttons: rawButtons,
     } = command
 
     const bus = new Bus()
@@ -33,6 +36,10 @@ export class CreateTableHandler implements ICreateTableHandler {
       new NormalizeTableFiltersCommand(rawFilterParams),
     ) as F
 
+    const buttons = bus.execute(
+      new NormalizeTableButtonsCommand(rawButtons),
+    ) as B & ConvertToNormalizedTableButtons<B>
+
     bus.execute(
       new SetStoreTableCommand(id, {
         formId: form.id,
@@ -40,6 +47,7 @@ export class CreateTableHandler implements ICreateTableHandler {
         settings,
         pagination,
         filterParams,
+        buttons,
       }),
     )
 
@@ -50,6 +58,7 @@ export class CreateTableHandler implements ICreateTableHandler {
       settings,
       pagination,
       filterParams,
+      buttons,
     }
   }
 }

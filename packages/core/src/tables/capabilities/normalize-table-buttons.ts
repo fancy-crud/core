@@ -1,44 +1,44 @@
-import type { NormalizedButton, NormalizedButtons } from '@packages/core/forms/axioma'
 import { getDefaults } from '@packages/core/config'
-import type { INormalizeTableButtonsHandler, NormalizeTableButtonsCommand, NormalizeTableButtonsInputType } from '../axioma'
+import type { INormalizeTableButtonsHandler, NormalizeTableButtonsCommand } from '../axioma'
+import type { ConvertToNormalizedTableButtons, NormalizedTableButtons, RawTableButtons } from '../axioma/typing/buttons'
 
 export class NormalizeTableButtonsHandler implements INormalizeTableButtonsHandler {
-  execute<T extends NormalizeTableButtonsInputType>({ buttons }: NormalizeTableButtonsCommand<T>): NormalizedButtons<T> {
-    const { add = {}, edit = {}, remove = {} } = buttons || {}
+  execute<T extends RawTableButtons>({ buttons }: NormalizeTableButtonsCommand<T>): NormalizedTableButtons {
+    const { add = {}, edit = {}, remove = {}, ...customButtons } = buttons || {}
     const defaults = getDefaults()
 
-    const addButton: NormalizedButton = {
-      ...defaults.addButton,
-      ...add,
-      class: add?.class || defaults.addButton?.class,
-      isLoading: add?.isLoading || false,
-      icon: add?.icon || '',
+    const rawButtons = {
+      add, edit, remove, ...customButtons,
     }
 
-    const editButton: NormalizedButton = {
-      ...defaults.editButton,
-      ...edit,
-      isLoading: edit.isLoading || false,
-      icon: edit.icon || '',
-      class: edit.class || defaults.editButton?.class,
-    }
+    const defaultButtonsKeys = ['add', 'edit', 'remove', 'dump']
+    const defaultButtons: NormalizedTableButtons = {
+      add, edit, remove, ...customButtons,
+    } as ConvertToNormalizedTableButtons<T>
 
-    const removeButton: NormalizedButton = {
-      ...defaults.removeButton,
-      ...remove,
-      isLoading: remove.isLoading || false,
-      icon: remove.icon || '',
-      class: remove.class || defaults.removeButton?.class,
-    }
+    type ButtonKey = keyof typeof defaultButtons
 
-    const defaultButtons = {
-      add: addButton,
-      edit: editButton,
-      remove: removeButton,
-    }
+    Object.entries(rawButtons).forEach(([buttonKey, button]) => {
+      if (defaultButtonsKeys.includes(buttonKey)) {
+        const defaultButton = defaults[`${buttonKey}Button`]
+        defaultButtons[buttonKey as ButtonKey] = {
+          ...defaultButton,
+          ...button,
+          hidden: button.hidden || false,
+          class: button?.class || defaultButton?.class || '',
+          isLoading: button?.isLoading || false,
+        }
+      }
+      else {
+        defaultButtons[buttonKey as ButtonKey] = {
+          ...button,
+          hidden: button.hidden || false,
+          class: button?.class || '',
+          isLoading: button?.isLoading || false,
+        }
+      }
+    })
 
-    const normalizedButtons: NormalizedButtons<T> = Object.assign({}, buttons, defaultButtons)
-    return normalizedButtons
+    return defaultButtons
   }
 }
-

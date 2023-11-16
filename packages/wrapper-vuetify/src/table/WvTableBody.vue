@@ -21,6 +21,8 @@
         <f-table-row-actions
           @edit="emit('edit', bind.item)"
           @delete="emit('delete', bind.item)"
+          :edit="props.buttons.edit"
+          :delete="props.buttons.remove"
         />
       </slot>
     </template>
@@ -29,7 +31,7 @@
 
 <script lang="ts" setup>
 import { VDataTableServer } from 'vuetify/labs/VDataTable'
-import type { NormalizedColumn, NormalizedTablePagination, Pagination } from '@fancy-crud/core'
+import type { NormalizedColumn, NormalizedTableButtons, NormalizedTablePagination, Pagination } from '@fancy-crud/core'
 import { Bus, GetColumnValueCommand } from '@fancy-crud/core'
 import { FTableRowActions } from '@fancy-crud/vue'
 
@@ -38,6 +40,7 @@ const props = defineProps<{
   headers: NormalizedColumn[]
   pagination: NormalizedTablePagination
   loading: boolean
+  buttons: NormalizedTableButtons
 }>()
 
 const emit = defineEmits<{

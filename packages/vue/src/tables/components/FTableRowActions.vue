@@ -1,7 +1,7 @@
 <template>
   <slot name="edit-button">
     <f-button
-      v-if="!editButton.hide"
+      v-if="!editButton.hidden"
       @click="emit('edit')"
       v-bind="{ ...editButton }"
     />
@@ -9,7 +9,7 @@
 
   <slot name="delete-button">
     <f-button
-      v-if="!deleteButton.hide"
+      v-if="!deleteButton.hidden"
       @click="emit('delete')"
       v-bind="{ ...deleteButton }"
     />
@@ -17,11 +17,12 @@
 </template>
 
 <script lang="ts" setup>
+import type { NormalizedTableButton } from '@fancy-crud/core'
 import { getDefaults } from '@fancy-crud/core'
 
 const props = defineProps<{
-  edit?: Record<string, any>
-  delete?: Record<string, any>
+  edit?: NormalizedTableButton
+  delete?: NormalizedTableButton
 }>()
 
 const emit = defineEmits<{
@@ -32,14 +33,14 @@ const emit = defineEmits<{
 const defaults = computed(getDefaults)
 
 const editButton = computed(() => ({
-  hide: props.edit?.hide,
+  hidden: props.edit?.hidden,
   ...defaults.value.editButton,
   ...(props.edit || {}),
 
 }))
 
 const deleteButton = computed(() => ({
-  hide: props.delete?.hide,
+  hidden: props.delete?.hidden,
   ...defaults.value.removeButton,
   ...(props.delete || {}),
 

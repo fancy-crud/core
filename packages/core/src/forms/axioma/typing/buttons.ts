@@ -27,9 +27,12 @@ export interface RawButton extends EventHandlers<Partial<ButtonEvent>> {
   icon?: string
   class?: string
   isDisabled?: boolean
+  hidden?: boolean
+  [key: string]: unknown
 }
 
 export interface NormalizedButton extends RawButton, EventHandlers<Partial<ButtonEvent>> {
+  hidden: boolean
   isLoading: boolean
   class: string
 }

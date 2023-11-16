@@ -23,7 +23,7 @@ const defaults = ReturnObject<Record<string, { wrapper?: { class?: string }; cla
   removeButton: {
     class: '',
   },
-  exportButton: {
+  dumpButton: {
     class: '',
   },
   confirmButton: {
