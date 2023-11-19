@@ -4,6 +4,7 @@ export class NormalizeTableSettingsHandler implements INormalizeTableSettingsHan
   execute<T extends RawTableSettings>({ rawSettings }: NormalizeTableSettingsCommand<T>): T & NormalizedTableSettings {
     const _settings = {
       lookupField: rawSettings?.lookupField || 'id',
+      ...rawSettings,
     } as T & NormalizedTableSettings
 
     return _settings
