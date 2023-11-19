@@ -1,5 +1,3 @@
-import { Delete, Download, Edit, Plus } from '@element-plus/icons-vue'
-
 export const styles = {
   mainButton: {
     type: 'primary',
@@ -10,28 +8,26 @@ export const styles = {
 
   addButton: {
     circle: true,
-    icon: Plus,
+    icon: 'Plus',
     type: 'primary',
     plain: true,
   },
 
   editButton: {
     circle: true,
-    icon: Edit,
-    // variant: 'text',
+    icon: 'Edit',
   },
 
   removeButton: {
     circle: true,
-    icon: Delete,
+    icon: 'Delete',
     type: 'danger',
     plain: true,
   },
 
   exportButton: {
     circle: true,
-    icon: Download,
-    // variant: 'text',
+    icon: 'Download',
   },
 
   confirmButton: {
