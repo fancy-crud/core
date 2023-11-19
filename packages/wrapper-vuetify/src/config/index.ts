@@ -26,7 +26,7 @@ export const styles = {
     variant: 'text',
   },
 
-  exportButton: {
+  dumpButton: {
     color: 'primary',
     icon: 'mdi-microsoft-excel',
     variant: 'text',

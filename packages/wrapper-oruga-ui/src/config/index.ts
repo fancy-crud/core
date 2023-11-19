@@ -24,7 +24,7 @@ export const styles = {
     variant: 'danger',
     tag: 'a',
   },
-  exportButton: {
+  dumpButton: {
     variant: 'primary',
     iconRight: 'microsoft-excel',
     inverted: true,

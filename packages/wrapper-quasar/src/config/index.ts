@@ -29,7 +29,7 @@ export const styles = {
     flat: true,
   },
 
-  exportButton: {
+  dumpButton: {
     color: 'primary',
     icon: 'save_alt',
     round: true,

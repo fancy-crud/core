@@ -25,7 +25,7 @@ export const styles = {
     plain: true,
   },
 
-  exportButton: {
+  dumpButton: {
     circle: true,
     icon: 'Download',
   },
