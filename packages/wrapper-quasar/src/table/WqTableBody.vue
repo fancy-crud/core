@@ -77,7 +77,7 @@ const parseHeaders = computed((): QuasarColumn[] => props.headers.map((header) =
   }
 }))
 
-const hasActionHeader = computed(() => props.headers.some(header => header.key === 'actions'))
+const hasActionHeader = computed(() => props.headers.some(header => header.value === 'actions' && header.exclude !== true))
 
 const computedPagination = computed({
   get() {

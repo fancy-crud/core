@@ -73,7 +73,7 @@ const state = reactive({
   },
 })
 
-const hasActionHeader = computed(() => props.headers.some(header => header.key === 'actions'))
+const hasActionHeader = computed(() => props.headers.some(header => header.value === 'actions' && header.exclude !== true))
 watch(() => state.pagination.perPage, rowsPerPage => updatePagination({ rowsPerPage }))
 
 function getValue(row: any, column: NormalizedColumn, rowIndex: number) {

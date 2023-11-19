@@ -2,7 +2,6 @@
   <el-table
     v-bind="$attrs"
     :data="props.items"
-    :loading="props.loading"
     class="elevation-1"
     item-value="name"
   >
@@ -87,7 +86,7 @@ const bus = new Bus()
 
 const parseHeaders = computed(() => props.headers.map(header => ({ ...header, title: header.label, key: header.value })))
 const excludeActionsHeaders = computed(() => parseHeaders.value.filter(header => header.key !== 'actions'))
-const hasActionHeader = computed(() => parseHeaders.value.some(header => header.key === 'actions'))
+const hasActionHeader = computed(() => props.headers.some(header => header.value === 'actions' && header.exclude !== true))
 
 watch(() => state.pagination.perPage, rowsPerPage => updatePagination({ rowsPerPage }))
 watch(() => state.pagination.page, page => updatePagination({ page }))

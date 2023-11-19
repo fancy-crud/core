@@ -59,7 +59,7 @@ const bus = new Bus()
 
 const parseHeaders = computed(() => props.headers.map(header => ({ ...header, title: header.label, key: header.value })))
 const excludeActionsHeaders = computed(() => parseHeaders.value.filter(header => header.key !== 'actions'))
-const hasActionHeader = computed(() => props.headers.some(header => header.key === 'actions'))
+const hasActionHeader = computed(() => props.headers.some(header => header.value === 'actions' && header.exclude !== true))
 
 watch(() => state.pagination.perPage, rowsPerPage => updatePagination({ rowsPerPage }))
 
