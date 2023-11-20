@@ -73,7 +73,7 @@ const { isFormValid } = useRules(props.fields, ruleConfigStore.searchById(props.
 
 const beforeAndAfterFieldSlots = computed(() => {
   return Object.entries(slots).filter(
-    ([slotName]) => slotName.startsWith('before-') || slotName.startsWith('after-'),
+    ([slotName]) => slotName.startsWith('before-') || slotName.startsWith('after-') || slotName.startsWith('field-'),
   )
 })
 

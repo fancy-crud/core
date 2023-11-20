@@ -5,7 +5,7 @@ import FFormHeader from './FFormHeader.vue'
 import FFileList from './FFileList.vue'
 
 import FCheckbox from './FCheckbox.vue'
-import FTextVue from './FText.vue'
+import FText from './FText.vue'
 import FColor from './FColor.vue'
 import FDatepicker from './FDatepicker.vue'
 import FFile from './FFile.vue'
@@ -20,7 +20,7 @@ export {
   FFormHeader,
   FFileList,
   FCheckbox,
-  FTextVue,
+  FText,
   FColor,
   FDatepicker,
   FFile,

@@ -1,4 +1,4 @@
-name: Release
+name: Prerelease
 
 on:
   push:
@@ -11,9 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        # node-version: [10.x, 12.x, 14.x, 15.x, 16.x, 17.x]
         node-version: [16.x]
-        # os: [ubuntu-latest, windows-latest]
         os: [ubuntu-latest]
 
     steps:
@@ -31,7 +29,19 @@ jobs:
               args: [--frozen-lockfile, --strict-peer-dependencies]
             - args: [--global, gulp, prettier, typescript]
       - name: Run tests
-        run: pnpm test
+        run: |
+          pnpm build:bus
+          pnpm build:core
+          pnpm test
+          pnpm build:vue
+
+          pnpm build:w-oruga
+          pnpm build:w-vuetify
+          pnpm build:w-quasar
+          pnpm build:w-element
+
+          pnpm build:p-rule-parsers
+          pnpm build:p-vue3-toastify
 
   compute-new-tag-version:
     needs: quality
@@ -83,6 +93,11 @@ jobs:
     needs: compute-new-tag-version
     if: ${{ needs.compute-new-tag-version.outputs.fromTag != needs.compute-new-tag-version.outputs.toTag }}
     steps:
+      - name: checkout code repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
       - name: setup node.js
         uses: actions/setup-node@v3
         with:
@@ -100,10 +115,21 @@ jobs:
       - name: install dependencies
         run: pnpm install
 
-      - name: Do something when a new release published
+      - name: Build and publish
         run: |
           pnpm -w run release ${{ needs.compute-new-tag-version.outputs.toTag }}
-          pnpm --filter "./packages/**" publish --no-git-checks
+          pnpm build:bus
+          pnpm build:core
+          pnpm build:vue
+
+          pnpm build:w-oruga
+          pnpm build:w-vuetify
+          pnpm build:w-quasar
+          pnpm build:w-element
+
+          pnpm build:p-rule-parsers
+          pnpm build:p-vue3-toastify
+          pnpm --filter "./packages/**" publish --no-git-checks --tag ${{ github.ref_name }}
 
   generate-release:
     runs-on: ubuntu-latest
@@ -132,4 +158,5 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           body: ${{ env.CHANGELOG }}
+          prerelease: true
           tag_name: ${{ needs.compute-new-tag-version.outputs.toTag }}

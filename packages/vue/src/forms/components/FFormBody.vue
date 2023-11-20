@@ -8,13 +8,13 @@
       :key="fieldKey"
     >
       <slot :name="`before-field-${fieldKey}`" v-bind="{ field }" />
-      <slot :name="`field-${fieldKey}`" v-bind="{ field }">
+      <slot :name="`field-${fieldKey}`" v-bind="binding(field)">
         <component
           :is="getComponent(field)"
-          v-bind="{ formId: props.formId, field, class: 'f-form__body__field col-span-12' }"
+          v-bind="binding(field)"
         />
       </slot>
-      <slot :name="`before-field-after-${fieldKey}`" v-bind="{ field }" />
+      <slot :name="`after-field-${fieldKey}`" v-bind="{ field }" />
     </template>
   </main>
 </template>
@@ -75,5 +75,11 @@ function filterFields(fields: BaseObjectWithNormalizedFields, mode: FormMode): [
   ) as [string, NormalizedField][]
 
   return filteredFields
+}
+
+function binding(field: NormalizedField) {
+  return {
+    is: getComponent(field), formId: props.formId, field, class: 'f-form__body__field col-span-12',
+  }
 }
 </script>
