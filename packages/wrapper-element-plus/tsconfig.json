@@ -22,6 +22,7 @@
     ],
     "paths": {
       "@packages/wrapper-element-plus/*": ["src/*"],
+      "@fancy-crud/vue": ["../vue/src/index.ts"]
     }
   },
   "exclude": [

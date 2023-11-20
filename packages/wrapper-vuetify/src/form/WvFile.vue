@@ -1,5 +1,6 @@
 <template>
   <v-file-input
+    v-model="modelValue"
     v-bind="computedAttrs"
     :label="props.field.label"
     :hint="props.field.hintText"
@@ -19,11 +20,11 @@ const props = defineProps<{
   field: NormalizedFileField
 }>()
 
-const { vmodel, filesList } = useFileField(props)
+const { modelValue, vmodel, filesList } = useFileField(props)
 
 const computedAttrs = computed(() => {
   return {
-    ...props.field.wrapper, ...props.field, ...vmodel
+    ...props.field.wrapper, ...props.field,
   } as any
 })
 

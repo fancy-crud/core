@@ -6,7 +6,7 @@
     v-bind="props.field.wrapper"
   >
     <el-upload
-      v-model:file-list="modelValue"
+      v-model:file-list="state.fileList"
       v-bind="computedAttrs"
       show-file-list
     >
@@ -23,16 +23,32 @@ import type { NormalizedFileField } from '@fancy-crud/vue'
 import { useFileField } from '@fancy-crud/vue'
 import WeField from './WeField.vue'
 
+interface UserFile {
+  raw: File
+}
+
 const props = defineProps<{
   formId: symbol
   field: NormalizedFileField
 }>()
 
-const { modelValue } = useFileField(props)
+const state = reactive({
+  fileList: [] as UserFile[],
+})
+const { onFileChanged } = useFileField(props)
 
 const computedAttrs = computed(() => {
   return {
     autoUpload: false, ...props.field,
   } as any
+})
+
+watch(() => state.fileList, (files) => {
+  const rawFiles = {
+    target: {
+      files: files.map(file => file.raw),
+    },
+  } as any
+  onFileChanged(rawFiles)
 })
 </script>
