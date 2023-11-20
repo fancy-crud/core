@@ -8,6 +8,7 @@ export interface RawSetting {
   title?: string
   disableResponseHandlers?: boolean
   disableNotifications?: boolean
+  loading?: boolean
 }
 
 export interface NormalizedSettings extends RawSetting {
@@ -15,4 +16,5 @@ export interface NormalizedSettings extends RawSetting {
   url: string
   lookupField: string
   title: string
+  loading: boolean
 }

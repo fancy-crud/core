@@ -34,6 +34,9 @@ export class PrepareFormToUpdateHandler implements IPrepareFormToUpdateHandler {
 
     const onRetrieve = this.httpService.hooks.onRetrieve
     const requestRetrieveCommand = new RequestRetrieveCommand(tableSettings.url, lookupValue, {
+      onInit() {
+        form.settings.loading = true
+      },
       onSuccess(response: { data: Record<string, unknown> }) {
         const data: any = typeof onRetrieve === 'function' ? onRetrieve(response) : response.data
 
@@ -43,6 +46,9 @@ export class PrepareFormToUpdateHandler implements IPrepareFormToUpdateHandler {
 
         if (options?.onReady)
           options.onReady()
+      },
+      onFinally() {
+        form.settings.loading = false
       },
     })
 

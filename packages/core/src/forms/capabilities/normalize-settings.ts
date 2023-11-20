@@ -22,6 +22,7 @@ export class NormalizeSettingsHandler implements INormalizeSettingsHandler {
       mode: settings?.mode || FORM_MODE.create,
       lookupField: settings?.lookupField || DEFAULT_LOOKUP_FIELD,
       title: settings?.title ?? `{{ ${t('create-new-record')} | ${t('update-record')} }}`,
+      loading: settings?.loading || false,
     }
 
     return _settings

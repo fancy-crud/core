@@ -5,7 +5,11 @@
 
   <slot name="table-form" v-bind="{ onSuccess, form: tableForm, formModal }">
     <f-modal v-model="formModal">
+      <div v-if="form.settings.loading" class="loader-wrapper">
+        <div :class="{ loader: form.settings.loading }" />
+      </div>
       <f-form
+        v-else
         @success="onSuccess"
         v-bind="tableForm"
         :id="props.form.id"

@@ -55,7 +55,7 @@ const table = useTable({
     created_at: {
       format: (value: unknown) => 'Lo que sea',
     },
-    actions: { value: 'actions', label: '', exclude: true },
+    actions: { value: 'actions', label: '' },
   },
   settings: {
     url: form.settings.url,
