@@ -108,7 +108,7 @@ function onMainClick() {
 
   const fields = filterFields(props.fields, props.settings.mode).reduce((previous, [fieldKey, field]) => {
     if (field.exclude !== true)
-      return previous[fieldKey] = field
+      previous[fieldKey] = field
     return previous
   }, {} as Record<string, NormalizedField>)
 
