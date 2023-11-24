@@ -13,6 +13,7 @@ export interface BaseRawField extends Record<string, any> {
   createOnly?: boolean
   updateOnly?: boolean
   hidden?: boolean
+  exclude?: boolean
   hintText?: string
   bounceTime?: number
   modelKey?: string

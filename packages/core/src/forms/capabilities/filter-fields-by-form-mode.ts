@@ -5,9 +5,6 @@ import type { FilterFieldsByFormModeCommand, FilterFieldsByFormModeCommandInput,
 export class FilterFieldsByFormModeHandler implements IFilterFieldsByFormModeHandler {
   private filter<T extends FilterFieldsByFormModeCommandInput>(fields: BaseObjectWithNormalizedFields<T>, omit: 'createOnly' | 'updateOnly') {
     const filteredFields = Object.entries(fields).filter(([_, field]) => {
-      if (field.hidden)
-        return false
-
       if (field[omit])
         return false
 

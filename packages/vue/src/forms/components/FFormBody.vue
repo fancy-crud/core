@@ -40,7 +40,9 @@ const props = defineProps<{
 
 const bus = new Bus()
 
-const computedFields = computed(() => filterFields(props.fields, props.settings.mode))
+const computedFields = computed(() => filterFields(props.fields, props.settings.mode).filter(
+  ([_, field]) => field.hidden !== true || field.exclude !== true),
+)
 
 const defaultControls: Record<string, any> = {
   checkbox: FCheckbox,
@@ -55,9 +57,10 @@ const defaultControls: Record<string, any> = {
 }
 
 onMounted(() => {
-  const fields = Object.fromEntries(filterFields(props.fields, props.settings.mode))
+  const fields = Object.fromEntries(
+    filterFields(props.fields, props.settings.mode).filter(([_, field]) => field.exclude !== true),
+  )
   const getForeignKeyValuesCommand = new GetForeignKeyValuesCommand(fields)
-
   bus.execute(getForeignKeyValuesCommand)
 })
 

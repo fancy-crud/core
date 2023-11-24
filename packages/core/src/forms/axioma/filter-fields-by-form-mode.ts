@@ -3,7 +3,7 @@ import type { BaseCommand } from '@fancy-crud/bus'
 import type { BaseObjectWithNormalizedFields, FormMode, NormalizedField } from '@packages/core/forms/axioma'
 import { FORM_MODE, UnknownFormMode } from '@packages/core/forms/axioma'
 
-export type FilterFieldsByFormModeCommandInput = Pick<NormalizedField, 'hidden' | 'createOnly' | 'updateOnly'>
+export type FilterFieldsByFormModeCommandInput = Pick<NormalizedField, 'createOnly' | 'updateOnly'>
 
 export class FilterFieldsByFormModeCommand<T extends FilterFieldsByFormModeCommandInput> implements BaseCommand {
   public readonly meta = meta(IFilterFieldsByFormModeHandler)

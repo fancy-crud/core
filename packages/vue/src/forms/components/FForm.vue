@@ -29,10 +29,11 @@
 </template>
 
 <script lang="ts" setup>
-import type { BaseObjectWithNormalizedFields, NormalizedSettings, NotificationType, ObjectWithNormalizedButtons } from '@fancy-crud/core'
+import type { BaseObjectWithNormalizedFields, FormMode, NormalizedField, NormalizedSettings, NotificationType, ObjectWithNormalizedButtons } from '@fancy-crud/core'
 import {
   Bus,
   FORM_MODE,
+  FilterFieldsByFormModeCommand,
   GenerateFormDataCommand,
   IFormStore,
   INotificationStore,
@@ -89,6 +90,14 @@ function onFailed(error?: StandardErrorResponseStructure) {
   triggerNotification(NOTIFICATION_TYPE.error)
 }
 
+function filterFields(fields: BaseObjectWithNormalizedFields, mode: FormMode): [string, NormalizedField][] {
+  const filteredFields = bus.execute(
+    new FilterFieldsByFormModeCommand(fields, mode),
+  ) as [string, NormalizedField][]
+
+  return filteredFields
+}
+
 function onMainClick() {
   const { buttons } = formStore.searchById(props.id) || {}
 
@@ -97,8 +106,14 @@ function onMainClick() {
     return
   }
 
+  const fields = filterFields(props.fields, props.settings.mode).reduce((previous, [fieldKey, field]) => {
+    if (field.exclude !== true)
+      return previous[fieldKey] = field
+    return previous
+  }, {} as Record<string, NormalizedField>)
+
   const { jsonForm, formData } = bus.execute(
-    new GenerateFormDataCommand(props.fields),
+    new GenerateFormDataCommand(fields),
   )
 
   const { url, mode, lookupValue } = props.settings
