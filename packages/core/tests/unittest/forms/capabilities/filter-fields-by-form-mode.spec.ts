@@ -25,6 +25,7 @@ describe('FilterFieldsByFormModeHandler', () => {
     // The result should only contain field1 because it is not hidden, not createOnly, and not updateOnly.
     expect(result).toEqual([
       ['field1', fields.field1],
+      ['field2', fields.field2],
       ['field3', fields.field3],
       ['field7', fields.field7],
     ])
@@ -39,6 +40,7 @@ describe('FilterFieldsByFormModeHandler', () => {
 
     expect(result).toEqual([
       ['field1', fields.field1],
+      ['field2', fields.field2],
       ['field4', fields.field4],
       ['field7', fields.field7],
     ])
