@@ -1,8 +1,8 @@
 export interface RawColumn extends Record<string, unknown> {
   label?: string
   value?: string
-  field?: (row: unknown, index: number) => unknown
-  format?: (value: unknown) => unknown
+  field?: (row: any, index: number) => any
+  format?: (value: any) => any
   allowCheckbox?: boolean
   allowImagePreview?: boolean
   exclude?: boolean
