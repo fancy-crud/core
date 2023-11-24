@@ -4,9 +4,10 @@ import type {
   Locale,
   NotificationState,
   PaginationStructure,
+  ResponseInterceptorState,
   RuleConfig,
 } from '@packages/core/index'
-import { setDefaultNotificationHandler, setDefaults, setHttpHooks, setHttpPagination, setHttpRequest, setLocale, setRuleConfig } from '@packages/core/index'
+import { setDefaultInterceptors, setDefaultNotificationHandler, setDefaults, setHttpHooks, setHttpPagination, setHttpRequest, setLocale, setRuleConfig } from '@packages/core/index'
 import { components, setComponents } from './components'
 
 export interface Config {
@@ -20,6 +21,7 @@ export interface Config {
   styles?: Record<string, string>
   i18n?: Locale
   toast?: NotificationState
+  responseInterceptors?: ResponseInterceptorState
 }
 
 export function setupConfig(config: Config) {
@@ -46,6 +48,9 @@ export function setupConfig(config: Config) {
 
   if (config.toast)
     setDefaultNotificationHandler(config.toast)
+
+  if (config.responseInterceptors)
+    setDefaultInterceptors(config.responseInterceptors)
 
   if (Object.keys(components).length === 0)
     throw new Error('You should install a ui wrapper, please follow the documentation at: https://fancy-crud.github.io/docs/')

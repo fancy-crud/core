@@ -50,10 +50,10 @@ const table = useTable({
   form,
   columns: {
     gender: {
-      format: (value: unknown) => value === 'm' ? 'Male' : 'Female',
+      format: (value: string) => value === 'm' ? 'Male' : 'Female',
     },
     created_at: {
-      format: (value: unknown) => 'Lo que sea',
+      format: (value: string) => 'Lo que sea',
     },
     actions: { value: 'actions', label: '' },
   },
