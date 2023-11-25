@@ -1,7 +1,7 @@
 import type { BaseCommand } from '@fancy-crud/bus'
 import type { BaseTableForm, MappedRawColumn, ObjectWithRawColumns, RawTableFilters, RawTablePagination, RawTableSettings, Table } from '@packages/core/tables/axioma'
 import { meta } from '@fancy-crud/bus'
-import type { RawTableButtons } from './typing/buttons'
+import type { RawTableButtons } from '../typing/buttons'
 
 export class CreateTableCommand<T extends BaseTableForm, U extends ObjectWithRawColumns, S extends RawTableSettings, F extends RawTableFilters, B extends RawTableButtons> implements BaseCommand {
   public readonly meta = meta(ICreateTableHandler)

@@ -1,6 +1,6 @@
 import { meta } from '@fancy-crud/bus'
 import type { BaseCommand } from '@fancy-crud/bus'
-import type { NormalizedTableButtons, RawTableButtons } from './typing/buttons'
+import type { NormalizedTableButtons, RawTableButtons } from '../typing/buttons'
 
 export class NormalizeTableButtonsCommand<T extends RawTableButtons> implements BaseCommand {
   public readonly meta = meta(INormalizeTableButtonsHandler)

@@ -1,7 +1,7 @@
 import type { BaseCommand } from '@fancy-crud/bus'
 import type { StoreMap } from '@packages/core/common/store/axioma/typing'
 import { meta } from '@fancy-crud/bus'
-import type { TableStoreState } from '../axioma'
+import type { TableStoreState } from '..'
 
 export class SetStoreTableManagerCommand implements BaseCommand {
   public readonly meta = meta(ISetStoreTableManagerHandler)

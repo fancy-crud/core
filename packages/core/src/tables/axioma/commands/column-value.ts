@@ -1,6 +1,6 @@
 import type { BaseCommand } from '@fancy-crud/bus'
 import { meta } from '@fancy-crud/bus'
-import type { NormalizedColumn } from '../axioma'
+import type { NormalizedColumn } from '../typing'
 
 export class GetColumnValueCommand implements BaseCommand {
   public readonly meta = meta(IGetColumnValueHandler)
