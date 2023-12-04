@@ -91,6 +91,7 @@ const tableStore: ITableStore = injecting(ITableStore.name)!
 const baseTable: VueTable = injecting('IBaseTable')!
 
 baseTable.setTableId(props.id)
+baseTable.createWatchers()
 
 const table = tableStore.searchById(props.id)!
 
