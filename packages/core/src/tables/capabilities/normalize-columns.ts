@@ -7,8 +7,9 @@ export class NormalizeColumnsHandler implements INormalizeColumnsHandler {
     const mergeColumns = Object.assign({}, fields, columns)
 
     Object.keys(mergeColumns).forEach((columnName) => {
+      const columnFromField = fields ? fields[columnName] : { name: columnName, type: 'text' }
       const column = {
-        ...(fields[columnName] || {}),
+        ...columnFromField,
         ...(columns[columnName] || {}),
       }
 

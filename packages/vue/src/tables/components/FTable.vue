@@ -1,5 +1,5 @@
 <template>
-  <slot name="table-header" v-bind="{ openCreateModal: baseTable.openCreateModal, exportData: baseTable.exportData }">
+  <slot name="table-header" v-bind="tableHeaderVBind()">
     <f-table-header-actions
       @create="() => baseTable.openCreateModal()"
       @export="() => baseTable.exportData()"
@@ -26,7 +26,7 @@
     </f-modal>
   </slot>
 
-  <slot name="table-body" v-bind="{ openEditModal: (row: Row) => baseTable.openEditModal(row), onDelete: (row: Row) => baseTable.onDelete(row), setPagination: (p: Pagination) => baseTable.setPagination(p) }">
+  <slot name="table-body" v-bind="tableBodyVBind()">
     <f-table-body
       @edit="(row: Row) => baseTable.openEditModal(row)"
       @delete="(row: Row) => baseTable.onDelete(row)"
@@ -81,7 +81,6 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'update:formModal', value: boolean): void
   (e: 'export'): void
 }>()
 
@@ -103,4 +102,22 @@ const computedData = computed<any[]>(() => {
 })
 
 baseTable.triggerFetchItems()
+
+function tableHeaderVBind() {
+  return {
+    openCreateModal: () => baseTable.openCreateModal(),
+    exportData: () => {
+      emit('export')
+      baseTable.exportData()
+    },
+  }
+}
+
+function tableBodyVBind() {
+  return {
+    openEditModal: (row: Row) => baseTable.openEditModal(row),
+    onDelete: (row: Row) => baseTable.onDelete(row),
+    setPagination: (p: Pagination) => baseTable.setPagination(p),
+  }
+}
 </script>

@@ -577,7 +577,6 @@ declare module 'vue' {
     readonly useRadioField: UnwrapRef<typeof import('./src/forms/composables/fields/radio')['useRadioField']>
     readonly useRafFn: UnwrapRef<typeof import('@vueuse/core')['useRafFn']>
     readonly useRefHistory: UnwrapRef<typeof import('@vueuse/core')['useRefHistory']>
-    readonly useRequestList: UnwrapRef<typeof import('./src/http/composables/request-list')['useRequestList']>
     readonly useResizeObserver: UnwrapRef<typeof import('@vueuse/core')['useResizeObserver']>
     readonly useRules: UnwrapRef<typeof import('./src/forms/composables/rules')['useRules']>
     readonly useScreenOrientation: UnwrapRef<typeof import('@vueuse/core')['useScreenOrientation']>
@@ -897,7 +896,6 @@ declare module '@vue/runtime-core' {
     readonly useRadioField: UnwrapRef<typeof import('./src/forms/composables/fields/radio')['useRadioField']>
     readonly useRafFn: UnwrapRef<typeof import('@vueuse/core')['useRafFn']>
     readonly useRefHistory: UnwrapRef<typeof import('@vueuse/core')['useRefHistory']>
-    readonly useRequestList: UnwrapRef<typeof import('./src/http/composables/request-list')['useRequestList']>
     readonly useResizeObserver: UnwrapRef<typeof import('@vueuse/core')['useResizeObserver']>
     readonly useRules: UnwrapRef<typeof import('./src/forms/composables/rules')['useRules']>
     readonly useScreenOrientation: UnwrapRef<typeof import('@vueuse/core')['useScreenOrientation']>

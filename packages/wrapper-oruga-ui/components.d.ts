@@ -19,6 +19,7 @@ declare module 'vue' {
     WoRadio: typeof import('./src/form/WoRadio.vue')['default']
     WoSelect: typeof import('./src/form/WoSelect.vue')['default']
     WoTableBody: typeof import('./src/table/WoTableBody.vue')['default']
+    WoTableFooter: typeof import('./src/table/WoTableFooter.vue')['default']
     WoText: typeof import('./src/form/WoText.vue')['default']
     WoTextarea: typeof import('./src/form/WoTextarea.vue')['default']
   }

@@ -7,23 +7,24 @@ export interface TableArgs<
   F,
   B extends RawTableButtons,
   L extends RawTableList,
+  P extends RawTablePagination,
 > {
   id?: string
   form: T
   columns?: MappedRawColumn<T['fields'], U> & U
-  pagination?: RawTablePagination
+  pagination?: P
   settings?: S
   filterParams?: F
   buttons?: B
   list?: L
 }
 
-export interface UseTable<T extends BaseTableForm, U, S, F, B, L extends RawTableList> {
+export interface UseTable<T extends BaseTableForm, U, S, F, B, L extends RawTableList, P> {
   id: symbol
   form: T
   columns: FieldAsColumn<T['fields'], NormalizedColumn> & U
   settings: S & NormalizedTableSettings
-  pagination: NormalizedTablePagination
+  pagination: P & NormalizedTablePagination
   filterParams: F
   buttons: B & NormalizedTableButtons
   list: L & NormalizedTableList

@@ -31,8 +31,8 @@ export interface Table<T extends BaseTableForm, U, S, F, B, L, P> {
   id: symbol
   form: T
   columns: FieldAsColumn<T['fields'], NormalizedColumn> & U
-  settings: S
-  pagination: P
+  settings: S & NormalizedTableSettings
+  pagination: P & NormalizedTablePagination
   filterParams: F
   buttons: B & NormalizedTableButtons
   list: L & NormalizedTableList
