@@ -1,4 +1,4 @@
-import '@packages/core/forms/integration/load-commands'
+import '@packages/core/forms/integration/register-handlers'
 import { handlers } from '@fancy-crud/bus'
 import type { FormState, NormalizedButtons, NormalizedSettings, SwitchFormToUpdateModeCommandInput } from '@packages/core/forms/axioma'
 import { FORM_MODE, ISwitchFormToUpdateModeHandler, SwitchFormToUpdateModeCommand, formStore } from '@packages/core/forms/axioma'

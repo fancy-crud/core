@@ -1,4 +1,4 @@
-import '@packages/core/forms/integration/load-commands'
+import '@packages/core/forms/integration/register-handlers'
 import { handlers } from '@fancy-crud/bus'
 import { IValidateFormHandler, ValidateFormCommand } from '@packages/core/forms/axioma'
 import { ValidateFormHandler } from '@packages/core/forms/capabilities'

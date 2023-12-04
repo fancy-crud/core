@@ -1,6 +1,5 @@
-import '@packages/core/forms/integration/load-commands'
-import { UnprocessableValidationResult } from '@packages/core/forms/axioma/exceptions/unprocessable-validation-result'
-import { IValidateFieldRulesHandler, ValidateFieldRulesCommand } from '@packages/core/forms/axioma'
+import '@packages/core/forms/integration/register-handlers'
+import { IValidateFieldRulesHandler, UnprocessableValidationResult, ValidateFieldRulesCommand } from '@packages/core/forms/axioma'
 import { handlers } from '@packages/core/index'
 import { describe, expect, it } from 'vitest'
 import { ValidateFieldRulesHandler } from '@packages/core/forms/capabilities'

@@ -1,4 +1,4 @@
-import '@packages/core/forms/integration/load-commands'
+import '@packages/core/forms/integration/register-handlers'
 import type { FormState, NormalizedButtons, NormalizedSettings, SwitchFormToCreateModeCommandInput } from '@packages/core/forms/axioma'
 import { FORM_MODE, SwitchFormToCreateModeCommand, formStore } from '@packages/core/forms/axioma'
 import { beforeEach, describe, expect, it, vi } from 'vitest'

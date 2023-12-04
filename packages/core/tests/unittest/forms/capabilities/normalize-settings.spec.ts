@@ -1,4 +1,4 @@
-import '@packages/core/forms/integration/load-commands'
+import '@packages/core/forms/integration/register-handlers'
 import { DEFAULT_LOOKUP_FIELD, FORM_MODE, NormalizeSettingsCommand } from '@packages/core/forms/axioma'
 import { describe, expect, it } from 'vitest'
 
