@@ -4,6 +4,9 @@ import type { NormalizedSettings } from './settings'
 export type RawRuleResult = string | true | unknown
 export type Rule = (value?: any) => RawRuleResult
 
+export interface StandardResponseStructure { data: any; status: number }
+export interface StandardErrorResponseStructure { response: StandardResponseStructure }
+
 export interface BaseRawField extends Record<string, any> {
   type: string
   wrapper?: Record<string, unknown>

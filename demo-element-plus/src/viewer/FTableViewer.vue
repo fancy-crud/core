@@ -1,5 +1,15 @@
 <template>
   <div class="pb-5">
+    <!-- <f-table
+      :columns="table.columns"
+      :buttons="table.buttons"
+      :form="table.form"
+      :settings="table.settings"
+      :list="table.list"
+      :filter-params="table.filterParams"
+      :pagination="table.pagination"
+      :id="table.id"
+    > -->
     <f-table v-bind="table">
       <template #column-created_at>
         <a href="https://google.com" class="underline text-primary-500" target="_blank">Haz click</a>
@@ -53,16 +63,20 @@ const table = useTable({
       format: (value: string) => value === 'm' ? 'Male' : 'Female',
     },
     created_at: {
-      format: (value: string) => 'Lo que sea',
+      format: (value: string) => 'anything',
     },
     actions: { value: 'actions', label: '' },
   },
-  settings: {
-    url: form.settings.url,
-    lookupField: 'id',
-  },
   pagination: {
     rowsPerPage: 10,
+  },
+  list: {
+    data: [],
+    options: {
+      onInit() {
+        console.log('ok')
+      },
+    },
   },
 })
 </script>

@@ -29,9 +29,11 @@ declare global {
   const FSelect: typeof import('./src/forms/components/index')['FSelect']
   const FTable: typeof import('./src/tables/components/index')['FTable']
   const FTableBody: typeof import('./src/tables/components/index')['FTableBody']
+  const FTableFooter: typeof import('./src/tables/components/index')['FTableFooter']
   const FTableHeaderActions: typeof import('./src/tables/components/index')['FTableHeaderActions']
   const FTableRowActions: typeof import('./src/tables/components/index')['FTableRowActions']
   const FTableRowFilePreview: typeof import('./src/tables/components/index')['FTableRowFilePreview']
+  const FText: typeof import('./src/forms/components/index')['FText']
   const FTextVue: typeof import('./src/forms/components/index')['FTextVue']
   const FTextarea: typeof import('./src/forms/components/index')['FTextarea']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
@@ -271,6 +273,7 @@ declare global {
   const useSupported: typeof import('@vueuse/core')['useSupported']
   const useSwipe: typeof import('@vueuse/core')['useSwipe']
   const useTable: typeof import('./src/tables/composables/table')['useTable']
+  const useTableFooter: typeof import('./src/tables/composables/table-footer')['useTableFooter']
   const useTemplateRefsList: typeof import('@vueuse/core')['useTemplateRefsList']
   const useTextDirection: typeof import('@vueuse/core')['useTextDirection']
   const useTextField: typeof import('./src/forms/composables/fields/text')['useTextField']
@@ -354,10 +357,11 @@ declare module 'vue' {
     readonly FSelect: UnwrapRef<typeof import('./src/forms/components/index')['FSelect']>
     readonly FTable: UnwrapRef<typeof import('./src/tables/components/index')['FTable']>
     readonly FTableBody: UnwrapRef<typeof import('./src/tables/components/index')['FTableBody']>
+    readonly FTableFooter: UnwrapRef<typeof import('./src/tables/components/index')['FTableFooter']>
     readonly FTableHeaderActions: UnwrapRef<typeof import('./src/tables/components/index')['FTableHeaderActions']>
     readonly FTableRowActions: UnwrapRef<typeof import('./src/tables/components/index')['FTableRowActions']>
     readonly FTableRowFilePreview: UnwrapRef<typeof import('./src/tables/components/index')['FTableRowFilePreview']>
-    readonly FTextVue: UnwrapRef<typeof import('./src/forms/components/index')['FTextVue']>
+    readonly FText: UnwrapRef<typeof import('./src/forms/components/index')['FText']>
     readonly FTextarea: UnwrapRef<typeof import('./src/forms/components/index')['FTextarea']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
@@ -595,6 +599,7 @@ declare module 'vue' {
     readonly useSupported: UnwrapRef<typeof import('@vueuse/core')['useSupported']>
     readonly useSwipe: UnwrapRef<typeof import('@vueuse/core')['useSwipe']>
     readonly useTable: UnwrapRef<typeof import('./src/tables/composables/table')['useTable']>
+    readonly useTableFooter: UnwrapRef<typeof import('./src/tables/composables/table-footer')['useTableFooter']>
     readonly useTemplateRefsList: UnwrapRef<typeof import('@vueuse/core')['useTemplateRefsList']>
     readonly useTextDirection: UnwrapRef<typeof import('@vueuse/core')['useTextDirection']>
     readonly useTextField: UnwrapRef<typeof import('./src/forms/composables/fields/text')['useTextField']>
@@ -672,10 +677,11 @@ declare module '@vue/runtime-core' {
     readonly FSelect: UnwrapRef<typeof import('./src/forms/components/index')['FSelect']>
     readonly FTable: UnwrapRef<typeof import('./src/tables/components/index')['FTable']>
     readonly FTableBody: UnwrapRef<typeof import('./src/tables/components/index')['FTableBody']>
+    readonly FTableFooter: UnwrapRef<typeof import('./src/tables/components/index')['FTableFooter']>
     readonly FTableHeaderActions: UnwrapRef<typeof import('./src/tables/components/index')['FTableHeaderActions']>
     readonly FTableRowActions: UnwrapRef<typeof import('./src/tables/components/index')['FTableRowActions']>
     readonly FTableRowFilePreview: UnwrapRef<typeof import('./src/tables/components/index')['FTableRowFilePreview']>
-    readonly FTextVue: UnwrapRef<typeof import('./src/forms/components/index')['FTextVue']>
+    readonly FText: UnwrapRef<typeof import('./src/forms/components/index')['FText']>
     readonly FTextarea: UnwrapRef<typeof import('./src/forms/components/index')['FTextarea']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
@@ -913,6 +919,7 @@ declare module '@vue/runtime-core' {
     readonly useSupported: UnwrapRef<typeof import('@vueuse/core')['useSupported']>
     readonly useSwipe: UnwrapRef<typeof import('@vueuse/core')['useSwipe']>
     readonly useTable: UnwrapRef<typeof import('./src/tables/composables/table')['useTable']>
+    readonly useTableFooter: UnwrapRef<typeof import('./src/tables/composables/table-footer')['useTableFooter']>
     readonly useTemplateRefsList: UnwrapRef<typeof import('@vueuse/core')['useTemplateRefsList']>
     readonly useTextDirection: UnwrapRef<typeof import('@vueuse/core')['useTextDirection']>
     readonly useTextField: UnwrapRef<typeof import('./src/forms/composables/fields/text')['useTextField']>

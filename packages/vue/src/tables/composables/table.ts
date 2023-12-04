@@ -1,49 +1,58 @@
-import type { BaseTableForm, FieldAsColumn, NormalizedColumn, NormalizedSettings, NormalizedTableButtons, ObjectWithRawColumns, RawTableButtons, RawTableFilters, RawTableSettings } from '@fancy-crud/core'
-import { Bus, CreateTableCommand, DeleteStoreTableCommand, SetStoreTableCommand } from '@fancy-crud/core'
+import type { BaseTableForm, FieldAsColumn, NormalizedColumn, NormalizedTableButtons, NormalizedTableList, NormalizedTableSettings, ObjectWithRawColumns, RawTableButtons, RawTableFilters, RawTableList, RawTableSettings } from '@fancy-crud/core'
+import { Bus, CreateTableCommand, ITableStore, inject as injecting } from '@fancy-crud/core'
 import type { TableArgs, UseTable } from '../typing'
 
-export function useTable<T extends BaseTableForm, U extends ObjectWithRawColumns, S extends RawTableSettings, F extends RawTableFilters, B extends RawTableButtons>(
-  args: TableArgs<T, U, S, F, B>,
-): UseTable<T, U, S, F, B> {
+export function useTable<
+  T extends BaseTableForm,
+  U extends ObjectWithRawColumns,
+  S extends RawTableSettings,
+  F extends RawTableFilters,
+  B extends RawTableButtons,
+  L extends RawTableList,
+>(
+  args: TableArgs<T, U, S, F, B, L>,
+): UseTable<T, U, S, F, B, L> {
   const {
     id: _id,
     form,
     columns: rawColumns = {},
-    settings: rawSettings = {},
+    settings: rawSettings = {
+      url: form.settings?.url,
+    },
     pagination: rawPagination = {},
     filterParams: rawFilterParams = {},
     buttons: rawButtons = {},
+    list: rawList = {},
   } = args
 
+  const tableStore: ITableStore = injecting(ITableStore.name)!
   const bus = new Bus()
   const id = Symbol(_id)
 
   const table = bus.execute(
     new CreateTableCommand(
-      form, rawColumns, rawPagination, rawSettings, rawFilterParams, rawButtons,
+      form, rawColumns, rawPagination, rawSettings, rawFilterParams, rawButtons, rawList,
     ),
   )
 
   const columns = reactive(table.columns) as FieldAsColumn<T['fields'], NormalizedColumn> & U
-  const settings = reactive(table.settings) as S & NormalizedSettings
+  const settings = reactive(table.settings) as S & NormalizedTableSettings
   const pagination = reactive(table.pagination)
   const filterParams = reactive(table.filterParams) as F
   const buttons = reactive(table.buttons) as B & NormalizedTableButtons
+  const list = reactive(table.list) as L & NormalizedTableList
 
-  bus.execute(
-    new SetStoreTableCommand(id, {
-      columns,
-      settings,
-      pagination,
-      filterParams,
-      formId: form.id,
-      buttons,
-    }),
-  )
+  tableStore.save(id, {
+    columns,
+    settings,
+    pagination,
+    filterParams,
+    formId: form.id,
+    buttons,
+    list,
+  })
 
-  onUnmounted(() => bus.execute(
-    new DeleteStoreTableCommand(id),
-  ))
+  onUnmounted(() => tableStore.deleteById(id))
 
   return {
     id,
@@ -53,5 +62,6 @@ export function useTable<T extends BaseTableForm, U extends ObjectWithRawColumns
     pagination,
     filterParams,
     buttons,
+    list,
   }
 }

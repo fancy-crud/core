@@ -1,27 +1,35 @@
 import { register } from '@fancy-crud/bus'
 import {
   ICreateTableHandler, IDeleteRecordHandler,
-  IDeleteStoreTableHandler, IGetColumnValueHandler,
-  IGetStoreTableHandler, INormalizeColumnsHandler,
+  IFetchListDataHandler,
+  IGetColumnValueHandler,
+  INormalizeColumnsHandler,
   INormalizePaginationHandler, INormalizeTableButtonsHandler, INormalizeTableFiltersHandler,
+  INormalizeTableListHandler,
   INormalizeTableSettingsHandler, IPrepareFormToCreateHandler,
-  IPrepareFormToUpdateHandler, ISetStoreTableHandler,
-  ISetStoreTableManagerHandler, IUpdateRowValueHandler,
+  IPrepareFormToUpdateHandler,
+  IResetTablePaginationHandler,
+  ISetListDataHandler,
+  IUpdateRowValueHandler,
 } from '../axioma'
-import { CreateTableHandler, DeleteRecordHandler, DeleteStoreTableHandler, GetColumnValueHandler, GetStoreTableHandler, NormalizeColumnsHandler, NormalizePaginationHandler, NormalizeTableButtonsHandler, NormalizeTableFiltersHandler, NormalizeTableSettingsHandler, PrepareFormToCreateHandler, PrepareFormToUpdateHandler, SetStoreTableHandler, SetStoreTableManagerHandler, UpdateRowValueHandler } from '../capabilities'
+import { CreateTableHandler, DeleteRecordHandler, GetColumnValueHandler, NormalizeColumnsHandler, NormalizePaginationHandler, NormalizeTableButtonsHandler, NormalizeTableFiltersHandler, NormalizeTableListHandler, NormalizeTableSettingsHandler, PrepareFormToCreateHandler, PrepareFormToUpdateHandler, ResetTablePaginationHandler, SetListDataHandler, UpdateRowValueHandler } from '../capabilities'
+import { FetchListDataHandler } from '../capabilities/fetch-list-data'
 
 register(IGetColumnValueHandler.name, GetColumnValueHandler)
 register(ICreateTableHandler.name, CreateTableHandler)
 register(IDeleteRecordHandler.name, DeleteRecordHandler)
-register(IDeleteStoreTableHandler.name, DeleteStoreTableHandler)
-register(IGetStoreTableHandler.name, GetStoreTableHandler)
+
 register(INormalizeColumnsHandler.name, NormalizeColumnsHandler)
 register(INormalizePaginationHandler.name, NormalizePaginationHandler)
 register(INormalizeTableFiltersHandler.name, NormalizeTableFiltersHandler)
 register(INormalizeTableSettingsHandler.name, NormalizeTableSettingsHandler)
 register(INormalizeTableButtonsHandler.name, NormalizeTableButtonsHandler)
+register(INormalizeTableListHandler.name, NormalizeTableListHandler)
+register(IResetTablePaginationHandler.name, ResetTablePaginationHandler)
+register(ISetListDataHandler.name, SetListDataHandler)
+register(IFetchListDataHandler.name, FetchListDataHandler)
 register(IPrepareFormToCreateHandler.name, PrepareFormToCreateHandler)
 register(IPrepareFormToUpdateHandler.name, PrepareFormToUpdateHandler)
-register(ISetStoreTableManagerHandler.name, SetStoreTableManagerHandler)
-register(ISetStoreTableHandler.name, SetStoreTableHandler)
+
 register(IUpdateRowValueHandler.name, UpdateRowValueHandler)
+

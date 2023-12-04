@@ -18,6 +18,7 @@ declare module 'vue' {
     WqRadio: typeof import('./src/form/WqRadio.vue')['default']
     WqSelect: typeof import('./src/form/WqSelect.vue')['default']
     WqTableBody: typeof import('./src/table/WqTableBody.vue')['default']
+    WqTableFooter: typeof import('./src/table/WqTableFooter.vue')['default']
     WqText: typeof import('./src/form/WqText.vue')['default']
     WqTextarea: typeof import('./src/form/WqTextarea.vue')['default']
   }

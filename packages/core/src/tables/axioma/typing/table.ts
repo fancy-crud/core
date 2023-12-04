@@ -1,9 +1,10 @@
-import type { DeleteRequestOptions } from '@packages/core/common/http/axioma'
+import type { DeleteRequestOptions, OnFinally } from '@packages/core/common/http/axioma'
 import type { NormalizedTableFilters } from './filters'
 import type { BaseTableForm, FieldAsColumn, MappedRawColumn, NormalizedColumn, ObjectWithNormalizedColumns } from './column'
-import type { NormalizedTablePagination, RawTablePagination } from './pagination'
+import type { NormalizedTablePagination } from './pagination'
 import type { NormalizedTableSettings } from './settings'
 import type { NormalizedTableButtons } from './buttons'
+import type { NormalizedTableList } from './list'
 
 export interface TableStoreState {
   formId: symbol
@@ -23,24 +24,33 @@ export interface SetupOptions {
 
 export interface DeleteRecordOptions extends DeleteRequestOptions {
   onRequestDeleteConfirmation?: (row: Row) => void
+  onFinally: OnFinally
 }
 
-export interface Table<T extends BaseTableForm, U, S, F, B> {
+export interface Table<T extends BaseTableForm, U, S, F, B, L, P> {
   id: symbol
   form: T
   columns: FieldAsColumn<T['fields'], NormalizedColumn> & U
   settings: S
-  pagination: NormalizedTablePagination
+  pagination: P
   filterParams: F
   buttons: B & NormalizedTableButtons
+  list: L & NormalizedTableList
 }
 
-export interface RawTable<T extends BaseTableForm, U, S, F, B> {
+export interface RawTable<T extends BaseTableForm, U, S, F, B, L, P> {
   id?: string
   form: T
   columns?: MappedRawColumn<T['fields'], U> & U
-  pagination?: RawTablePagination
+  pagination?: P
   settings?: S
   filterParams?: F
   buttons?: B
+  list?: L
+}
+
+export interface BaseTableState {
+  formModal: boolean
+  confirmationModal: boolean
+  rowToDelete: Row | null
 }

@@ -18,6 +18,7 @@ declare module 'vue' {
     WeRadio: typeof import('./src/form/WeRadio.vue')['default']
     WeSelect: typeof import('./src/form/WeSelect.vue')['default']
     WeTableBody: typeof import('./src/table/WeTableBody.vue')['default']
+    WeTableFooter: typeof import('./src/table/WeTableFooter.vue')['default']
     WeText: typeof import('./src/form/WeText.vue')['default']
     WeTextarea: typeof import('./src/form/WeTextarea.vue')['default']
   }

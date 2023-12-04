@@ -1,16 +1,21 @@
 <template>
-  <slot name="table-header" v-bind="{ openCreateModal, exportData }">
-    <f-table-header-actions @create="openCreateModal" @export="exportData" :add="props.buttons.add" :dump="props.buttons.dump" />
+  <slot name="table-header" v-bind="{ openCreateModal: baseTable.openCreateModal, exportData: baseTable.exportData }">
+    <f-table-header-actions
+      @create="() => baseTable.openCreateModal()"
+      @export="() => baseTable.exportData()"
+      :add="props.buttons.add"
+      :dump="props.buttons.dump"
+    />
   </slot>
 
-  <slot name="table-form" v-bind="{ onSuccess, form: tableForm, formModal }">
-    <f-modal v-model="formModal">
-      <div v-if="form.settings.loading" class="loader-wrapper">
-        <div :class="{ loader: form.settings.loading }" />
+  <slot name="table-form" v-bind="{ onSuccess: () => baseTable.onSuccess() }">
+    <f-modal v-model="table.settings.displayFormDialog">
+      <div v-if="tableForm.settings.loading" class="loader-wrapper">
+        <div :class="{ loader: tableForm.settings.loading }" />
       </div>
       <f-form
         v-else
-        @success="onSuccess"
+        @success="() => baseTable.onSuccess()"
         v-bind="tableForm"
         :id="props.form.id"
       >
@@ -21,17 +26,14 @@
     </f-modal>
   </slot>
 
-  <slot name="table-body" v-bind="{ openEditModal, onDelete, updateCheckbox, setPagination }">
+  <slot name="table-body" v-bind="{ openEditModal: (row: Row) => baseTable.openEditModal(row), onDelete: (row: Row) => baseTable.onDelete(row), setPagination: (p: Pagination) => baseTable.setPagination(p) }">
     <f-table-body
-      @edit="openEditModal"
-      @delete="onDelete"
-      @hot-update="updateCheckbox"
-      @update:pagination="setPagination"
+      @edit="(row: Row) => baseTable.openEditModal(row)"
+      @delete="(row: Row) => baseTable.onDelete(row)"
       v-bind="$attrs"
       :headers="headers"
       :items="computedData"
-      :loading="isFetching"
-      :pagination="pagination"
+      :loading="table.list.isFetching"
       :buttons="props.buttons"
     >
       <template v-for="(_, slotName) in slots" #[`${slotName}`]="bind" :key="slotName">
@@ -40,11 +42,18 @@
     </f-table-body>
   </slot>
 
-  <slot name="table-footer" />
+  <slot name="table-footer">
+    <div class="flex justify-between mt-4">
+      <f-table-footer
+        @update:pagination="(newPagination: Pagination) => baseTable.setPagination(newPagination)"
+        :pagination="pagination"
+      />
+    </div>
+  </slot>
 
   <f-delete-confirmation-modal
-    v-model="confirmationModal"
-    @accept="onDelete(rowToDelete, true)"
+    v-model="table.settings.displayConfirmationDialog"
+    @accept="() => baseTable.onDelete(table.settings.rowToDelete, true)"
   >
     <template #default="{ accept, cancel }">
       <slot
@@ -55,10 +64,10 @@
   </f-delete-confirmation-modal>
 </template>
 
-<script lang="ts" generic="DataType = unknown" setup>
-import type { BaseTableForm, DeleteRecordOptions, NormalizedTableButtons, NormalizedTablePagination, NormalizedTableSettings, ObjectWithNormalizedColumns, Pagination, Row } from '@fancy-crud/core'
-import { Bus, DeleteRecordCommand, GetStoreTableCommand, IFormStore, PrepareFormToCreateCommand, PrepareFormToUpdateCommand } from '@fancy-crud/core'
-import { useRequestList } from '@packages/vue/http'
+<script lang="ts" setup>
+import type { BaseTableForm, NormalizedTableButtons, NormalizedTableFilters, NormalizedTableList, NormalizedTablePagination, NormalizedTableSettings, ObjectWithNormalizedColumns, Pagination, Row } from '@fancy-crud/core'
+import { IFormStore, ITableStore, inject as injecting } from '@fancy-crud/core'
+import type { VueTable } from '../Table'
 
 const props = defineProps<{
   id: symbol
@@ -66,10 +75,9 @@ const props = defineProps<{
   form: BaseTableForm
   settings: NormalizedTableSettings
   pagination: NormalizedTablePagination
+  filterParams: NormalizedTableFilters
   buttons: NormalizedTableButtons
-  formModal?: boolean
-  skipDeleteConfirmation?: boolean
-  data?: DataType[]
+  list: NormalizedTableList
 }>()
 
 const emit = defineEmits<{
@@ -79,112 +87,20 @@ const emit = defineEmits<{
 
 const slots = useSlots()
 
-const bus = new Bus()
-const formStore: IFormStore = inject(IFormStore.name)!
+const formStore: IFormStore = injecting(IFormStore.name)!
+const tableStore: ITableStore = injecting(ITableStore.name)!
+const baseTable: VueTable = injecting('IBaseTable')!
 
-const { formId } = bus.execute(
-  new GetStoreTableCommand(props.id),
-)
+baseTable.setTableId(props.id)
 
-const { list, isFetching, pagination, triggerRequest: fetchItems } = useRequestList<DataType>(
-  props.settings.url,
-  props.settings.filterParams,
-  props.pagination,
-  { autoTrigger: false },
-)
+const table = tableStore.searchById(props.id)!
 
-const formModal = ref(Boolean(props.formModal))
-const confirmationModal = ref(false)
-const rowToDelete = ref<Row | null>(null)
-
-const tableForm = formStore.searchById(formId)!
+const tableForm = formStore.searchById(table.formId)!
 const headers = computed(() => Object.values(props.columns).filter(column => !column.exclude))
 
-const computedData = computed<DataType[]>(() => {
-  if (Array.isArray(props.data))
-    return props.data
-  return list.value
+const computedData = computed<any[]>(() => {
+  return table.list.data
 })
 
-triggerFetchItems()
-
-watch(() => props.formModal, () => {
-  formModal.value = Boolean(props.formModal)
-})
-
-watch(formModal, () => {
-  emit('update:formModal', formModal.value)
-})
-
-function triggerFetchItems() {
-  if (!Array.isArray(props.data))
-    fetchItems()
-}
-
-function exportData() {
-  // TODO: Create a plugin to export data
-  emit('export')
-}
-
-function onSuccess() {
-  fetchItems()
-  closeModal()
-}
-
-function setPagination(newPagination: Pagination) {
-  Object.assign(pagination, newPagination)
-}
-
-function closeModal() {
-  formModal.value = false
-}
-
-function openModal() {
-  formModal.value = true
-}
-
-function openCreateModal() {
-  bus.execute(
-    new PrepareFormToCreateCommand(formId, {
-      onClickAux: closeModal,
-    }),
-  )
-  openModal()
-}
-
-function openEditModal(row: Row) {
-  bus.execute(
-    new PrepareFormToUpdateCommand(formId, row, props.settings, {
-      onClickAux: closeModal,
-    }),
-  )
-
-  openModal()
-}
-
-function onDelete(row: Row | null, skipDeleteConfirmation?: boolean) {
-  if (!row)
-    return
-
-  const options: DeleteRecordOptions = {
-    onRequestDeleteConfirmation(row: Row) {
-      rowToDelete.value = row
-      confirmationModal.value = true
-    },
-    onFinally() {
-      fetchItems()
-    },
-  }
-
-  if (skipDeleteConfirmation)
-    options.onRequestDeleteConfirmation = undefined
-
-  bus.execute(
-    new DeleteRecordCommand(row, props.settings, options),
-  )
-}
-
-function updateCheckbox() {
-  throw new Error('This method is not implemented')
-}
+baseTable.triggerFetchItems()
 </script>

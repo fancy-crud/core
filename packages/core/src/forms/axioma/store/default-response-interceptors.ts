@@ -1,5 +1,5 @@
 import { Bus, inject } from '@fancy-crud/bus'
-import { SetFieldsErrorsCommand } from '../set-fields-errors'
+import { SetFieldsErrorsCommand } from '../commands/set-fields-errors'
 import { IFormStore } from './form-store'
 
 export function getDefaultInterceptors(formId: symbol) {

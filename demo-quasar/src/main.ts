@@ -1,4 +1,6 @@
 import '@quasar/extras/material-icons/material-icons.css'
+import '@fancy-crud/vue/dist/fancy-crud-vue.css'
+
 import 'quasar/dist/quasar.css'
 import './styles/main.sass'
 

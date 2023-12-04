@@ -29,7 +29,7 @@ export interface BaseFormField extends Record<string, {
 
 export interface BaseTableForm {
   id: symbol
-  fields: BaseFormField
-  settings: { url: string; loading: boolean }
+  fields?: BaseFormField
+  settings?: { url?: string; loading?: boolean }
 }
 

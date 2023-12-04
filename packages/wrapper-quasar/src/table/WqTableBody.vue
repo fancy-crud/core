@@ -1,13 +1,12 @@
 <template>
   <q-table
     v-bind="$attrs"
-    v-model:pagination="computedPagination"
-    @request="setPage"
     :rows="props.items"
     :columns="parseHeaders"
     row-key="id"
     :loading="props.loading"
-    :rows-per-page-options="props.pagination.rowsPerPageOptions"
+    :rows-per-page-options="[0]"
+    hide-bottom
   >
     <template v-for="(column, _columnIndex) in excludeActionsHeaders" :key="_columnIndex" #[`body-cell-${column.value}`]="bind">
       <q-td :key="column.value" :props="bind">
@@ -33,8 +32,8 @@
 
 <script lang="ts" setup>
 import { QTable, QTd } from 'quasar'
-import type { NormalizedColumn, NormalizedTableButtons, NormalizedTablePagination, Pagination } from '@fancy-crud/core'
 import { Bus, GetColumnValueCommand } from '@fancy-crud/core'
+import type { TableBodyEmit, TableBodyProps } from '@fancy-crud/vue'
 import { FTableRowActions } from '@fancy-crud/vue'
 
 interface QuasarColumn {
@@ -49,19 +48,9 @@ interface QuasarColumn {
   exclude?: boolean | undefined
 }
 
-const props = defineProps<{
-  items: any[]
-  headers: NormalizedColumn[]
-  loading: boolean
-  pagination: NormalizedTablePagination
-  buttons: NormalizedTableButtons
-}>()
+const props = defineProps<TableBodyProps>()
 
-const emit = defineEmits<{
-  (e: 'edit', row: any): void
-  (e: 'delete', row: any): void
-  (e: 'update:pagination', pagination: Pagination): void
-}>()
+const emit = defineEmits<TableBodyEmit>()
 
 const bus = new Bus()
 
@@ -79,17 +68,6 @@ const parseHeaders = computed((): QuasarColumn[] => props.headers.map((header) =
 
 const hasActionHeader = computed(() => props.headers.some(header => header.value === 'actions' && header.exclude !== true))
 
-const computedPagination = computed({
-  get() {
-    return {
-      rowsPerPage: props.pagination.rowsPerPage,
-      rowsNumber: props.pagination.count,
-      page: props.pagination.page,
-    }
-  },
-  set(_value) {},
-})
-
 const excludeActionsHeaders = computed(() => parseHeaders.value.filter(header => header.name !== 'actions'))
 
 function getValue(row: any, column: QuasarColumn, rowIndex: number) {
@@ -99,13 +77,5 @@ function getValue(row: any, column: QuasarColumn, rowIndex: number) {
       field: column.fieldBackup,
     }, rowIndex),
   )
-}
-
-function setPage({ pagination }: any) {
-  emit('update:pagination', {
-    page: pagination.page,
-    rowsPerPage: pagination.rowsPerPage,
-    count: pagination.rowsNumber,
-  })
 }
 </script>

@@ -6,7 +6,7 @@
       </template>
     </f-table>
 
-    <q-btn icon="plus" />
+    <!-- <q-btn icon="plus" /> -->
   </div>
 </template>
 
@@ -59,7 +59,7 @@ const table = useTable({
     created_at: {
       format: (value: unknown) => 'Lo que sea',
     },
-    actions: { value: 'actions', label: '' },
+    actions: { value: 'actions', label: '', align: 'right' },
   },
   settings: {
     url: form.settings.url,

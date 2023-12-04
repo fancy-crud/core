@@ -23,14 +23,6 @@ export class CreateFormHandler implements ICreateFormHandler {
     private ruleConfigStore: IRuleConfigStore = inject(IRuleConfigStore),
   ) {}
 
-  /**
-   * Creates a form from raw fields and settings.
-   *
-   * @typeparam T - A generic type parameter that extends `ObjectWithRawField`.
-   * @param rawFields - A `ObjectWithRawField` object containing the raw fields to be normalized.
-   * @param rawSettings - An optional `RawSettings` object containing the raw settings to be normalized.
-   * @returns A `Form` object containing the normalized fields and settings.
-   */
   execute<T extends BaseObjectWithRawFields, U extends RawSetting, V extends Record<'main' | 'aux', RawButton>>({ id, rawFields, rawSettings, rawButtons }: CreateFormCommand<T, U, V>): Form<T, V> {
     const formId = Symbol(id)
     const bus = new Bus()

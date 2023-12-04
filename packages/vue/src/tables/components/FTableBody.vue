@@ -4,7 +4,6 @@
     v-bind="$attrs"
     :headers="props.headers"
     :items="props.items"
-    :pagination="props.pagination"
     :buttons="props.buttons"
   >
     <template v-for="(_, slotName) in slots" #[`${slotName}`]="bind" :key="slotName">
@@ -14,13 +13,12 @@
 </template>
 
 <script lang="ts" setup>
-import type { NormalizedColumn, NormalizedTableButtons, NormalizedTablePagination } from '@fancy-crud/core'
+import type { NormalizedColumn, NormalizedTableButtons } from '@fancy-crud/core'
 import { components } from '@fancy-crud/core'
 
 const props = defineProps<{
   headers: NormalizedColumn[]
   items: any[]
-  pagination: NormalizedTablePagination
   buttons: NormalizedTableButtons
 }>()
 

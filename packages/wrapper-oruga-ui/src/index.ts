@@ -1,4 +1,4 @@
-import './styles/index.sass'
+// import './styles/index.sass'
 
 import { form } from './form'
 import { table } from './table'

@@ -47,6 +47,7 @@ export interface RequestResponse {
   value: unknown
 }
 
+export type OnInit = () => void
 export type OnSuccess = (response: any) => void
 export type OnFailed = (error: any) => void
 export type OnFinally = () => void
@@ -57,7 +58,7 @@ export interface DefaultOptions {
 }
 
 export interface RequestDefaultOptions {
-  onInit?: () => void
+  onInit?: OnInit
   onSuccess?: OnSuccess
   onFailed?: OnFailed
   onFinally?: OnFinally

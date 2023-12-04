@@ -165,7 +165,7 @@ importers:
         specifier: ^2.4.2
         version: 2.4.2(vue@3.3.4)
       vue:
-        specifier: ^3.2.19
+        specifier: ^3.3.4
         version: 3.3.4
     devDependencies:
       autoprefixer:
@@ -208,7 +208,7 @@ importers:
         specifier: ^9.9.0
         version: 9.9.0(vue@3.3.4)
       vue:
-        specifier: ^3.2.19
+        specifier: ^3.3.4
         version: 3.3.4
     devDependencies:
       autoprefixer:
@@ -248,7 +248,7 @@ importers:
         specifier: ^2.13.0
         version: 2.13.0
       vue:
-        specifier: ^3.2.19
+        specifier: ^3.3.4
         version: 3.3.4
     devDependencies:
       '@quasar/vite-plugin':
@@ -285,7 +285,7 @@ importers:
         specifier: ^9.9.0
         version: 9.9.0(vue@3.3.4)
       vue:
-        specifier: ^3.2.19
+        specifier: ^3.3.4
         version: 3.3.4
       vuetify:
         specifier: ^3.3.23
@@ -316,34 +316,6 @@ importers:
         specifier: ^4.5.0
         version: 4.5.0
 
-  packages/oruga-wrapper:
-    dependencies:
-      '@fancy-crud/core':
-        specifier: workspace:^
-        version: link:../core
-      '@fancy-crud/vue':
-        specifier: workspace:^
-        version: link:../vue
-      '@oruga-ui/oruga-next':
-        specifier: ^0.7.0
-        version: 0.7.0(vue@3.3.4)
-      '@vueuse/core':
-        specifier: ^10.4.1
-        version: 10.4.1(vue@3.3.4)
-      vue:
-        specifier: ^3.3.4
-        version: 3.3.4
-    devDependencies:
-      autoprefixer:
-        specifier: ^10.4.15
-        version: 10.4.15(postcss@8.4.28)
-      postcss:
-        specifier: ^8.4.28
-        version: 8.4.28
-      tailwindcss:
-        specifier: ^3.3.4
-        version: 3.3.4(ts-node@10.9.1)
-
   packages/plugin-rule-parsers:
     devDependencies:
       valibot:
@@ -358,12 +330,6 @@ importers:
       vue3-toastify:
         specifier: ^0.1.14
         version: 0.1.14(vue@3.3.4)
-
-  packages/rules-processors:
-    devDependencies:
-      zod:
-        specifier: ^3.21.4
-        version: 3.21.4
 
   packages/vue:
     dependencies:
@@ -392,12 +358,6 @@ importers:
       tailwindcss:
         specifier: ^3.3.4
         version: 3.3.4(ts-node@10.9.1)
-
-  packages/vue-toastify-plugin:
-    devDependencies:
-      vue3-toastify:
-        specifier: ^0.1.14
-        version: 0.1.14(vue@3.3.4)
 
   packages/wrapper-element-plus:
     dependencies:

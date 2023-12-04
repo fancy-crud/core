@@ -1,23 +1,20 @@
 <template>
   <div class="bg-white rounded-xl p-4">
-    <f-form v-bind="form">
-      <template #field-name="bind">
-        <f-text :form-id="form.id" :field="form.fields.name">
-          <template #prepend>
-            Http://
-          </template>
-        </f-text>
-      </template>
-    </f-form>
+    <f-form v-bind="form" />
   </div>
+
+  <button @click="loadData">
+    Load data
+  </button>
 </template>
 
 <script lang='ts' setup>
 import { email, string } from 'valibot'
-import { FText, FieldType, useForm } from '@fancy-crud/vue'
-import { Bus, FORM_MODE, ResetFieldsByFormIdCommand } from '@fancy-crud/core'
+import { FieldType, useForm } from '@fancy-crud/vue'
+import { Bus, FORM_MODE, LoadRemoteRecordCommand, ResetFieldsByFormIdCommand } from '@fancy-crud/core'
 
 const bus = new Bus()
+
 const settings = {
   url: 'artists/',
   mode: FORM_MODE.update,
@@ -59,6 +56,7 @@ const form = useForm({
   buttons: {
     main: {
       label: '{{ Lanzar | Modificar }}',
+      loading: false,
     },
     aux: {
       onClick: () => {
@@ -69,5 +67,18 @@ const form = useForm({
     },
   },
 })
+
+function loadData(e: any) {
+  bus.execute(
+    new LoadRemoteRecordCommand(form.id, '9', {
+      onInit() {
+        form.buttons.main.loading = true
+      },
+      onFinally() {
+        form.buttons.main.loading = false
+      },
+    }),
+  )
+}
 </script>
 

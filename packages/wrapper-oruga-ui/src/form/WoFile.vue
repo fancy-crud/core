@@ -11,7 +11,7 @@
       :modelValue="vmodel.modelValue"
       :multiple="props.field.multiple"
     >
-      <f-button v-bind="{ ...defaults.mainButton, ...props.field }" icon="upload" tag="a" class="text-primary-500 border-primary-500 hover:bg-primary-500 ease-in duration-300">
+      <f-button v-bind="{ ...defaults.mainButton, ...props.field }" icon="pencil" tag="a">
         <span>{{ props.field.placeholder }}</span>
       </f-button>
     </o-upload>

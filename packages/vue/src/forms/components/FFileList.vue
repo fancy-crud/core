@@ -4,19 +4,28 @@
       <div class="f-file-list__wrapper__item">
         <a @click="previewFile(file)" class="f-file-list__chip">
           <div v-if="isImage(file)" class="f-file-list__chip__preview__icon-wrapper">
-            <i class="mdi mdi-eye" />
+            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 14">
+              <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                <path d="M10 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                <path d="M10 13c4.97 0 9-2.686 9-6s-4.03-6-9-6-9 2.686-9 6 4.03 6 9 6Z" />
+              </g>
+            </svg>
           </div>
           <span class="truncate">
             {{ file.name }}
           </span>
         </a>
-        <f-button @click="emit('remove', file)" icon="close-circle" class="text-gray-500 hover:text-gray-600 ease-in duration-200" borderless />
+        <div @click="emit('remove', file)" class="px-2">
+          <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z" />
+          </svg>
+        </div>
       </div>
     </div>
   </div>
 
   <f-modal v-model="preview.show">
-    <img class="f-preview__image" :src="preview.url" alt="">
+    <img class="f-preview__image" :src="preview.url">
   </f-modal>
 </template>
 
@@ -31,7 +40,7 @@ const emit = defineEmits<{
 
 const preview = reactive({
   show: false,
-  url: '',
+  url: 'https://imagenes.20minutos.es/files/image_640_360/uploads/imagenes/2022/10/05/one-piece-film-red.jpeg',
 })
 
 const list = computed(() => props.items ?? [])
@@ -57,15 +66,25 @@ function previewFile(file: File) {
 
 <style lang="sass" scoped>
 .f-file-list
-  @apply w-full pt-6 flex flex-wrap
+  @apply pt-6
+  width: 100%
+  display: flex
+  flex-flow: row wrap
 
 .f-file-list__wrapper
   @apply pr-4 py-2
+
 .f-file-list__wrapper__item
-  @apply flex items-center py-1 pl-5 rounded-full bg-gray-300 hover:bg-gray-400/60 ease-in duration-300
+  @apply py-1 pl-5 bg-gray-300 hover:bg-gray-400/60 ease-in duration-300
+  display: flex
+  align-items: center
+  border-radius: 100px
 
 .f-file-list__chip
-  @apply cursor-pointer h-full flex items-center
+  cursor: pointer
+  height: 100%
+  display: flex
+  align-items: center
   max-width: 10rem
 
 .f-file-list__chip__preview__icon-wrapper

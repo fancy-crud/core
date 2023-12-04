@@ -1,5 +1,6 @@
 <template>
   <el-table
+    v-loading="props.loading"
     v-bind="$attrs"
     :data="props.items"
     class="elevation-1"
@@ -24,63 +25,18 @@
       </el-table-column>
     </template>
   </el-table>
-  <div class="flex justify-between">
-    <el-dropdown>
-      <el-button tag="a">
-        {{ state.pagination.perPage }}
-        <el-icon class="el-icon--right">
-          <arrow-down />
-        </el-icon>
-      </el-button>
-      <template #dropdown>
-        <el-dropdown-menu>
-          <el-dropdown-item
-            v-for="rowsPerPage in props.pagination.rowsPerPageOptions"
-            @click="state.pagination.perPage = rowsPerPage"
-            :key="rowsPerPage"
-          >
-            {{ rowsPerPage }}
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </template>
-    </el-dropdown>
-    <el-pagination
-      v-model:current-page="state.pagination.page"
-      background
-      layout="prev, pager, next"
-      :page-size="state.pagination.perPage"
-      :total="props.pagination.count"
-    />
-  </div>
 </template>
 
 <script lang="ts" setup>
-import { ElButton, ElDropdown, ElDropdownItem, ElDropdownMenu, ElPagination, ElTable, ElTableColumn } from 'element-plus'
-import { ArrowDown } from '@element-plus/icons-vue'
-import type { NormalizedColumn, NormalizedTableButtons, NormalizedTablePagination, Pagination } from '@fancy-crud/core'
+import { ElTable, ElTableColumn } from 'element-plus'
+import type { NormalizedColumn } from '@fancy-crud/core'
 import { Bus, GetColumnValueCommand } from '@fancy-crud/core'
+import type { TableBodyEmit, TableBodyProps } from '@fancy-crud/vue'
 import { FTableRowActions } from '@fancy-crud/vue'
 
-const props = defineProps<{
-  items: any[]
-  headers: NormalizedColumn[]
-  pagination: NormalizedTablePagination
-  loading: boolean
-  buttons: NormalizedTableButtons
-}>()
+const props = defineProps<TableBodyProps>()
 
-const emit = defineEmits<{
-  (e: 'edit', row: any): void
-  (e: 'delete', row: any): void
-  (e: 'update:pagination', pagination: Pagination): void
-}>()
-
-const state = reactive({
-  pagination: {
-    perPage: props.pagination.rowsPerPage,
-    page: props.pagination.page,
-  },
-})
+const emit = defineEmits<TableBodyEmit>()
 
 const bus = new Bus()
 
@@ -88,16 +44,9 @@ const parseHeaders = computed(() => props.headers.map(header => ({ ...header, ti
 const excludeActionsHeaders = computed(() => parseHeaders.value.filter(header => header.key !== 'actions'))
 const hasActionHeader = computed(() => props.headers.some(header => header.value === 'actions' && header.exclude !== true))
 
-watch(() => state.pagination.perPage, rowsPerPage => updatePagination({ rowsPerPage }))
-watch(() => state.pagination.page, page => updatePagination({ page }))
-
 function getValue(row: any, column: NormalizedColumn, rowIndex: number) {
   return bus.execute(
     new GetColumnValueCommand(row, column, rowIndex),
   )
-}
-
-function updatePagination(pagination: Pagination) {
-  emit('update:pagination', pagination)
 }
 </script>

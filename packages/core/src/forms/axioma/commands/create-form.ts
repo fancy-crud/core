@@ -1,6 +1,6 @@
 import { meta } from '@fancy-crud/bus'
 import type { BaseCommand } from '@fancy-crud/bus'
-import type { BaseObjectWithRawFields, Form, RawButton, RawSetting } from './typing'
+import type { BaseObjectWithRawFields, Form, RawButton, RawSetting } from '../typing'
 
 /**
  * A class that provides functionality to create a form from raw fields and settings.

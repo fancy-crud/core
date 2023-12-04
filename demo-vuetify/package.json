@@ -21,7 +21,7 @@
     "@fancy-crud/plugin-vue3-toastify": "workspace:^",
     "vuetify": "^3.3.23",
     "@vueuse/core": "^9.9.0",
-    "vue": "^3.2.19"
+    "vue": "^3.3.4"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.15",

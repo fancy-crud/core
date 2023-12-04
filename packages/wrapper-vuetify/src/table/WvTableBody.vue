@@ -1,15 +1,12 @@
 <template>
-  <v-data-table-server
-    v-model:items-per-page="state.pagination.perPage"
-    @update:page="setPage"
+  <v-data-table
     v-bind="$attrs"
     :headers="parseHeaders"
     :items="props.items"
-    :items-length="props.pagination.count"
-    :items-per-page-options="props.pagination.rowsPerPageOptions"
     :loading="props.loading"
     class="elevation-1"
     item-value="name"
+    loading-text=""
   >
     <template v-for="(column, _columnIndex) in excludeActionsHeaders" :key="_columnIndex" #[`item.${column.value}`]="bind">
       <slot :name="`column-${column.value}`" v-bind="{ ...bind, row: bind.item }">
@@ -26,34 +23,22 @@
         />
       </slot>
     </template>
-  </v-data-table-server>
+    <template #bottom>
+      <span />
+    </template>
+  </v-data-table>
 </template>
 
 <script lang="ts" setup>
-import { VDataTableServer } from 'vuetify/labs/VDataTable'
-import type { NormalizedColumn, NormalizedTableButtons, NormalizedTablePagination, Pagination } from '@fancy-crud/core'
+import { VDataTable } from 'vuetify/labs/VDataTable'
+import type { NormalizedColumn } from '@fancy-crud/core'
 import { Bus, GetColumnValueCommand } from '@fancy-crud/core'
+import type { TableBodyEmit, TableBodyProps } from '@fancy-crud/vue'
 import { FTableRowActions } from '@fancy-crud/vue'
 
-const props = defineProps<{
-  items: any[]
-  headers: NormalizedColumn[]
-  pagination: NormalizedTablePagination
-  loading: boolean
-  buttons: NormalizedTableButtons
-}>()
+const props = defineProps<TableBodyProps>()
 
-const emit = defineEmits<{
-  (e: 'edit', row: any): void
-  (e: 'delete', row: any): void
-  (e: 'update:pagination', pagination: Pagination): void
-}>()
-
-const state = reactive({
-  pagination: {
-    perPage: props.pagination.rowsPerPage,
-  },
-})
+const emit = defineEmits<TableBodyEmit>()
 
 const bus = new Bus()
 
@@ -61,20 +46,9 @@ const parseHeaders = computed(() => props.headers.map(header => ({ ...header, ti
 const excludeActionsHeaders = computed(() => parseHeaders.value.filter(header => header.key !== 'actions'))
 const hasActionHeader = computed(() => props.headers.some(header => header.value === 'actions' && header.exclude !== true))
 
-watch(() => state.pagination.perPage, rowsPerPage => updatePagination({ rowsPerPage }))
-
 function getValue(row: any, column: NormalizedColumn, rowIndex: number) {
   return bus.execute(
     new GetColumnValueCommand(row, column, rowIndex),
   )
-}
-
-function setPage(page: number) {
-  updatePagination({
-    page,
-  })
-}
-function updatePagination(pagination: Pagination) {
-  emit('update:pagination', pagination)
 }
 </script>

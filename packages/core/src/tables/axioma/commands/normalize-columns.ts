@@ -6,8 +6,8 @@ export class NormalizeColumnsCommand implements BaseCommand {
   public readonly meta = meta(INormalizeColumnsHandler)
 
   constructor(
-    public readonly fields: BaseFormField,
     public readonly columns: ObjectWithRawColumns,
+    public readonly fields?: BaseFormField,
   ) {}
 }
 

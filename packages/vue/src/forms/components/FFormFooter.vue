@@ -37,8 +37,16 @@ const emit = defineEmits<{
 }>()
 
 const bus = new Bus()
-const mainButton = computed(() => props.buttons.main)
-const auxButton = computed(() => props.buttons.aux)
+
+const mainButton = computed(() => {
+  const { onClick, ...attrs } = props.buttons.main
+  return attrs
+})
+
+const auxButton = computed(() => {
+  const { onClick, ...attrs } = props.buttons.aux
+  return attrs
+})
 
 const getLabel = computed(() => (button: NormalizedButton) => bus.execute(
   new GetButtonLabelByFormModeCommand(props.settings.mode, button.label),
@@ -46,6 +54,9 @@ const getLabel = computed(() => (button: NormalizedButton) => bus.execute(
 
 const isMainButtonDisabled = computed(() => mainButton.value?.isDisabled || !props.isFormValid)
 
-function onMainClick() { emit('main-click') }
+function onMainClick() {
+  if (!isMainButtonDisabled.value)
+    emit('main-click')
+}
 function onAuxClick() { emit('aux-click') }
 </script>

@@ -24,6 +24,7 @@ declare module 'vue' {
     FSelect: typeof import('./src/forms/components/FSelect.vue')['default']
     FTable: typeof import('./src/tables/components/FTable.vue')['default']
     FTableBody: typeof import('./src/tables/components/FTableBody.vue')['default']
+    FTableFooter: typeof import('./src/tables/components/FTableFooter.vue')['default']
     FTableHeaderActions: typeof import('./src/tables/components/FTableHeaderActions.vue')['default']
     FTableRowActions: typeof import('./src/tables/components/FTableRowActions.vue')['default']
     FTableRowFilePreview: typeof import('./src/tables/components/FTableRowFilePreview.vue')['default']

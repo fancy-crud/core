@@ -3,7 +3,11 @@ import type { INormalizeTableSettingsHandler, NormalizeTableSettingsCommand, Nor
 export class NormalizeTableSettingsHandler implements INormalizeTableSettingsHandler {
   execute<T extends RawTableSettings>({ rawSettings }: NormalizeTableSettingsCommand<T>): T & NormalizedTableSettings {
     const _settings = {
-      lookupField: rawSettings?.lookupField || 'id',
+      lookupField: 'id',
+      skipDeleteConfirmation: false,
+      displayFormDialog: false,
+      displayConfirmationDialog: false,
+      rowToDelete: null,
       ...rawSettings,
     } as T & NormalizedTableSettings
 
