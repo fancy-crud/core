@@ -6,7 +6,7 @@
     class="elevation-1"
     item-value="name"
   >
-    <el-table-column v-for="(column, _columnIndex) in excludeActionsHeaders" :key="_columnIndex" v-slot="bind" :prop="column.value" :label="column.label">
+    <el-table-column v-for="(column, _columnIndex) in excludeActionsHeaders" v-bind="column" :key="_columnIndex" v-slot="bind" :prop="column.value">
       <slot :name="`column-${column.value}`" v-bind="bind">
         {{ getValue(bind.row, column, bind.$index) }}
       </slot>

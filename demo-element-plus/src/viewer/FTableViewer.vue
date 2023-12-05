@@ -34,7 +34,7 @@ const form = useForm({
     },
     gender: {
       type: FieldType.text,
-      label: 'Gender',
+      label: 'Base salary january feb mar abr lorem ipsum dolor ',
       wrapper: {
         class: 'col-span-12',
       },
@@ -61,6 +61,7 @@ const table = useTable({
   columns: {
     gender: {
       format: (value: string) => value === 'm' ? 'Male' : 'Female',
+      width: 700,
     },
     created_at: {
       format: (value: string) => 'anything',
