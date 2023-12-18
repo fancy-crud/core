@@ -25,6 +25,7 @@ export interface BaseRawField extends Record<string, any> {
   multiple?: boolean
   rules?: Rule
   recordValue?: (value: any) => unknown
+  interceptOptions?: (options: any[]) => unknown[]
 }
 
 export interface DefaultAttributes {
@@ -35,6 +36,7 @@ export interface DefaultAttributes {
   ref: any
   errors: string[]
   recordValue: (value: any) => unknown
+  interceptOptions: (options: any[]) => unknown[]
 }
 
 export type FieldNormalizer<T> = T & DefaultAttributes

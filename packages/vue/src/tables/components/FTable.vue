@@ -1,41 +1,27 @@
 <template>
-  <slot name="table-header" v-bind="tableHeaderVBind()">
-    <f-table-header-actions
-      @create="() => baseTable.openCreateModal()"
-      @export="() => baseTable.exportData()"
-      :add="props.buttons.add"
-      :dump="props.buttons.dump"
-    />
+  <slot name="table-header" v-bind="tableHeaderVBind">
+    <f-table-header-actions v-bind="tableHeaderVBind" />
   </slot>
 
-  <slot name="table-form" v-bind="{ onSuccess: () => baseTable.onSuccess() }">
-    <f-modal v-model="table.settings.displayFormDialog">
+  <f-modal v-model="table.settings.displayFormDialog">
+    <slot name="table-form" v-bind="tableFormVBind">
       <div v-if="tableForm.settings.loading" class="loader-wrapper">
         <div :class="{ loader: tableForm.settings.loading }" />
       </div>
       <f-form
         v-else
-        @success="() => baseTable.onSuccess()"
-        v-bind="tableForm"
+        v-bind="tableFormVBind"
         :id="props.form.id"
       >
         <template v-for="(_, slotName) in slots" #[`${slotName}`]="bind" :key="slotName">
           <slot :name="slotName" v-bind="bind" />
         </template>
       </f-form>
-    </f-modal>
-  </slot>
+    </slot>
+  </f-modal>
 
-  <slot name="table-body" v-bind="tableBodyVBind()">
-    <f-table-body
-      @edit="(row: Row) => baseTable.openEditModal(row)"
-      @delete="(row: Row) => baseTable.onDelete(row)"
-      v-bind="$attrs"
-      :headers="headers"
-      :items="computedData"
-      :loading="table.list.isFetching"
-      :buttons="props.buttons"
-    >
+  <slot name="table-body" v-bind="tableBodyVBind">
+    <f-table-body v-bind="{ ...$attrs, ...tableBodyVBind }">
       <template v-for="(_, slotName) in slots" #[`${slotName}`]="bind" :key="slotName">
         <slot :name="slotName" v-bind="bind" />
       </template>
@@ -44,10 +30,7 @@
 
   <slot name="table-footer">
     <div class="flex justify-between mt-4">
-      <f-table-footer
-        @update:pagination="(newPagination: Pagination) => baseTable.setPagination(newPagination)"
-        :pagination="pagination"
-      />
+      <f-table-footer v-bind="tableFooterVBind" />
     </div>
   </slot>
 
@@ -104,21 +87,42 @@ const computedData = computed<any[]>(() => {
 
 baseTable.triggerFetchItems()
 
-function tableHeaderVBind() {
+const tableHeaderVBind = computed(() => {
   return {
-    openCreateModal: () => baseTable.openCreateModal(),
-    exportData: () => {
+    onCreate: () => baseTable.openCreateModal(),
+    onExport: () => {
       emit('export')
       baseTable.exportData()
     },
+    add: props.buttons.add,
+    dump: props.buttons.dump,
   }
-}
+})
 
-function tableBodyVBind() {
+const tableFormVBind = computed(() => {
+  return {
+    ...tableForm,
+    id: props.form.id,
+    onSuccess: () => baseTable.onSuccess(),
+  }
+})
+
+const tableBodyVBind = computed(() => {
   return {
     openEditModal: (row: Row) => baseTable.openEditModal(row),
+    onEdit: (row: Row) => baseTable.openEditModal(row),
     onDelete: (row: Row) => baseTable.onDelete(row),
-    setPagination: (p: Pagination) => baseTable.setPagination(p),
+    items: computedData.value,
+    loading: table.list.isFetching,
+    buttons: props.buttons,
+    headers: headers.value,
   }
-}
+})
+
+const tableFooterVBind = computed(() => {
+  return {
+    'pagination': props.pagination,
+    'onUpdate:pagination': (newPagination: Pagination) => baseTable.setPagination(newPagination),
+  }
+})
 </script>

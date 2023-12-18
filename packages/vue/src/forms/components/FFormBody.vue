@@ -60,8 +60,9 @@ onMounted(() => {
   const fields = Object.fromEntries(
     filterFields(props.fields, props.settings.mode).filter(([_, field]) => field.exclude !== true),
   )
-  const getForeignKeyValuesCommand = new GetForeignKeyValuesCommand(fields)
-  bus.execute(getForeignKeyValuesCommand)
+  bus.execute(
+    new GetForeignKeyValuesCommand(fields),
+  )
 })
 
 function getComponent(field: NormalizedField) {

@@ -18,6 +18,7 @@ export class NormalizeFormFieldsHandler implements INormalizeFormFieldsHandler {
       name: fieldKey,
       errors: [],
       recordValue: (value: any) => value[fieldKey],
+      interceptOptions: (options: any[]) => options,
       wasFocused: false,
       modelValue: rawField.multiple ? [] : null,
       class: '',

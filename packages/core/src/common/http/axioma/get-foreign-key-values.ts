@@ -5,7 +5,7 @@ export class GetForeignKeyValuesCommand implements BaseCommand {
   public readonly meta = meta(IGetForeignKeyValuesHandler)
 
   constructor(
-    public readonly fields: Record<string, { type: string; options?: any[]; url?: string; filterParams?: Record<string, unknown> }>,
+    public readonly fields: Record<string, { type: string; options?: any[]; url?: string; filterParams?: Record<string, unknown>; interceptOptions: (options: any[]) => unknown[] }>,
   ) {}
 }
 

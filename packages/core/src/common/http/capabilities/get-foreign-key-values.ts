@@ -41,7 +41,7 @@ export class GetForeignKeyValuesHandler implements IGetForeignKeyValuesHandler {
     return sameAPIEndpoint
   }
 
-  private addOptionsToField(field: { options?: any[] }, data: any) {
+  private addOptionsToField(field: { options?: any[]; interceptOptions: (options: any[]) => unknown[] }, data: any) {
     const options: any[] = field.options || []
 
     const addOptionsItems = (items: any[]) => {
@@ -60,7 +60,8 @@ export class GetForeignKeyValuesHandler implements IGetForeignKeyValuesHandler {
       const paginateResults = new PaginateResult(this.http.pagination, data)
       addOptionsItems(paginateResults.results)
     }
-    return options
+
+    field.options = field.interceptOptions(options)
   }
 
   execute({ fields }: GetForeignKeyValuesCommand): void {
@@ -68,9 +69,7 @@ export class GetForeignKeyValuesHandler implements IGetForeignKeyValuesHandler {
 
     Object.entries(sameAPIEndpoint).forEach(([url, fieldKeys]) => {
       this.http.request.get(url).then((response: any) => {
-        fieldKeys.forEach((fieldKey) => {
-          fields[fieldKey].options = this.addOptionsToField(fields[fieldKey], response.data)
-        })
+        fieldKeys.forEach(fieldKey => this.addOptionsToField(fields[fieldKey], response.data))
       })
         .catch(e => console.error(e))
     })
