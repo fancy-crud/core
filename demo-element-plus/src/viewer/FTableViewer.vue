@@ -10,6 +10,12 @@
       :pagination="table.pagination"
       :id="table.id"
     > -->
+
+    <el-select v-model="table.filterParams.gender">
+      <el-option value="m">
+        Male
+      </el-option>
+    </el-select>
     <f-table v-bind="table">
       <template #column-created_at>
         <a href="https://google.com" class="underline text-primary-500" target="_blank">Haz click</a>
@@ -70,6 +76,9 @@ const table = useTable({
   },
   pagination: {
     rowsPerPage: 10,
+  },
+  filterParams: {
+    gender: '',
   },
   list: {
     data: [],

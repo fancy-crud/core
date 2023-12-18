@@ -12,9 +12,14 @@ export class VueTable extends BaseTable {
   createWatchers() {
     const table = this.tableStore.searchById(this.id)!
 
-    watch(() => table.filterParams, () => this.bus.execute(
-      new ResetTablePaginationCommand(this.id),
-    ), { deep: true })
+    watch(() => table.filterParams, () => {
+      if (table.pagination.page === 1)
+        this.triggerFetchItems()
+
+      this.bus.execute(
+        new ResetTablePaginationCommand(this.id),
+      )
+    }, { deep: true })
 
     watch(() => table.pagination.page, () => {
       if (table.list.options?.hotFetch !== false)

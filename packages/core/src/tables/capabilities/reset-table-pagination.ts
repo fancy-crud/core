@@ -9,7 +9,6 @@ export class ResetTablePaginationHandler implements IResetTablePaginationHandler
 
   execute({ tableId }: ResetTablePaginationCommand): void {
     const table = this.tableStore.searchById(tableId)!
-
     table.pagination.page = 1
   }
 }
