@@ -5,6 +5,7 @@ import type {
   NormalizedSettings,
   RawFormButtons,
   RawSetting,
+  ResponseInterceptorState,
 } from '@fancy-crud/core'
 import { Bus, CreateFormCommand, IFormStore, IRuleConfigStore, rulesConfig } from '@fancy-crud/core'
 import type { Args, UseForm } from '../typing'
@@ -24,13 +25,15 @@ export function useForm<
   TypeFields extends BaseObjectWithRawFields,
   TypeButtons extends RawFormButtons,
   TypeSettings extends RawSetting,
->(args: Args<TypeFields, TypeButtons, TypeSettings>): UseForm<TypeFields, TypeButtons, TypeSettings> {
+  TypeResponseInterceptor extends ResponseInterceptorState,
+>(args: Args<TypeFields, TypeButtons, TypeSettings, TypeResponseInterceptor>): UseForm<TypeFields, TypeButtons, TypeSettings> {
   const {
     id: _id = '',
     fields: rawFields,
     buttons: rawButtons,
     settings: rawSettings,
     rulesConfig: customRulesConfig,
+    responseInterceptor = {},
   } = args
 
   const formStore: IFormStore = inject(IFormStore.name)!
@@ -44,7 +47,7 @@ export function useForm<
     normalizedButtons,
     normalizedSettings,
   } = bus.execute(
-    new CreateFormCommand(_id, rawFields, rawButtons, rawSettings),
+    new CreateFormCommand(_id, rawFields, rawButtons, rawSettings, responseInterceptor),
   )
 
   const fields = reactive(clonedNormalizedFields) as NormalizedFields<TypeFields>

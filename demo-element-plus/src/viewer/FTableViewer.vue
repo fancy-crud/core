@@ -60,6 +60,12 @@ const form = useForm({
     url: 'artists/',
     title: '{{ Crear artista | Actualizar artista }}',
   },
+  responseInterceptor: {
+    // 201: (formId, response) => {
+    //   console.log('🚀 ~ file: FTableViewer.vue:65 ~ response:', response)
+    //   console.log(response)
+    // },
+  },
 })
 
 const table = useTable({

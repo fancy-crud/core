@@ -1,5 +1,6 @@
 import { Bus, inject } from '@fancy-crud/bus'
 import { INotificationStore } from '@packages/core/common/notifications/axioma'
+import type { ResponseInterceptorState } from '@packages/core/common/response-interceptor/axioma'
 import { IResponseInterceptorStore } from '@packages/core/common/response-interceptor/axioma'
 
 import type {
@@ -25,7 +26,12 @@ export class CreateFormHandler implements ICreateFormHandler {
     private ruleConfigStore: IRuleConfigStore = inject(IRuleConfigStore),
   ) {}
 
-  execute<T extends BaseObjectWithRawFields, U extends RawSetting, V extends RawFormButtons>({ id, rawFields, rawSettings, rawButtons }: CreateFormCommand<T, U, V>): Form<T, V> {
+  execute<
+    T extends BaseObjectWithRawFields,
+    U extends RawSetting,
+    V extends RawFormButtons,
+    TypeResponseInterceptor extends ResponseInterceptorState,
+  >({ id, rawFields, rawSettings, rawButtons, responseInterceptor }: CreateFormCommand<T, U, V, TypeResponseInterceptor>): Form<T, V> {
     const formId = Symbol(id)
     const bus = new Bus()
 
@@ -48,7 +54,10 @@ export class CreateFormHandler implements ICreateFormHandler {
     })
 
     this.notificationStore.save(formId, getDefaultNotificationHandler())
-    this.responseInterceptorStore.save(formId, getDefaultInterceptors())
+    this.responseInterceptorStore.save(formId, {
+      ...getDefaultInterceptors(),
+      ...(responseInterceptor || {}),
+    })
     this.ruleConfigStore.save(formId, {})
 
     return {

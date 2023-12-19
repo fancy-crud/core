@@ -6,7 +6,7 @@ import type {
   NormalizedFields,
   NormalizedSettings,
   RuleConfig,
-} from '@fancy-crud/core';
+} from '@fancy-crud/core'
 
 export interface UseForm<T, U, S> {
   id: symbol
@@ -16,12 +16,13 @@ export interface UseForm<T, U, S> {
   bus: Bus
 }
 
-export interface Args<T, U, S> {
+export interface Args<T, U, S, TypeResponseInterceptor> {
   fields: T
   id?: string
   buttons?: U
   settings?: S
   rulesConfig?: RuleConfig
+  responseInterceptor?: TypeResponseInterceptor
 }
 
 export interface DefaultProps {
