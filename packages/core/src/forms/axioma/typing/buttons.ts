@@ -31,11 +31,27 @@ export interface RawButton extends EventHandlers<Partial<ButtonEvent>> {
   [key: string]: unknown
 }
 
+export interface RawFormButtons {
+  main?: RawButton
+  aux?: RawButton
+  [extraButton: string]: RawButton | undefined
+}
+
 export interface NormalizedButton extends RawButton, EventHandlers<Partial<ButtonEvent>> {
   hidden: boolean
   isLoading: boolean
   class: string
 }
+
+export interface NormalizedFormButtons {
+  add: NormalizedButton
+  edit: NormalizedButton
+  remove: NormalizedButton
+  dump: NormalizedButton
+  [extraButton: string]: RawButton
+}
+
+export type ConvertToNormalizedFormButtons<T extends RawFormButtons> = NormalizedFormButtons & { [K in keyof T]: NormalizedButton }
 
 export type ButtonType = 'main' | 'aux'
 

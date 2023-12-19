@@ -10,13 +10,6 @@ axios.defaults.baseURL = 'http://localhost:9000/api/'
 export default defineConfig({
   http: {
     request: axios as any,
-    // hooks: {
-    // onRetrieve: (response) => {
-    //   console.log('🚀 ~ file: fancy-crud.ts:15 ~ response:', response)
-
-    //   return response.data
-    // },
-    // },
   },
   components,
   styles,

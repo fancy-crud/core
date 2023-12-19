@@ -10,6 +10,8 @@ import type {
 import { setDefaultInterceptors, setDefaultNotificationHandler, setDefaults, setHttpHooks, setHttpPagination, setHttpRequest, setLocale, setRuleConfig } from '@packages/core/index'
 import { components, setComponents } from './components'
 
+type Button = Record<string, unknown>
+
 export interface Config {
   http?: {
     request?: HttpRequest['request']
@@ -18,7 +20,17 @@ export interface Config {
   }
   components: Record<string, any>
   rules?: RuleConfig
-  styles?: Record<string, string>
+  styles?: {
+    mainButton?: Button
+    auxButton?: Button
+    addButton?: Button
+    editButton?: Button
+    removeButton?: Button
+    dumpButton?: Button
+    confirmButton?: Button
+    cancelButton?: Button
+    [key: string]: unknown
+  }
   i18n?: Locale
   toast?: NotificationState
   responseInterceptors?: ResponseInterceptorState

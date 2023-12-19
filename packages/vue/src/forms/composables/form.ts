@@ -1,4 +1,11 @@
-import type { BaseObjectWithRawFields, NormalizedButtons, NormalizedFields, RawButton } from '@fancy-crud/core'
+import type {
+  BaseObjectWithRawFields,
+  NormalizedButtons,
+  NormalizedFields,
+  NormalizedSettings,
+  RawFormButtons,
+  RawSetting,
+} from '@fancy-crud/core'
 import { Bus, CreateFormCommand, IFormStore, IRuleConfigStore, rulesConfig } from '@fancy-crud/core'
 import type { Args, UseForm } from '../typing'
 
@@ -13,7 +20,11 @@ import type { Args, UseForm } from '../typing'
  * @param rawSettings - An optional `RawSettings` object containing the raw settings to be normalized.
  * @returns A `UseForm` object containing the reactive fields, titles, buttons, and settings.
  */
-export function useForm<T extends BaseObjectWithRawFields, U extends Record<string, RawButton>>(args: Args<T, U>): UseForm<T, U> {
+export function useForm<
+  TypeFields extends BaseObjectWithRawFields,
+  TypeButtons extends RawFormButtons,
+  TypeSettings extends RawSetting,
+>(args: Args<TypeFields, TypeButtons, TypeSettings>): UseForm<TypeFields, TypeButtons, TypeSettings> {
   const {
     id: _id = '',
     fields: rawFields,
@@ -36,9 +47,9 @@ export function useForm<T extends BaseObjectWithRawFields, U extends Record<stri
     new CreateFormCommand(_id, rawFields, rawButtons, rawSettings),
   )
 
-  const fields = reactive(clonedNormalizedFields) as NormalizedFields<T>
-  const buttons = reactive(normalizedButtons) as NormalizedButtons<U>
-  const settings = reactive(normalizedSettings)
+  const fields = reactive(clonedNormalizedFields) as NormalizedFields<TypeFields>
+  const buttons = reactive(normalizedButtons) as NormalizedButtons<TypeButtons>
+  const settings = reactive(normalizedSettings) as TypeSettings & NormalizedSettings
 
   formStore.save(id, {
     originalNormalizedFields,
