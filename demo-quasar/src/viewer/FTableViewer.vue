@@ -1,4 +1,5 @@
 <template>
+  <q-input v-model="r" />
   <div class="pb-5">
     <f-table v-bind="table">
       <template #column-created_at>
@@ -15,6 +16,8 @@ import { FieldType, useForm, useTable } from '@fancy-crud/vue'
 
 // const formats = useFormats()
 
+const r = ref(1)
+
 const form = useForm({
   id: 'formulario',
   fields: {
@@ -25,6 +28,7 @@ const form = useForm({
       wrapper: {
         class: 'col-span-12',
       },
+      parseModelValue: Number,
     },
     gender: {
       type: FieldType.text,

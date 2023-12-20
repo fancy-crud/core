@@ -3,6 +3,8 @@ import { GenerateFormDataCommand } from '@packages/core/forms/axioma'
 import { describe, expect, it } from 'vitest'
 
 describe('GenerateFormData', () => {
+  const parseModelValue = (value: any) => value
+
   it.concurrent('should generate form data for fields with primitive values', () => {
     const fields = {
       firstName: {
@@ -10,30 +12,35 @@ describe('GenerateFormData', () => {
         errors: [],
         modelValue: 'John',
         type: 'text',
+        parseModelValue,
       },
       lastName: {
         modelKey: 'lastName',
         errors: [],
         modelValue: 'Doe',
         type: 'text',
+        parseModelValue,
       },
       isActive: {
         modelKey: 'isActive',
         errors: [],
         modelValue: true,
         type: 'radio',
+        parseModelValue,
       },
       isDisabled: {
         modelKey: 'isDisabled',
         errors: [],
         modelValue: false,
         type: 'radio',
+        parseModelValue,
       },
       age: {
         modelKey: 'age',
         errors: [],
         modelValue: 18,
         type: 'radio',
+        parseModelValue,
       },
     }
 
@@ -59,6 +66,7 @@ describe('GenerateFormData', () => {
         type: 'select',
         label: 'Roles',
         url: '/roles',
+        parseModelValue,
       },
       hobbies: {
         modelKey: 'hobbies',
@@ -70,6 +78,7 @@ describe('GenerateFormData', () => {
         type: 'checkbox',
         url: '/hobbies',
         optionValue: 'id',
+        parseModelValue,
       },
     }
 
@@ -92,12 +101,14 @@ describe('GenerateFormData', () => {
           new File(['avatar-image'], 'avatar.jpg', { type: 'image/jpeg' }),
         ],
         type: 'file',
+        parseModelValue,
       },
       resume: {
         modelKey: 'resume',
         errors: [],
         modelValue: new File(['resume-file'], 'resume.pdf', { type: 'application/pdf' }),
         type: 'file',
+        parseModelValue,
       },
     }
 
@@ -121,6 +132,7 @@ describe('GenerateFormData', () => {
         errors: [],
         modelValue: null,
         type: 'text',
+        parseModelValue,
       },
       hobbies: {
         modelKey: 'hobbies',
@@ -128,6 +140,7 @@ describe('GenerateFormData', () => {
         modelValue: null,
         type: 'checkbox',
         optionValue: 'id',
+        parseModelValue,
       },
     }
 

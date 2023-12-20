@@ -4,7 +4,7 @@ import type { BaseObjectWithNormalizedFields, NormalizedField } from '@packages/
 import { meta } from '@fancy-crud/bus'
 
 export type MinimumNormalizedField =
-  Pick<NormalizedField, 'type' | 'modelValue' | 'errors' | 'modelKey'> & { optionValue?: string; multiple?: boolean }
+  Pick<NormalizedField, 'type' | 'modelValue' | 'errors' | 'modelKey' | 'parseModelValue'> & { optionValue?: string; multiple?: boolean }
 
 export type JsonForm<T extends BaseObjectWithNormalizedFields<MinimumNormalizedField>> = { [K in keyof T]: T[K]['modelValue'] }
 

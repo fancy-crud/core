@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest'
 describe('NormalizeFormFields', () => {
   const recordValue = (_: any) => null
   const interceptOptions = (options: any[]) => options
+  const parseModelValue = (value: any) => value
 
   it.concurrent('should normalize form fields with default values when no fields are provided', () => {
     const command = new NormalizeFormFieldsCommand({})
@@ -20,12 +21,14 @@ describe('NormalizeFormFields', () => {
         label: 'First Name',
         recordValue,
         interceptOptions,
+        parseModelValue,
       },
       lastName: {
         type: 'text',
         label: 'Last Name',
         recordValue,
         interceptOptions,
+        parseModelValue,
       },
     }
 
@@ -40,6 +43,7 @@ describe('NormalizeFormFields', () => {
       errors: [],
       recordValue,
       interceptOptions,
+      parseModelValue,
       wasFocused: false,
       modelValue: null,
       ref: null,
@@ -57,6 +61,7 @@ describe('NormalizeFormFields', () => {
       errors: [],
       recordValue,
       interceptOptions,
+      parseModelValue,
       wasFocused: false,
       ref: null,
       modelValue: null,
@@ -75,6 +80,7 @@ describe('NormalizeFormFields', () => {
         class: 'custom-class',
         recordValue,
         interceptOptions,
+        parseModelValue,
       },
     }
 
@@ -89,6 +95,7 @@ describe('NormalizeFormFields', () => {
       errors: [],
       recordValue,
       interceptOptions,
+      parseModelValue,
       wasFocused: false,
       modelValue: null,
       ref: null,
@@ -107,6 +114,7 @@ describe('NormalizeFormFields', () => {
         minLength: 8,
         recordValue,
         interceptOptions,
+        parseModelValue,
       },
     }
 
@@ -121,6 +129,7 @@ describe('NormalizeFormFields', () => {
       errors: [],
       recordValue,
       interceptOptions,
+      parseModelValue,
       wasFocused: false,
       modelValue: null,
       ref: null,

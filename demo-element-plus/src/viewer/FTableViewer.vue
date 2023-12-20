@@ -11,6 +11,8 @@
       :id="table.id"
     > -->
 
+    <el-input v-model="r" />
+
     <el-select v-model="table.filterParams.gender">
       <el-option value="m">
         Male
@@ -26,6 +28,8 @@
 
 <script lang='ts' setup>
 import { FieldType, useForm, useTable } from '@fancy-crud/vue'
+
+const r = ref(1)
 
 const form = useForm({
   id: 'formulario',
@@ -85,14 +89,6 @@ const table = useTable({
   },
   filterParams: {
     gender: '',
-  },
-  list: {
-    data: [],
-    options: {
-      onInit() {
-        console.log('ok')
-      },
-    },
   },
 })
 </script>
