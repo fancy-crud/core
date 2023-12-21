@@ -78,7 +78,6 @@ describe('GenerateFormData', () => {
         type: 'checkbox',
         url: '/hobbies',
         optionValue: 'id',
-        parseModelValue,
       },
     }
 

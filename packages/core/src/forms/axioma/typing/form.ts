@@ -38,7 +38,6 @@ export interface DefaultAttributes {
   errors: string[]
   recordValue: (value: any) => unknown
   interceptOptions: (options: any[]) => unknown[]
-  parseModelValue: (value: any) => unknown
 }
 
 export type FieldNormalizer<T> = T & DefaultAttributes

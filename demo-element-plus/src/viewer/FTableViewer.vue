@@ -41,6 +41,22 @@ const form = useForm({
       wrapper: {
         class: 'col-span-12',
       },
+      parseModelValue: Number,
+    },
+    select: {
+      type: FieldType.select,
+      label: 'Select',
+      optionLabel: 'label',
+      optionValue: 'value',
+      multiple: true,
+      options: [
+        { label: 'Primer valor', value: 1 },
+        { label: 'Segundo valor', value: 2 },
+        { label: 'Tercer valor', value: 3 },
+      ],
+      parseModelValue(value) {
+        return [1, 2, 3, 4]
+      },
     },
     gender: {
       type: FieldType.text,

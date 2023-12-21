@@ -11,9 +11,9 @@ export class GenerateFormDataHandler implements IGenerateFormDataHandler {
    * @param fieldKey The key of the field being handled.
    * @param field The field being handled.
    */
-  private handleListValues(fieldKey: string, field: MinimumNormalizedField, fieldModelValue: unknown) {
+  private handleListValues(fieldKey: string, field: MinimumNormalizedField) {
     const formKey = field.modelKey || `${fieldKey}_id`
-    const multiple = Array.isArray(fieldModelValue)
+    const multiple = Array.isArray(field.modelValue)
 
     const addFormDataValue = (value: any) => {
       const optionValue = String(field.optionValue || '')
@@ -33,7 +33,7 @@ export class GenerateFormDataHandler implements IGenerateFormDataHandler {
     }
 
     this.jsonForm[fieldKey] = []
-    ;(fieldModelValue as unknown[]).forEach(addFormDataValue)
+    ;(field.modelValue as unknown[]).forEach(addFormDataValue)
   }
 
   /**
@@ -42,22 +42,23 @@ export class GenerateFormDataHandler implements IGenerateFormDataHandler {
    * @param fieldKey The key of the field being handled.
    * @param field The field being handled.
    */
-  private handleFileValue(fieldKey: string, field: MinimumNormalizedField, fieldModelValue: unknown) {
+  private handleFileValue(fieldKey: string, field: MinimumNormalizedField) {
     const formKey = field.modelKey || fieldKey
+    const parseModelValue = field.parseModelValue ? field.parseModelValue(field.modelValue) : field.modelValue
 
     if (!this.formData)
       this.formData = new FormData()
 
-    if (Array.isArray(fieldModelValue)) {
+    if (Array.isArray(parseModelValue)) {
       if (field.multiple)
-        fieldModelValue.forEach((file: File) => this.formData?.append(formKey, file))
+        parseModelValue.forEach((file: File) => this.formData?.append(formKey, file))
 
       else
-        this.formData.set(formKey, fieldModelValue[0])
+        this.formData.set(formKey, parseModelValue[0])
 
       return
     }
-    this.formData.set(formKey, fieldModelValue as any)
+    this.formData.set(formKey, parseModelValue as any)
   }
 
   /**
@@ -66,8 +67,8 @@ export class GenerateFormDataHandler implements IGenerateFormDataHandler {
    * @param fieldKey The key of the field being handled.
    * @param field The field being handled.
    */
-  private handlePlainValue(fieldKey: string, field: MinimumNormalizedField, fieldModelValue: unknown) {
-    const value: unknown = fieldModelValue
+  private handlePlainValue(fieldKey: string, field: MinimumNormalizedField) {
+    const value: unknown = field.parseModelValue ? field.parseModelValue(field.modelValue) : field.modelValue
 
     this.jsonForm[field.modelKey || fieldKey] = value
   }
@@ -92,20 +93,23 @@ export class GenerateFormDataHandler implements IGenerateFormDataHandler {
 
     entriesFields.forEach(([fieldKey, field]) => {
       const isFileOrImage = ['file', 'image'].includes(field.type)
-      const fieldModelValue = field.parseModelValue(field.modelValue)
+      field.errors = []
 
-      if (Array.isArray(fieldModelValue) && !isFileOrImage) {
-        this.handleListValues(fieldKey, field, fieldModelValue)
+      if (!isFileOrImage && field.parseModelValue) {
+        this.handlePlainValue(fieldKey, field)
         return
       }
 
-      if (isFileOrImage && fieldModelValue)
-        this.handleFileValue(fieldKey, field, fieldModelValue)
+      if (!isFileOrImage && Array.isArray(field.modelValue)) {
+        this.handleListValues(fieldKey, field)
+        return
+      }
+
+      if (isFileOrImage && field.modelValue)
+        this.handleFileValue(fieldKey, field)
 
       else
-        this.handlePlainValue(fieldKey, field, fieldModelValue)
-
-      field.errors = []
+        this.handlePlainValue(fieldKey, field)
     })
 
     this.syncData()
