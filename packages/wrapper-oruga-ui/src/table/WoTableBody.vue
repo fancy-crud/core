@@ -17,7 +17,7 @@
         </o-table-column>
 
         <template v-else>
-          <o-table-column v-if="hasActionHeader" v-slot="{ row, index }">
+          <o-table-column v-if="actionHeader" v-slot="{ row, index }" v-bind="actionHeader">
             <slot name="column-actions" v-bind="{ row, index }">
               <f-table-row-actions
                 @edit="emit('edit', row)"
@@ -46,7 +46,7 @@ const emit = defineEmits<TableBodyEmit>()
 
 const bus = new Bus()
 
-const hasActionHeader = computed(() => props.headers.some(header => header.value === 'actions' && header.exclude !== true))
+const actionHeader = computed(() => props.headers.find(header => header.value === 'actions' && header.exclude !== true))
 
 function getValue(row: any, column: NormalizedColumn, rowIndex: number) {
   return bus.execute(

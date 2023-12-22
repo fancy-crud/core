@@ -12,8 +12,8 @@
       </slot>
     </el-table-column>
 
-    <template v-if="hasActionHeader">
-      <el-table-column v-slot="bind" prop="actions" label="Actions">
+    <template v-if="actionHeader">
+      <el-table-column v-slot="bind" prop="actions" v-bind="actionHeader">
         <slot name="column-actions" v-bind="bind">
           <f-table-row-actions
             @edit="emit('edit', bind.row)"
@@ -42,7 +42,7 @@ const bus = new Bus()
 
 const parseHeaders = computed(() => props.headers.map(header => ({ ...header, title: header.label, key: header.value })))
 const excludeActionsHeaders = computed(() => parseHeaders.value.filter(header => header.key !== 'actions'))
-const hasActionHeader = computed(() => props.headers.some(header => header.value === 'actions' && header.exclude !== true))
+const actionHeader = computed(() => props.headers.find(header => header.value === 'actions' && header.exclude !== true))
 
 function getValue(row: any, column: NormalizedColumn, rowIndex: number) {
   return bus.execute(

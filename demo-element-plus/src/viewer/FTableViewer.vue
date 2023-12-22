@@ -98,7 +98,7 @@ const table = useTable({
     created_at: {
       format: (value: string) => 'anything',
     },
-    actions: { value: 'actions', label: '' },
+    actions: { value: 'actions', label: '', width: '200px', align: 'right' },
   },
   pagination: {
     rowsPerPage: 10,

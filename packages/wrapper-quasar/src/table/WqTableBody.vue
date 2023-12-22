@@ -15,8 +15,8 @@
         </slot>
       </q-td>
     </template>
-    <template v-if="hasActionHeader" #[`body-cell-actions`]="bind">
-      <q-td key="actions" :props="bind">
+    <template v-if="actionHeader" #[`body-cell-actions`]="bind">
+      <q-td key="actions" :props="bind" v-bind="actionHeader">
         <slot name="column-actions" v-bind="bind">
           <f-table-row-actions
             @edit="emit('edit', bind.row)"
@@ -66,7 +66,7 @@ const parseHeaders = computed((): QuasarColumn[] => props.headers.map((header) =
   }
 }))
 
-const hasActionHeader = computed(() => props.headers.some(header => header.value === 'actions' && header.exclude !== true))
+const actionHeader = computed(() => props.headers.find(header => header.value === 'actions' && header.exclude !== true))
 
 const excludeActionsHeaders = computed(() => parseHeaders.value.filter(header => header.name !== 'actions'))
 
