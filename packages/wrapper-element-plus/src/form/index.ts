@@ -8,6 +8,7 @@ import WeRadio from './WeRadio.vue'
 import WeCheckbox from './WeCheckbox.vue'
 import WeFile from './WeFile.vue'
 import WeDatepicker from './WeDatepicker.vue'
+import WeField from './WeField.vue'
 
 export const form = ReturnObject({
   text: WeText,
@@ -31,4 +32,5 @@ export {
   WeFile,
   WeDatepicker,
   WeTextarea,
+  WeField,
 }
