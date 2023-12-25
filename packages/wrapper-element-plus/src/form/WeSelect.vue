@@ -18,7 +18,7 @@ export default defineComponent({
   },
 
   setup(props, { attrs: vAttrs, slots }) {
-    const { vmodel, hintText, options, attrs } = useSelectField(props)
+    const { vmodel, hintText, options, attrs, hasFieldErrors } = useSelectField(props)
 
     function renderOptions() {
       return options.value.map(
@@ -31,7 +31,7 @@ export default defineComponent({
     }
 
     return () =>
-      h(WeField, { ...props.field.wrapper, label: props.field.label, message: hintText.value }, {
+      h(WeField, { ...props.field.wrapper, label: props.field.label, message: hintText.value, hasFieldErrors: hasFieldErrors.value }, {
         default: () => h(ElSelect, { ...vAttrs, ...attrs.value, ...vmodel.value as any }, {
           default: () => renderOptions(),
         }),
