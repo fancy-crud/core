@@ -18,7 +18,7 @@ export interface BaseRawField extends Record<string, any> {
   hidden?: boolean
   exclude?: boolean
   hintText?: string
-  bounceTime?: number
+  debounceTime?: number
   modelKey?: string
   modelValue?: unknown
   fileUrl?: string | null
@@ -36,6 +36,7 @@ export interface DefaultAttributes {
   modelValue: unknown
   ref: any
   errors: string[]
+  debounceTime: number
   recordValue: (value: any) => unknown
   interceptOptions: (options: any[]) => unknown[]
 }
