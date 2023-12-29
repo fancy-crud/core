@@ -10,7 +10,7 @@
     "build:bus": "pnpm --filter='./packages/bus' build",
     "build:core": "pnpm --filter='./packages/core' build",
     "build:vue": "pnpm --filter='./packages/vue' build",
-    "build:p-rule-parsers": "pnpm --filter='./packages/plugin-rules-parsers' build",
+    "build:p-rule-parsers": "pnpm --filter='./packages/plugin-rule-parsers' build",
     "build:p-vue3-toastify": "pnpm --filter='./packages/plugin-vue3-toastify' build",
     "build:w-oruga": "pnpm --filter='./packages/wrapper-oruga-ui' build",
     "build:w-vuetify": "pnpm --filter='./packages/wrapper-vuetify' build:no-ts",
