@@ -5,3 +5,7 @@ export const rulesConfig: RuleConfig = {}
 export function setRuleConfig(config: RuleConfig = {}) {
   Object.assign(rulesConfig, config)
 }
+
+export function getDefaultRulesConfig() {
+  return rulesConfig
+}

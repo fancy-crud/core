@@ -5,7 +5,9 @@ import type {
   NormalizedButtons,
   NormalizedFields,
   NormalizedSettings,
-  RuleConfig,
+  NotificationState,
+  ResponseInterceptorState,
+  RuleConfigState,
 } from '@fancy-crud/core'
 
 export interface UseForm<T, U, S> {
@@ -16,13 +18,14 @@ export interface UseForm<T, U, S> {
   bus: Bus
 }
 
-export interface Args<T, U, S, TypeResponseInterceptor> {
+export interface Args<T, U, S> {
   fields: T
   id?: string
   buttons?: U
   settings?: S
-  rulesConfig?: RuleConfig
-  responseInterceptor?: TypeResponseInterceptor
+  rulesConfig?: RuleConfigState
+  responseInterceptor?: ResponseInterceptorState
+  notifications?: NotificationState
 }
 
 export interface DefaultProps {

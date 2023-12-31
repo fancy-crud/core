@@ -5,39 +5,26 @@ import type {
   NormalizedSettings,
   RawFormButtons,
   RawSetting,
-  ResponseInterceptorState,
 } from '@fancy-crud/core'
-import { Bus, CreateFormCommand, IFormStore, IRuleConfigStore, rulesConfig } from '@fancy-crud/core'
+import { Bus, CreateFormCommand, IFormStore } from '@fancy-crud/core'
 import type { Args, UseForm } from '../typing'
 
-/**
- * A function that provides functionality to create a reactive form object from raw fields, titles, buttons, and settings.
- *
- * @typeparam T - A generic type parameter that extends `ObjectWithRawField`.
- * @typeparam U - A generic type parameter that extends `Record<string, RawButton>`.
- * @param rawFields - A `ObjectWithRawField` object containing the raw fields to be normalized.
- * @param rawTitles - An optional `RawTitle` object containing the raw titles to be normalized.
- * @param rawButtons - An optional `Record<string, RawButton>` object containing the raw buttons to be normalized.
- * @param rawSettings - An optional `RawSettings` object containing the raw settings to be normalized.
- * @returns A `UseForm` object containing the reactive fields, titles, buttons, and settings.
- */
 export function useForm<
   TypeFields extends BaseObjectWithRawFields,
   TypeButtons extends RawFormButtons,
   TypeSettings extends RawSetting,
-  TypeResponseInterceptor extends ResponseInterceptorState,
->(args: Args<TypeFields, TypeButtons, TypeSettings, TypeResponseInterceptor>): UseForm<TypeFields, TypeButtons, TypeSettings> {
+>(args: Args<TypeFields, TypeButtons, TypeSettings>): UseForm<TypeFields, TypeButtons, TypeSettings> {
   const {
     id: _id = '',
     fields: rawFields,
     buttons: rawButtons,
     settings: rawSettings,
-    rulesConfig: customRulesConfig,
+    rulesConfig = {},
     responseInterceptor = {},
+    notifications = {},
   } = args
 
   const formStore: IFormStore = inject(IFormStore.name)!
-  const ruleConfigStore: IRuleConfigStore = inject(IRuleConfigStore.name)!
   const bus = new Bus()
 
   const {
@@ -47,7 +34,7 @@ export function useForm<
     normalizedButtons,
     normalizedSettings,
   } = bus.execute(
-    new CreateFormCommand(_id, rawFields, rawButtons, rawSettings, responseInterceptor),
+    new CreateFormCommand(_id, rawFields, rawButtons, rawSettings, responseInterceptor, notifications, rulesConfig),
   )
 
   const fields = reactive(clonedNormalizedFields) as NormalizedFields<TypeFields>
@@ -59,11 +46,6 @@ export function useForm<
     fields,
     settings,
     buttons,
-  })
-
-  ruleConfigStore.save(id, {
-    ...rulesConfig,
-    ...customRulesConfig,
   })
 
   return {

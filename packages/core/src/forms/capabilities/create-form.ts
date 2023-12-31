@@ -1,6 +1,5 @@
 import { Bus, inject } from '@fancy-crud/bus'
 import { INotificationStore } from '@packages/core/common/notifications/axioma'
-import type { ResponseInterceptorState } from '@packages/core/common/response-interceptor/axioma'
 import { IResponseInterceptorStore } from '@packages/core/common/response-interceptor/axioma'
 
 import type {
@@ -14,7 +13,7 @@ import {
   NormalizeFormFieldsCommand,
   NormalizeSettingsCommand,
 } from '@packages/core/forms/axioma'
-import { getDefaultInterceptors, getDefaultNotificationHandler } from '@packages/core/config'
+import { getDefaultInterceptors, getDefaultNotificationHandler, getDefaultRulesConfig } from '@packages/core/config'
 import type { BaseObjectWithRawFields, Form, NormalizedFields, RawSetting } from '../axioma'
 import { IFormStore, IRuleConfigStore } from '../axioma'
 
@@ -30,8 +29,17 @@ export class CreateFormHandler implements ICreateFormHandler {
     T extends BaseObjectWithRawFields,
     U extends RawSetting,
     V extends RawFormButtons,
-    TypeResponseInterceptor extends ResponseInterceptorState,
-  >({ id, rawFields, rawSettings, rawButtons, responseInterceptor }: CreateFormCommand<T, U, V, TypeResponseInterceptor>): Form<T, V> {
+  >(command: CreateFormCommand<T, U, V>): Form<T, V> {
+    const {
+      id,
+      rawFields = {},
+      rawSettings = {},
+      rawButtons = {},
+      responseInterceptor = {},
+      notifications = {},
+      rulesConfig = {},
+    } = command
+
     const formId = Symbol(id)
     const bus = new Bus()
 
@@ -40,11 +48,13 @@ export class CreateFormHandler implements ICreateFormHandler {
     const originalNormalizedFields = bus.execute(normalizeFieldsCommand) as NormalizedFields<T>
     const clonedNormalizedFields = bus.execute(normalizeFieldsCommand) as NormalizedFields<T>
 
-    const normalizeSettingsCommand = new NormalizeSettingsCommand(rawSettings)
-    const normalizedSettings = bus.execute(normalizeSettingsCommand)
+    const normalizedSettings = bus.execute(
+      new NormalizeSettingsCommand(rawSettings),
+    )
 
-    const normalizeButtonsCommand = new NormalizeButtonsCommand(rawButtons)
-    const normalizedButtons = bus.execute(normalizeButtonsCommand) as V & ConvertToNormalizedFormButtons<V>
+    const normalizedButtons = bus.execute(
+      new NormalizeButtonsCommand(rawButtons),
+    ) as V & ConvertToNormalizedFormButtons<V>
 
     this.formStore.save(formId, {
       originalNormalizedFields,
@@ -53,12 +63,20 @@ export class CreateFormHandler implements ICreateFormHandler {
       buttons: normalizedButtons,
     })
 
-    this.notificationStore.save(formId, getDefaultNotificationHandler())
+    this.notificationStore.save(formId, {
+      ...getDefaultNotificationHandler(),
+      ...notifications,
+    })
+
     this.responseInterceptorStore.save(formId, {
       ...getDefaultInterceptors(),
-      ...(responseInterceptor || {}),
+      ...responseInterceptor,
     })
-    this.ruleConfigStore.save(formId, {})
+
+    this.ruleConfigStore.save(formId, {
+      ...getDefaultRulesConfig(),
+      ...rulesConfig,
+    })
 
     return {
       id: formId,

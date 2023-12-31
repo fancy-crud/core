@@ -24,7 +24,7 @@ export function useRules(fields: BaseObjectWithNormalizedFields, options: RuleCo
         })
         bus.execute(validateFieldCommand)
       },
-      { debounce: 500, maxWait: 5000 },
+      { debounce: 400, maxWait: 5000 },
     )
   }
 

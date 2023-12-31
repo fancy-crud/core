@@ -1,7 +1,9 @@
 import { meta } from '@fancy-crud/bus'
 import type { BaseCommand } from '@fancy-crud/bus'
 import type { ResponseInterceptorState } from '@packages/core/common/response-interceptor/axioma'
+import type { NotificationState } from '@packages/core/common/notifications/axioma'
 import type { BaseObjectWithRawFields, Form, RawFormButtons, RawSetting } from '../typing'
+import type { RuleConfigState } from '../store'
 
 /**
  * A class that provides functionality to create a form from raw fields and settings.
@@ -10,7 +12,6 @@ export class CreateFormCommand<
   T extends BaseObjectWithRawFields,
   U extends RawSetting,
   V extends RawFormButtons,
-  TypeResponseInterceptor extends ResponseInterceptorState,
 > implements BaseCommand {
   public readonly meta = meta(ICreateFormHandler)
 
@@ -19,7 +20,9 @@ export class CreateFormCommand<
     public readonly rawFields: T,
     public readonly rawButtons?: V,
     public readonly rawSettings?: U,
-    public readonly responseInterceptor?: TypeResponseInterceptor,
+    public readonly responseInterceptor?: ResponseInterceptorState,
+    public readonly notifications?: NotificationState,
+    public readonly rulesConfig?: RuleConfigState,
   ) {}
 }
 
@@ -36,6 +39,5 @@ export abstract class ICreateFormHandler {
     T extends BaseObjectWithRawFields,
     U extends RawSetting,
     V extends RawFormButtons,
-    TypeResponseInterceptor extends ResponseInterceptorState,
-  >({ id, rawFields, rawSettings, rawButtons }: CreateFormCommand<T, U, V, TypeResponseInterceptor>): Form<T, V>
+  >(command: CreateFormCommand<T, U, V>): Form<T, V>
 }
