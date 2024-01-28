@@ -44,10 +44,8 @@ export interface NormalizedButton extends RawButton, EventHandlers<Partial<Butto
 }
 
 export interface NormalizedFormButtons {
-  add: NormalizedButton
-  edit: NormalizedButton
-  remove: NormalizedButton
-  dump: NormalizedButton
+  main: NormalizedButton
+  aux: NormalizedButton
   [extraButton: string]: RawButton
 }
 

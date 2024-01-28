@@ -30,15 +30,19 @@
 
 <script lang="ts" setup>
 import type {
-  BaseObjectWithNormalizedFields, NormalizedSettings,
+  BaseObjectWithNormalizedFields, DispatchOnFailedFormEventCommand, DispatchOnSuccessFormEventCommand, NormalizedSettings,
   ObjectWithNormalizedButtons,
 } from '@fancy-crud/core'
 import {
+  DispatchOnFailedFormEventHandler,
+  DispatchOnSuccessFormEventHandler,
+  IDispatchOnFailedFormEventHandler,
+  IDispatchOnSuccessFormEventHandler,
   IRuleConfigStore,
   inject as injecting,
+  register,
 } from '@fancy-crud/core'
 import { useRules } from '@packages/vue/forms'
-import type { VueForm } from '../Form'
 
 const props = defineProps<{
   id: symbol
@@ -55,17 +59,6 @@ const emit = defineEmits<{
 
 const slots = useSlots()
 const ruleConfigStore: IRuleConfigStore = injecting(IRuleConfigStore.name)!
-const baseForm: VueForm = injecting('IBaseForm')!
-
-baseForm.setFormId(props.id)
-
-baseForm.setOnSuccessCallback((response) => {
-  emit('success', response)
-})
-
-baseForm.setOnFailedCallback((error) => {
-  emit('error', error)
-})
 
 const { isFormValid } = useRules(
   props.fields, ruleConfigStore.searchById(props.id),
@@ -77,8 +70,32 @@ const beforeAndAfterFieldSlots = computed(() => {
   )
 })
 
-const onMainClick = () => baseForm.onMainClick()
-const onAuxClick = () => baseForm.onAuxClick()
+const onMainClick = () => {
+  if (props.buttons.main.onClick)
+    props.buttons.main.onClick()
+}
+
+const onAuxClick = () => {
+  if (props.buttons.aux.onClick)
+    props.buttons.aux.onClick()
+}
+
+class VueDispatchOnSuccessFormEventHandler extends DispatchOnSuccessFormEventHandler {
+  execute(command: DispatchOnSuccessFormEventCommand): void {
+    super.execute(command)
+    emit('success', command.response?.response)
+  }
+}
+
+class VueDispatchOnFailedFormEventHandler extends DispatchOnFailedFormEventHandler {
+  execute(command: DispatchOnFailedFormEventCommand): void {
+    super.execute(command)
+    emit('error', command.response)
+  }
+}
+
+register(IDispatchOnSuccessFormEventHandler.name, VueDispatchOnSuccessFormEventHandler)
+register(IDispatchOnFailedFormEventHandler.name, VueDispatchOnFailedFormEventHandler)
 </script>
 
 <style lang="sass" scoped>

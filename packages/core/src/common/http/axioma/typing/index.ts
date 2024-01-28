@@ -51,7 +51,7 @@ export type OnInit = () => void
 export type OnSuccess = (response: any) => void
 export type OnFailed = (error: any) => void
 export type OnFinally = () => void
-
+export type intercept = (response: any) => any
 export interface DefaultOptions {
   onSuccess?: () => void
   onFailed?: (e: any) => void
@@ -62,6 +62,7 @@ export interface RequestDefaultOptions {
   onSuccess?: OnSuccess
   onFailed?: OnFailed
   onFinally?: OnFinally
+  intercept?: intercept
   autoTrigger?: boolean
 }
 

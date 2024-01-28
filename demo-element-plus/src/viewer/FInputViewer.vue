@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white rounded-xl p-4">
-    <f-form v-bind="form" />
+    <f-form @success="printing" @error="printing" v-bind="form" />
   </div>
 
   <button @click="loadData">
@@ -9,15 +9,14 @@
 </template>
 
 <script lang='ts' setup>
-import { email, string } from 'valibot'
+// import { email, string } from 'valibot'
 import { FieldType, useForm } from '@fancy-crud/vue'
-import { Bus, FORM_MODE, LoadRemoteRecordCommand, ResetFieldsByFormIdCommand } from '@fancy-crud/core'
+import { Bus, LoadRemoteRecordCommand, ResetFieldsByFormIdCommand } from '@fancy-crud/core'
 
 const bus = new Bus()
 
 const settings = {
   url: 'artists/',
-  mode: FORM_MODE.update,
   title: 'Modo root',
 }
 
@@ -28,28 +27,14 @@ const form = useForm({
       label: 'First name',
       placeholder: 'Como asi pues?',
       hintText: 'Display some message',
-      rules: value => ({ value, rule: string([email()]) }),
+      // rules: value => ({ value, rule: string([email()]) }),
       wrapper: {
         class: 'col-span-6',
       },
     },
-
-    password: {
-      type: FieldType.text,
-      label: 'Last name',
-      class: 'w-full',
-      wrapper: {
-        class: 'col-span-6',
-      },
-    },
-
-    email: {
-      type: FieldType.text,
-      label: 'Email',
-      class: 'w-full',
-      wrapper: {
-        class: 'col-span-6',
-      },
+    gender: {
+      type: '',
+      modelValue: 'm',
     },
   },
   settings,
@@ -80,5 +65,7 @@ function loadData(e: any) {
     }),
   )
 }
+
+function printing(response: any) { console.log(response) }
 </script>
 

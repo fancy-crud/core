@@ -1,9 +1,9 @@
 import { Bus } from '@fancy-crud/bus'
 import { NOTIFICATION_TYPE } from '@packages/core/common/notifications/axioma'
-import type { DispatchOnSuccessFormEventCommand } from '../axioma'
+import type { DispatchOnSuccessFormEventCommand, IDispatchOnSuccessFormEventHandler } from '../axioma'
 import { TriggerFormNotificationCommand, TriggerFormResponseInterceptorCommand } from '../axioma'
 
-export class DispatchOnSuccessFormEventHandler {
+export class DispatchOnSuccessFormEventHandler implements IDispatchOnSuccessFormEventHandler {
   constructor(
     private bus = new Bus(),
   ) {}

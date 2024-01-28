@@ -7,11 +7,16 @@ import type {
   CreateFormCommand,
   ICreateFormHandler,
   RawFormButtons,
+  StandardErrorResponseStructure,
+  StandardResponseStructure,
 } from '@packages/core/forms/axioma'
 import {
+  DispatchOnFailedFormEventCommand,
+  DispatchOnSuccessFormEventCommand,
   NormalizeButtonsCommand,
   NormalizeFormFieldsCommand,
   NormalizeSettingsCommand,
+  SaveFormCommand,
 } from '@packages/core/forms/axioma'
 import { getDefaultInterceptors, getDefaultNotificationHandler, getDefaultRulesConfig } from '@packages/core/config'
 import type { BaseObjectWithRawFields, Form, NormalizedFields, RawSetting } from '../axioma'
@@ -34,7 +39,7 @@ export class CreateFormHandler implements ICreateFormHandler {
       id,
       rawFields = {},
       rawSettings = {},
-      rawButtons = {},
+      rawButtons = {} as RawFormButtons,
       responseInterceptor = {},
       notifications = {},
       rulesConfig = {},
@@ -55,6 +60,33 @@ export class CreateFormHandler implements ICreateFormHandler {
     const normalizedButtons = bus.execute(
       new NormalizeButtonsCommand(rawButtons),
     ) as V & ConvertToNormalizedFormButtons<V>
+
+    normalizedButtons.main.onClick = () => {
+      if (rawButtons.main?.onClick) {
+        rawButtons.main.onClick()
+        return
+      }
+
+      bus.execute(
+        new SaveFormCommand(formId, {
+          onSuccess(response?: StandardResponseStructure) {
+            bus.execute(
+              new DispatchOnSuccessFormEventCommand(formId, { response }),
+            )
+          },
+          onFailed(error?: StandardErrorResponseStructure) {
+            bus.execute(
+              new DispatchOnFailedFormEventCommand(formId, error),
+            )
+          },
+        }),
+      )
+    }
+
+    normalizedButtons.aux.onClick = () => {
+      if (rawButtons.aux?.onClick)
+        rawButtons.aux.onClick()
+    }
 
     this.formStore.save(formId, {
       originalNormalizedFields,

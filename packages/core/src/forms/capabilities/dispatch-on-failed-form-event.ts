@@ -1,9 +1,9 @@
 import { inject } from '@fancy-crud/bus'
 import { IResponseInterceptorStore } from '@packages/core/common/response-interceptor/axioma'
-import type { DispatchOnFailedFormEventCommand } from '../axioma'
+import type { DispatchOnFailedFormEventCommand, IDispatchOnFailedFormEventHandler } from '../axioma'
 import { IFormStore } from '../axioma'
 
-export class DispatchOnFailedFormEventHandler {
+export class DispatchOnFailedFormEventHandler implements IDispatchOnFailedFormEventHandler {
   constructor(
     private formStore: IFormStore = inject(IFormStore),
     private responseInterceptorStore: IResponseInterceptorStore = inject(IResponseInterceptorStore.name),
