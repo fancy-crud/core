@@ -37,7 +37,7 @@ export class PrepareFormToUpdateHandler implements IPrepareFormToUpdateHandler {
       },
       onSuccess(response) {
         setFieldsValues.execute(
-          new SetFieldsValuesCommand(form.fields, form.settings, response || {}),
+          new SetFieldsValuesCommand(form.fields, form.settings, response.data || {}),
         )
 
         if (options?.onReady)

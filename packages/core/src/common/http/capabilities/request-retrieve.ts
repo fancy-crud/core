@@ -11,7 +11,7 @@ export class RequestRetrieveHandler implements IRequestRetrieveHandler {
     if (options?.onInit)
       options.onInit()
 
-    const onRetrieveSuccess = this.http.hooks.onRetrieveSuccess || ((response: any) => response.data)
+    const onRetrieveSuccess = this.http.hooks?.onRetrieveSuccess || ((response: any) => response)
 
     this.http.request.get(url)
       .then((response: any) => {
