@@ -1,5 +1,5 @@
 import { IFormStore, ISetFieldsValuesHandler, ISwitchFormToUpdateModeHandler, SetFieldsValuesCommand, SwitchFormToUpdateModeCommand } from '@packages/core/forms/axioma'
-import { IHttp, IRequestRetrieveHandler, RequestRetrieveCommand } from '@packages/core/common/http/axioma'
+import { IRequestRetrieveHandler, RequestRetrieveCommand } from '@packages/core/common/http/axioma'
 import { inject } from '@fancy-crud/bus'
 import { StoreStateDoesNotExist } from '@packages/core/common/store/axioma'
 import type { IPrepareFormToUpdateHandler, PrepareFormToUpdateCommand } from '../axioma'
@@ -10,7 +10,6 @@ export class PrepareFormToUpdateHandler implements IPrepareFormToUpdateHandler {
     private setFieldsValues: ISetFieldsValuesHandler = inject(ISetFieldsValuesHandler),
     private requestRetrieve: IRequestRetrieveHandler = inject(IRequestRetrieveHandler),
     private formStore: IFormStore = inject(IFormStore),
-    private httpService: IHttp = inject(IHttp),
   ) {}
 
   execute({ formId, options, tableSettings, row }: PrepareFormToUpdateCommand): void {
@@ -32,16 +31,13 @@ export class PrepareFormToUpdateHandler implements IPrepareFormToUpdateHandler {
 
     const setFieldsValues = this.setFieldsValues
 
-    const onRetrieve = this.httpService.hooks.onRetrieve
     const requestRetrieveCommand = new RequestRetrieveCommand(tableSettings.url, lookupValue, {
       onInit() {
         form.settings.loading = true
       },
-      onSuccess(response: { data: Record<string, unknown> }) {
-        const data: any = typeof onRetrieve === 'function' ? onRetrieve(response) : response.data
-
+      onSuccess(response) {
         setFieldsValues.execute(
-          new SetFieldsValuesCommand(form.fields, form.settings, data || {}),
+          new SetFieldsValuesCommand(form.fields, form.settings, response || {}),
         )
 
         if (options?.onReady)

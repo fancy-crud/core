@@ -27,7 +27,7 @@ export interface HttpRequestDelete {
 export type HttpRequest = HttpRequestPost & HttpRequestGet & HttpRequestPatch & HttpRequestDelete
 
 export interface HttpHooks {
-  onRetrieve?: (response: any) => any
+  onRetrieveSuccess?: (response: any) => any
 }
 
 export abstract class IHttp {
