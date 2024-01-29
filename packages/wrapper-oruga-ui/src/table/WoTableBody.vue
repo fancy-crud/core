@@ -17,14 +17,16 @@
         </o-table-column>
 
         <template v-else>
-          <o-table-column v-if="actionHeader" v-slot="{ row, index }" v-bind="actionHeader">
-            <slot name="column-actions" v-bind="{ row, index }">
+          <o-table-column v-if="actionHeader" v-slot="bind" v-bind="actionHeader">
+            <slot name="column-actions" v-bind="bind">
+              <slot name="column-actions-prepend" v-bind="bind" />
               <f-table-row-actions
-                @edit="emit('edit', row)"
-                @delete="emit('delete', row)"
+                @edit="emit('edit', bind.row)"
+                @delete="emit('delete', bind.row)"
                 :edit="props.buttons.edit"
                 :delete="props.buttons.remove"
               />
+              <slot name="column-actions-append" v-bind="bind" />
             </slot>
           </o-table-column>
         </template>

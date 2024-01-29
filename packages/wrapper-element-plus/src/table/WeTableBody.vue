@@ -15,12 +15,14 @@
     <template v-if="actionHeader">
       <el-table-column v-slot="bind" prop="actions" v-bind="actionHeader">
         <slot name="column-actions" v-bind="bind">
+          <slot name="column-actions-prepend" v-bind="bind" />
           <f-table-row-actions
             @edit="emit('edit', bind.row)"
             @delete="emit('delete', bind.row)"
             :edit="props.buttons.edit"
             :delete="props.buttons.remove"
           />
+          <slot name="column-actions-append" v-bind="bind" />
         </slot>
       </el-table-column>
     </template>

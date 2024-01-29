@@ -22,6 +22,9 @@
       <template #column-created_at>
         <a href="https://google.com" class="underline text-primary-500" target="_blank">Haz click</a>
       </template>
+      <template #column-actions-prepend>
+        'hello'
+      </template>
     </f-table>
   </div>
 </template>

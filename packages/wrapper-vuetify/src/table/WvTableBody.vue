@@ -15,12 +15,14 @@
     </template>
     <template v-if="hasActionHeader" #[`item.actions`]="bind">
       <slot name="column-actions" v-bind="{ ...bind, row: bind.item }">
+        <slot name="column-actions-prepend" v-bind="bind" />
         <f-table-row-actions
           @edit="emit('edit', bind.item)"
           @delete="emit('delete', bind.item)"
           :edit="props.buttons.edit"
           :delete="props.buttons.remove"
         />
+        <slot name="column-actions-append" v-bind="bind" />
       </slot>
     </template>
     <template #bottom>
