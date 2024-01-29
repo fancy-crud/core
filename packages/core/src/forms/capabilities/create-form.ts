@@ -83,11 +83,6 @@ export class CreateFormHandler implements ICreateFormHandler {
       )
     }
 
-    normalizedButtons.aux.onClick = () => {
-      if (rawButtons.aux?.onClick)
-        rawButtons.aux.onClick()
-    }
-
     this.formStore.save(formId, {
       originalNormalizedFields,
       fields: clonedNormalizedFields,

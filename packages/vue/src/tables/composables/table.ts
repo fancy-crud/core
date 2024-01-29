@@ -1,6 +1,9 @@
 import type { BaseTableForm, FieldAsColumn, NormalizedColumn, NormalizedTableButtons, NormalizedTableList, NormalizedTablePagination, NormalizedTableSettings, ObjectWithRawColumns, RawTableButtons, RawTableFilters, RawTableList, RawTablePagination, RawTableSettings } from '@fancy-crud/core'
-import { Bus, CreateTableCommand, ITableStore, inject as injecting } from '@fancy-crud/core'
+import { Bus, CreateTableCommand, ITableStore, injectable, inject as injecting } from '@fancy-crud/core'
 import type { TableArgs, UseTable } from '../typing'
+import { TableStoreService } from './table-store.service'
+
+injectable(ITableStore.name, TableStoreService)
 
 export function useTable<
   T extends BaseTableForm,
@@ -30,7 +33,7 @@ export function useTable<
   const bus = new Bus()
   const id = Symbol(_id)
 
-  const table = bus.execute(
+  const { buttons: normalizedButtons, ...table } = bus.execute(
     new CreateTableCommand(
       form, rawColumns, rawPagination, rawSettings, rawFilterParams, rawButtons, rawList,
     ),
@@ -40,7 +43,7 @@ export function useTable<
   const settings = reactive(table.settings) as S & NormalizedTableSettings
   const pagination = reactive(table.pagination) as P & NormalizedTablePagination
   const filterParams = reactive(table.filterParams) as F
-  const buttons = reactive(table.buttons) as B & NormalizedTableButtons
+  const buttons = reactive(normalizedButtons) as B & NormalizedTableButtons
   const list = reactive(table.list) as L & NormalizedTableList
 
   tableStore.save(id, {

@@ -7,6 +7,7 @@ export class NormalizePaginationHandler implements INormalizePaginationHandler {
       rowsPerPage: 10,
       rowsPerPageOptions: [10, 25, 50, 100],
       count: 0,
+      hidden: false,
       ...rawPagination,
     }
   }

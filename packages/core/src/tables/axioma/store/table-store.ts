@@ -15,6 +15,3 @@ export abstract class ITableStore {
   abstract searchById(id: symbol): TableState | undefined
   abstract deleteById(id: symbol): void
 }
-
-export const tableStore = new Map<symbol, TableState>()
-

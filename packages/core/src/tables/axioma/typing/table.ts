@@ -15,7 +15,7 @@ export interface TableStoreState {
   buttons: NormalizedTableButtons
 }
 
-export interface Row extends Record<string, unknown> {}
+export type Row = any
 
 export interface SetupOptions {
   onReady?: () => void

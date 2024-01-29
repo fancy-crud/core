@@ -41,29 +41,16 @@ const form = useForm({
       wrapper: {
         class: 'col-span-12',
       },
-      parseModelValue: Number,
     },
-    select: {
+    gender: {
       type: FieldType.select,
       label: 'Select',
       optionLabel: 'label',
       optionValue: 'value',
-      multiple: true,
       options: [
-        { label: 'Primer valor', value: 1 },
-        { label: 'Segundo valor', value: 2 },
-        { label: 'Tercer valor', value: 3 },
+        { label: 'Male', value: 'm' },
+        { label: 'Female', value: 'f' },
       ],
-      parseModelValue(value) {
-        return [1, 2, 3, 4]
-      },
-    },
-    gender: {
-      type: FieldType.text,
-      label: 'Base salary january feb mar abr lorem ipsum dolor ',
-      wrapper: {
-        class: 'col-span-12',
-      },
     },
     created_at: {
       type: FieldType.text,
@@ -105,6 +92,13 @@ const table = useTable({
   },
   filterParams: {
     gender: '',
+  },
+  buttons: {
+    edit: {
+      // onClick(row) {
+      //   console.log('🚀 ~ onClick ~ row:', row)
+      // },
+    },
   },
 })
 </script>

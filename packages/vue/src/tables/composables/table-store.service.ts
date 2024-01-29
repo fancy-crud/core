@@ -1,8 +1,6 @@
-import { injectable } from '@fancy-crud/bus'
-import type { TableState } from '../axioma'
-import { ITableStore } from '../axioma'
+import type { ITableStore, TableState } from '@fancy-crud/core'
 
-const tableStore = new Map<symbol, TableState>()
+const tableStore: Record<symbol, TableState> = reactive({})
 
 export class TableStoreService implements ITableStore {
   private assign<T extends {}>(target: T, source: TableState): asserts target is T & TableState {
@@ -14,16 +12,14 @@ export class TableStoreService implements ITableStore {
 
     this.assign(state, payload)
 
-    tableStore.set(id, state)
+    tableStore[id] = state
   }
 
   searchById(id: symbol): TableState | undefined {
-    return tableStore.get(id)
+    return tableStore[id]
   }
 
   deleteById(id: symbol): void {
-    tableStore.delete(id)
+    delete tableStore[id]
   }
 }
-
-injectable(ITableStore.name, TableStoreService)

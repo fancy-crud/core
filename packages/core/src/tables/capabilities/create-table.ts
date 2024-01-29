@@ -1,6 +1,6 @@
 import { Bus, inject } from '@fancy-crud/bus'
-import type { BaseTableForm, CreateTableCommand, FieldAsColumn, ICreateTableHandler, NormalizedColumn, NormalizedTableList, NormalizedTablePagination, NormalizedTableSettings, ObjectWithRawColumns, RawTableFilters, RawTableList, RawTablePagination, RawTableSettings, Table } from '../axioma'
-import { ITableStore, NormalizeColumnsCommand, NormalizePaginationCommand, NormalizeTableButtonsCommand, NormalizeTableFiltersCommand, NormalizeTableListCommand, NormalizeTableSettingsCommand } from '../axioma'
+import type { BaseTableForm, CreateTableCommand, FieldAsColumn, ICreateTableHandler, NormalizedColumn, NormalizedTableList, NormalizedTablePagination, NormalizedTableSettings, ObjectWithRawColumns, RawTableFilters, RawTableList, RawTablePagination, RawTableSettings, Row, Table } from '../axioma'
+import { DeleteRecordCommand, FetchListDataCommand, ITableStore, NormalizeColumnsCommand, NormalizePaginationCommand, NormalizeTableButtonsCommand, NormalizeTableFiltersCommand, NormalizeTableListCommand, NormalizeTableSettingsCommand, PrepareFormToCreateCommand, PrepareFormToUpdateCommand } from '../axioma'
 import type { ConvertToNormalizedTableButtons, RawTableButtons } from '../axioma/typing/buttons'
 
 export class CreateTableHandler implements ICreateTableHandler {
@@ -26,7 +26,7 @@ export class CreateTableHandler implements ICreateTableHandler {
       settings: rawSettings = {
         url: form?.settings?.url,
       },
-      list: rawList = {},
+      list: rawList = {} as RawTableList,
     } = command
 
     const bus = new Bus()
@@ -55,6 +55,50 @@ export class CreateTableHandler implements ICreateTableHandler {
     const list = bus.execute(
       new NormalizeTableListCommand(rawList),
     ) as TableListType & NormalizedTableList
+
+    const tableStore = this.tableStore
+    buttons.add.onClick = () => {
+      const table = tableStore.searchById(id)!
+
+      bus.execute(
+        new PrepareFormToCreateCommand(form.id, {
+          onClickAux: () => {
+            table.settings.displayFormDialog = false
+          },
+        }),
+      )
+
+      table.settings.displayFormDialog = true
+    }
+
+    buttons.edit.onClick = (row: Row) => {
+      const table = tableStore.searchById(id)!
+
+      bus.execute(
+        new PrepareFormToUpdateCommand(table.formId, row, table.settings, {
+          onClickAux: () => {
+            table.settings.displayFormDialog = false
+          },
+        }),
+      )
+
+      table.settings.displayFormDialog = true
+    }
+
+    buttons.remove.onClick = (row: Row) => {
+      const table = tableStore.searchById(id)!
+
+      bus.execute(
+        new DeleteRecordCommand(id, row, table.settings),
+      )
+    }
+
+    list.fetchData = rawList.fetchData || (() => {
+      const table = tableStore.searchById(id)!
+      bus.execute(
+        new FetchListDataCommand(id, table.pagination.page, table.list.options),
+      )
+    })
 
     this.tableStore.save(id, {
       formId: form.id,

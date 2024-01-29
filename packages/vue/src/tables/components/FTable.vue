@@ -36,7 +36,8 @@
 
   <f-delete-confirmation-modal
     v-model="table.settings.displayConfirmationDialog"
-    @accept="() => baseTable.onDelete(table.settings.rowToDelete, true)"
+    @accept="() => props.buttons.remove.onClick()"
+    @cancel="() => table.settings.rowToDelete = null"
   >
     <template #default="{ accept, cancel }">
       <slot
@@ -48,9 +49,8 @@
 </template>
 
 <script lang="ts" setup>
-import type { BaseTableForm, NormalizedTableButtons, NormalizedTableFilters, NormalizedTableList, NormalizedTablePagination, NormalizedTableSettings, ObjectWithNormalizedColumns, Pagination, Row } from '@fancy-crud/core'
-import { IFormStore, ITableStore, inject as injecting } from '@fancy-crud/core'
-import type { VueTable } from '../Table'
+import type { BaseTableForm, NormalizedTableButtons, NormalizedTableFilters, NormalizedTableList, NormalizedTablePagination, NormalizedTableSettings, ObjectWithNormalizedColumns, Pagination } from '@fancy-crud/core'
+import { Bus, IFormStore, ITableStore, ResetTablePaginationCommand, inject as injecting } from '@fancy-crud/core'
 
 const props = defineProps<{
   id: symbol
@@ -63,18 +63,10 @@ const props = defineProps<{
   list: NormalizedTableList
 }>()
 
-const emit = defineEmits<{
-  (e: 'export'): void
-}>()
-
 const slots = useSlots()
 
 const formStore: IFormStore = injecting(IFormStore.name)!
 const tableStore: ITableStore = injecting(ITableStore.name)!
-const baseTable: VueTable = injecting('IBaseTable')!
-
-baseTable.setTableId(props.id)
-baseTable.createWatchers()
 
 const table = tableStore.searchById(props.id)!
 
@@ -85,15 +77,12 @@ const computedData = computed<any[]>(() => {
   return table.list.data
 })
 
-baseTable.triggerFetchItems()
+props.list.fetchData()
 
 const tableHeaderVBind = computed(() => {
   return {
-    onCreate: () => baseTable.openCreateModal(),
-    onExport: () => {
-      emit('export')
-      baseTable.exportData()
-    },
+    onCreate: props.buttons.add.onClick,
+    onExport: () => props.buttons.dump?.onClick ? props.buttons.dump.onClick() : null,
     add: props.buttons.add,
     dump: props.buttons.dump,
   }
@@ -103,15 +92,17 @@ const tableFormVBind = computed(() => {
   return {
     ...tableForm,
     id: props.form.id,
-    onSuccess: () => baseTable.onSuccess(),
+    onSuccess: () => {
+      props.list.fetchData()
+      table.settings.displayFormDialog = false
+    },
   }
 })
 
 const tableBodyVBind = computed(() => {
   return {
-    openEditModal: (row: Row) => baseTable.openEditModal(row),
-    onEdit: (row: Row) => baseTable.openEditModal(row),
-    onDelete: (row: Row) => baseTable.onDelete(row),
+    onEdit: props.buttons.edit.onClick,
+    onDelete: props.buttons.remove.onClick,
     items: computedData.value,
     loading: table.list.isFetching,
     buttons: props.buttons,
@@ -122,7 +113,27 @@ const tableBodyVBind = computed(() => {
 const tableFooterVBind = computed(() => {
   return {
     'pagination': props.pagination,
-    'onUpdate:pagination': (newPagination: Pagination) => baseTable.setPagination(newPagination),
+    'onUpdate:pagination': (newPagination: Pagination) => Object.assign(table.pagination, newPagination),
   }
+})
+
+const bus = new Bus()
+watch(() => table.filterParams, () => {
+  if (table.pagination.page === 1)
+    props.list.fetchData()
+
+  bus.execute(
+    new ResetTablePaginationCommand(props.id),
+  )
+}, { deep: true })
+
+watch(() => table.pagination.page, () => {
+  if (table.list.options?.hotFetch !== false)
+    props.list.fetchData()
+})
+
+watch(() => table.pagination.rowsPerPage, () => {
+  if (table.list.options?.hotFetch !== false)
+    props.list.fetchData()
 })
 </script>

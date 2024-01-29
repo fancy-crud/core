@@ -6,6 +6,7 @@ export class DeleteRecordCommand implements BaseCommand {
   public readonly meta = meta(IDeleteRecordHandler)
 
   constructor(
+    public readonly tableId: symbol,
     public readonly row: Row | null,
     public readonly tableSettings: NormalizedTableSettings,
     public readonly options?: DeleteRecordOptions,

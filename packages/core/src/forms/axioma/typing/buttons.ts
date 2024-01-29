@@ -3,22 +3,22 @@ export type EventHandlers<E = {}> = {
 }
 
 export interface ButtonEvent {
-  onClick: MouseEvent
-  onDblclick: MouseEvent
-  onMousedown: MouseEvent
-  onMousemove: MouseEvent
-  onMouseup: MouseEvent
-  onMouseover: MouseEvent
-  onMouseout: MouseEvent
-  onMouseenter: MouseEvent
-  onMouseleave: MouseEvent
-  onSubmit: Event
-  onChange: Event
-  onFocus: FocusEvent
-  onBlur: FocusEvent
-  onInput: InputEvent
-  onDrag: DragEvent
-  onDrop: DragEvent
+  onClick: any
+  onDblclick: any
+  onMousedown: any
+  onMousemove: any
+  onMouseup: any
+  onMouseover: any
+  onMouseout: any
+  onMouseenter: any
+  onMouseleave: any
+  onSubmit: any
+  onChange: any
+  onFocus: any
+  onBlur: any
+  onInput: any
+  onDrag: any
+  onDrop: any
 }
 
 export interface RawButton extends EventHandlers<Partial<ButtonEvent>> {

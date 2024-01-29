@@ -32,17 +32,23 @@ const emit = defineEmits<{
 
 const defaults = computed(getDefaults)
 
-const editButton = computed(() => ({
-  hidden: props.edit?.hidden,
-  ...defaults.value.editButton,
-  ...(props.edit || {}),
+const editButton = computed(() => {
+  const { onClick, ...edit } = (props.edit || {}) as any
+  return {
+    hidden: edit?.hidden,
+    ...defaults.value.editButton,
+    ...(edit || {}),
 
-}))
+  }
+})
 
-const deleteButton = computed(() => ({
-  hidden: props.delete?.hidden,
-  ...defaults.value.removeButton,
-  ...(props.delete || {}),
+const deleteButton = computed(() => {
+  const { onClick, ...remove } = (props.delete || {}) as any
+  return {
+    hidden: remove?.hidden,
+    ...defaults.value.removeButton,
+    ...(remove || {}),
 
-}))
+  }
+})
 </script>

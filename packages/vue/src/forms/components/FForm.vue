@@ -70,12 +70,12 @@ const beforeAndAfterFieldSlots = computed(() => {
   )
 })
 
-const onMainClick = () => {
+function onMainClick() {
   if (props.buttons.main.onClick)
     props.buttons.main.onClick()
 }
 
-const onAuxClick = () => {
+function onAuxClick() {
   if (props.buttons.aux.onClick)
     props.buttons.aux.onClick()
 }

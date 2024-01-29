@@ -9,6 +9,7 @@ export class NormalizeTableListHandler implements INormalizeTableListHandler {
         autoTrigger: false,
         ...(rawList?.options || {}),
       },
+      fetchData() {},
     } as unknown as T & NormalizedTableList
   }
 }
