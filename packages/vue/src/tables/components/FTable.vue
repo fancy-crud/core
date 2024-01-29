@@ -29,7 +29,7 @@
   </slot>
 
   <slot name="table-footer">
-    <div class="flex justify-between mt-4">
+    <div v-if="!props.pagination.hidden" class="flex justify-between mt-4">
       <f-table-footer v-bind="tableFooterVBind" />
     </div>
   </slot>

@@ -92,6 +92,7 @@ const table = useTable({
   },
   pagination: {
     rowsPerPage: 10,
+    hidden: true,
   },
   filterParams: {
     gender: '',
