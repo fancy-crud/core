@@ -6,7 +6,7 @@ import type {
   RawFormButtons,
   RawSetting,
 } from '@fancy-crud/core'
-import { Bus, CreateFormCommand, IFormStore } from '@fancy-crud/core'
+import { Bus, CreateFormCommand, IFormStore, inject as injecting } from '@fancy-crud/core'
 import type { Args, UseForm } from '../typing'
 
 export function useForm<
@@ -24,7 +24,7 @@ export function useForm<
     notifications = {},
   } = args
 
-  const formStore: IFormStore = inject(IFormStore.name)!
+  const formStore: IFormStore = injecting(IFormStore.name)!
   const bus = new Bus()
 
   const {
