@@ -23,7 +23,7 @@ export class TriggerFormNotificationHandler {
     if (!notification)
       return
 
-    this.notificationService.pushNotification(formId, notification)
+    this.notificationService.push({ id: formId, notification })
   }
 }
 

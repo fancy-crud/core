@@ -25,4 +25,5 @@ export abstract class INotificationStore {
   abstract searchById(id: symbol): NotificationState | undefined
   abstract deleteById(id: symbol): void
   abstract pushNotification(id: symbol, notification: Notification): void
+  abstract push(args: { id?: symbol; notification: Notification }): void
 }

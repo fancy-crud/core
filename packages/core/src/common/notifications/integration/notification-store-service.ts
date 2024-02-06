@@ -1,4 +1,5 @@
 import { injectable } from '@fancy-crud/bus'
+import { getDefaultNotificationHandler } from '@packages/core/config'
 import type { Notification, NotificationState } from '../axioma'
 import { INotificationStore, notificationStore } from '../axioma'
 
@@ -33,6 +34,22 @@ export class NotificationStoreService implements INotificationStore {
     }
 
     state.handler(notification)
+  }
+
+  push(args: { id?: symbol; notification: Notification }) {
+    const { id, notification } = args
+
+    if (id) {
+      this.pushNotification(id, notification)
+      return
+    }
+
+    const manager = getDefaultNotificationHandler()
+
+    if (!manager.handler)
+      return
+
+    manager.handler(notification)
   }
 }
 
