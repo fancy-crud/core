@@ -2,6 +2,7 @@
   "name": "@fancy-crud/wrapper-quasar",
   "version": "0.0.0",
   "private": false,
+  "type": "module",
   "author": {
     "name": "Christopher A. Flores",
     "url": "https://github.com/cafadev"
@@ -11,9 +12,8 @@
     "url": "https://github.com/fancy-crud/core",
     "directory": "packages/wrapper-quasar"
   },
-  "main": "./dist/fancy-crud-wrapper-quasar.umd.js",
-  "module": "./dist/fancy-crud-wrapper-quasar.mjs",
-
+  "main": "./dist/fancy-crud-wrapper-quasar.js",
+  "module": "./dist/fancy-crud-wrapper-quasar.js",
   "types": "./dist/src/index.d.ts",
   "files": [
     "dist"

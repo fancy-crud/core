@@ -2,6 +2,7 @@
   "name": "@fancy-crud/wrapper-vuetify",
   "version": "0.0.0",
   "private": false,
+  "type": "module",
   "author": {
     "name": "Christopher A. Flores",
     "url": "https://github.com/cafadev"
@@ -11,9 +12,8 @@
     "url": "https://github.com/fancy-crud/core",
     "directory": "packages/wrapper-vuetify"
   },
-  "main": "./dist/fancy-crud-wrapper-vuetify.umd.js",
-  "module": "./dist/fancy-crud-wrapper-vuetify.mjs",
-
+  "main": "./dist/fancy-crud-wrapper-vuetify.js",
+  "module": "./dist/fancy-crud-wrapper-vuetify.js",
   "types": "./dist/src/index.d.ts",
   "files": [
     "dist"

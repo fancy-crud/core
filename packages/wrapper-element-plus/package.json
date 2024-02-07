@@ -2,6 +2,7 @@
   "name": "@fancy-crud/wrapper-element-plus",
   "version": "0.0.0",
   "private": false,
+  "type": "module",
   "author": {
     "name": "Christopher A. Flores",
     "url": "https://github.com/cafadev"
@@ -11,8 +12,8 @@
     "url": "https://github.com/fancy-crud/core",
     "directory": "packages/wrapper-element-plus"
   },
-  "main": "./dist/fancy-crud-wrapper-element-plus.umd.js",
-  "module": "./dist/fancy-crud-wrapper-element-plus.mjs",
+  "main": "./dist/fancy-crud-wrapper-element-plus.js",
+  "module": "./dist/fancy-crud-wrapper-element-plus.js",
   "types": "./dist/src/index.d.ts",
   "files": [
     "dist"
