@@ -13,8 +13,8 @@
     "directory": "packages/vue"
   },
   "license": "MIT",
-  "main": "./dist/fancy-crud-vue.umd.js",
-  "module": "./dist/fancy-crud-vue.umd.js",
+  "main": "./dist/fancy-crud-vue.js",
+  "module": "./dist/fancy-crud-vue.js",
   "types": "dist/src/index.d.ts",
   "files": [
     "dist",
