@@ -2,6 +2,7 @@
   "name": "@fancy-crud/vue",
   "version": "0.0.0",
   "private": false,
+  "type": "module",
   "author": {
     "name": "Christopher A. Flores",
     "url": "https://github.com/cafadev"
