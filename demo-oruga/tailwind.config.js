@@ -7,9 +7,8 @@ module.exports = {
 
   content: [
     './index.html',
-    './src/**/*.{vue,js,ts,sass, scss}',
+    './src/**/*.{vue,js,ts,sass,scss}',
     './node_modules/@fancy-crud/vue/**/*.{js,vue}',
-    './node_modules/@fancy-crud/oruga-wrapper/dist/*.js',
   ],
   theme: {
     extend: {

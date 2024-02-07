@@ -1,6 +1,7 @@
 {
   "name": "@fancy-crud/bus",
   "version": "0.0.0",
+  "type": "module",
   "description": "Utility package to use command responsibility segregation",
   "private": false,
   "author": {
@@ -13,8 +14,8 @@
     "directory": "packages/bus"
   },
   "license": "MIT",
-  "main": "dist/fancy-crud-bus.mjs",
-  "module": "dist/fancy-crud-bus.mjs",
+  "main": "dist/fancy-crud-bus.umd.js",
+  "module": "dist/fancy-crud-bus.umd.js",
   "types": "dist/src/index.d.ts",
   "files": [
     "dist"

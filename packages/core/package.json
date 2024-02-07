@@ -2,6 +2,7 @@
   "name": "@fancy-crud/core",
   "version": "0.0.0",
   "private": false,
+  "type": "module",
   "author": {
     "name": "Christopher A. Flores",
     "url": "https://github.com/cafadev"
@@ -12,8 +13,8 @@
     "directory": "packages/core"
   },
   "license": "MIT",
-  "main": "dist/core.mjs",
-  "module": "dist/core.mjs",
+  "main": "dist/core.umd.js",
+  "module": "dist/core.umd.js",
   "types": "dist/src/index.d.ts",
   "files": [
     "dist"

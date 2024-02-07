@@ -36,6 +36,7 @@ declare global {
   const FText: typeof import('./src/forms/components/index')['FText']
   const FTextVue: typeof import('./src/forms/components/index')['FTextVue']
   const FTextarea: typeof import('./src/forms/components/index')['FTextarea']
+  const TableStoreService: typeof import('./src/tables/composables/table-store.service')['TableStoreService']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const computed: typeof import('vue')['computed']
@@ -363,6 +364,7 @@ declare module 'vue' {
     readonly FTableRowFilePreview: UnwrapRef<typeof import('./src/tables/components/index')['FTableRowFilePreview']>
     readonly FText: UnwrapRef<typeof import('./src/forms/components/index')['FText']>
     readonly FTextarea: UnwrapRef<typeof import('./src/forms/components/index')['FTextarea']>
+    readonly TableStoreService: UnwrapRef<typeof import('./src/tables/composables/table-store.service')['TableStoreService']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
@@ -682,6 +684,7 @@ declare module '@vue/runtime-core' {
     readonly FTableRowFilePreview: UnwrapRef<typeof import('./src/tables/components/index')['FTableRowFilePreview']>
     readonly FText: UnwrapRef<typeof import('./src/forms/components/index')['FText']>
     readonly FTextarea: UnwrapRef<typeof import('./src/forms/components/index')['FTextarea']>
+    readonly TableStoreService: UnwrapRef<typeof import('./src/tables/composables/table-store.service')['TableStoreService']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>

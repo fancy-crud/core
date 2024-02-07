@@ -7,7 +7,12 @@ import Oruga from '@oruga-ui/oruga-next'
 import fancyOrugaConfig from './plugins/fancy-crud-oruga'
 
 import App from './App.vue'
-import './styles/main.sass'
+
+import '@mdi/font/css/materialdesignicons.css'
+import '@oruga-ui/theme-oruga/dist/oruga-full.css'
+import '@fancy-crud/vue/dist/fancy-crud-vue.css'
+
+// import './styles/main.sass'
 
 const app = createApp(App)
 
