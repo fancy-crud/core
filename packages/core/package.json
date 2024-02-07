@@ -13,8 +13,8 @@
     "directory": "packages/core"
   },
   "license": "MIT",
-  "main": "dist/core.umd.js",
-  "module": "dist/core.umd.js",
+  "main": "dist/core.js",
+  "module": "dist/core.js",
   "types": "dist/src/index.d.ts",
   "files": [
     "dist"
