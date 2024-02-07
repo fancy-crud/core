@@ -14,8 +14,8 @@
     "directory": "packages/bus"
   },
   "license": "MIT",
-  "main": "dist/fancy-crud-bus.umd.js",
-  "module": "dist/fancy-crud-bus.umd.js",
+  "main": "dist/fancy-crud-bus.js",
+  "module": "dist/fancy-crud-bus.js",
   "types": "dist/src/index.d.ts",
   "files": [
     "dist"
