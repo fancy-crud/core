@@ -6,6 +6,10 @@ export interface BaseCommand {
   readonly meta: Readonly<CommandMeta>
 }
 
+export interface BaseHandler<CommandType extends BaseCommand = any, ReturnType = any> {
+  execute(command: CommandType): ReturnType
+}
+
 export type HandlerDefinition = abstract new (...args: any[]) => { execute(command: any): any }
 
 export type MetaReturnHandler<T> = T extends abstract new (...args: any[]) => { execute(command: infer Args): infer A } ? { execute(command: Args): A } : { execute(command: any): any }
