@@ -1,4 +1,4 @@
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import type { BaseObjectWithNormalizedFields, NormalizedField } from '@packages/core/forms/axioma'
 
 import { meta } from '@fancy-crud/bus'
@@ -24,7 +24,7 @@ export class GenerateFormDataCommand<T extends BaseObjectWithNormalizedFields<Mi
 /**
  * Class responsible for generating form data in the appropriate format.
  */
-export abstract class IGenerateFormDataHandler {
+export abstract class IGenerateFormDataHandler implements BaseHandler {
   /**
    * Generates the form data in the appropriate format.
    *

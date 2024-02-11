@@ -1,4 +1,4 @@
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import { meta } from '@fancy-crud/bus'
 
 export class SetListDataCommand implements BaseCommand {
@@ -10,6 +10,6 @@ export class SetListDataCommand implements BaseCommand {
   ) {}
 }
 
-export abstract class ISetListDataHandler {
+export abstract class ISetListDataHandler implements BaseHandler {
   abstract execute(command: SetListDataCommand): void
 }

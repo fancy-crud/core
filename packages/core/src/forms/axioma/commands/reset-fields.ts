@@ -1,6 +1,6 @@
 import { meta } from '@fancy-crud/bus'
 import type { BaseObjectWithNormalizedFields } from '@packages/core/forms/axioma'
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 
 type ObjectRecord = Record<string, unknown>
 
@@ -13,6 +13,6 @@ export class ResetFieldsCommand implements BaseCommand {
   ) {}
 }
 
-export abstract class IResetFieldsHandler {
+export abstract class IResetFieldsHandler implements BaseHandler {
   abstract execute(command: ResetFieldsCommand): void
 }

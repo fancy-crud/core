@@ -1,4 +1,4 @@
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import type { BaseObjectWithNormalizedFields, NormalizedField, RuleConfig } from '@packages/core/forms/axioma'
 import { meta } from '@fancy-crud/bus'
 
@@ -13,6 +13,6 @@ export class ValidateFormCommand implements BaseCommand {
   ) {}
 }
 
-export abstract class IValidateFormHandler {
+export abstract class IValidateFormHandler implements BaseHandler {
   abstract execute({ fields, options }: ValidateFormCommand): boolean
 }

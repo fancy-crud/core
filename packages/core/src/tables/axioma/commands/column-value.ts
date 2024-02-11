@@ -1,4 +1,4 @@
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import { meta } from '@fancy-crud/bus'
 import type { NormalizedColumn } from '../typing'
 
@@ -12,6 +12,6 @@ export class GetColumnValueCommand implements BaseCommand {
   ) {}
 }
 
-export abstract class IGetColumnValueHandler {
+export abstract class IGetColumnValueHandler implements BaseHandler {
   abstract execute({ row, column, rowIndex }: GetColumnValueCommand): unknown
 }

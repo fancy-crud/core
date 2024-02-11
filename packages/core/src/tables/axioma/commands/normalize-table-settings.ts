@@ -1,5 +1,5 @@
 import type { NormalizedTableSettings, RawTableSettings } from '@packages/core/tables/axioma'
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import { meta } from '@fancy-crud/bus'
 
 export class NormalizeTableSettingsCommand<T extends RawTableSettings> implements BaseCommand {
@@ -10,6 +10,6 @@ export class NormalizeTableSettingsCommand<T extends RawTableSettings> implement
   ) {}
 }
 
-export abstract class INormalizeTableSettingsHandler {
+export abstract class INormalizeTableSettingsHandler implements BaseHandler {
   abstract execute<T extends RawTableSettings>({ rawSettings }: NormalizeTableSettingsCommand<T>): T & NormalizedTableSettings
 }

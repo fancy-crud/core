@@ -1,5 +1,5 @@
 import type { NormalizedTableSettings, Row } from '@packages/core/tables/axioma'
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import type { RetrieveRequestOptions } from '@packages/core/common/http/axioma'
 import { meta } from '@fancy-crud/bus'
 
@@ -15,6 +15,6 @@ export class UpdateRowValueCommand<T extends Row = Row> implements BaseCommand {
   ) {}
 }
 
-export abstract class IUpdateRowValueHandler {
+export abstract class IUpdateRowValueHandler implements BaseHandler {
   abstract execute({ newValue, row, field, tableSettings, options }: UpdateRowValueCommand): void
 }

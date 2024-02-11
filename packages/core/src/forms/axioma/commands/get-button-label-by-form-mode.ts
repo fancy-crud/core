@@ -1,5 +1,5 @@
 import type { FormMode } from '@packages/core/forms/axioma'
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import { meta } from '@fancy-crud/bus'
 
 export class GetButtonLabelByFormModeCommand implements BaseCommand {
@@ -11,6 +11,6 @@ export class GetButtonLabelByFormModeCommand implements BaseCommand {
   ) {}
 }
 
-export abstract class IGetButtonLabelByFormModeHandler {
+export abstract class IGetButtonLabelByFormModeHandler implements BaseHandler {
   abstract execute({ mode, text }: GetButtonLabelByFormModeCommand): string
 }

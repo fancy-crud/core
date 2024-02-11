@@ -1,5 +1,5 @@
 import { meta } from '@fancy-crud/bus'
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import type { NormalizedField, Rule, RuleConfig, RuleResult } from '@packages/core/forms/axioma'
 
 export type NormalizedFieldToValidate = Pick<NormalizedField, 'errors' | 'modelValue' | 'modelKey'> & { rules?: Rule }
@@ -13,6 +13,6 @@ export class ValidateFieldRulesCommand implements BaseCommand {
   ) {}
 }
 
-export abstract class IValidateFieldRulesHandler {
+export abstract class IValidateFieldRulesHandler implements BaseHandler {
   abstract execute(command: ValidateFieldRulesCommand): RuleResult
 }

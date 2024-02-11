@@ -1,4 +1,4 @@
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import { meta } from '@fancy-crud/bus'
 import type { ListRequestOptions } from '@packages/core/common/http/axioma'
 
@@ -12,6 +12,6 @@ export class FetchListDataCommand implements BaseCommand {
   ) {}
 }
 
-export abstract class IFetchListDataHandler {
+export abstract class IFetchListDataHandler implements BaseHandler {
   abstract execute(command: FetchListDataCommand): void
 }

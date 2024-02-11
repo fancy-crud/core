@@ -1,5 +1,5 @@
 import { meta } from '@fancy-crud/bus'
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import type { RetrieveRequestOptions } from '@packages/core/common/http/axioma'
 
 export class LoadRemoteRecordCommand implements BaseCommand {
@@ -12,6 +12,6 @@ export class LoadRemoteRecordCommand implements BaseCommand {
   ) {}
 }
 
-export abstract class ILoadRemoteRecordHandler {
+export abstract class ILoadRemoteRecordHandler implements BaseHandler {
   abstract execute(command: LoadRemoteRecordCommand): void
 }

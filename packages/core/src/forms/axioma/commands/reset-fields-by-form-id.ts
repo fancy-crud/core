@@ -1,5 +1,5 @@
 import { meta } from '@fancy-crud/bus'
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 
 export class ResetFieldsByFormIdCommand implements BaseCommand {
   public readonly meta = meta(IResetFieldsByFormIdHandler)
@@ -9,7 +9,7 @@ export class ResetFieldsByFormIdCommand implements BaseCommand {
   ) {}
 }
 
-export abstract class IResetFieldsByFormIdHandler {
+export abstract class IResetFieldsByFormIdHandler implements BaseHandler {
   /**
    * Resets the model value of fields in a normalized fields object to their original values.
    *

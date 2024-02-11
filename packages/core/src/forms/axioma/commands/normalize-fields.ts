@@ -1,5 +1,5 @@
 import { meta } from '@fancy-crud/bus'
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import type { BaseObjectWithRawFields, NormalizedFields } from '@packages/core/forms/axioma'
 
 export type NormalizeFormFieldsCommandInputType = BaseObjectWithRawFields
@@ -17,7 +17,7 @@ export class NormalizeFormFieldsCommand<T extends NormalizeFormFieldsCommandInpu
   Provides a static execute method that takes an object containing form fields and returns
   a new object with normalized fields.
 **/
-export abstract class INormalizeFormFieldsHandler {
+export abstract class INormalizeFormFieldsHandler implements BaseHandler {
   /**
     Normalizes an object containing form fields by merging each field with the default keys and values.
     Returns a new object with normalized fields.

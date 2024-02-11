@@ -1,5 +1,5 @@
 import type { Row } from '@packages/core/tables/axioma'
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import { meta } from '@fancy-crud/bus'
 
 export class PrepareFormToUpdateCommand implements BaseCommand {
@@ -13,6 +13,6 @@ export class PrepareFormToUpdateCommand implements BaseCommand {
   ) {}
 }
 
-export abstract class IPrepareFormToUpdateHandler {
+export abstract class IPrepareFormToUpdateHandler implements BaseHandler {
   abstract execute({ formId, options, tableSettings, row }: PrepareFormToUpdateCommand): void
 }

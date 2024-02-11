@@ -1,5 +1,5 @@
 import { meta } from '@fancy-crud/bus'
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import type { BaseObjectWithNormalizedFields, FormMode, NormalizedField } from '@packages/core/forms/axioma'
 import { FORM_MODE, UnknownFormMode } from '@packages/core/forms/axioma'
 
@@ -17,6 +17,6 @@ export class FilterFieldsByFormModeCommand<T extends FilterFieldsByFormModeComma
   }
 }
 
-export abstract class IFilterFieldsByFormModeHandler {
+export abstract class IFilterFieldsByFormModeHandler implements BaseHandler {
   abstract execute<T extends FilterFieldsByFormModeCommandInput = NormalizedField>({ mode, fields }: FilterFieldsByFormModeCommand<T>): [string, T][]
 }

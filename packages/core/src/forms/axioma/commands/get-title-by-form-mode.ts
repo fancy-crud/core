@@ -1,5 +1,5 @@
 import type { FormMode } from '@packages/core/forms/axioma'
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import { meta } from '@fancy-crud/bus'
 
 export class GetTitleByFormModeCommand implements BaseCommand {
@@ -11,6 +11,6 @@ export class GetTitleByFormModeCommand implements BaseCommand {
   ) {}
 }
 
-export abstract class IGetTitleByFomModeHandler {
+export abstract class IGetTitleByFomModeHandler implements BaseHandler {
   abstract execute(command: GetTitleByFormModeCommand): string
 }

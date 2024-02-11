@@ -1,4 +1,4 @@
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import { meta } from '@fancy-crud/bus'
 import type { NormalizedTableFilters, RawTableFilters } from '..'
 
@@ -10,6 +10,6 @@ export class NormalizeTableFiltersCommand<T extends RawTableFilters> implements 
   ) {}
 }
 
-export abstract class INormalizeTableFiltersHandler {
+export abstract class INormalizeTableFiltersHandler implements BaseHandler {
   abstract execute<T extends RawTableFilters>({ rawFilters }: NormalizeTableFiltersCommand<T>): T & NormalizedTableFilters
 }

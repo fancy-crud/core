@@ -1,5 +1,5 @@
 import { meta } from '@fancy-crud/bus'
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import type { CreateRequestOptions, UpdateRequestOptions } from '@packages/core/common/http/axioma'
 
 export class SaveFormCommand implements BaseCommand {
@@ -11,6 +11,6 @@ export class SaveFormCommand implements BaseCommand {
   ) {}
 }
 
-export abstract class ISaveFormHandler {
+export abstract class ISaveFormHandler implements BaseHandler {
   abstract execute(command: SaveFormCommand): void
 }

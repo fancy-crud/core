@@ -1,5 +1,5 @@
 import { meta } from '@fancy-crud/bus'
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import type { ResponseInterceptorState } from '@packages/core/common/response-interceptor/axioma'
 import type { NotificationState } from '@packages/core/common/notifications/axioma'
 import type { BaseObjectWithRawFields, Form, RawFormButtons, RawSetting } from '../typing'
@@ -26,7 +26,7 @@ export class CreateFormCommand<
   ) {}
 }
 
-export abstract class ICreateFormHandler {
+export abstract class ICreateFormHandler implements BaseHandler {
   /**
    * Creates a form from raw fields and settings.
    *

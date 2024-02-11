@@ -1,5 +1,5 @@
 import { meta } from '@fancy-crud/bus'
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import type { StandardErrorResponseStructure } from '../typing'
 
 export class DispatchOnFailedFormEventCommand implements BaseCommand {
@@ -11,6 +11,6 @@ export class DispatchOnFailedFormEventCommand implements BaseCommand {
   ) {}
 }
 
-export abstract class IDispatchOnFailedFormEventHandler {
+export abstract class IDispatchOnFailedFormEventHandler implements BaseHandler {
   abstract execute(command: DispatchOnFailedFormEventCommand): void
 }

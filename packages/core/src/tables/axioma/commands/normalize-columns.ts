@@ -1,4 +1,4 @@
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import { meta } from '@fancy-crud/bus'
 import type { BaseFormField, ObjectWithNormalizedColumns, ObjectWithRawColumns } from '@packages/core/tables/axioma'
 
@@ -11,6 +11,6 @@ export class NormalizeColumnsCommand implements BaseCommand {
   ) {}
 }
 
-export abstract class INormalizeColumnsHandler {
+export abstract class INormalizeColumnsHandler implements BaseHandler {
   abstract execute({ fields, columns }: NormalizeColumnsCommand): ObjectWithNormalizedColumns
 }

@@ -1,5 +1,5 @@
 import type { DeleteRecordOptions, NormalizedTableSettings, Row } from '@packages/core/tables/axioma'
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import { meta } from '@fancy-crud/bus'
 
 export class DeleteRecordCommand implements BaseCommand {
@@ -13,6 +13,6 @@ export class DeleteRecordCommand implements BaseCommand {
   ) {}
 }
 
-export abstract class IDeleteRecordHandler {
+export abstract class IDeleteRecordHandler implements BaseHandler {
   abstract execute({ row, options, tableSettings }: DeleteRecordCommand): void
 }

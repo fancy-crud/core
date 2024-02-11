@@ -1,4 +1,4 @@
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import { meta } from '@fancy-crud/bus'
 
 export class PrepareFormToCreateCommand implements BaseCommand {
@@ -10,6 +10,6 @@ export class PrepareFormToCreateCommand implements BaseCommand {
   ) {}
 }
 
-export abstract class IPrepareFormToCreateHandler {
+export abstract class IPrepareFormToCreateHandler implements BaseHandler {
   abstract execute({ formId, options }: PrepareFormToCreateCommand): void
 }

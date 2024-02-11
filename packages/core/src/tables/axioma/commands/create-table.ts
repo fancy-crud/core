@@ -1,4 +1,4 @@
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import type { BaseTableForm, MappedRawColumn, ObjectWithRawColumns, RawTableFilters, RawTableList, RawTablePagination, RawTableSettings, Table } from '@packages/core/tables/axioma'
 import { meta } from '@fancy-crud/bus'
 import type { RawTableButtons } from '../typing/buttons'
@@ -25,6 +25,6 @@ export class CreateTableCommand<
   ) {}
 }
 
-export abstract class ICreateTableHandler {
+export abstract class ICreateTableHandler implements BaseHandler {
   abstract execute<T extends BaseTableForm, U extends ObjectWithRawColumns, S extends RawTableSettings, F extends RawTableFilters, B extends RawTableButtons, L extends RawTableList, P extends RawTablePagination>(command: CreateTableCommand<T, U, S, F, B, L, P>): Table<T, U, S, F, B, L, P>
 }

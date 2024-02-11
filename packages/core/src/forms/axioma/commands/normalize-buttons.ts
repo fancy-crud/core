@@ -1,5 +1,5 @@
 import { meta } from '@fancy-crud/bus'
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import type { NormalizedFormButtons, RawFormButtons } from '@packages/core/forms/axioma'
 
 export type NormalizeButtonsInputType = RawFormButtons
@@ -12,6 +12,6 @@ export class NormalizeButtonsCommand<T extends NormalizeButtonsInputType> implem
   ) {}
 }
 
-export abstract class INormalizeButtonsHandler {
+export abstract class INormalizeButtonsHandler implements BaseHandler {
   abstract execute<T extends NormalizeButtonsInputType>({ buttons }: NormalizeButtonsCommand<T>): NormalizedFormButtons
 }

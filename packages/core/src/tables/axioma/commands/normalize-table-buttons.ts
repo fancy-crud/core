@@ -1,5 +1,5 @@
 import { meta } from '@fancy-crud/bus'
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import type { NormalizedTableButtons, RawTableButtons } from '../typing/buttons'
 
 export class NormalizeTableButtonsCommand<T extends RawTableButtons> implements BaseCommand {
@@ -10,6 +10,6 @@ export class NormalizeTableButtonsCommand<T extends RawTableButtons> implements 
   ) {}
 }
 
-export abstract class INormalizeTableButtonsHandler {
+export abstract class INormalizeTableButtonsHandler implements BaseHandler {
   abstract execute<T extends RawTableButtons>({ buttons }: NormalizeTableButtonsCommand<T>): NormalizedTableButtons
 }

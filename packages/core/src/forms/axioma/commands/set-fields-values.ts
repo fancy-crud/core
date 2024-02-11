@@ -1,4 +1,4 @@
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import { meta } from '@fancy-crud/bus'
 import type { BaseObjectWithNormalizedFields, NormalizedField, NormalizedSettings } from '@packages/core/forms/axioma'
 
@@ -17,6 +17,6 @@ export class SetFieldsValuesCommand implements BaseCommand {
   ) {}
 }
 
-export abstract class ISetFieldsValuesHandler {
+export abstract class ISetFieldsValuesHandler implements BaseHandler {
   abstract execute(command: SetFieldsValuesCommand): void
 }

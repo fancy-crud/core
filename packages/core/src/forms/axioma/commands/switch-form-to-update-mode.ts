@@ -1,6 +1,6 @@
 import { meta } from '@fancy-crud/bus'
 import type { BaseObjectWithNormalizedFields, NormalizedSettings, ObjectWithNormalizedButtons } from '@packages/core/forms/axioma'
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 
 export type SwitchFormToUpdateModeCommandInput = symbol | {
   originalNormalizedFields: BaseObjectWithNormalizedFields
@@ -18,6 +18,6 @@ export class SwitchFormToUpdateModeCommand implements BaseCommand {
   ) {}
 }
 
-export abstract class ISwitchFormToUpdateModeHandler {
+export abstract class ISwitchFormToUpdateModeHandler implements BaseHandler {
   abstract execute(command: SwitchFormToUpdateModeCommand): void
 }

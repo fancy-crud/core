@@ -1,5 +1,5 @@
 import { meta } from '@fancy-crud/bus'
-import type { BaseCommand } from '@fancy-crud/bus'
+import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import type { NormalizedSettings, RawSetting } from '@packages/core/forms/axioma'
 
 export class NormalizeSettingsCommand implements BaseCommand {
@@ -15,7 +15,7 @@ export class NormalizeSettingsCommand implements BaseCommand {
  * Provides an `execute` method that takes an optional object containing settings configurations
  * and returns a new object with normalized settings properties.
  */
-export abstract class INormalizeSettingsHandler {
+export abstract class INormalizeSettingsHandler implements BaseHandler {
   /**
    * Normalizes an optional object containing settings configurations by merging each configuration
    * with the default properties. Returns a new object with normalized settings properties.
