@@ -57,7 +57,7 @@ export class CreateTableHandler implements ICreateTableHandler {
     ) as TableListType & NormalizedTableList
 
     const tableStore = this.tableStore
-    buttons.add.onClick = () => {
+    buttons.add.onClick = rawButtons?.add?.onClick || (() => {
       const table = tableStore.searchById(id)!
 
       bus.execute(
@@ -69,9 +69,9 @@ export class CreateTableHandler implements ICreateTableHandler {
       )
 
       table.settings.displayFormDialog = true
-    }
+    })
 
-    buttons.edit.onClick = (row: Row) => {
+    buttons.edit.onClick = rawButtons?.edit?.onClick || ((row: Row) => {
       const table = tableStore.searchById(id)!
 
       bus.execute(
@@ -83,15 +83,15 @@ export class CreateTableHandler implements ICreateTableHandler {
       )
 
       table.settings.displayFormDialog = true
-    }
+    })
 
-    buttons.remove.onClick = (row: Row) => {
+    buttons.remove.onClick = rawButtons?.remove?.onClick || ((row: Row) => {
       const table = tableStore.searchById(id)!
 
       bus.execute(
         new DeleteRecordCommand(id, row, table.settings),
       )
-    }
+    })
 
     list.fetchData = rawList.fetchData || (() => {
       const table = tableStore.searchById(id)!
