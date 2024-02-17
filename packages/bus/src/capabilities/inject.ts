@@ -15,3 +15,5 @@ export function inject<T>(provider: T extends string ? T : { name: string }): an
 
   return new Provider()
 }
+
+export const injecting = inject
