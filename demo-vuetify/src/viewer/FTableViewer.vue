@@ -66,5 +66,15 @@ const table = useTable({
   pagination: {
     rowsPerPage: 10,
   },
+  list: {
+    data: [] as number[],
+  },
+  buttons: {
+    remove: {
+      onClick: () => {
+        console.log('hello')
+      },
+    },
+  },
 })
 </script>

@@ -14,9 +14,9 @@ export class CreateTableHandler implements ICreateTableHandler {
   TableSettingsType extends RawTableSettings,
   TableFiltersType extends RawTableFilters,
   TableButtonsType extends RawTableButtons,
-  TableListType extends RawTableList,
-  TablePaginationType extends RawTablePagination,
->(command: CreateTableCommand<TableFormType, TableColumnsType, TableSettingsType, TableFiltersType, TableButtonsType, TableListType, TablePaginationType>): Table<TableFormType, TableColumnsType, TableSettingsType, TableFiltersType, TableButtonsType, TableListType, TablePaginationType> {
+  TableListDataType = unknown,
+  TablePaginationType extends RawTablePagination = NormalizedTablePagination,
+>(command: CreateTableCommand<TableFormType, TableColumnsType, TableSettingsType, TableFiltersType, TableButtonsType, TableListDataType, TablePaginationType>): Table<TableFormType, TableColumnsType, TableSettingsType, TableFiltersType, TableButtonsType, TableListDataType, TablePaginationType> {
     const {
       form,
       columns: rawColumns = {},
@@ -26,7 +26,7 @@ export class CreateTableHandler implements ICreateTableHandler {
       settings: rawSettings = {
         url: form?.settings?.url,
       },
-      list: rawList = {} as RawTableList,
+      list: rawList = {} as RawTableList<TableListDataType>,
     } = command
 
     const bus = new Bus()
@@ -54,7 +54,7 @@ export class CreateTableHandler implements ICreateTableHandler {
 
     const list = bus.execute(
       new NormalizeTableListCommand(rawList),
-    ) as TableListType & NormalizedTableList
+    ) as NormalizedTableList<TableListDataType>
 
     const tableStore = this.tableStore
     buttons.add.onClick = rawButtons?.add?.onClick || (() => {

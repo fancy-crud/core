@@ -9,7 +9,7 @@ export class CreateTableCommand<
   S extends RawTableSettings,
   F extends RawTableFilters,
   B extends RawTableButtons,
-  L extends RawTableList,
+  L,
   P extends RawTablePagination,
 > implements BaseCommand {
   public readonly meta = meta(ICreateTableHandler)
@@ -21,10 +21,18 @@ export class CreateTableCommand<
     public readonly settings?: S,
     public readonly filterParams?: F,
     public readonly buttons?: B,
-    public readonly list?: L,
+    public readonly list?: RawTableList<L>,
   ) {}
 }
 
 export abstract class ICreateTableHandler implements BaseHandler {
-  abstract execute<T extends BaseTableForm, U extends ObjectWithRawColumns, S extends RawTableSettings, F extends RawTableFilters, B extends RawTableButtons, L extends RawTableList, P extends RawTablePagination>(command: CreateTableCommand<T, U, S, F, B, L, P>): Table<T, U, S, F, B, L, P>
+  abstract execute<
+    T extends BaseTableForm,
+    U extends ObjectWithRawColumns,
+    S extends RawTableSettings,
+    F extends RawTableFilters,
+    B extends RawTableButtons,
+    L,
+    P extends RawTablePagination,
+  >(command: CreateTableCommand<T, U, S, F, B, L, P>): Table<T, U, S, F, B, L, P>
 }

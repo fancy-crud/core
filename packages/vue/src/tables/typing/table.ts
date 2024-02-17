@@ -6,7 +6,7 @@ export interface TableArgs<
   S extends RawTableSettings,
   F,
   B extends RawTableButtons,
-  L extends RawTableList,
+  L,
   P extends RawTablePagination,
 > {
   id?: string
@@ -16,10 +16,10 @@ export interface TableArgs<
   settings?: S
   filterParams?: F
   buttons?: B
-  list?: L
+  list?: RawTableList<L>
 }
 
-export interface UseTable<T extends BaseTableForm, U, S, F, B, L extends RawTableList, P> {
+export interface UseTable<T extends BaseTableForm, U, S, F, B, L, P> {
   id: symbol
   form: T
   columns: FieldAsColumn<T['fields'], NormalizedColumn> & U
@@ -27,7 +27,7 @@ export interface UseTable<T extends BaseTableForm, U, S, F, B, L extends RawTabl
   pagination: P & NormalizedTablePagination
   filterParams: F
   buttons: B & NormalizedTableButtons
-  list: L & NormalizedTableList
+  list: NormalizedTableList<L>
 }
 
 export interface TableBodyProps {

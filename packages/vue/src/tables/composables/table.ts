@@ -11,7 +11,7 @@ export function useTable<
   S extends RawTableSettings,
   F extends RawTableFilters,
   B extends RawTableButtons,
-  L extends RawTableList,
+  L,
   P extends RawTablePagination,
 >(
   args: TableArgs<T, U, S, F, B, L, P>,
@@ -44,7 +44,7 @@ export function useTable<
   const pagination = reactive(table.pagination) as P & NormalizedTablePagination
   const filterParams = reactive(table.filterParams) as F
   const buttons = reactive(normalizedButtons) as B & NormalizedTableButtons
-  const list = reactive(table.list) as L & NormalizedTableList
+  const list = reactive(table.list) as NormalizedTableList<L>
 
   tableStore.save(id, {
     columns,

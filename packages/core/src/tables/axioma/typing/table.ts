@@ -35,7 +35,7 @@ export interface Table<T extends BaseTableForm, U, S, F, B, L, P> {
   pagination: P & NormalizedTablePagination
   filterParams: F
   buttons: B & NormalizedTableButtons
-  list: L & NormalizedTableList
+  list: NormalizedTableList<L>
 }
 
 export interface RawTable<T extends BaseTableForm, U, S, F, B, L, P> {
