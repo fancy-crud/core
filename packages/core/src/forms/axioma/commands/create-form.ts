@@ -5,9 +5,6 @@ import type { NotificationState } from '@packages/core/common/notifications/axio
 import type { BaseObjectWithRawFields, Form, RawFormButtons, RawSetting } from '../typing'
 import type { RuleConfigState } from '../store'
 
-/**
- * A class that provides functionality to create a form from raw fields and settings.
- */
 export class CreateFormCommand<
   T extends BaseObjectWithRawFields,
   U extends RawSetting,
@@ -27,14 +24,6 @@ export class CreateFormCommand<
 }
 
 export abstract class ICreateFormHandler implements BaseHandler {
-  /**
-   * Creates a form from raw fields and settings.
-   *
-   * @typeparam T - A generic type parameter that extends `ObjectWithRawField`.
-   * @param rawFields - A `ObjectWithRawField` object containing the raw fields to be normalized.
-   * @param rawSettings - An optional `RawSettings` object containing the raw settings to be normalized.
-   * @returns A `Form` object containing the normalized fields and settings.
-   */
   abstract execute<
     T extends BaseObjectWithRawFields,
     U extends RawSetting,
