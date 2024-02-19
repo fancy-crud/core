@@ -1,10 +1,10 @@
-import type { ConvertToNormalizedFormButtons, NormalizedButton, NormalizedFormButtons } from '@packages/core/forms/axioma'
+import type { ConvertToNormalizedFormButtons, NormalizedButton } from '@packages/core/forms/axioma'
 import { getDefaults } from '@packages/core/config'
 import { t } from '@packages/core/locales'
 import type { INormalizeButtonsHandler, NormalizeButtonsCommand, NormalizeButtonsInputType } from '../axioma'
 
 export class NormalizeButtonsHandler implements INormalizeButtonsHandler {
-  execute<T extends NormalizeButtonsInputType>({ buttons }: NormalizeButtonsCommand<T>): NormalizedFormButtons {
+  execute<T extends NormalizeButtonsInputType>({ buttons }: NormalizeButtonsCommand<T>): ConvertToNormalizedFormButtons<T> {
     const { main = {}, aux = {} } = buttons || {}
     const defaults = getDefaults()
 
@@ -31,7 +31,7 @@ export class NormalizeButtonsHandler implements INormalizeButtonsHandler {
       aux: defaultAuxButton,
     } as ConvertToNormalizedFormButtons<T>
 
-    const normalizedButtons: NormalizedFormButtons = Object.assign({}, buttons, defaultButtons)
+    const normalizedButtons = Object.assign({}, buttons, defaultButtons) as ConvertToNormalizedFormButtons<T>
     return normalizedButtons
   }
 }

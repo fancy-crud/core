@@ -3,25 +3,25 @@ export type EventHandlers<E = {}> = {
 }
 
 export interface ButtonEvent {
-  onClick: any
-  onDblclick: any
-  onMousedown: any
-  onMousemove: any
-  onMouseup: any
-  onMouseover: any
-  onMouseout: any
-  onMouseenter: any
-  onMouseleave: any
-  onSubmit: any
-  onChange: any
-  onFocus: any
-  onBlur: any
-  onInput: any
-  onDrag: any
-  onDrop: any
+  onClick: Function
+  onDblclick: Function
+  onMousedown: Function
+  onMousemove: Function
+  onMouseup: Function
+  onMouseover: Function
+  onMouseout: Function
+  onMouseenter: Function
+  onMouseleave: Function
+  onSubmit: Function
+  onChange: Function
+  onFocus: Function
+  onBlur: Function
+  onInput: Function
+  onDrag: Function
+  onDrop: Function
 }
 
-export interface RawButton extends EventHandlers<Partial<ButtonEvent>> {
+export interface RawButton extends Partial<ButtonEvent> {
   label?: string
   isLoading?: boolean
   icon?: string
@@ -37,7 +37,8 @@ export interface RawFormButtons {
   [extraButton: string]: RawButton | undefined
 }
 
-export interface NormalizedButton extends RawButton, EventHandlers<Partial<ButtonEvent>> {
+export interface NormalizedButton extends RawButton, Partial<ButtonEvent> {
+  label: string
   hidden: boolean
   isLoading: boolean
   class: string
@@ -49,11 +50,11 @@ export interface NormalizedFormButtons {
   [extraButton: string]: RawButton
 }
 
-export type ConvertToNormalizedFormButtons<T extends RawFormButtons> = NormalizedFormButtons & { [K in keyof T]: NormalizedButton }
+export type ConvertToNormalizedFormButtons<T = {}> = NormalizedFormButtons & T
 
 export type ButtonType = 'main' | 'aux'
 
-export type NormalizedButtons<T> = T & Record<string, NormalizedButton>
+export type NormalizedButtons<T> = { [K in keyof T]: NormalizedButton & T[K] }
 
 export interface ObjectWithRawButtons extends Record<string, RawButton> {}
 export interface ObjectWithNormalizedButtons extends Record<string, NormalizedButton> {}

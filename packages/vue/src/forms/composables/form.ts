@@ -1,5 +1,6 @@
 import type {
   BaseObjectWithRawFields,
+  ConvertToNormalizedFormButtons,
   NormalizedButtons,
   NormalizedFields,
   NormalizedSettings,
@@ -13,7 +14,7 @@ export function useForm<
   TypeFields extends BaseObjectWithRawFields,
   TypeButtons extends RawFormButtons,
   TypeSettings extends RawSetting,
->(args: Args<TypeFields, TypeButtons, TypeSettings>): UseForm<TypeFields, TypeButtons, TypeSettings> {
+>(args: Args<TypeFields, TypeButtons, TypeSettings>): UseForm<TypeFields, ConvertToNormalizedFormButtons<TypeButtons>, TypeSettings> {
   const {
     id: _id = '',
     fields: rawFields,
@@ -38,7 +39,7 @@ export function useForm<
   )
 
   const fields = reactive(clonedNormalizedFields) as NormalizedFields<TypeFields>
-  const buttons = reactive(normalizedButtons) as NormalizedButtons<TypeButtons>
+  const buttons = reactive(normalizedButtons) as NormalizedButtons<ConvertToNormalizedFormButtons<TypeButtons>>
   const settings = reactive(normalizedSettings) as TypeSettings & NormalizedSettings
 
   formStore.save(id, {

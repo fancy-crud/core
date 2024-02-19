@@ -1,4 +1,4 @@
-import type { NormalizedButtons } from './buttons'
+import type { ConvertToNormalizedFormButtons } from './buttons'
 import type { NormalizedSettings } from './settings'
 
 export type RawRuleResult = string | true | unknown
@@ -55,6 +55,6 @@ export interface Form<T, U> {
   id: symbol
   originalNormalizedFields: NormalizedFields<T>
   clonedNormalizedFields: NormalizedFields<T>
-  normalizedButtons: NormalizedButtons<U>
+  normalizedButtons: ConvertToNormalizedFormButtons<U>
   normalizedSettings: NormalizedSettings
 }

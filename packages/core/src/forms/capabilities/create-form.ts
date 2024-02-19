@@ -59,7 +59,7 @@ export class CreateFormHandler implements ICreateFormHandler {
 
     const normalizedButtons = bus.execute(
       new NormalizeButtonsCommand(rawButtons),
-    ) as V & ConvertToNormalizedFormButtons<V>
+    ) as ConvertToNormalizedFormButtons<V>
 
     normalizedButtons.main.onClick = () => {
       if (rawButtons.main?.onClick) {
