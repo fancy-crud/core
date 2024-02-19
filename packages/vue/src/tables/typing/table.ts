@@ -1,4 +1,4 @@
-import type { BaseTableForm, FieldAsColumn, MappedRawColumn, NormalizedColumn, NormalizedTableButtons, NormalizedTableList, NormalizedTablePagination, NormalizedTableSettings, Pagination, RawTableButtons, RawTableList, RawTablePagination, RawTableSettings } from '@fancy-crud/core'
+import type { BaseTableForm, ConvertToNormalizedTableButtons, FieldAsColumn, MappedRawColumn, NormalizedColumn, NormalizedTableButtons, NormalizedTableList, NormalizedTablePagination, NormalizedTableSettings, Pagination, RawTableButtons, RawTableList, RawTablePagination, RawTableSettings } from '@fancy-crud/core'
 
 export interface TableArgs<
   T extends BaseTableForm,
@@ -26,7 +26,7 @@ export interface UseTable<T extends BaseTableForm, U, S, F, B, L, P> {
   settings: S & NormalizedTableSettings
   pagination: P & NormalizedTablePagination
   filterParams: F
-  buttons: B & NormalizedTableButtons
+  buttons: ConvertToNormalizedTableButtons<B>
   list: NormalizedTableList<L>
 }
 

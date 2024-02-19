@@ -1,4 +1,4 @@
-import type { ButtonEvent, EventHandlers, RawButton } from '@packages/core/forms/axioma'
+import type { ButtonEvent, RawButton } from '@packages/core/forms/axioma'
 import type { Row } from './table'
 
 export interface RawTableButton extends RawButton {}
@@ -14,16 +14,14 @@ export interface RawTableButtons {
   [extraButton: string]: RawTableButton | undefined
 }
 
-export interface NormalizedTableButton extends RawTableButton, EventHandlers<Partial<ButtonEvent>> {
-  onClick: any
-}
+export interface NormalizedTableButton extends RawTableButton, Partial<ButtonEvent> {}
 
 export interface NormalizedTableButtons {
   add: NormalizedTableButton
-  edit: NormalizedTableButton & OnRowClick
-  remove: NormalizedTableButton & OnRowClick
+  edit: NormalizedTableButton & Required<OnRowClick>
+  remove: NormalizedTableButton & Required<OnRowClick>
   dump: NormalizedTableButton
   [extraButton: string]: RawTableButton
 }
 
-export type ConvertToNormalizedTableButtons<T extends RawTableButtons> = NormalizedTableButtons & { [K in keyof T]: K extends EditButton ? (NormalizedTableButton & { onClick: (row: Row) => void }) : NormalizedTableButton }
+export type ConvertToNormalizedTableButtons<T = {}> = NormalizedTableButtons & T

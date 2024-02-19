@@ -22,7 +22,7 @@ export class CreateTableHandler implements ICreateTableHandler {
       columns: rawColumns = {},
       pagination: rawPagination = {},
       filterParams: rawFilterParams = {},
-      buttons: rawButtons,
+      buttons: rawButtons = {} as RawTableButtons,
       settings: rawSettings = {
         url: form?.settings?.url,
       },

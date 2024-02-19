@@ -46,6 +46,14 @@ const form = useForm({
     url: 'artists/',
     title: '{{ Crear artista | Actualizar artista }}',
   },
+  buttons: {
+    main: {
+      onClick(a: number, b: number) {
+
+      },
+      chubaca: '',
+    },
+  },
 })
 
 const table = useTable({
@@ -66,12 +74,10 @@ const table = useTable({
   pagination: {
     rowsPerPage: 10,
   },
-  list: {
-    data: [] as number[],
-  },
   buttons: {
     remove: {
-      onClick: () => {
+      chubaca: '',
+      onClick: (x: number, b: number) => {
         console.log('hello')
       },
     },
