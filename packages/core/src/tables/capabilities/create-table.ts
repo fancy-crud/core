@@ -50,7 +50,7 @@ export class CreateTableHandler implements ICreateTableHandler {
 
     const buttons = bus.execute(
       new NormalizeTableButtonsCommand(rawButtons),
-    ) as TableButtonsType & ConvertToNormalizedTableButtons<TableButtonsType>
+    ) as ConvertToNormalizedTableButtons<TableButtonsType>
 
     const list = bus.execute(
       new NormalizeTableListCommand(rawList),

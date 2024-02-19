@@ -80,9 +80,11 @@ const computedData = computed<any[]>(() => {
 props.list.fetchData()
 
 const tableHeaderVBind = computed(() => {
+  const dump = props.buttons.dump
+
   return {
     onCreate: props.buttons.add.onClick,
-    onExport: () => props.buttons.dump?.onClick ? props.buttons.dump.onClick() : null,
+    onExport: () => dump.onClick ? dump.onClick() : null,
     add: props.buttons.add,
     dump: props.buttons.dump,
   }

@@ -1,6 +1,6 @@
 import { getDefaults } from '@packages/core/config'
 import type { INormalizeTableButtonsHandler, NormalizeTableButtonsCommand } from '../axioma'
-import type { ConvertToNormalizedTableButtons, NormalizedTableButtons, RawTableButtons } from '../axioma/typing/buttons'
+import type { ConvertToNormalizedTableButtons, EditButton, NormalizedTableButtons, RawTableButton, RawTableButtons } from '../axioma/typing/buttons'
 
 export class NormalizeTableButtonsHandler implements INormalizeTableButtonsHandler {
   execute<T extends RawTableButtons>({ buttons }: NormalizeTableButtonsCommand<T>): NormalizedTableButtons {
@@ -18,7 +18,7 @@ export class NormalizeTableButtonsHandler implements INormalizeTableButtonsHandl
 
     type ButtonKey = keyof typeof defaultButtons
 
-    Object.entries(rawButtons).forEach(([buttonKey, button]) => {
+    Object.entries(rawButtons).forEach(([buttonKey, button]: [string, RawTableButton | EditButton]) => {
       if (defaultButtonsKeys.includes(buttonKey)) {
         const defaultButton = defaults[`${buttonKey}Button`]
         defaultButtons[buttonKey as ButtonKey] = {
