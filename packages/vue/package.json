@@ -1,0 +1,75 @@
+{
+  "name": "@fancy-crud/vue",
+  "version": "0.0.0",
+  "private": false,
+  "type": "module",
+  "author": {
+    "name": "Christopher A. Flores",
+    "url": "https://github.com/cafadev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fancy-crud/core",
+    "directory": "packages/vue"
+  },
+  "license": "MIT",
+  "main": "./dist/fancy-crud-vue.js",
+  "module": "./dist/fancy-crud-vue.js",
+  "types": "dist/src/index.d.ts",
+  "files": [
+    "dist",
+    "src/styles"
+  ],
+  "scripts": {
+    "build": "vite build && vue-tsc -p ./tsconfig.build.json --declaration --emitDeclarationOnly && tsc-alias --verbose -p ./tsconfig.build.json"
+  },
+  "peerDependencies": {
+    "@fancy-crud/core": "workspace:^",
+    "@vueuse/core": "^10.4.1",
+    "esno": "0.10.0",
+    "lodash.isequal": "^4.5.0",
+    "vue": "^3.3.2"
+  },
+  "dependencies": {
+    "@fancy-crud/core": "workspace:^",
+    "@vueuse/core": "^10.4.1",
+    "esno": "0.10.0",
+    "lodash.isequal": "^4.5.0",
+    "vue": "^3.3.2"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.15",
+    "postcss": "^8.4.28",
+    "tailwindcss": "^3.3.4"
+  },
+  "release": {
+    "branches": [
+      "main",
+      "next",
+      "next-major",
+      {
+        "name": "beta",
+        "prerelease": true
+      },
+      {
+        "name": "alpha",
+        "prerelease": true
+      }
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "form",
+    "table",
+    "datatable",
+    "automation",
+    "crud",
+    "create",
+    "read",
+    "update",
+    "delete",
+    "vue"
+  ]
+}

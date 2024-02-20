@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "ES2022",
+    "target": "ES2022",
+    "lib": ["DOM", "ESNext"],
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "strict": true,
+    "maxNodeModuleJsDepth": 0,
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "types": [
+      "vite/client",
+    ],
+    "paths": {
+      "@packages/wrapper-element-plus/*": ["src/*"],
+    }
+  },
+  "exclude": [
+    "dist",
+    "node_modules",
+  ]
+}

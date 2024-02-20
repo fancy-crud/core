@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "matic"
+version = "1.0.0-alpha.1"
+description = ""
+authors = ["Christopher A. Flores <christopher.flores@codexitos.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+matic-release = {git = "https://github.com/fancy-crud/matic-release.git"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

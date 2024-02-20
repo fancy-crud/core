@@ -1,0 +1,13 @@
+{
+  "mode": "pre",
+  "tag": "alpha",
+  "initialVersions": {
+    "@fancy-crud/demo": "0.0.0",
+    "@fancy-crud/core": "2.1.0-alpha.30",
+    "@fancy-crud/oruga-wrapper": "2.1.0-alpha.30",
+    "@fancy-crud/vue": "2.1.0-alpha.30"
+  },
+  "changesets": [
+    "tasty-bees-bow"
+  ]
+}

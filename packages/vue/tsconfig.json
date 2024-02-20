@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.common.json",
+  "compilerOptions": {
+    "paths": {
+      "@fancy-crud/bus": ["../bus/src/index.ts"],
+      "@fancy-crud/core": ["../core/src/index.ts"],
+      "@packages/vue/*": ["src/*"],
+    }
+  },
+}

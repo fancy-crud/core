@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["DOM", "ES2022"],
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "sourceMap": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "types": [
+      "vite/client",
+    ],
+    "paths": {
+      "@packages/bus/*": ["src/*"],
+    }
+  },
+  "exclude": [
+    "dist",
+    "node_modules",
+    "**/**/*.test.ts",
+    "**/dist",
+    "packages/.test",
+    "packages/_docs",
+    "tests"
+  ]
+}

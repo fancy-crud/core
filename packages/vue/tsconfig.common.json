@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "ES2022",
+    "target": "ES2022",
+    "lib": ["DOM", "ESNext"],
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "types": [
+      "vite/client"
+    ],
+    "paths": {
+      "@packages/vue/*": ["src/*"],
+    }
+  },
+  "exclude": [
+    "dist",
+    "node_modules",
+    "cypress",
+    "**/**/*.test.ts",
+    "**/**/*.spec.ts",
+    "**/**/*.stories.tsx",
+    "**/**/*.md",
+    "**/dist",
+    "packages/.test",
+    "packages/_docs",
+  ]
+}

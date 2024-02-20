@@ -1,0 +1,32 @@
+@tailwind base
+@tailwind components
+@tailwind utilities
+
+@import url('./loader.css')
+
+@layer components
+  .f-form
+    height: 100%
+    display: grid
+    grid-template-rows: auto 1fr auto
+
+  .f-form__body
+    @apply grid grid-cols-12 gap-x-8
+
+  .f-form__footer
+    @apply pt-2
+
+  .f-form__footer__button--aux
+    @apply ml-2
+
+  .f-form__header
+    @apply pb-4
+
+  .f-form__header__title
+    @apply text-2xl
+
+
+@layer utilities
+  .checkbox-group--column
+    display: flex
+    flex-flow: column nowrap

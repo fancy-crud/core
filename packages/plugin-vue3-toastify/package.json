@@ -1,0 +1,48 @@
+{
+  "name": "@fancy-crud/plugin-vue3-toastify",
+  "version": "0.0.0",
+  "description": "Utility to add vue3-toastify support for fancy-crud",
+  "private": false,
+  "author": {
+    "name": "Christopher A. Flores",
+    "url": "https://github.com/cafadev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fancy-crud/core",
+    "directory": "packages/plugin-vue3-toastify"
+  },
+  "license": "MIT",
+  "main": "dist/fancy-crud-plugin-vue3-toastify.mjs",
+  "module": "dist/fancy-crud-plugin-vue3-toastify.mjs",
+  "types": "dist/src/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build && tsc && tsc-alias --verbose -p ./tsconfig.json"
+  },
+  "peerDependencies": {
+    "vue3-toastify": "^0.1.14"
+  },
+  "devDependencies": {
+    "vue3-toastify": "^0.1.14"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "form",
+    "table",
+    "datatable",
+    "automation",
+    "crud",
+    "create",
+    "read",
+    "update",
+    "delete",
+    "vue",
+    "toast",
+    "notifications"
+  ]
+}

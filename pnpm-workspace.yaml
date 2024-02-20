@@ -1,0 +1,7 @@
+packages:
+  - 'packages/*'
+  - './demo-oruga'
+  - './demo-vuetify'
+  - './demo-quasar'
+  - './demo-element-plus'
+  - '!**/tests/**'
