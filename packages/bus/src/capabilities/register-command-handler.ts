@@ -1,20 +1,13 @@
 import { handlers } from '../axioma'
 
 export class RegisterCommandHandler {
-  public execute<T>(handler: T extends { name: string } ? T : string, value?: any) {
-    let handlerId: string
+  public execute<T>(identifier: T extends { name: string } ? T : string, value: any) {
+    const handlerId: string = typeof identifier === 'string' ? identifier : identifier.name
 
-    if (typeof handler === 'string') {
-      if (!value)
-        throw new Error('Should specify a handler for naming handlers')
+    if (!value)
+      throw new Error('Should specify a handler for naming handlers')
 
-      handlerId = handler
-      handlers.set(handlerId, value)
-    }
-    else {
-      handlerId = handler.name
-      handlers.set(handlerId, handler)
-    }
+    handlers.set(handlerId, value)
 
     return handlerId
   }
