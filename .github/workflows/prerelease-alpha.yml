@@ -129,7 +129,7 @@ jobs:
 
           pnpm build:p-rule-parsers
           pnpm build:p-vue3-toastify
-          pnpm --filter "./packages/**" publish --no-git-checks --tag ${{ github.ref_name }}
+          pnpm --filter "./packages/**" publish --no-git-checks
 
   generate-release:
     runs-on: ubuntu-latest
