@@ -16,12 +16,14 @@ export function useTable<
 >(
   args: TableArgs<T, U, S, F, B, L, P>,
 ): UseTable<T, U, S, F, B, L, P> {
+  const baseForm = { id: Symbol(''), settings: { url: '' } } as T
+
   const {
     id: _id,
-    form,
+    form = baseForm,
     columns: rawColumns = {},
     settings: rawSettings = {
-      url: form.settings?.url,
+      url: form?.settings?.url,
     },
     pagination: rawPagination = {},
     filterParams: rawFilterParams = {},

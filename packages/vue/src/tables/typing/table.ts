@@ -10,7 +10,7 @@ export interface TableArgs<
   P extends RawTablePagination,
 > {
   id?: string
-  form: T
+  form?: T
   columns?: MappedRawColumn<T['fields'], U> & U
   pagination?: P
   settings?: S
