@@ -9,10 +9,10 @@
     <f-form-body :fields="props.fields" :settings="props.settings" :form-id="props.id">
       <template
         v-for="([slotName]) in beforeAndAfterFieldSlots"
-        #[`${slotName}`]
+        #[`${slotName}`]="bind"
         :key="slotName"
       >
-        <slot :name="slotName" />
+        <slot :name="slotName" v-bind="bind" />
       </template>
     </f-form-body>
 

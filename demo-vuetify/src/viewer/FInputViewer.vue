@@ -1,6 +1,10 @@
 <template>
   <div class="bg-white rounded-xl p-4">
-    <f-form v-bind="form" />
+    <f-form v-bind="form">
+      <template #field-email="{ field }">
+        {{ field }}
+      </template>
+    </f-form>
   </div>
 </template>
 
