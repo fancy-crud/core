@@ -19,7 +19,7 @@ export interface TableArgs<
   list?: RawTableList<L>
 }
 
-export interface UseTable<T extends BaseTableForm, U, S, F, B, L, P> {
+export interface UseTable<T extends BaseTableForm = any, U = any, S = any, F = any, B = any, L = any, P = any> {
   id: symbol
   form: T
   columns: FieldAsColumn<T['fields'], NormalizedColumn> & U

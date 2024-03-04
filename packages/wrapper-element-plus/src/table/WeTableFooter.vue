@@ -37,4 +37,7 @@ import { useTableFooter } from '@fancy-crud/vue'
 const props = defineProps<TableFooterProps>()
 const emit = defineEmits<TableFooterEmit>()
 const state = useTableFooter(props.pagination, emit)
+
+const tableId = inject('tableId')
+console.log('🚀 ~ tableId:', tableId)
 </script>

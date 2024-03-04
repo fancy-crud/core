@@ -9,17 +9,17 @@
 </template>
 
 <script lang="ts" setup>
-import type { NormalizedSettings } from '@fancy-crud/core'
+import type { FormMode } from '@fancy-crud/core'
 import { Bus, GetTitleByFormModeCommand } from '@fancy-crud/core'
 
 const props = defineProps<{
   title?: string
-  settings: NormalizedSettings
+  mode: FormMode
 }>()
 
 const bus = new Bus()
 
 const formModeTitle = computed(() => bus.execute(
-  new GetTitleByFormModeCommand(props.settings.mode, props.title),
+  new GetTitleByFormModeCommand(props.mode, props.title),
 ))
 </script>

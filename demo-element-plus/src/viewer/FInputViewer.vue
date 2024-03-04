@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white rounded-xl p-4">
-    <f-form @success="printing" @error="printing" v-bind="form" />
+    <f-form @success="printing" @error="printing" v-bind="form" class="el-form--label-top" />
   </div>
 
   <button @click="loadData">

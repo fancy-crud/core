@@ -28,7 +28,7 @@
     </f-table-body>
   </slot>
 
-  <slot name="table-footer">
+  <slot name="table-footer" v-bind="tableFooterVBind">
     <div v-if="!props.pagination.hidden" class="flex justify-between mt-4">
       <f-table-footer v-bind="tableFooterVBind" />
     </div>
@@ -62,6 +62,8 @@ const props = defineProps<{
   buttons: NormalizedTableButtons
   list: NormalizedTableList
 }>()
+
+provide('tableId', props.id)
 
 const slots = useSlots()
 
@@ -114,6 +116,7 @@ const tableBodyVBind = computed(() => {
 
 const tableFooterVBind = computed(() => {
   return {
+    'tableId': props.id,
     'pagination': props.pagination,
     'onUpdate:pagination': (newPagination: Pagination) => Object.assign(table.pagination, newPagination),
   }

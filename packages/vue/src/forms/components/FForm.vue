@@ -2,8 +2,8 @@
   <form
     class="f-form"
   >
-    <f-form-header v-slot="{ formModeTitle }" :title="props.settings.title" :settings="props.settings">
-      <slot name="form-header" v-bind="{ formModeTitle }" />
+    <f-form-header v-slot="bind" :title="props.settings.title" :mode="props.settings.mode">
+      <slot name="form-header" v-bind="bind" />
     </f-form-header>
 
     <f-form-body :fields="props.fields" :settings="props.settings" :form-id="props.id">
@@ -19,11 +19,12 @@
     <f-form-footer
       @main-click="onMainClick"
       @aux-click="onAuxClick"
+      v-slot="bind"
       :buttons="props.buttons"
       :settings="props.settings"
       :is-form-valid="isFormValid"
     >
-      <slot name="form-footer" v-bind="{ onMainClick, onAuxClick, isFormValid }" />
+      <slot name="form-footer" v-bind="bind" />
     </f-form-footer>
   </form>
 </template>
