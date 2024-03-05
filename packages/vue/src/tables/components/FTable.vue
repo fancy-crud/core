@@ -116,7 +116,6 @@ const tableBodyVBind = computed(() => {
 
 const tableFooterVBind = computed(() => {
   return {
-    'tableId': props.id,
     'pagination': props.pagination,
     'onUpdate:pagination': (newPagination: Pagination) => Object.assign(table.pagination, newPagination),
   }

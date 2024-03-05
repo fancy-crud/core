@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-const tableId = inject('tableId')
+const tableId: symbol = inject('tableId')
 
 console.log('🚀 ~ tableId:', tableId)
 </script>
