@@ -1,8 +1,11 @@
 import type { BaseRawField, NormalizedField, NormalizedFields } from '@packages/core/forms/axioma'
 import { getDefaults } from '@packages/core/config'
+import { IHttp, PaginateResult } from '@packages/core/common/http/axioma'
+import { inject } from '@fancy-crud/bus'
 import type { INormalizeFormFieldsHandler, NormalizeFormFieldsCommand, NormalizeFormFieldsCommandInputType } from '../axioma'
 
 export class NormalizeFormFieldsHandler implements INormalizeFormFieldsHandler {
+  constructor(private http: Pick<IHttp, 'pagination'> = inject(IHttp)) {}
   private getDefaultNormalizedField<T extends NormalizedField>(obj: T): NormalizedField & T {
     const field: NormalizedField & T = Object.assign({}, obj)
 
@@ -21,7 +24,15 @@ export class NormalizeFormFieldsHandler implements INormalizeFormFieldsHandler {
       modelValue: rawField.multiple ? [] : null,
       class: '',
       recordValue: (value: any) => value[fieldKey],
-      interceptOptions: (options: any[]) => options,
+      interceptOptions: (options: any[]) => {
+        if (Array.isArray(options)) {
+          return options
+        }
+        else {
+          const paginateResults = new PaginateResult(this.http.pagination, options)
+          return paginateResults.results
+        }
+      },
       debounceTime: 0,
       wrapper: {
         class: '',
