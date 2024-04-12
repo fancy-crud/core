@@ -2,7 +2,7 @@ import isEqual from 'lodash.isequal'
 import { inject } from '@fancy-crud/bus'
 import { IHttp } from '../axioma/typing'
 import type { HttpRequestGet, SameAPIEndpoint } from '../axioma/typing'
-import type { GetForeignKeyValuesCommand, IGetForeignKeyValuesHandler } from '../axioma'
+import { type GetForeignKeyValuesCommand, type IGetForeignKeyValuesHandler, PaginateResult } from '../axioma'
 
 export class GetForeignKeyValuesHandler implements IGetForeignKeyValuesHandler {
   constructor(private http: Pick<IHttp, 'pagination'> & HttpRequestGet = inject(IHttp)) {}
@@ -52,7 +52,14 @@ export class GetForeignKeyValuesHandler implements IGetForeignKeyValuesHandler {
       })
     }
 
-    addOptionsItems(field.interceptOptions(data))
+    let _data = data
+
+    if (!Array.isArray(_data)) {
+      const paginateResults = new PaginateResult(this.http.pagination, _data)
+      _data = Array.isArray(paginateResults.results) ? paginateResults.results : _data
+    }
+
+    addOptionsItems(field.interceptOptions(_data))
     field.options = options
   }
 
