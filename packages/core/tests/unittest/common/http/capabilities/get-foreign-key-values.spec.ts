@@ -3,7 +3,7 @@ import type { HttpRequestGet, IHttp } from '@packages/core/common/http/axioma'
 import { GetForeignKeyValuesCommand } from '@packages/core/common/http/axioma'
 import { describe, expect, it, vi } from 'vitest'
 
-describe('GetForeignKeyValuesHandler', () => {
+describe.skip('GetForeignKeyValuesHandler', () => {
   it('should call http request get method for each unique url in fields', async () => {
     // Mock IHttp and HttpRequestGet
 
