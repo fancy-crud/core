@@ -33,32 +33,5 @@ const { modelValue, hintText, attrs, hasFieldErrors } = useSelectField<any>(prop
 const computedSlotNames = computed(() => {
   return Object.entries(slots)
 })
-
-// export default defineComponent({
-//   props: {
-//     formId: {
-//       type: Symbol,
-//       required: true,
-//     },
-//     field: {
-//       type: Object as PropType<NormalizedSelectField>,
-//       required: true,
-//     },
-//   },
-
-//   setup(props, { attrs: vAttrs, slots }) {
-
-//     return () =>
-//       h(QSelect as any, {
-//         ...props.field.wrapper,
-//         ...props.field,
-//         ...attrs.value,
-//         ...vmodel.value,
-//         label: props.field.label,
-//         hint: hintText.value,
-//         errorMessages: props.field.errors,
-//       }, slots)
-//   },
-// })
 </script>
 
