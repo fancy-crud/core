@@ -140,4 +140,8 @@ watch(() => table.pagination.rowsPerPage, () => {
   if (table.list.options?.hotFetch !== false)
     props.list.fetchData()
 })
+
+watch(() => table.settings.displayFormDialog, () => {
+  tableForm.settings.loading = !table.settings.displayFormDialog
+})
 </script>
