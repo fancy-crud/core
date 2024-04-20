@@ -41,7 +41,7 @@ export class GetForeignKeyValuesHandler implements IGetForeignKeyValuesHandler {
   }
 
   private addOptionsToField(field: { options?: any[]; interceptOptions: (options: any[]) => unknown[] }, data: any) {
-    const options: any[] = field.options || []
+    const options: any[] = [...(field.options || [])]
 
     const addOptionsItems = (items: any[]) => {
       items.forEach((item) => {
