@@ -1,4 +1,4 @@
-import type { BaseTableForm, ConvertToNormalizedTableButtons, FieldAsColumn, NormalizedTableList, NormalizedTablePagination, NormalizedTableSettings, RawTableButtons, RawTableFilters, RawTablePagination, RawTableSettings } from '@fancy-crud/core'
+import type { BaseTableForm, ConvertToNormalizedTableButtons, FieldAsColumn, MappedRawColumn, NormalizedTableList, NormalizedTablePagination, NormalizedTableSettings, ObjectWithRawColumns, RawTableButtons, RawTableFilters, RawTablePagination, RawTableSettings } from '@fancy-crud/core'
 import { Bus, CreateTableCommand, ITableStore, injectable, inject as injecting } from '@fancy-crud/core'
 import { useProxies } from '@packages/vue/common/composables'
 import type { TableArgs, UseTable } from '../typing'
@@ -8,7 +8,7 @@ injectable(ITableStore.name, TableStoreService)
 
 export function useTable<
   T extends BaseTableForm,
-  U,
+  U extends ObjectWithRawColumns,
   S extends RawTableSettings,
   F extends RawTableFilters,
   B extends RawTableButtons,
@@ -20,7 +20,6 @@ export function useTable<
   const baseForm = { id: Symbol(''), settings: { url: '' } } as T
 
   const {
-    id: _id,
     form = baseForm,
     columns: rawColumns = {},
     settings: rawSettings = {
@@ -34,9 +33,6 @@ export function useTable<
 
   const tableStore: ITableStore = injecting(ITableStore.name)!
   const bus = new Bus()
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const id = Symbol(_id)
 
   type ProxyCollection = [
     FieldAsColumn<T['fields'], U>,
@@ -59,7 +55,7 @@ export function useTable<
 
   const table = bus.execute(
     new CreateTableCommand(
-      form, columns, pagination, settings, filterParams, buttons, list,
+      form, columns as unknown as MappedRawColumn<T['fields'], U>, pagination, settings, filterParams, buttons, list,
     ),
   )
 

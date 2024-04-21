@@ -16,7 +16,7 @@ export class CreateTableCommand<
 
   constructor(
     public readonly form: T,
-    public readonly columns?: MappedRawColumn<T['fields'], U> & U,
+    public readonly columns?: MappedRawColumn<T['fields'], U>,
     public readonly pagination?: P,
     public readonly settings?: S,
     public readonly filterParams?: F,
