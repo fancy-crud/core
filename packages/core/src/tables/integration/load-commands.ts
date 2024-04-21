@@ -1,6 +1,6 @@
 import { register } from '@fancy-crud/bus'
 import {
-  ICreateTableHandler, IDeleteRecordHandler,
+  ICreateTableHandler, ICustomColumnsOrderHandler, IDeleteRecordHandler,
   IFetchListDataHandler,
   IGetColumnValueHandler,
   INormalizeColumnsHandler,
@@ -12,7 +12,7 @@ import {
   ISetListDataHandler,
   IUpdateRowValueHandler,
 } from '../axioma'
-import { CreateTableHandler, DeleteRecordHandler, GetColumnValueHandler, NormalizeColumnsHandler, NormalizePaginationHandler, NormalizeTableButtonsHandler, NormalizeTableFiltersHandler, NormalizeTableListHandler, NormalizeTableSettingsHandler, PrepareFormToCreateHandler, PrepareFormToUpdateHandler, ResetTablePaginationHandler, SetListDataHandler, UpdateRowValueHandler } from '../capabilities'
+import { CreateTableHandler, CustomColumnsOrderHandler, DeleteRecordHandler, GetColumnValueHandler, NormalizeColumnsHandler, NormalizePaginationHandler, NormalizeTableButtonsHandler, NormalizeTableFiltersHandler, NormalizeTableListHandler, NormalizeTableSettingsHandler, PrepareFormToCreateHandler, PrepareFormToUpdateHandler, ResetTablePaginationHandler, SetListDataHandler, UpdateRowValueHandler } from '../capabilities'
 import { FetchListDataHandler } from '../capabilities/fetch-list-data'
 
 register(IGetColumnValueHandler.name, GetColumnValueHandler)
@@ -30,6 +30,6 @@ register(ISetListDataHandler.name, SetListDataHandler)
 register(IFetchListDataHandler.name, FetchListDataHandler)
 register(IPrepareFormToCreateHandler.name, PrepareFormToCreateHandler)
 register(IPrepareFormToUpdateHandler.name, PrepareFormToUpdateHandler)
-
+register(ICustomColumnsOrderHandler.name, CustomColumnsOrderHandler)
 register(IUpdateRowValueHandler.name, UpdateRowValueHandler)
 

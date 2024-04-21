@@ -57,15 +57,18 @@ const table = useTable({
     gender: {
       label: 'Gender',
       format: (value: string) => value === 'm' ? 'Male' : 'Female',
-      width: 700,
     },
     created_at: {
+      label: 'Created at',
       format: (value: string) => 'anything',
+    },
+    updated_at: {
+      label: 'Updated at',
     },
     actions: { value: 'actions', label: '', width: '200px', align: 'right' },
   },
   settings: {
-    autoInferColumns: false,
+    columnsOrder: ['name', '...', 'gender'],
   },
   pagination: {
     rowsPerPage: 10,

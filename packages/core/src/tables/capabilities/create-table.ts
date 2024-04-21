@@ -43,6 +43,9 @@ export class CreateTableHandler implements ICreateTableHandler {
       new NormalizePaginationCommand(rawPagination),
     ) as TablePaginationType & NormalizedTablePagination
 
+    if (!rawSettings.columnsOrder || !rawSettings.columnsOrder.length)
+      rawSettings.columnsOrder = Object.keys(columns)
+
     const settings = bus.execute(
       new NormalizeTableSettingsCommand(rawSettings),
     ) as TableSettingsType & NormalizedTableSettings
