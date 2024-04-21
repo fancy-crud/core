@@ -8,9 +8,11 @@ export interface RawColumn extends Record<string, unknown> {
   exclude?: boolean
 }
 
-export type FieldAsColumn<T, U> = { [K in keyof T]: U }
+export type FieldAsColumn<T, U> = { [K in keyof (Converter<T> & U)]: K extends keyof U ? NormalizedColumn & U[K] : NormalizedColumn }
 
-export type MappedRawColumn<T, U> = { [K in keyof (Extract<T, U>)]?: RawColumn }
+export type Converter<T> = { [K in keyof T]: RawColumn }
+
+export type MappedRawColumn<T, U> = { [K in keyof (Converter<T> & U)]?: K extends keyof U ? RawColumn & U[K] : RawColumn }
 
 export interface NormalizedColumn extends RawColumn {
   label: string
@@ -19,7 +21,7 @@ export interface NormalizedColumn extends RawColumn {
 
 export interface ObjectWithRawColumns extends Record<string, RawColumn> {}
 
-export interface ObjectWithNormalizedColumns extends Record<string, NormalizedColumn> {}
+export type ObjectWithNormalizedColumns = Record<string, NormalizedColumn>
 
 export interface BaseFormField extends Record<string, {
   type: string

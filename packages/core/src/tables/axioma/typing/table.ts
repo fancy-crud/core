@@ -1,6 +1,6 @@
 import type { DeleteRequestOptions, OnFinally } from '@packages/core/common/http/axioma'
 import type { NormalizedTableFilters } from './filters'
-import type { BaseTableForm, FieldAsColumn, MappedRawColumn, NormalizedColumn, ObjectWithNormalizedColumns } from './column'
+import type { BaseTableForm, FieldAsColumn, MappedRawColumn, ObjectWithNormalizedColumns } from './column'
 import type { NormalizedTablePagination } from './pagination'
 import type { NormalizedTableSettings } from './settings'
 import type { NormalizedTableButtons } from './buttons'
@@ -30,7 +30,7 @@ export interface DeleteRecordOptions extends DeleteRequestOptions {
 export interface Table<T extends BaseTableForm, U, S, F, B, L, P> {
   id: symbol
   form: T
-  columns: FieldAsColumn<T['fields'], NormalizedColumn> & U
+  columns: FieldAsColumn<T['fields'], U>
   settings: S & NormalizedTableSettings
   pagination: P & NormalizedTablePagination
   filterParams: F

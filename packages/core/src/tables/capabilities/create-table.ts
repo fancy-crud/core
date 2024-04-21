@@ -1,5 +1,5 @@
 import { Bus, inject } from '@fancy-crud/bus'
-import type { BaseTableForm, CreateTableCommand, FieldAsColumn, ICreateTableHandler, NormalizedColumn, NormalizedTableList, NormalizedTablePagination, NormalizedTableSettings, ObjectWithRawColumns, RawTableFilters, RawTableList, RawTablePagination, RawTableSettings, Row, Table } from '../axioma'
+import type { BaseTableForm, CreateTableCommand, FieldAsColumn, ICreateTableHandler, NormalizedTableList, NormalizedTablePagination, NormalizedTableSettings, ObjectWithRawColumns, RawTableFilters, RawTableList, RawTablePagination, RawTableSettings, Row, Table } from '../axioma'
 import { DeleteRecordCommand, FetchListDataCommand, ITableStore, NormalizeColumnsCommand, NormalizePaginationCommand, NormalizeTableButtonsCommand, NormalizeTableFiltersCommand, NormalizeTableListCommand, NormalizeTableSettingsCommand, PrepareFormToCreateCommand, PrepareFormToUpdateCommand } from '../axioma'
 import type { ConvertToNormalizedTableButtons, RawTableButtons } from '../axioma/typing/buttons'
 
@@ -34,7 +34,7 @@ export class CreateTableHandler implements ICreateTableHandler {
 
     const columns = bus.execute(
       new NormalizeColumnsCommand(rawColumns, form.fields),
-    ) as FieldAsColumn<TableFormType['fields'], NormalizedColumn> & TableColumnsType
+    ) as FieldAsColumn<TableFormType['fields'], TableColumnsType>
 
     const pagination = bus.execute(
       new NormalizePaginationCommand(rawPagination),
