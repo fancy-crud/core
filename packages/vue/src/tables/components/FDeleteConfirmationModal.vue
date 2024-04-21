@@ -57,6 +57,8 @@ const defaults = computed(getDefaults)
 
 watch(modelValue, (value: boolean) => {
   emit('update:modelValue', value)
+  if (!value)
+    emit('cancel')
 })
 
 watch(() => props.modelValue, () => {

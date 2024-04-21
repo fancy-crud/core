@@ -30,7 +30,7 @@ const { hintText, modelValue, hasFieldErrors } = useTextField<any>(props)
 
 const computedAttrs = computed(() => {
   return {
-    attrs,
+    ...attrs,
     ...props.field.wrapper,
   }
 })

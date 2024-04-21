@@ -1,4 +1,5 @@
 import type { BaseTableForm, ConvertToNormalizedTableButtons, FieldAsColumn, MappedRawColumn, NormalizedColumn, NormalizedTableButtons, NormalizedTableList, NormalizedTablePagination, NormalizedTableSettings, Pagination, RawTableButtons, RawTableList, RawTablePagination, RawTableSettings } from '@fancy-crud/core'
+import type { ArgProxy } from '@packages/vue/common'
 
 export interface TableArgs<
   T extends BaseTableForm,
@@ -11,18 +12,18 @@ export interface TableArgs<
 > {
   id?: string
   form?: T
-  columns?: MappedRawColumn<T['fields'], U> & U
-  pagination?: P
-  settings?: S
-  filterParams?: F
-  buttons?: B
-  list?: RawTableList<L>
+  columns?: ArgProxy<MappedRawColumn<T['fields'], U>>
+  pagination?: ArgProxy<P>
+  settings?: ArgProxy<S>
+  filterParams?: ArgProxy<F>
+  buttons?: ArgProxy<B>
+  list?: ArgProxy<RawTableList<L>>
 }
 
 export interface UseTable<T extends BaseTableForm = any, U = any, S = any, F = any, B = any, L = any, P = any> {
   id: symbol
   form: T
-  columns: FieldAsColumn<T['fields'], NormalizedColumn> & U
+  columns: FieldAsColumn<T['fields'], U>
   settings: S & NormalizedTableSettings
   pagination: P & NormalizedTablePagination
   filterParams: F

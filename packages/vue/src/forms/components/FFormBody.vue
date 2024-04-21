@@ -83,7 +83,7 @@ function filterFields(fields: BaseObjectWithNormalizedFields, mode: FormMode): [
 
 function binding(field: NormalizedField) {
   return {
-    is: getComponent(field), formId: props.formId, field, class: 'f-form__body__field col-span-12',
+    formId: props.formId, field, class: 'f-form__body__field col-span-12',
   }
 }
 </script>

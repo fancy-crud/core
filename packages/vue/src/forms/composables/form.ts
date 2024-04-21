@@ -8,6 +8,7 @@ import type {
   RawSetting,
 } from '@fancy-crud/core'
 import { Bus, CreateFormCommand, IFormStore, inject as injecting } from '@fancy-crud/core'
+import { useProxies } from '@packages/vue/common/composables/proxies'
 import type { Args, UseForm } from '../typing'
 
 export function useForm<
@@ -28,6 +29,20 @@ export function useForm<
   const formStore: IFormStore = injecting(IFormStore.name)!
   const bus = new Bus()
 
+  type ProxyCollection = [
+    TypeSettings & NormalizedSettings,
+    NormalizedFields<TypeFields>,
+    NormalizedButtons<ConvertToNormalizedFormButtons<TypeButtons>>,
+  ]
+
+  const { proxies, createProxy } = useProxies<ProxyCollection>([
+    rawSettings,
+    rawFields,
+    rawButtons,
+  ], [false, true, true])
+
+  const [settings, fields, buttons] = proxies
+
   const {
     id,
     originalNormalizedFields,
@@ -35,12 +50,12 @@ export function useForm<
     normalizedButtons,
     normalizedSettings,
   } = bus.execute(
-    new CreateFormCommand(_id, rawFields, rawButtons, rawSettings, responseInterceptor, notifications, rulesConfig),
+    new CreateFormCommand(_id, fields, buttons, settings, responseInterceptor, notifications, rulesConfig),
   )
 
-  const fields = reactive(clonedNormalizedFields) as NormalizedFields<TypeFields>
-  const buttons = reactive(normalizedButtons) as NormalizedButtons<ConvertToNormalizedFormButtons<TypeButtons>>
-  const settings = reactive(normalizedSettings) as TypeSettings & NormalizedSettings
+  Object.assign(settings, normalizedSettings)
+  Object.assign(fields, clonedNormalizedFields)
+  Object.assign(buttons, normalizedButtons)
 
   formStore.save(id, {
     originalNormalizedFields,
@@ -48,6 +63,8 @@ export function useForm<
     settings,
     buttons,
   })
+
+  createProxy()
 
   return {
     id,

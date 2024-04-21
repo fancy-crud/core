@@ -1,13 +1,4 @@
 <template>
-  <!-- <v-file-input
-    v-bind="computedAttrs"
-    :label="props.field.label"
-    :hint="props.field.hintText"
-    :error-messages="props.field.errors"
-  >
-    <f-file-list @remove="removeFile" :items="filesList" />
-  </v-file-input> -->
-
   <q-file v-bind="computedAttrs" v-model="modelValue" outlined>
     <template #prepend>
       <q-icon name="attach_file" />
@@ -32,16 +23,4 @@ const computedAttrs = computed(() => {
     ...props.field.wrapper, ...props.field,
   } as any
 })
-
-// function removeFile(file: File) {
-//   if (!vmodel.value.modelValue)
-//     return
-
-//   if (Array.isArray(vmodel.value.modelValue)) {
-//     vmodel.value['onUpdate:modelValue'](vmodel.value.modelValue.filter(f => f.name !== file.name))
-//     return
-//   }
-
-//   vmodel.value['onUpdate:modelValue'](null)
-// }
 </script>

@@ -61,12 +61,7 @@ export class CreateFormHandler implements ICreateFormHandler {
       new NormalizeButtonsCommand(rawButtons),
     ) as ConvertToNormalizedFormButtons<V>
 
-    normalizedButtons.main.onClick = () => {
-      if (rawButtons.main?.onClick) {
-        rawButtons.main.onClick()
-        return
-      }
-
+    normalizedButtons.main.onClick = rawButtons.main?.onClick || (() => {
       bus.execute(
         new SaveFormCommand(formId, {
           onSuccess(response?: StandardResponseStructure) {
@@ -81,7 +76,7 @@ export class CreateFormHandler implements ICreateFormHandler {
           },
         }),
       )
-    }
+    })
 
     this.formStore.save(formId, {
       originalNormalizedFields,

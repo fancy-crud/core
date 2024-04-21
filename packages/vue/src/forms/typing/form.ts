@@ -9,6 +9,7 @@ import type {
   ResponseInterceptorState,
   RuleConfigState,
 } from '@fancy-crud/core'
+import type { ArgProxy } from '@packages/vue/common'
 
 export interface UseForm<T, U, S> {
   id: symbol
@@ -19,10 +20,10 @@ export interface UseForm<T, U, S> {
 }
 
 export interface Args<T, U, S> {
-  fields: T
+  fields: ArgProxy<T>
   id?: string
-  buttons?: U
-  settings?: S
+  buttons?: ArgProxy<U>
+  settings?: ArgProxy<S>
   rulesConfig?: RuleConfigState
   responseInterceptor?: ResponseInterceptorState
   notifications?: NotificationState
