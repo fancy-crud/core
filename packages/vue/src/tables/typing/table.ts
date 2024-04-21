@@ -20,10 +20,10 @@ export interface TableArgs<
   list?: ArgProxy<RawTableList<L>>
 }
 
-export interface UseTable<T extends BaseTableForm = any, U = any, S = any, F = any, B = any, L = any, P = any> {
+export interface UseTable<T extends BaseTableForm = any, U = any, S extends RawTableSettings = any, F = any, B = any, L = any, P = any> {
   id: symbol
   form: T
-  columns: FieldAsColumn<T['fields'], U>
+  columns: S['autoInferColumns'] extends false ? FieldAsColumn<{}, U> : FieldAsColumn<T['fields'], U>
   settings: S & NormalizedTableSettings
   pagination: P & NormalizedTablePagination
   filterParams: F

@@ -2,7 +2,7 @@ import type { DeleteRequestOptions, OnFinally } from '@packages/core/common/http
 import type { NormalizedTableFilters } from './filters'
 import type { BaseTableForm, FieldAsColumn, MappedRawColumn, ObjectWithNormalizedColumns } from './column'
 import type { NormalizedTablePagination } from './pagination'
-import type { NormalizedTableSettings } from './settings'
+import type { NormalizedTableSettings, RawTableSettings } from './settings'
 import type { NormalizedTableButtons } from './buttons'
 import type { NormalizedTableList } from './list'
 
@@ -27,10 +27,10 @@ export interface DeleteRecordOptions extends DeleteRequestOptions {
   onFinally: OnFinally
 }
 
-export interface Table<T extends BaseTableForm, U, S, F, B, L, P> {
+export interface Table<T extends BaseTableForm, U, S extends RawTableSettings, F, B, L, P> {
   id: symbol
   form: T
-  columns: FieldAsColumn<T['fields'], U>
+  columns: S['autoInferColumns'] extends false ? FieldAsColumn<{}, U> : FieldAsColumn<T['fields'], U>
   settings: S & NormalizedTableSettings
   pagination: P & NormalizedTablePagination
   filterParams: F

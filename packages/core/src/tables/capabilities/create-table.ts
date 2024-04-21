@@ -25,15 +25,18 @@ export class CreateTableHandler implements ICreateTableHandler {
       buttons: rawButtons = {} as RawTableButtons,
       settings: rawSettings = {
         url: form?.settings?.url,
-      },
+      } as RawTableSettings,
       list: rawList = {} as RawTableList<TableListDataType>,
     } = command
+
+    if (!rawSettings.url)
+      rawSettings.url = form?.settings?.url ?? ''
 
     const bus = new Bus()
     const id = Symbol('')
 
     const columns = bus.execute(
-      new NormalizeColumnsCommand(rawColumns, form.fields),
+      new NormalizeColumnsCommand(rawColumns, rawSettings.autoInferColumns === false ? {} : form.fields),
     ) as FieldAsColumn<TableFormType['fields'], TableColumnsType>
 
     const pagination = bus.execute(

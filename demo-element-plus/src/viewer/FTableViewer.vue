@@ -55,6 +55,7 @@ const table = useTable({
   form,
   columns: {
     gender: {
+      label: 'Gender',
       format: (value: string) => value === 'm' ? 'Male' : 'Female',
       width: 700,
     },
@@ -62,6 +63,9 @@ const table = useTable({
       format: (value: string) => 'anything',
     },
     actions: { value: 'actions', label: '', width: '200px', align: 'right' },
+  },
+  settings: {
+    autoInferColumns: false,
   },
   pagination: {
     rowsPerPage: 10,
