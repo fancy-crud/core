@@ -1,5 +1,5 @@
 import { handlers } from '../axioma'
-import type { BusCommand, BusHandlerInstance, CommandReturn, IBaseCommand, IBus } from '../axioma'
+import type { BusCommand, BusHandlerInstance, IBaseCommand, IBus, IBusExecuteReturn } from '../axioma'
 
 export class Bus implements IBus {
   private hasImplicitHandler(command: BusCommand | IBaseCommand): command is BusCommand {
@@ -30,7 +30,7 @@ export class Bus implements IBus {
     return handler.execute(command)
   }
 
-  execute<U extends BusCommand | IBaseCommand>(command: U, providers?: any[]): U extends IBaseCommand ? U['$meta']['returnType'] : CommandReturn<Exclude<U, IBaseCommand>> {
+  execute<U extends BusCommand | IBaseCommand>(command: U, providers?: any[]): IBusExecuteReturn<U> {
     if (this.hasImplicitHandler(command))
       return this.implicitHandler(command, providers)
 
