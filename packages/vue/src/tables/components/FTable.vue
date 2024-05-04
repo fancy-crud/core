@@ -84,8 +84,6 @@ const computedData = computed<any[]>(() => {
   return table.list.data
 })
 
-props.list.fetchData()
-
 const tableHeaderVBind = computed(() => {
   const dump = props.buttons.dump
 

@@ -116,6 +116,9 @@ export class CreateTableHandler implements ICreateTableHandler {
       list,
     })
 
+    if (list.options.autoTrigger)
+      list.fetchData()
+
     return {
       id,
       columns,
@@ -128,4 +131,3 @@ export class CreateTableHandler implements ICreateTableHandler {
     }
   }
 }
-
