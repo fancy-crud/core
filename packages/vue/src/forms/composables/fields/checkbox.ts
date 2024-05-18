@@ -12,7 +12,15 @@ export function useCheckboxField<T = any>(props: DefaultProps & { field: Normali
 
   const { validate } = useRules(fields, ruleConfigStore.searchById(props.formId))
 
-  const { options } = useOptions(props)
+  const isABooleanCheckbox = (
+    !Array.isArray(props.field.options)
+    && !props.field.multiple
+    && !props.field.url
+    && !props.field.optionLabel
+    && !props.field.optionValue
+  )
+
+  const { options } = useOptions(props, isABooleanCheckbox)
   const { hintText, hasFieldErrors } = useHintText(props)
 
   const inRowDisplay = computed(() => {
