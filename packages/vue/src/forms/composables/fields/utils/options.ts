@@ -5,15 +5,26 @@ interface Props {
     options?: any[]
     optionValue?: string
     optionLabel?: string
+    label?: string
   }
 }
 
-export function useOptions(props: Props) {
+export function useOptions(props: Props, isABooleanCheckbox: boolean) {
   const options = computed(() => {
-    const options = props.field.options || []
+    let options = props.field.options || []
+    let defaultOptionValue = ''
+    let defaultOptionLabel = ''
 
-    const optionValue = props.field.optionValue || ''
-    const optionLabel = props.field.optionLabel || ''
+    if (isABooleanCheckbox) {
+      options = [
+        { label: props.field.label, value: true },
+      ]
+      defaultOptionLabel = 'label'
+      defaultOptionValue = 'value'
+    }
+
+    const optionValue = props.field.optionValue || defaultOptionValue
+    const optionLabel = props.field.optionLabel || defaultOptionLabel
 
     return options.reduce((previousValue: Options, currentValue: any): Options => {
       const value: unknown = currentValue[optionValue] || currentValue
