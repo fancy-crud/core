@@ -14,7 +14,8 @@ export function useSelectField<T>(props: { formId: symbol; field: NormalizedSele
 
   const { hintText, hasFieldErrors } = useHintText(props)
 
-  const { options } = useOptions(props)
+  const isBooleanField = false
+  const { options } = useOptions(props, isBooleanField)
 
   const attrs = computed(() => {
     const {

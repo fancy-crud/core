@@ -9,13 +9,13 @@ interface Props {
   }
 }
 
-export function useOptions(props: Props, isABooleanCheckbox: boolean) {
+export function useOptions(props: Props, isBoolean: boolean) {
   const options = computed(() => {
     let options = props.field.options || []
     let defaultOptionValue = ''
     let defaultOptionLabel = ''
 
-    if (isABooleanCheckbox) {
+    if (isBoolean) {
       options = [
         { label: props.field.label, value: true },
       ]
