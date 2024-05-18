@@ -27,6 +27,7 @@ export interface BaseRawField extends Record<string, any> {
   recordValue?: (value: any) => unknown
   interceptOptions?: (options: any) => any[]
   parseModelValue?: (value: any) => unknown
+  getComponent?: () => any
 }
 
 export interface DefaultAttributes {
@@ -39,6 +40,7 @@ export interface DefaultAttributes {
   debounceTime: number
   recordValue: (value: any) => unknown
   interceptOptions: (options: any) => any[]
+  getComponent: () => any
 }
 
 export type FieldNormalizer<T> = T & DefaultAttributes
