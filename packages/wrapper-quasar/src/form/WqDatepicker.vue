@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts" setup>
-import { QDate, QIcon, QInput, QPopupProxy } from 'quasar'
+import { QBtn, QDate, QIcon, QInput, QPopupProxy, ClosePopup as vClosePopup } from 'quasar'
 import type { NormalizedDatepickerField } from '@fancy-crud/vue'
 import { useDatepickerField } from '@fancy-crud/vue'
 
