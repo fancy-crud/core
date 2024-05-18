@@ -41,7 +41,7 @@ const props = defineProps<{
 const bus = new Bus()
 
 const computedFields = computed(() => filterFields(props.fields, props.settings.mode).filter(
-  ([_, field]) => field.hidden !== true || field.exclude !== true),
+  ([_, field]) => field.hidden !== true),
 )
 
 const defaultControls: Record<string, any> = {
@@ -58,7 +58,7 @@ const defaultControls: Record<string, any> = {
 
 onMounted(() => {
   const fields = Object.fromEntries(
-    filterFields(props.fields, props.settings.mode).filter(([_, field]) => field.exclude !== true),
+    filterFields(props.fields, props.settings.mode),
   )
   bus.execute(
     new GetForeignKeyValuesCommand(fields),

@@ -17,6 +17,7 @@ const form = useForm({
       wrapper: {
         class: 'col-span-12',
       },
+      exclude: true,
     },
     gender: {
       type: FieldType.select,
@@ -27,6 +28,7 @@ const form = useForm({
         { label: 'Male', value: 'm' },
         { label: 'Female', value: 'f' },
       ],
+      hidden: true,
     },
     created_at: {
       type: FieldType.text,
@@ -42,12 +44,6 @@ const form = useForm({
   settings: {
     url: 'artists/',
     title: '{{ Crear artista | Actualizar artista }}',
-  },
-  responseInterceptor: {
-    // 201: (formId, response) => {
-    //   console.log('🚀 ~ file: FTableViewer.vue:65 ~ response:', response)
-    //   console.log(response)
-    // },
   },
 })
 
