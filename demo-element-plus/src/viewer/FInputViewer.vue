@@ -6,7 +6,6 @@
 </template>
 
 <script lang='ts' setup>
-// import { email, string } from 'valibot'
 import { FieldType, useForm } from '@fancy-crud/vue'
 import { Bus, ResetFieldsByFormIdCommand } from '@fancy-crud/core'
 
@@ -18,7 +17,7 @@ const form = useForm({
   fields: () => ({
     name: {
       type: FieldType.text,
-      label: 'First name',
+      label: title.value,
       placeholder: 'Como asi pues?',
       hintText: 'Display some message',
       modelValue: title.value,

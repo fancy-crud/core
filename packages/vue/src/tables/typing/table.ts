@@ -1,6 +1,8 @@
 import type { BaseTableForm, ConvertToNormalizedTableButtons, FieldAsColumn, MappedRawColumn, NormalizedColumn, NormalizedTableButtons, NormalizedTableList, NormalizedTablePagination, NormalizedTableSettings, Pagination, RawTableButtons, RawTableList, RawTablePagination, RawTableSettings } from '@fancy-crud/core'
 import type { ArgProxy } from '@packages/vue/common'
 
+type MappedRawColumnsOrder<S extends RawTableSettings, U> = S & { columnsOrder?: (keyof U | '...')[] }
+type MappedNormalizedColumnsOrder<S, U> = Omit<S, 'columnsOrder'> & NormalizedTableSettings & { columnsOrder: (keyof U | '...')[] }
 export interface TableArgs<
   T extends BaseTableForm,
   U,
@@ -14,7 +16,7 @@ export interface TableArgs<
   form?: T
   columns?: ArgProxy<MappedRawColumn<T['fields'], U>>
   pagination?: ArgProxy<P>
-  settings?: ArgProxy<S>
+  settings?: ArgProxy<MappedRawColumnsOrder<S, MappedRawColumn<T['fields'], U>>>
   filterParams?: ArgProxy<F>
   buttons?: ArgProxy<B>
   list?: ArgProxy<RawTableList<L>>
@@ -24,7 +26,7 @@ export interface UseTable<T extends BaseTableForm = any, U = any, S extends RawT
   id: symbol
   form: T
   columns: S['autoInferColumns'] extends false ? FieldAsColumn<{}, U> : FieldAsColumn<T['fields'], U>
-  settings: S & NormalizedTableSettings
+  settings: MappedNormalizedColumnsOrder<S, MappedRawColumn<T['fields'], U>>
   pagination: P & NormalizedTablePagination
   filterParams: F
   buttons: ConvertToNormalizedTableButtons<B>

@@ -1,22 +1,15 @@
 <template>
-  <q-input v-model="r" />
   <div class="pb-5">
     <f-table v-bind="table">
       <template #column-created_at>
         <a href="https://google.com" class="underline text-primary-500" target="_blank">Haz click</a>
       </template>
     </f-table>
-
-    <!-- <q-btn icon="plus" /> -->
   </div>
 </template>
 
 <script lang='ts' setup>
 import { FieldType, useForm, useTable } from '@fancy-crud/vue'
-
-// const formats = useFormats()
-
-const r = ref(1)
 
 const form = useForm({
   id: 'formulario',
@@ -63,11 +56,12 @@ const table = useTable({
     created_at: {
       format: (value: unknown) => 'Lo que sea',
     },
-    actions: { value: 'actions', label: '', align: 'right' },
+    actions: { value: 'actions', label: '', align: 'left' },
   },
   settings: {
     url: form.settings.url,
     lookupField: 'id',
+    columnsOrder: ['actions', '...'],
   },
   pagination: {
     rowsPerPage: 10,
