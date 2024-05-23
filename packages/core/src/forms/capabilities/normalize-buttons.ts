@@ -13,7 +13,7 @@ export class NormalizeButtonsHandler implements INormalizeButtonsHandler {
       ...main,
       class: main?.class || defaults.mainButton?.class,
       isLoading: main?.isLoading || false,
-      hidden: aux.hidden || false,
+      hidden: main.hidden || false,
       label: main?.label ?? `{{ ${t('create-new')} | ${t('update-record')} }}`,
     }
 

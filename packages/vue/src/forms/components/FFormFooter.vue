@@ -2,6 +2,7 @@
   <footer class="f-form__footer">
     <slot v-bind="{ mainButton, auxButton, getLabel, onMainClick, onAuxClick, isMainButtonDisabled }">
       <f-button
+        v-if="!mainButton.hidden"
         @click="onMainClick"
         v-bind="mainButton"
         :disabled="isMainButtonDisabled"
@@ -11,6 +12,7 @@
       </f-button>
 
       <f-button
+        v-if="!auxButton.hidden"
         @click="onAuxClick"
         v-bind="auxButton"
         class="f-button f-form__footer__button f-form__footer__button--aux"
