@@ -1,12 +1,16 @@
 <template>
   <div class="bg-white rounded-xl p-4">
-    <f-form v-bind="form" />
+    <f-form v-bind="form">
+      <template #form-footer="bind">
+        <f-form-footer v-bind="bind" />
+      </template>
+    </f-form>
   </div>
 </template>
 
 <script lang='ts' setup>
 // import { email, string } from 'valibot'
-import { FieldType, useForm } from '@fancy-crud/vue'
+import { FFormFooter, FieldType, useForm } from '@fancy-crud/vue'
 import { Bus, FORM_MODE, ResetFieldsByFormIdCommand } from '@fancy-crud/core'
 
 const bus = new Bus()

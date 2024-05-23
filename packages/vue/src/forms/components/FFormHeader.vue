@@ -1,6 +1,6 @@
 <template>
   <header class="f-form__header">
-    <slot v-bind="{ formModeTitle }">
+    <slot v-bind="{ formModeTitle, title, mode }">
       <h3 class="f-form__header__title">
         {{ formModeTitle }}
       </h3>

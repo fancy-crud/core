@@ -2,9 +2,13 @@
   <form
     class="f-form"
   >
+    <slot name="before-header" />
+
     <f-form-header v-slot="bind" :title="props.settings.title" :mode="props.settings.mode">
       <slot name="form-header" v-bind="bind" />
     </f-form-header>
+
+    <slot name="before-body" />
 
     <f-form-body :fields="props.fields" :settings="props.settings" :form-id="props.id">
       <template
@@ -15,6 +19,8 @@
         <slot :name="slotName" v-bind="bind" />
       </template>
     </f-form-body>
+
+    <slot name="before-footer" />
 
     <f-form-footer
       @main-click="onMainClick"
