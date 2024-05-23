@@ -8,7 +8,7 @@ import { createApp } from 'vue'
 
 import { FancyCrud } from '@fancy-crud/vue'
 
-import { Quasar } from 'quasar'
+import { Notify, Quasar } from 'quasar'
 // import quasarIconSet from 'quasar/icon-set/material-icons'
 import fancyConfig from './plugins/fancy-crud'
 
@@ -17,7 +17,9 @@ import App from './App.vue'
 const app = createApp(App)
 
 app.use(Quasar, {
-  plugins: {},
+  plugins: {
+    Notify,
+  },
   // iconSet: quasarIconSet,
 })
 
