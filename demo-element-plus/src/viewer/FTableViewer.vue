@@ -17,7 +17,7 @@ const form = useForm({
       wrapper: {
         class: 'col-span-12',
       },
-      exclude: true,
+      modelValue: 'John',
     },
     gender: {
       type: FieldType.select,
@@ -28,7 +28,7 @@ const form = useForm({
         { label: 'Male', value: 'm' },
         { label: 'Female', value: 'f' },
       ],
-      hidden: true,
+      modelValue: 'm',
     },
     created_at: {
       type: FieldType.text,

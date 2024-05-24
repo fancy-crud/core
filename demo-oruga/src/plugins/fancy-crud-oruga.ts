@@ -1,7 +1,7 @@
 import { defineConfig } from '@fancy-crud/vue'
 import axios from 'axios'
 
-import components, { styles } from '@fancy-crud/wrapper-oruga-ui'
+import { components, styles } from '@fancy-crud/wrapper-oruga-ui'
 import { valibotSafeParser as parser } from '@fancy-crud/plugin-rule-parsers'
 import { vueToastifyPlugin } from '@fancy-crud/plugin-vue3-toastify'
 
@@ -16,5 +16,5 @@ export default defineConfig({
   rules: {
     parser,
   },
-  toast: vueToastifyPlugin({ autoClose: 5000 }),
+  toast: vueToastifyPlugin(),
 })

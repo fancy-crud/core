@@ -1,6 +1,10 @@
 <template>
   <div class="bg-white rounded-xl p-4">
-    <f-form @success="printing" @error="printing" v-bind="form" class="el-form--label-top" />
+    <f-form v-bind="form">
+      <template #form-footer="bind">
+        <f-form-footer v-bind="bind" />
+      </template>
+    </f-form>
   </div>
 
   <button @click="loadData">
@@ -10,7 +14,7 @@
 
 <script lang='ts' setup>
 // import { email, string } from 'valibot'
-import { FieldType, useForm } from '@fancy-crud/vue'
+import { FFormFooter, FieldType, useForm } from '@fancy-crud/vue'
 import { Bus, LoadRemoteRecordCommand, ResetFieldsByFormIdCommand } from '@fancy-crud/core'
 
 const bus = new Bus()

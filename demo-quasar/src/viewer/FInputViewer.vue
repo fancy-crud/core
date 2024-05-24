@@ -54,7 +54,7 @@ const form = useForm({
   buttons: {
     main: {
       label: '{{ Lanzar | Modificar }}',
-      // hidden: true,
+      hidden: true,
     },
     aux: {
       // hidden: true,

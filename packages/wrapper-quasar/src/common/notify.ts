@@ -30,3 +30,6 @@ export function quasarNotifyPlugin<NotificationType extends Record<string, any> 
     },
   }
 }
+
+export const toast = quasarNotifyPlugin
+export const notify = quasarNotifyPlugin
