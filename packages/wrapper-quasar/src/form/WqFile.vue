@@ -16,11 +16,15 @@ const props = defineProps<{
   field: NormalizedFileField
 }>()
 
-const { modelValue } = useFileField(props)
+const { modelValue, hintText, hasFieldErrors } = useFileField(props)
 
 const computedAttrs = computed(() => {
   return {
-    ...props.field.wrapper, ...props.field,
+    ...props.field.wrapper,
+    ...props.field,
+    errorMessage: hintText.value,
+    error: hasFieldErrors.value,
+    hint: hintText.value,
   } as any
 })
 </script>
