@@ -52,3 +52,9 @@ function getValue(row: any, column: NormalizedColumn, rowIndex: number) {
   )
 }
 </script>
+
+<style lang="sass">
+.el-table__cell
+  .el-form-item__content
+    justify-content: center
+</style>

@@ -9,29 +9,28 @@ interface Props {
   }
 }
 
-export function useOptions(props: Props, isBoolean: boolean) {
+export function useOptions(props: Props, isBoolean = false) {
   const options = computed(() => {
-    let options = props.field.options || []
-    let defaultOptionValue = ''
-    let defaultOptionLabel = ''
+    let rawOptions = props.field.options || []
+    let optionValue = props.field.optionValue ?? ''
+    let optionLabel = props.field.optionLabel ?? ''
 
     if (isBoolean) {
-      options = [
-        { label: props.field.label, value: true },
+      rawOptions = [
+        { label: props.field.label ?? null, value: true },
       ]
-      defaultOptionLabel = 'label'
-      defaultOptionValue = 'value'
+      optionLabel = 'label'
+      optionValue = 'value'
     }
 
-    const optionValue = props.field.optionValue || defaultOptionValue
-    const optionLabel = props.field.optionLabel || defaultOptionLabel
-
-    return options.reduce((previousValue: Options, currentValue: any): Options => {
+    const normalizedOptions = rawOptions.reduce((previousValue: Options, currentValue: any): Options => {
       const value: unknown = currentValue[optionValue] || currentValue
-      const label: unknown = currentValue[optionLabel] || currentValue
+      const label: unknown = currentValue[optionLabel] ?? currentValue
 
       return [...previousValue, [label, value]]
     }, [] as Options)
+
+    return normalizedOptions
   })
 
   return { options }

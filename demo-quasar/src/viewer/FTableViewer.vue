@@ -14,8 +14,6 @@
 <script lang='ts' setup>
 import { FieldType, useForm, useTable } from '@fancy-crud/vue'
 
-// const formats = useFormats()
-
 const r = ref(1)
 
 const form = useForm({
@@ -38,7 +36,7 @@ const form = useForm({
       },
     },
     created_at: {
-      type: FieldType.text,
+      type: FieldType.datepicker,
       label: 'Created at',
       updateOnly: true,
       readonly: true,
@@ -62,11 +60,17 @@ const table = useTable({
     },
     created_at: {
       format: (value: unknown) => 'Lo que sea',
+      input: {
+        isEnable: true,
+      },
+    },
+    is_active: {
+      input: { isEnable: true, type: FieldType.checkbox },
     },
     actions: { value: 'actions', label: '', align: 'right' },
   },
   settings: {
-    url: form.settings.url,
+    url: 'artists/',
     lookupField: 'id',
   },
   pagination: {

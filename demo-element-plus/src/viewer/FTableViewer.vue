@@ -51,17 +51,27 @@ const table = useTable({
   form,
   columns: {
     gender: {
-      format: (value: string) => value === 'm' ? 'Male' : 'Female',
-      width: 700,
+      input: {
+        isEnable: true,
+      },
     },
     created_at: {
-      format: (value: string) => 'anything',
+      input: {
+        isEnable: true,
+        readonly: false,
+        disabled: false,
+        type: FieldType.datepicker,
+      },
+    },
+    is_active: {
+      label: 'Is active',
+      input: { isEnable: true, type: FieldType.checkbox },
+      align: 'center',
     },
     actions: { value: 'actions', label: '', width: '200px', align: 'right' },
   },
   pagination: {
     rowsPerPage: 10,
-    // hidden: true,
   },
   filterParams: {
     gender: '',
