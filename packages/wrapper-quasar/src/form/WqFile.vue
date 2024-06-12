@@ -19,9 +19,10 @@ const props = defineProps<{
 const { modelValue, hintText, hasFieldErrors } = useFileField(props)
 
 const computedAttrs = computed(() => {
+  const { rules: _rules, ...field } = props.field
   return {
     ...props.field.wrapper,
-    ...props.field,
+    ...field,
     errorMessage: hintText.value,
     error: hasFieldErrors.value,
     hint: hintText.value,
