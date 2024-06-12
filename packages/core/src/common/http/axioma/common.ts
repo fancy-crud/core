@@ -8,6 +8,7 @@ export function onSuccess(response: any, options?: RequestDefaultOptions) {
 export function onFailed(error: any, options?: RequestDefaultOptions) {
   if (typeof options?.onFailed === 'function')
     options?.onFailed(error)
+  console.error(error)
 }
 
 export function onFinally(options?: RequestDefaultOptions) {
