@@ -37,19 +37,20 @@ export class SetListDataWithReactivityFormsHandler implements ISetListDataHandle
 
       acc[columnName] = {
         ...field,
-        ...column,
         label: '',
       }
       return acc
     }, {} as ObjectWithRawFields)
 
+    const settings = form?.settings ?? table?.settings ?? {}
+
     items = items.map((record: any) => {
       const $form = useForm({
         fields: allowInputFields,
         settings: {
-          ...form.settings,
+          ...settings,
           mode: FORM_MODE.update,
-          lookupValue: record[form.settings.lookupField],
+          lookupValue: record[settings.lookupField],
         },
       })
 
