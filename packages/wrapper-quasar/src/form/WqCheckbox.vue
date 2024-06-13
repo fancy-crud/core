@@ -51,3 +51,7 @@ function getCheckboxAttributes(value: unknown) {
 }
 </script>
 
+<style lang="sass">
+.checkbox-group--column
+  justify-content: end
+</style>
