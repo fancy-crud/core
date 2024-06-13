@@ -46,7 +46,6 @@ function getCheckboxAttributes(value: unknown) {
   }
 
   const { id, label, ...attrs } = attributes
-
   return attrs
 }
 </script>
