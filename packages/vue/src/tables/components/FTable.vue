@@ -3,7 +3,7 @@
     <f-table-header-actions v-bind="tableHeaderVBind" />
   </slot>
 
-  <f-modal v-model="table.settings.displayFormDialog">
+  <f-modal v-model="table.settings.displayFormDialog" v-bind="table.settings.modal">
     <slot name="table-form" v-bind="tableFormVBind">
       <div v-if="tableForm.settings.loading" class="loader-wrapper">
         <div :class="{ loader: tableForm.settings.loading }" />
