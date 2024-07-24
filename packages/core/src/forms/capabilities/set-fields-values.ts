@@ -2,11 +2,14 @@ import type { ISetFieldsValuesHandler, NormalizedFieldToAssignValues, SetFieldsV
 
 export class SetFieldsValuesHandler implements ISetFieldsValuesHandler {
   private setFieldValue(field: NormalizedFieldToAssignValues, value: unknown): void {
-    if (field.type !== 'file' && field.type !== 'image')
+    const isFile = ['file', 'image'].includes(field.type)
+    if (!isFile)
       field.modelValue = value
 
-    else
-      field.fileUrl = String(value)
+    else {
+      field.fileUrl = value ? String(value) : null
+      field.modelValue = undefined
+    }
   }
 
   execute({ fields, recordValues, settings }: SetFieldsValuesCommand): void {

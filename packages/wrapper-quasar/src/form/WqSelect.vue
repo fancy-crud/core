@@ -1,5 +1,4 @@
 <template>
-  <div>
     <q-select
       v-bind="{
         emitValue: !!props.field.optionValue,
@@ -24,7 +23,6 @@
         <slot :name="slotName" />
       </template>
     </q-select>
-  </div>
 </template>
 
 <script lang="ts" setup>
