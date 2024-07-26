@@ -11,6 +11,9 @@ export class ValidateFormHandler implements IValidateFormHandler {
     const isValid = Object.values(fields).every((field) => {
       const command = new ValidateFieldRulesCommand(field, options)
 
+      if (field.hidden || field.exclude)
+        return true
+
       const result = this.validateFieldRules.execute(command)
       return result === true
     })
