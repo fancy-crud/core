@@ -2,7 +2,7 @@ import type { BaseCommand, BaseHandler } from '@fancy-crud/bus'
 import type { BaseObjectWithNormalizedFields, NormalizedField, RuleConfig } from '@packages/core/forms/axioma'
 import { meta } from '@fancy-crud/bus'
 
-type MinimumNormalizedField = Pick<NormalizedField, 'rules' | 'errors' | 'modelValue' | 'modelKey'>
+type MinimumNormalizedField = Pick<NormalizedField, 'rules' | 'errors' | 'modelValue' | 'modelKey' | 'hidden' | 'exclude'>
 
 export class ValidateFormCommand implements BaseCommand {
   public readonly meta = meta(IValidateFormHandler)
