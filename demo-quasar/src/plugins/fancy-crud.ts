@@ -2,7 +2,7 @@ import { defineConfig } from '@fancy-crud/vue'
 import axios from 'axios'
 
 import { components, styles, toast } from '@fancy-crud/wrapper-quasar'
-import { valibotSafeParser as parser } from '@fancy-crud/plugin-rule-parsers'
+import { zodSafeParser as parser } from '@fancy-crud/plugin-rule-parsers'
 
 axios.defaults.baseURL = 'http://localhost:9000/api/'
 

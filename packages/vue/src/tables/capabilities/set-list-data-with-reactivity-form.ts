@@ -35,7 +35,12 @@ export class SetListDataWithReactivityFormsHandler implements ISetListDataHandle
     const allowInputFields = allowInputColumns.reduce((acc, [columnName, column]) => {
       const field = column.input
 
+      const exclude = ['file', 'image'].includes(field.type)
+      const preview = exclude
+
       acc[columnName] = {
+        preview,
+        exclude,
         ...field,
         label: '',
       }

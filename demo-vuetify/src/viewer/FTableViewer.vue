@@ -31,6 +31,13 @@ const form = useForm({
         class: 'col-span-12',
       },
     },
+    image2: {
+      type: FieldType.image,
+      label: 'Imagen',
+      wrapper: {
+        class: 'col-span-6',
+      },
+    },
     created_at: {
       type: FieldType.text,
       label: 'Created at',
@@ -46,14 +53,6 @@ const form = useForm({
     url: 'artists/',
     title: '{{ Crear artista | Actualizar artista }}',
   },
-  buttons: {
-    main: {
-      onClick(a: number, b: number) {
-
-      },
-      chubaca: '',
-    },
-  },
 })
 
 const table = useTable({
@@ -64,6 +63,11 @@ const table = useTable({
     },
     created_at: {
       format: (value: unknown) => 'Lo que sea',
+    },
+    image2: {
+      input: {
+        isEnable: true,
+      },
     },
     actions: { value: 'actions', label: '' },
   },

@@ -13,6 +13,7 @@
 
 <script lang='ts' setup>
 import { FieldType, useForm, useTable } from '@fancy-crud/vue'
+import { z } from 'zod';
 
 const r = ref(1)
 
@@ -26,13 +27,24 @@ const form = useForm({
       wrapper: {
         class: 'col-span-12',
       },
-      parseModelValue: Number,
+
     },
     gender: {
-      type: FieldType.text,
+      type: FieldType.select,
       label: 'Gender',
+      rules: value => ({ value, rule: z.string().nonempty() }),
+      multiple: true,
+      exclude: true,
       wrapper: {
-        class: 'col-span-12',
+        class: 'col-span-6',
+      },
+    },
+    image2: {
+      type: FieldType.file,
+      label: 'Imagen',
+      preview: true,
+      wrapper: {
+        class: 'col-span-6',
       },
     },
     created_at: {
@@ -41,6 +53,14 @@ const form = useForm({
       updateOnly: true,
       readonly: true,
       disabled: true,
+      wrapper: {
+        class: 'col-span-12',
+      },
+    },
+    is_active: {
+      type: FieldType.checkbox,
+      label: 'Is active',
+      modelValue: false,
       wrapper: {
         class: 'col-span-12',
       },
@@ -55,17 +75,26 @@ const form = useForm({
 const table = useTable({
   form,
   columns: {
+    name: {
+    },
     gender: {
       format: (value: unknown) => value === 'm' ? 'Male' : 'Female',
     },
-    created_at: {
-      format: (value: unknown) => 'Lo que sea',
+    image2: {
+      label: 'Image',
       input: {
         isEnable: true,
+        type: FieldType.image,
       },
     },
+    created_at: {
+      format: (value: unknown) => 'Lo que sea',
+    },
     is_active: {
-      input: { isEnable: true, type: FieldType.checkbox },
+      input: {
+        type: FieldType.checkbox,
+        isEnable: true,
+      },
     },
     actions: { value: 'actions', label: '', align: 'right' },
   },

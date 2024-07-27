@@ -24,7 +24,7 @@ const { modelValue, vmodel, filesList } = useFileField(props)
 
 const computedAttrs = computed(() => {
   return {
-    ...props.field.wrapper, ...props.field,
+    ...props.field.wrapper, ...props.field, type: 'file',
   } as any
 })
 

@@ -53,6 +53,7 @@ const defaultControls: Record<string, any> = {
   file: FFile,
   datepicker: FDatepicker,
   text: FText,
+  image: FFile,
   ...components,
 }
 

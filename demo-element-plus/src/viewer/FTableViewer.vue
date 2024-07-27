@@ -76,6 +76,12 @@ const table = useTable({
   filterParams: {
     gender: '',
   },
+  settings: {
+    url: form.settings.url,
+    modal: {
+      title: 'Crear record',
+    },
+  },
   buttons: {
     edit: {
       // onClick(row) {

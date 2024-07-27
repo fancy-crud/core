@@ -20,6 +20,16 @@
 import type { NormalizedColumn, NormalizedField, NormalizedTableButtons } from '@fancy-crud/core'
 import { ITableStore, components, injecting } from '@fancy-crud/core'
 
+import FCheckbox from '@packages/vue/forms/components/FCheckbox.vue'
+import FPassword from '@packages/vue/forms/components/FPassword.vue'
+import FColor from '@packages/vue/forms/components/FColor.vue'
+import FSelect from '@packages/vue/forms/components/FSelect.vue'
+import FRadio from '@packages/vue/forms/components/FRadio.vue'
+import FFile from '@packages/vue/forms/components/FFile.vue'
+import FDatepicker from '@packages/vue/forms/components/FDatepicker.vue'
+import FText from '@packages/vue/forms/components/FText.vue'
+import FFileReveal from '@packages/vue/forms/components/FFileReveal.vue'
+
 interface Row {
   $form: {
     id: symbol
@@ -47,10 +57,28 @@ const allowInputColumns = computed(() => {
 })
 
 function getComponent(field: NormalizedField) {
-  type ControlType = keyof typeof components
+  const defaultControls: Record<string, any> = {
+    checkbox: FCheckbox,
+    password: FPassword,
+    color: FColor,
+    select: FSelect,
+    radio: FRadio,
+    file: FFile,
+    datepicker: FDatepicker,
+    text: FText,
+    image: FFile,
+    filePreview: FFileReveal,
+    ...components,
+  }
 
-  const control = components[field.type]
-  return control ?? (components[field.type as ControlType] ?? components.text)
+  if (field.preview)
+    return defaultControls.filePreview
+
+  type ControlType = keyof typeof defaultControls
+
+  const control = defaultControls[field.type]
+
+  return control ?? (defaultControls[field.type as ControlType] ?? defaultControls.text)
 }
 
 function binding(row: Row, fieldName: string) {
