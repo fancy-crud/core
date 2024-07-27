@@ -29,12 +29,8 @@ export class ResponseInterceptorStoreService implements IResponseInterceptorStor
 
     const interceptor = state[code]
 
-    if (!interceptor) {
-      console.error(
-        `Unable to intercept response. Response interceptor of code ${code} does not exist`,
-      )
+    if (!interceptor)
       return
-    }
 
     interceptor(formId, payload)
   }
