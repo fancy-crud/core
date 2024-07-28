@@ -3,26 +3,6 @@ import type { ArgProxy } from '@packages/vue/common'
 
 type MappedRawColumnsOrder<S extends RawTableSettings, U> = S & { columnsOrder?: (keyof U | '...')[] }
 type MappedNormalizedColumnsOrder<S, U> = Omit<S, 'columnsOrder'> & NormalizedTableSettings & { columnsOrder: (keyof U | '...')[] }
-export interface TableArgs<
-  T extends BaseTableForm,
-  U,
-  S extends RawTableSettings,
-  F,
-  B extends RawTableButtons,
-  L,
-  P extends RawTablePagination,
-  RecordType = any,
-> {
-  id?: string
-  form?: T
-  columns?: ArgProxy<MappedRawColumn<T['fields'], U>>
-  pagination?: ArgProxy<P>
-  settings?: ArgProxy<MappedRawColumnsOrder<S, MappedRawColumn<T['fields'], U>>>
-  filterParams?: ArgProxy<F>
-  buttons?: ArgProxy<B>
-  list?: ArgProxy<RawTableList<L>>
-  record?: RecordType
-}
 
 export interface UseTable<
   T extends BaseTableForm,
@@ -43,6 +23,27 @@ export interface UseTable<
   buttons: ConvertToNormalizedTableButtons<B>
   list: NormalizedTableList<L>
   record: RecordType
+}
+
+export interface TableArgs<
+  T extends BaseTableForm,
+  U,
+  S extends RawTableSettings,
+  F,
+  B extends RawTableButtons,
+  L,
+  P extends RawTablePagination,
+  RecordType = any,
+> {
+  id?: string
+  form?: T
+  columns?: ArgProxy<MappedRawColumn<T['fields'], U>, UseTable<T, U, S, F, B, L, P, RecordType>>
+  pagination?: ArgProxy<P, UseTable<T, U, S, F, B, L, P, RecordType>>
+  settings?: ArgProxy<MappedRawColumnsOrder<S, MappedRawColumn<T['fields'], U>>, UseTable<T, U, S, F, B, L, P, RecordType>>
+  filterParams?: ArgProxy<F, UseTable<T, U, S, F, B, L, P, RecordType>>
+  buttons?: ArgProxy<B, UseTable<T, U, S, F, B, L, P, RecordType>>
+  list?: ArgProxy<RawTableList<L>, UseTable<T, U, S, F, B, L, P, RecordType>>
+  record?: RecordType
 }
 
 export interface TableBodyProps {

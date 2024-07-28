@@ -32,9 +32,9 @@ export interface UseForm<T, U, S, RecordObjectValueType extends RecordObjectValu
 }
 
 export interface Args<T, U, S, RecordObjectValueType extends RecordObjectValue = RecordObjectValue> {
-  fields: ArgProxy<InferRawModelValue<T, NonNullable<RecordObjectValueType>>>
+  fields: ArgProxy<InferRawModelValue<T, NonNullable<RecordObjectValueType>>, UseForm<T, U, S, RecordObjectValueType>>
   id?: string
-  buttons?: ArgProxy<U>
+  buttons?: ArgProxy<U, UseForm<T, U, S, RecordObjectValueType>>
   settings?: ArgProxy<S, UseForm<T, U, S, RecordObjectValueType>>
   rulesConfig?: RuleConfigState
   responseInterceptor?: ResponseInterceptorState
