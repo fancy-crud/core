@@ -56,6 +56,7 @@ export enum FieldType {
   select = 'select',
   file = 'file',
   datepicker = 'datepicker',
+  image = 'image',
 }
 
 export interface RawTextField extends BaseRawField {

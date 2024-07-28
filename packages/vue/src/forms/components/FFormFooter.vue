@@ -1,6 +1,6 @@
 <template>
   <footer class="f-form__footer">
-    <slot v-bind="{ mainButton, auxButton, getLabel, onMainClick, onAuxClick, isMainButtonDisabled }">
+    <slot v-bind="{ mainButton, auxButton, getLabel, onMainClick, onAuxClick, isMainButtonDisabled, buttons, settings, isFormValid }">
       <f-button
         v-if="!mainButton.hidden"
         @click="onMainClick"

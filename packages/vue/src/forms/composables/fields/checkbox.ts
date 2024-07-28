@@ -54,5 +54,6 @@ export function useCheckboxField<T = any>(props: DefaultProps & { field: Normali
     options,
     hintText,
     hasFieldErrors,
+    isABooleanCheckbox,
   }
 }

@@ -41,6 +41,7 @@ const form = useForm({
       label: 'Checkbox',
       type: 'checkbox',
       inRow: true,
+      modelValue: false,
       options: [true],
     },
     artists: {

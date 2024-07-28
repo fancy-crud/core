@@ -22,7 +22,7 @@ const props = defineProps<{
   field: NormalizedCheckboxField
 }>()
 
-const { modelValue, hintText, inRowDisplay, options, hasFieldErrors } = useCheckboxField(props)
+const { modelValue, hintText, inRowDisplay, options, hasFieldErrors, isABooleanCheckbox } = useCheckboxField(props)
 
 function getLabel(label: unknown): string {
   return String(label)
@@ -31,7 +31,7 @@ function getLabel(label: unknown): string {
 function getCheckboxAttributes(value: unknown) {
   let attributes: Record<string, unknown> = {}
 
-  if (props.field.multiple) {
+  if (!isABooleanCheckbox) {
     attributes = {
       val: value,
       ...props.field,
@@ -40,14 +40,17 @@ function getCheckboxAttributes(value: unknown) {
   else {
     attributes = {
       trueValue: value,
-      falseValue: null,
+      falseValue: false,
       ...props.field,
     }
   }
 
   const { id, label, ...attrs } = attributes
-
   return attrs
 }
 </script>
 
+<style lang="sass">
+.checkbox-group--column
+  justify-content: end
+</style>

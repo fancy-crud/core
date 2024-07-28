@@ -35,7 +35,7 @@
 <script lang="ts" setup>
 import { QTable, QTd } from 'quasar'
 import { Bus, GetColumnValueCommand } from '@fancy-crud/core'
-import type { TableBodyEmit, TableBodyProps } from '@fancy-crud/vue'
+import type { NormalizedColumnInput, TableBodyEmit, TableBodyProps } from '@fancy-crud/vue'
 import { FTableRowActions } from '@fancy-crud/vue'
 
 interface QuasarColumn {
@@ -48,6 +48,7 @@ interface QuasarColumn {
   allowCheckbox?: boolean | undefined
   allowImagePreview?: boolean | undefined
   exclude?: boolean | undefined
+  input: NormalizedColumnInput
 }
 
 const props = defineProps<TableBodyProps>()

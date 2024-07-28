@@ -1,4 +1,16 @@
-import type { BaseTableForm, ConvertToNormalizedTableButtons, FieldAsColumn, MappedRawColumn, NormalizedTableList, NormalizedTablePagination, NormalizedTableSettings, ObjectWithRawColumns, RawTableButtons, RawTableFilters, RawTablePagination, RawTableSettings } from '@fancy-crud/core'
+import type {
+  BaseTableForm,
+  ConvertToNormalizedTableButtons,
+  FieldAsColumn, MappedRawColumn,
+  NormalizedTableList,
+  NormalizedTablePagination,
+  NormalizedTableSettings,
+  ObjectWithRawColumns,
+  RawTableButtons,
+  RawTableFilters,
+  RawTablePagination,
+  RawTableSettings
+} from '@fancy-crud/core'
 import { Bus, CreateTableCommand, ITableStore, injectable, inject as injecting } from '@fancy-crud/core'
 import { useProxies } from '@packages/vue/common/composables'
 import type { TableArgs, UseTable } from '../typing'

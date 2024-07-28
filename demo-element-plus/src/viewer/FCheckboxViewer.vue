@@ -4,7 +4,7 @@
   </div>
 
   <div class="p-10 mt-10 border">
-    {{ form.fields.checkbox.modelValue }}
+    {{ form.fields.terms.modelValue }}
   </div>
 
   <button @click="resetFields" class="px-8 py-4 bg-primary-500 text-white font-bold">
@@ -35,7 +35,7 @@ const form = useForm({
       label: 'By clicking this checkbox, you agree to our terms and conditions',
       type: 'checkbox',
       inRow: true,
-      modelValue: false,
+      // modelValue: false,
     },
     checkbox: {
       label: 'Checkbox',

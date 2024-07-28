@@ -9,8 +9,10 @@ export class ValidateFormHandler implements IValidateFormHandler {
 
   execute({ fields, options }: ValidateFormCommand): boolean {
     const isValid = Object.values(fields).every((field) => {
-      const command = new ValidateFieldRulesCommand(field, options)
+      if (field.hidden || field.exclude)
+        return true
 
+      const command = new ValidateFieldRulesCommand(field, options)
       const result = this.validateFieldRules.execute(command)
       return result === true
     })

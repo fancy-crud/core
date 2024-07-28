@@ -7,7 +7,8 @@ export class NormalizeColumnsHandler implements INormalizeColumnsHandler {
     const mergeColumns = Object.assign({}, fields, columns)
 
     Object.keys(mergeColumns).forEach((columnName) => {
-      const columnFromField = fields ? fields[columnName] : { name: columnName, type: 'text' }
+      const DEFAULT_COLUMN = { name: columnName, type: 'text', input: { isEnable: false } }
+      const columnFromField = fields ? fields[columnName] ?? DEFAULT_COLUMN : DEFAULT_COLUMN
       const column = {
         ...columnFromField,
         ...(columns[columnName] || {}),
@@ -16,17 +17,20 @@ export class NormalizeColumnsHandler implements INormalizeColumnsHandler {
       const label = column.label || ''
       const value = column.name || columnName
 
-      const allowCheckbox = column.type === 'checkbox' && column?.allowCheckbox !== false
-      const allowImagePreview = column.type === 'image' && column?.allowImagePreview !== false
-
       const rawColumn = columns[columnName] ? columns[columnName] : {}
+
+      const input = fields ? fields[columnName] ?? {} : {}
 
       mappedColumns[columnName] = {
         label,
         value,
-        allowCheckbox,
-        allowImagePreview,
         ...rawColumn,
+        input: {
+          isEnable: false,
+          type: 'text',
+          ...input,
+          ...rawColumn.input,
+        },
       }
     })
 

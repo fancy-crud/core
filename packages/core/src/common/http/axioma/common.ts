@@ -6,8 +6,11 @@ export function onSuccess(response: any, options?: RequestDefaultOptions) {
 }
 
 export function onFailed(error: any, options?: RequestDefaultOptions) {
-  if (typeof options?.onFailed === 'function')
+  if (typeof options?.onFailed === 'function') {
     options?.onFailed(error)
+    return
+  }
+  console.error(error)
 }
 
 export function onFinally(options?: RequestDefaultOptions) {

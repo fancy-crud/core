@@ -1,12 +1,16 @@
 <template>
   <div class="bg-white rounded-xl p-4">
-    <f-form @success="printing" @error="printing" v-bind="form" class="el-form--label-top" />
+    <f-form v-bind="form">
+      <template #form-footer="bind">
+        <f-form-footer v-bind="bind" />
+      </template>
+    </f-form>
   </div>
   <input v-model="title">
 </template>
 
 <script lang='ts' setup>
-import { FieldType, useForm } from '@fancy-crud/vue'
+import { FieldType, useForm, FFormFooter } from '@fancy-crud/vue'
 import { Bus, ResetFieldsByFormIdCommand } from '@fancy-crud/core'
 
 const bus = new Bus()
@@ -49,20 +53,5 @@ const form = useForm({
     },
   }),
 })
-
-// function loadData(e: any) {
-//   bus.execute(
-//     new LoadRemoteRecordCommand(form.id, '9', {
-//       onInit() {
-//         form.buttons.main.loading = true
-//       },
-//       onFinally() {
-//         form.buttons.main.loading = false
-//       },
-//     }),
-//   )
-// }
-
-function printing(response: any) { console.log(response) }
 </script>
 

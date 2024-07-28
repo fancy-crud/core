@@ -2,9 +2,13 @@
   <form
     class="f-form"
   >
+    <slot name="before-form-header" />
+
     <f-form-header v-slot="bind" :title="props.settings.title" :mode="props.settings.mode">
       <slot name="form-header" v-bind="bind" />
     </f-form-header>
+
+    <slot name="before-form-body" />
 
     <f-form-body :fields="props.fields" :settings="props.settings" :form-id="props.id">
       <template
@@ -16,6 +20,8 @@
       </template>
     </f-form-body>
 
+    <slot name="before-form-footer" />
+
     <f-form-footer
       @main-click="onMainClick"
       @aux-click="onAuxClick"
@@ -26,6 +32,8 @@
     >
       <slot name="form-footer" v-bind="bind" />
     </f-form-footer>
+
+    <slot name="after-form-footer" />
   </form>
 </template>
 

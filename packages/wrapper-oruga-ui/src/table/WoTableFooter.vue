@@ -2,7 +2,6 @@
   <o-select v-model="state.pagination.perPage">
     <option
       v-for="rowsPerPage in props.pagination.rowsPerPageOptions"
-      v-close-popup
       @click="state.pagination.perPage = rowsPerPage" :key="rowsPerPage" clickable :value="rowsPerPage"
     >
       {{ rowsPerPage }}

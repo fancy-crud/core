@@ -7,7 +7,7 @@ export * from './table'
 export * from './common'
 export * from './form'
 
-const components = {
+export const components = {
   ...form,
   ...table,
   ...common,

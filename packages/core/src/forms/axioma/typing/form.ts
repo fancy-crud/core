@@ -23,6 +23,7 @@ export interface BaseRawField extends Record<string, any> {
   modelValue?: unknown
   fileUrl?: string | null
   multiple?: boolean
+  preview?: boolean
   rules?: Rule
   recordValue?: (value: any) => unknown
   interceptOptions?: (options: any) => any[]

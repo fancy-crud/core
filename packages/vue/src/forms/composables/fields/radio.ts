@@ -12,7 +12,8 @@ export function useRadioField(props: DefaultProps & { field: NormalizedRadioFiel
 
   const { validate } = useRules(fields, ruleConfigStore.searchById(props.formId))
 
-  const { options } = useOptions(props)
+  const isBooleanField = false
+  const { options } = useOptions(props, isBooleanField)
   const { hintText, hasFieldErrors } = useHintText(props)
 
   const inRowDisplay = computed(() => {

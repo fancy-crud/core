@@ -1,7 +1,16 @@
 <template>
-  <div>
     <q-select
-      v-bind="{ ...props.field.wrapper, ...props.field, ...$attrs, ...attrs, rules: undefined }"
+      v-bind="{
+        emitValue: !!props.field.optionValue,
+        mapOptions: !!props.field.optionValue,
+        ...props.field.wrapper,
+        ...props.field,
+        ...attrs,
+        rules: undefined,
+        options: props.field.options,
+        optionLabel: props.field.optionLabel,
+        optionValue: props.field.optionValue,
+      }"
       v-model="modelValue"
       :error-message="hintText"
       :error="hasFieldErrors"
@@ -14,7 +23,6 @@
         <slot :name="slotName" />
       </template>
     </q-select>
-  </div>
 </template>
 
 <script lang="ts" setup>

@@ -10,6 +10,7 @@
 
 <script lang='ts' setup>
 import { FieldType, useForm, useTable, FORM_MODE } from '@fancy-crud/vue'
+import { z } from 'zod'
 
 const form = useForm({
   id: 'formulario',
@@ -21,21 +22,40 @@ const form = useForm({
       wrapper: {
         class: 'col-span-12',
       },
-      parseModelValue: Number,
+
     },
     gender: {
-      type: FieldType.text,
+      type: FieldType.select,
       label: 'Gender',
+      rules: (value: any) => ({ value, rule: z.string().nonempty() }),
+      multiple: true,
+      exclude: true,
       wrapper: {
-        class: 'col-span-12',
+        class: 'col-span-6',
+      },
+    },
+    image2: {
+      type: FieldType.file,
+      label: 'Imagen',
+      preview: true,
+      wrapper: {
+        class: 'col-span-6',
       },
     },
     created_at: {
-      type: FieldType.text,
+      type: FieldType.datepicker,
       label: 'Created at',
       updateOnly: true,
       readonly: true,
       disabled: true,
+      wrapper: {
+        class: 'col-span-12',
+      },
+    },
+    is_active: {
+      type: FieldType.checkbox,
+      label: 'Is active',
+      modelValue: false,
       wrapper: {
         class: 'col-span-12',
       },
@@ -53,8 +73,17 @@ const form = useForm({
 const table = useTable({
   form,
   columns: {
+    name: {
+    },
     gender: {
       format: (value: unknown) => value === 'm' ? 'Male' : 'Female',
+    },
+    image2: {
+      label: 'Image',
+      input: {
+        isEnable: true,
+        type: FieldType.image,
+      },
     },
     created_at: {
       format: (value: unknown) => 'Lo que sea',

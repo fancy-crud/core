@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts" setup>
-import { QItem, QItemSection, QList, QPagination, ClosePopup as vClosePopup } from 'quasar'
+import { QBtnDropdown, QItem, QItemLabel, QItemSection, QList, QPagination, ClosePopup as vClosePopup } from 'quasar'
 import type { TableFooterEmit, TableFooterProps } from '@fancy-crud/vue'
 import { useTableFooter } from '@fancy-crud/vue'
 

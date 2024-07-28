@@ -36,7 +36,7 @@ const form = useForm({
       wrapper: {
         class: 'col-span-12',
       },
-      exclude: true,
+      modelValue: 'John',
     },
     gender: {
       type: FieldType.select,
@@ -47,7 +47,7 @@ const form = useForm({
         { label: 'Male', value: 'm' },
         { label: 'Female', value: 'f' },
       ],
-      hidden: true,
+      modelValue: 'm',
     },
     tu: {
       type: FieldType.text,
@@ -104,7 +104,6 @@ const table = useTable({
   },
   pagination: {
     rowsPerPage: 10,
-    // hidden: true,
   },
   filterParams: {
     gender: '',
