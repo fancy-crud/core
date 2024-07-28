@@ -14,9 +14,10 @@ export function useTable<
   B extends RawTableButtons,
   L,
   P extends RawTablePagination,
+  RecordType = any,
 >(
-  args: TableArgs<T, U, S, F, B, L, P>,
-): UseTable<T, U, S, F, B, L, P> {
+  args: TableArgs<T, U, S, F, B, L, P, RecordType>,
+): UseTable<T, U, S, F, B, L, P, RecordType> {
   const baseForm = { id: Symbol(''), settings: { url: '' } } as T
 
   const {
@@ -29,6 +30,7 @@ export function useTable<
     filterParams: rawFilterParams = {},
     buttons: rawButtons = {},
     list: rawList = {},
+    record = null,
   } = args
 
   const tableStore: ITableStore = injecting(ITableStore.name)!
@@ -55,7 +57,7 @@ export function useTable<
 
   const table = bus.execute(
     new CreateTableCommand(
-      form, columns as unknown as MappedRawColumn<T['fields'], U>, pagination, settings, filterParams, buttons, list,
+      form, columns as unknown as MappedRawColumn<T['fields'], U>, pagination, settings, filterParams, buttons, list, record,
     ),
   )
 
@@ -74,9 +76,10 @@ export function useTable<
     formId: form.id,
     buttons,
     list,
+    record: table.record,
   })
 
-  createProxy()
+  createProxy(table)
 
   onUnmounted(() => tableStore.deleteById(table.id))
 
@@ -89,5 +92,6 @@ export function useTable<
     filterParams,
     buttons,
     list,
+    record: table.record,
   }
 }

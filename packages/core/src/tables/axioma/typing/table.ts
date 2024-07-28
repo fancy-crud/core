@@ -27,7 +27,7 @@ export interface DeleteRecordOptions extends DeleteRequestOptions {
   onFinally: OnFinally
 }
 
-export interface Table<T extends BaseTableForm, U, S extends RawTableSettings, F, B, L, P> {
+export interface Table<T extends BaseTableForm, U, S extends RawTableSettings, F, B, L, P, RecordType = any> {
   id: symbol
   form: T
   columns: S['autoInferColumns'] extends false ? FieldAsColumn<{}, U> : FieldAsColumn<T['fields'], U>
@@ -36,9 +36,10 @@ export interface Table<T extends BaseTableForm, U, S extends RawTableSettings, F
   filterParams: F
   buttons: B & NormalizedTableButtons
   list: NormalizedTableList<L>
+  record: RecordType
 }
 
-export interface RawTable<T extends BaseTableForm, U, S, F, B, L, P> {
+export interface RawTable<T extends BaseTableForm, U, S, F, B, L, P, RecordType = any> {
   id?: string
   form: T
   columns?: MappedRawColumn<T['fields'], U> & U
@@ -47,6 +48,7 @@ export interface RawTable<T extends BaseTableForm, U, S, F, B, L, P> {
   filterParams?: F
   buttons?: B
   list?: L
+  record?: RecordType
 }
 
 export interface BaseTableState {

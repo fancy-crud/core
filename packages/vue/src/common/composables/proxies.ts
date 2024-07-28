@@ -12,17 +12,17 @@ export function useProxies<T extends Record<string, any>>(proxies: unknown[], de
     return target
   }) as unknown as T
 
-  function createProxy() {
+  function createProxy<T>(form: T) {
     proxiesCollection.forEach((proxy) => {
       if (proxy.isDeep) {
-        watch(proxy.fn, (value: any) => {
+        watch(() => proxy.fn(form), (value: any) => {
           Object.keys(value).forEach((key) => {
             Object.assign(proxy.target[key], value[key])
           })
         })
         return
       }
-      watch(proxy.fn, (value: any) => {
+      watch(() => proxy.fn(form), (value: any) => {
         Object.assign(proxy.target, value)
       })
     })

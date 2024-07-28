@@ -8,6 +8,7 @@ export interface TableState {
   filterParams: NormalizedTableFilters
   buttons: NormalizedTableButtons
   list: NormalizedTableList
+  record: any | null
 }
 
 export abstract class ITableStore {

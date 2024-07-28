@@ -11,6 +11,7 @@ export interface TableArgs<
   B extends RawTableButtons,
   L,
   P extends RawTablePagination,
+  RecordType = any,
 > {
   id?: string
   form?: T
@@ -20,9 +21,19 @@ export interface TableArgs<
   filterParams?: ArgProxy<F>
   buttons?: ArgProxy<B>
   list?: ArgProxy<RawTableList<L>>
+  record?: RecordType
 }
 
-export interface UseTable<T extends BaseTableForm = any, U = any, S extends RawTableSettings = any, F = any, B = any, L = any, P = any> {
+export interface UseTable<
+  T extends BaseTableForm,
+  U,
+  S extends RawTableSettings,
+  F,
+  B,
+  L,
+  P,
+  RecordType = any,
+> {
   id: symbol
   form: T
   columns: S['autoInferColumns'] extends false ? FieldAsColumn<{}, U> : FieldAsColumn<T['fields'], U>
@@ -31,6 +42,7 @@ export interface UseTable<T extends BaseTableForm = any, U = any, S extends RawT
   filterParams: F
   buttons: ConvertToNormalizedTableButtons<B>
   list: NormalizedTableList<L>
+  record: RecordType
 }
 
 export interface TableBodyProps {
