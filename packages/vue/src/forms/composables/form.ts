@@ -72,10 +72,7 @@ export function useForm<
     record: ref(record.value) as RecordObject<RecordObjectValueType>,
   }
 
-  // watch(() => form.record.value, console.log)
-
   formStore.save(id, form)
-
   createProxy(form)
 
   return form

@@ -9,7 +9,7 @@
 </template>
 
 <script lang='ts' setup>
-import { FieldType, useForm, useTable } from '@fancy-crud/vue'
+import { FieldType, useForm, useTable, FORM_MODE } from '@fancy-crud/vue'
 
 const form = useForm({
   id: 'formulario',
@@ -41,9 +41,12 @@ const form = useForm({
       },
     },
   },
-  settings: {
-    url: 'artists/',
-    title: '{{ Crear artista | Actualizar artista }}',
+  settings: (f) => {
+    return {
+      url: f?.settings.mode === FORM_MODE.update ? `artists/${f.record.value?.id}/` : 'artists/',
+      title: '{{ Crear artista | Actualizar artista }}',
+      lookupField: null,
+    }
   },
 })
 
@@ -59,8 +62,7 @@ const table = useTable({
     actions: { value: 'actions', label: '', align: 'left' },
   },
   settings: {
-    url: form.settings.url,
-    lookupField: 'id',
+    url: 'artists/',
     columnsOrder: ['actions', '...'],
   },
   pagination: {
