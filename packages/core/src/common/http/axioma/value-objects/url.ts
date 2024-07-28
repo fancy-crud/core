@@ -8,8 +8,6 @@ export class Url {
   private parseUrl() {
     let result: string
 
-    console.log('this.url', this.url)
-
     if (this.url.endsWith('/'))
       result = [this.url + String(this.lookupValue ?? ''), ''].join('/')
 
