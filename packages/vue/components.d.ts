@@ -14,6 +14,7 @@ declare module 'vue' {
     FDeleteConfirmationModal: typeof import('./src/tables/components/FDeleteConfirmationModal.vue')['default']
     FFile: typeof import('./src/forms/components/FFile.vue')['default']
     FFileList: typeof import('./src/forms/components/FFileList.vue')['default']
+    FFileReveal: typeof import('./src/forms/components/FFileReveal.vue')['default']
     FForm: typeof import('./src/forms/components/FForm.vue')['default']
     FFormBody: typeof import('./src/forms/components/FFormBody.vue')['default']
     FFormFooter: typeof import('./src/forms/components/FFormFooter.vue')['default']

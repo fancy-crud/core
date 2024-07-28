@@ -104,6 +104,6 @@ export function useTable<
     filterParams,
     buttons,
     list,
-    record: table.record,
+    record: table.record as any,
   }
 }

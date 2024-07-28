@@ -55,7 +55,7 @@ export class SetListDataWithReactivityFormsHandler implements ISetListDataHandle
         settings: {
           ...settings,
           mode: FORM_MODE.update,
-          lookupValue: record[settings.lookupField],
+          lookupValue: settings.lookupField ? record[settings.lookupField] : undefined,
         },
       })
 
