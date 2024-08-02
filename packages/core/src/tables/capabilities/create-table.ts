@@ -1,5 +1,5 @@
 import { Bus, inject } from '@fancy-crud/bus'
-import type { BaseTableForm, CreateTableCommand, FieldAsColumn, ICreateTableHandler, NormalizedColumn, NormalizedTableList, NormalizedTablePagination, NormalizedTableSettings, ObjectWithRawColumns, RawTableFilters, RawTableList, RawTablePagination, RawTableSettings, Row, Table } from '../axioma'
+import type { BaseTableForm, CreateTableCommand, FieldAsColumn, ICreateTableHandler, NormalizedTableList, NormalizedTablePagination, NormalizedTableSettings, ObjectWithRawColumns, RawTableFilters, RawTableList, RawTablePagination, RawTableSettings, Row, Table } from '../axioma'
 import { DeleteRecordCommand, FetchListDataCommand, ITableStore, NormalizeColumnsCommand, NormalizePaginationCommand, NormalizeTableButtonsCommand, NormalizeTableFiltersCommand, NormalizeTableListCommand, NormalizeTableSettingsCommand, PrepareFormToCreateCommand, PrepareFormToUpdateCommand } from '../axioma'
 import type { ConvertToNormalizedTableButtons, RawTableButtons } from '../axioma/typing/buttons'
 
@@ -16,7 +16,17 @@ export class CreateTableHandler implements ICreateTableHandler {
   TableButtonsType extends RawTableButtons,
   TableListDataType = unknown,
   TablePaginationType extends RawTablePagination = NormalizedTablePagination,
->(command: CreateTableCommand<TableFormType, TableColumnsType, TableSettingsType, TableFiltersType, TableButtonsType, TableListDataType, TablePaginationType>): Table<TableFormType, TableColumnsType, TableSettingsType, TableFiltersType, TableButtonsType, TableListDataType, TablePaginationType> {
+  RecordType = any,
+>(command: CreateTableCommand<
+    TableFormType,
+    TableColumnsType,
+    TableSettingsType,
+    TableFiltersType,
+    TableButtonsType,
+    TableListDataType,
+    TablePaginationType,
+    RecordType
+  >): Table<TableFormType, TableColumnsType, TableSettingsType, TableFiltersType, TableButtonsType, TableListDataType, TablePaginationType, RecordType> {
     const {
       form,
       columns: rawColumns = {},
@@ -25,20 +35,27 @@ export class CreateTableHandler implements ICreateTableHandler {
       buttons: rawButtons = {} as RawTableButtons,
       settings: rawSettings = {
         url: form?.settings?.url,
-      },
+      } as RawTableSettings,
       list: rawList = {} as RawTableList<TableListDataType>,
+      record = null as RecordType,
     } = command
+
+    if (!rawSettings.url)
+      rawSettings.url = form?.settings?.url ?? ''
 
     const bus = new Bus()
     const id = Symbol('')
 
     const columns = bus.execute(
-      new NormalizeColumnsCommand(rawColumns, form.fields),
-    ) as FieldAsColumn<TableFormType['fields'], NormalizedColumn> & TableColumnsType
+      new NormalizeColumnsCommand(rawColumns, rawSettings.autoInferColumns === false ? {} : form.fields),
+    ) as FieldAsColumn<TableFormType['fields'], TableColumnsType>
 
     const pagination = bus.execute(
       new NormalizePaginationCommand(rawPagination),
     ) as TablePaginationType & NormalizedTablePagination
+
+    if (!rawSettings.columnsOrder || !rawSettings.columnsOrder.length)
+      rawSettings.columnsOrder = Object.keys(columns)
 
     const settings = bus.execute(
       new NormalizeTableSettingsCommand(rawSettings),
@@ -74,6 +91,8 @@ export class CreateTableHandler implements ICreateTableHandler {
     buttons.edit.onClick = rawButtons?.edit?.onClick || ((row: Row) => {
       const table = tableStore.searchById(id)!
 
+      table.record = row
+
       bus.execute(
         new PrepareFormToUpdateCommand(table.formId, row, table.settings, {
           onClickAux: () => {
@@ -108,7 +127,11 @@ export class CreateTableHandler implements ICreateTableHandler {
       filterParams,
       buttons,
       list,
+      record,
     })
+
+    if (list.options.autoTrigger)
+      list.fetchData()
 
     return {
       id,
@@ -119,7 +142,7 @@ export class CreateTableHandler implements ICreateTableHandler {
       filterParams,
       buttons,
       list,
+      record,
     }
   }
 }
-

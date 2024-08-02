@@ -1,5 +1,5 @@
 import type { BaseRawField, NormalizedField, NormalizedFields } from '@packages/core/forms/axioma'
-import { getDefaults } from '@packages/core/config'
+import { components, getDefaults } from '@packages/core/config'
 import type { INormalizeFormFieldsHandler, NormalizeFormFieldsCommand, NormalizeFormFieldsCommandInputType } from '../axioma'
 
 export class NormalizeFormFieldsHandler implements INormalizeFormFieldsHandler {
@@ -12,6 +12,10 @@ export class NormalizeFormFieldsHandler implements INormalizeFormFieldsHandler {
   private createDefaultKeys(fieldKey: string, rawField: BaseRawField): NormalizedField {
     const defaults = getDefaults()
 
+    const defaultControls: Record<string, any> = {
+      ...components,
+    }
+
     const field = this.getDefaultNormalizedField({
       id: `field-${fieldKey}-control`,
       modelKey: fieldKey,
@@ -22,6 +26,7 @@ export class NormalizeFormFieldsHandler implements INormalizeFormFieldsHandler {
       class: '',
       recordValue: (value: any) => value[fieldKey],
       interceptOptions: (options: any) => options,
+      getComponent: () => getComponent(rawField.type),
       debounceTime: 0,
       wrapper: {
         class: '',
@@ -29,6 +34,14 @@ export class NormalizeFormFieldsHandler implements INormalizeFormFieldsHandler {
       ref: null,
       ...rawField,
     })
+
+    function getComponent(fieldType: string) {
+      type ControlType = keyof typeof defaultControls
+
+      const control = defaultControls[fieldType]
+
+      return control ?? (defaultControls[fieldType as ControlType] ?? defaultControls.text)
+    }
 
     const fieldDefaults = defaults[field.type]
     field.class = `${fieldDefaults?.class || ''} ${field.class}`.trim()

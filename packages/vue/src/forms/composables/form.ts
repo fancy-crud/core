@@ -6,15 +6,19 @@ import type {
   NormalizedSettings,
   RawFormButtons,
   RawSetting,
+  RecordObject,
+  RecordObjectValue,
 } from '@fancy-crud/core'
 import { Bus, CreateFormCommand, IFormStore, inject as injecting } from '@fancy-crud/core'
-import type { Args, UseForm } from '../typing'
+import { useProxies } from '@packages/vue/common/composables/proxies'
+import type { Args, InferNormalizedModelValue, UseForm } from '../typing'
 
 export function useForm<
   TypeFields extends BaseObjectWithRawFields,
   TypeButtons extends RawFormButtons,
   TypeSettings extends RawSetting,
->(args: Args<TypeFields, TypeButtons, TypeSettings>): UseForm<TypeFields, ConvertToNormalizedFormButtons<TypeButtons>, TypeSettings> {
+  RecordObjectValueType extends RecordObjectValue = RecordObjectValue,
+>(args: Args<TypeFields, TypeButtons, TypeSettings, RecordObjectValueType>): UseForm<TypeFields, ConvertToNormalizedFormButtons<TypeButtons>, TypeSettings, RecordObjectValueType> {
   const {
     id: _id = '',
     fields: rawFields,
@@ -23,10 +27,25 @@ export function useForm<
     rulesConfig = {},
     responseInterceptor = {},
     notifications = {},
+    record: rawRecord = { value: null },
   } = args
 
   const formStore: IFormStore = injecting(IFormStore.name)!
   const bus = new Bus()
+
+  type ProxyCollection = [
+    TypeSettings & NormalizedSettings,
+    NormalizedFields<InferNormalizedModelValue<TypeFields, NonNullable<RecordObjectValueType>>>,
+    NormalizedButtons<ConvertToNormalizedFormButtons<TypeButtons>>,
+  ]
+
+  const { proxies, createProxy } = useProxies<ProxyCollection>([
+    rawSettings,
+    rawFields,
+    rawButtons,
+  ], [false, true, true])
+
+  const [settings, fields, buttons] = proxies
 
   const {
     id,
@@ -34,26 +53,27 @@ export function useForm<
     clonedNormalizedFields,
     normalizedButtons,
     normalizedSettings,
+    record,
   } = bus.execute(
-    new CreateFormCommand(_id, rawFields, rawButtons, rawSettings, responseInterceptor, notifications, rulesConfig),
+    new CreateFormCommand(_id, fields, buttons, settings, responseInterceptor, notifications, rulesConfig, rawRecord),
   )
 
-  const fields = reactive(clonedNormalizedFields) as NormalizedFields<TypeFields>
-  const buttons = reactive(normalizedButtons) as NormalizedButtons<ConvertToNormalizedFormButtons<TypeButtons>>
-  const settings = reactive(normalizedSettings) as TypeSettings & NormalizedSettings
+  Object.assign(settings, normalizedSettings)
+  Object.assign(fields, clonedNormalizedFields)
+  Object.assign(buttons, normalizedButtons)
 
-  formStore.save(id, {
-    originalNormalizedFields,
-    fields,
-    settings,
-    buttons,
-  })
-
-  return {
+  const form = {
     id,
     fields,
     buttons,
     settings,
     bus,
+    originalNormalizedFields,
+    record: ref(record.value) as RecordObject<RecordObjectValueType>,
   }
+
+  formStore.save(id, form)
+  createProxy(form)
+
+  return form
 }

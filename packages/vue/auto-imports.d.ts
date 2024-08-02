@@ -20,11 +20,13 @@ declare global {
   const FDeleteConfirmationModal: typeof import('./src/tables/components/index')['FDeleteConfirmationModal']
   const FFile: typeof import('./src/forms/components/index')['FFile']
   const FFileList: typeof import('./src/forms/components/index')['FFileList']
+  const FFileReveal: typeof import('./src/forms/components/index')['FFileReveal']
   const FForm: typeof import('./src/forms/components/index')['FForm']
   const FFormBody: typeof import('./src/forms/components/index')['FFormBody']
   const FFormFooter: typeof import('./src/forms/components/index')['FFormFooter']
   const FFormHeader: typeof import('./src/forms/components/index')['FFormHeader']
   const FModal: typeof import('./src/common/components/index')['FModal']
+  const FPassword: typeof import('./src/forms/components/index')['FPassword']
   const FRadio: typeof import('./src/forms/components/index')['FRadio']
   const FSelect: typeof import('./src/forms/components/index')['FSelect']
   const FTable: typeof import('./src/tables/components/index')['FTable']
@@ -249,6 +251,7 @@ declare global {
   const usePreferredLanguages: typeof import('@vueuse/core')['usePreferredLanguages']
   const usePreferredReducedMotion: typeof import('@vueuse/core')['usePreferredReducedMotion']
   const usePrevious: typeof import('@vueuse/core')['usePrevious']
+  const useProxies: typeof import('./src/common/composables/proxies')['useProxies']
   const useRadioField: typeof import('./src/forms/composables/fields/radio')['useRadioField']
   const useRafFn: typeof import('@vueuse/core')['useRafFn']
   const useRefHistory: typeof import('@vueuse/core')['useRefHistory']
@@ -349,11 +352,13 @@ declare module 'vue' {
     readonly FDeleteConfirmationModal: UnwrapRef<typeof import('./src/tables/components/index')['FDeleteConfirmationModal']>
     readonly FFile: UnwrapRef<typeof import('./src/forms/components/index')['FFile']>
     readonly FFileList: UnwrapRef<typeof import('./src/forms/components/index')['FFileList']>
+    readonly FFileReveal: UnwrapRef<typeof import('./src/forms/components/index')['FFileReveal']>
     readonly FForm: UnwrapRef<typeof import('./src/forms/components/index')['FForm']>
     readonly FFormBody: UnwrapRef<typeof import('./src/forms/components/index')['FFormBody']>
     readonly FFormFooter: UnwrapRef<typeof import('./src/forms/components/index')['FFormFooter']>
     readonly FFormHeader: UnwrapRef<typeof import('./src/forms/components/index')['FFormHeader']>
     readonly FModal: UnwrapRef<typeof import('./src/common/components/index')['FModal']>
+    readonly FPassword: UnwrapRef<typeof import('./src/forms/components/index')['FPassword']>
     readonly FRadio: UnwrapRef<typeof import('./src/forms/components/index')['FRadio']>
     readonly FSelect: UnwrapRef<typeof import('./src/forms/components/index')['FSelect']>
     readonly FTable: UnwrapRef<typeof import('./src/tables/components/index')['FTable']>
@@ -576,6 +581,7 @@ declare module 'vue' {
     readonly usePreferredLanguages: UnwrapRef<typeof import('@vueuse/core')['usePreferredLanguages']>
     readonly usePreferredReducedMotion: UnwrapRef<typeof import('@vueuse/core')['usePreferredReducedMotion']>
     readonly usePrevious: UnwrapRef<typeof import('@vueuse/core')['usePrevious']>
+    readonly useProxies: UnwrapRef<typeof import('./src/common/composables/proxies')['useProxies']>
     readonly useRadioField: UnwrapRef<typeof import('./src/forms/composables/fields/radio')['useRadioField']>
     readonly useRafFn: UnwrapRef<typeof import('@vueuse/core')['useRafFn']>
     readonly useRefHistory: UnwrapRef<typeof import('@vueuse/core')['useRefHistory']>
@@ -669,11 +675,13 @@ declare module '@vue/runtime-core' {
     readonly FDeleteConfirmationModal: UnwrapRef<typeof import('./src/tables/components/index')['FDeleteConfirmationModal']>
     readonly FFile: UnwrapRef<typeof import('./src/forms/components/index')['FFile']>
     readonly FFileList: UnwrapRef<typeof import('./src/forms/components/index')['FFileList']>
+    readonly FFileReveal: UnwrapRef<typeof import('./src/forms/components/index')['FFileReveal']>
     readonly FForm: UnwrapRef<typeof import('./src/forms/components/index')['FForm']>
     readonly FFormBody: UnwrapRef<typeof import('./src/forms/components/index')['FFormBody']>
     readonly FFormFooter: UnwrapRef<typeof import('./src/forms/components/index')['FFormFooter']>
     readonly FFormHeader: UnwrapRef<typeof import('./src/forms/components/index')['FFormHeader']>
     readonly FModal: UnwrapRef<typeof import('./src/common/components/index')['FModal']>
+    readonly FPassword: UnwrapRef<typeof import('./src/forms/components/index')['FPassword']>
     readonly FRadio: UnwrapRef<typeof import('./src/forms/components/index')['FRadio']>
     readonly FSelect: UnwrapRef<typeof import('./src/forms/components/index')['FSelect']>
     readonly FTable: UnwrapRef<typeof import('./src/tables/components/index')['FTable']>
@@ -896,6 +904,7 @@ declare module '@vue/runtime-core' {
     readonly usePreferredLanguages: UnwrapRef<typeof import('@vueuse/core')['usePreferredLanguages']>
     readonly usePreferredReducedMotion: UnwrapRef<typeof import('@vueuse/core')['usePreferredReducedMotion']>
     readonly usePrevious: UnwrapRef<typeof import('@vueuse/core')['usePrevious']>
+    readonly useProxies: UnwrapRef<typeof import('./src/common/composables/proxies')['useProxies']>
     readonly useRadioField: UnwrapRef<typeof import('./src/forms/composables/fields/radio')['useRadioField']>
     readonly useRafFn: UnwrapRef<typeof import('@vueuse/core')['useRafFn']>
     readonly useRefHistory: UnwrapRef<typeof import('@vueuse/core')['useRefHistory']>

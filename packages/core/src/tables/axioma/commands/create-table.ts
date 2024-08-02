@@ -11,17 +11,19 @@ export class CreateTableCommand<
   B extends RawTableButtons,
   L,
   P extends RawTablePagination,
+  RecordType,
 > implements BaseCommand {
   public readonly meta = meta(ICreateTableHandler)
 
   constructor(
     public readonly form: T,
-    public readonly columns?: MappedRawColumn<T['fields'], U> & U,
+    public readonly columns?: MappedRawColumn<T['fields'], U>,
     public readonly pagination?: P,
     public readonly settings?: S,
     public readonly filterParams?: F,
     public readonly buttons?: B,
     public readonly list?: RawTableList<L>,
+    public readonly record?: RecordType,
   ) {}
 }
 
@@ -34,5 +36,6 @@ export abstract class ICreateTableHandler implements BaseHandler {
     B extends RawTableButtons,
     L,
     P extends RawTablePagination,
-  >(command: CreateTableCommand<T, U, S, F, B, L, P>): Table<T, U, S, F, B, L, P>
+    RecordType = any,
+  >(command: CreateTableCommand<T, U, S, F, B, L, P, RecordType>): Table<T, U, S, F, B, L, P, RecordType>
 }

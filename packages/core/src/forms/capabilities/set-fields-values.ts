@@ -20,7 +20,9 @@ export class SetFieldsValuesHandler implements ISetFieldsValuesHandler {
       this.setFieldValue(field, field.recordValue(recordValues))
     })
 
-    settings.lookupValue = String(recordValues[settings.lookupField] || '')
+    const recordValue = settings.lookupField ? recordValues[settings.lookupField] || '' : ''
+
+    settings.lookupValue = String(recordValue)
   }
 }
 

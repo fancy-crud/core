@@ -26,8 +26,9 @@ export interface BaseRawField extends Record<string, any> {
   preview?: boolean
   rules?: Rule
   recordValue?: (value: any) => unknown
-  interceptOptions?: (options: any[]) => unknown[]
+  interceptOptions?: (options: any) => any[]
   parseModelValue?: (value: any) => unknown
+  getComponent?: () => any
 }
 
 export interface DefaultAttributes {
@@ -39,7 +40,8 @@ export interface DefaultAttributes {
   errors: string[]
   debounceTime: number
   recordValue: (value: any) => unknown
-  interceptOptions: (options: any[]) => unknown[]
+  interceptOptions: (options: any) => any[]
+  getComponent: () => any
 }
 
 export type FieldNormalizer<T> = T & DefaultAttributes
@@ -52,10 +54,14 @@ export interface BaseObjectWithRawFields extends Record<string, BaseRawField> {}
 export interface BaseObjectWithNormalizedFields<T = NormalizedField> extends Record<string, T> {}
 export interface FieldErrors extends Record<string, string[]> {}
 
-export interface Form<T, U> {
+export type RecordObjectValue = Record<string, any> | null
+export interface RecordObject<T extends RecordObjectValue = RecordObjectValue> { value: T | null }
+
+export interface Form<T, U, RecordObjectValueType extends RecordObjectValue = RecordObjectValue> {
   id: symbol
   originalNormalizedFields: NormalizedFields<T>
   clonedNormalizedFields: NormalizedFields<T>
   normalizedButtons: ConvertToNormalizedFormButtons<U>
   normalizedSettings: NormalizedSettings
+  record: RecordObject<RecordObjectValueType>
 }

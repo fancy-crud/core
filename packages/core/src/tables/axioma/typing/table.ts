@@ -1,8 +1,8 @@
 import type { DeleteRequestOptions, OnFinally } from '@packages/core/common/http/axioma'
 import type { NormalizedTableFilters } from './filters'
-import type { BaseTableForm, FieldAsColumn, MappedRawColumn, NormalizedColumn, ObjectWithNormalizedColumns } from './column'
+import type { BaseTableForm, FieldAsColumn, MappedRawColumn, ObjectWithNormalizedColumns } from './column'
 import type { NormalizedTablePagination } from './pagination'
-import type { NormalizedTableSettings } from './settings'
+import type { NormalizedTableSettings, RawTableSettings } from './settings'
 import type { NormalizedTableButtons } from './buttons'
 import type { NormalizedTableList } from './list'
 
@@ -27,18 +27,19 @@ export interface DeleteRecordOptions extends DeleteRequestOptions {
   onFinally: OnFinally
 }
 
-export interface Table<T extends BaseTableForm, U, S, F, B, L, P> {
+export interface Table<T extends BaseTableForm, U, S extends RawTableSettings, F, B, L, P, RecordType = any> {
   id: symbol
   form: T
-  columns: FieldAsColumn<T['fields'], NormalizedColumn> & U
+  columns: S['autoInferColumns'] extends false ? FieldAsColumn<{}, U> : FieldAsColumn<T['fields'], U>
   settings: S & NormalizedTableSettings
   pagination: P & NormalizedTablePagination
   filterParams: F
   buttons: B & NormalizedTableButtons
   list: NormalizedTableList<L>
+  record: RecordType
 }
 
-export interface RawTable<T extends BaseTableForm, U, S, F, B, L, P> {
+export interface RawTable<T extends BaseTableForm, U, S, F, B, L, P, RecordType = any> {
   id?: string
   form: T
   columns?: MappedRawColumn<T['fields'], U> & U
@@ -47,6 +48,7 @@ export interface RawTable<T extends BaseTableForm, U, S, F, B, L, P> {
   filterParams?: F
   buttons?: B
   list?: L
+  record?: RecordType
 }
 
 export interface BaseTableState {

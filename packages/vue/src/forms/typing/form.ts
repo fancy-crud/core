@@ -3,29 +3,43 @@ import type {
   Bus,
   FieldNormalizer,
   NormalizedButtons,
+  NormalizedField,
   NormalizedFields,
   NormalizedSettings,
   NotificationState,
+  RecordObject,
+  RecordObjectValue,
   ResponseInterceptorState,
   RuleConfigState,
 } from '@fancy-crud/core'
+import type { ArgProxy } from '@packages/vue/common'
 
-export interface UseForm<T, U, S> {
+export type InferRawModelValue<T, U> = {
+  [K in keyof T]: K extends keyof U ? Omit<BaseRawField & T[K], 'modelValue'> & { modelValue?: U[K] | null } : T[K]
+}
+
+export type InferNormalizedModelValue<T, U> = {
+  [K in keyof T]: K extends keyof U ? Omit<NormalizedField & T[K], 'modelValue'> & { modelValue: U[K] } : T[K]
+}
+
+export interface UseForm<T, U, S, RecordObjectValueType extends RecordObjectValue = RecordObjectValue> {
   id: symbol
-  fields: NormalizedFields<T>
+  fields: NormalizedFields<InferNormalizedModelValue<T, NonNullable<RecordObjectValueType>>>
   buttons: NormalizedButtons<U>
   settings: S & NormalizedSettings
   bus: Bus
+  record: RecordObject<RecordObjectValueType>
 }
 
-export interface Args<T, U, S> {
-  fields: T
+export interface Args<T, U, S, RecordObjectValueType extends RecordObjectValue = RecordObjectValue> {
+  fields: ArgProxy<InferRawModelValue<T, NonNullable<RecordObjectValueType>>, UseForm<T, U, S, RecordObjectValueType>>
   id?: string
-  buttons?: U
-  settings?: S
+  buttons?: ArgProxy<U, UseForm<T, U, S, RecordObjectValueType>>
+  settings?: ArgProxy<S, UseForm<T, U, S, RecordObjectValueType>>
   rulesConfig?: RuleConfigState
   responseInterceptor?: ResponseInterceptorState
   notifications?: NotificationState
+  record?: RecordObject<RecordObjectValueType>
 }
 
 export interface DefaultProps {

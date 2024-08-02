@@ -6,31 +6,25 @@
       </template>
     </f-form>
   </div>
-
-  <button @click="loadData">
-    Load data
-  </button>
+  <input v-model="title">
 </template>
 
 <script lang='ts' setup>
-// import { email, string } from 'valibot'
-import { FFormFooter, FieldType, useForm } from '@fancy-crud/vue'
-import { Bus, LoadRemoteRecordCommand, ResetFieldsByFormIdCommand } from '@fancy-crud/core'
+import { FieldType, useForm, FFormFooter } from '@fancy-crud/vue'
+import { Bus, ResetFieldsByFormIdCommand } from '@fancy-crud/core'
 
 const bus = new Bus()
 
-const settings = {
-  url: 'artists/',
-  title: 'Modo root',
-}
+const title = ref('Modo root')
 
 const form = useForm({
-  fields: {
+  fields: () => ({
     name: {
       type: FieldType.text,
-      label: 'First name',
+      label: title.value,
       placeholder: 'Como asi pues?',
       hintText: 'Display some message',
+      modelValue: title.value,
       // rules: value => ({ value, rule: string([email()]) }),
       wrapper: {
         class: 'col-span-6',
@@ -40,11 +34,14 @@ const form = useForm({
       type: '',
       modelValue: 'm',
     },
-  },
-  settings,
-  buttons: {
+  }),
+  settings: () => ({
+    url: 'artists/',
+    title: title.value,
+  }),
+  buttons: () => ({
     main: {
-      label: '{{ Lanzar | Modificar }}',
+      label: title.value,
       loading: false,
     },
     aux: {
@@ -54,22 +51,7 @@ const form = useForm({
         )
       },
     },
-  },
+  }),
 })
-
-function loadData(e: any) {
-  bus.execute(
-    new LoadRemoteRecordCommand(form.id, '9', {
-      onInit() {
-        form.buttons.main.loading = true
-      },
-      onFinally() {
-        form.buttons.main.loading = false
-      },
-    }),
-  )
-}
-
-function printing(response: any) { console.log(response) }
 </script>
 

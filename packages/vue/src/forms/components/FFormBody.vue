@@ -10,7 +10,7 @@
       <slot :name="`before-field-${fieldKey}`" v-bind="{ field }" />
       <slot :name="`field-${fieldKey}`" v-bind="binding(field)">
         <component
-          :is="getComponent(field)"
+          :is="field.getComponent()"
           v-bind="binding(field)"
         />
       </slot>
@@ -21,16 +21,7 @@
 
 <script lang="ts" setup>
 import type { BaseObjectWithNormalizedFields, FormMode, NormalizedField, NormalizedSettings } from '@fancy-crud/core'
-import { Bus, FilterFieldsByFormModeCommand, GetForeignKeyValuesCommand, components } from '@fancy-crud/core'
-
-import FCheckbox from './FCheckbox.vue'
-import FPassword from './FPassword.vue'
-import FColor from './FColor.vue'
-import FSelect from './FSelect.vue'
-import FRadio from './FRadio.vue'
-import FFile from './FFile.vue'
-import FDatepicker from './FDatepicker.vue'
-import FText from './FText.vue'
+import { Bus, FilterFieldsByFormModeCommand, GetForeignKeyValuesCommand } from '@fancy-crud/core'
 
 const props = defineProps<{
   formId: symbol
@@ -44,19 +35,6 @@ const computedFields = computed(() => filterFields(props.fields, props.settings.
   ([_, field]) => field.hidden !== true),
 )
 
-const defaultControls: Record<string, any> = {
-  checkbox: FCheckbox,
-  password: FPassword,
-  color: FColor,
-  select: FSelect,
-  radio: FRadio,
-  file: FFile,
-  datepicker: FDatepicker,
-  text: FText,
-  image: FFile,
-  ...components,
-}
-
 onMounted(() => {
   const fields = Object.fromEntries(
     filterFields(props.fields, props.settings.mode),
@@ -65,14 +43,6 @@ onMounted(() => {
     new GetForeignKeyValuesCommand(fields),
   )
 })
-
-function getComponent(field: NormalizedField) {
-  type ControlType = keyof typeof defaultControls
-
-  const control = defaultControls[field.type]
-
-  return control ?? (defaultControls[field.type as ControlType] ?? defaultControls.text)
-}
 
 function filterFields(fields: BaseObjectWithNormalizedFields, mode: FormMode): [string, NormalizedField][] {
   const filteredFields = bus.execute(

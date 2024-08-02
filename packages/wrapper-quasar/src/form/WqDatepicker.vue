@@ -1,5 +1,5 @@
 <template>
-  <q-input v-model="modelValue" mask="date" :error-message="hintText" :hint="hintText" :error="hasFieldErrors">
+  <q-input v-model="modelValue" mask="date" :error-message="hintText" :hint="hintText" :error="hasFieldErrors" v-bind="attributes">
     <template #append>
       <q-icon name="event" class="cursor-pointer">
         <q-popup-proxy cover transition-show="scale" transition-hide="scale">
@@ -25,5 +25,14 @@ const props = defineProps<{
 }>()
 
 const { hintText, modelValue, hasFieldErrors } = useDatepickerField<any>(props)
+
+const attributes = computed(() => {
+  const { modelValue, rules, type, ...attrs} = props.field
+
+  return {
+    ...attrs,
+    ...props.field.wrapper,
+  }
+})
 </script>
 

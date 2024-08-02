@@ -20,6 +20,7 @@ export class LoadRemoteRecordHandler {
           bus.execute(
             new SetFieldsValuesCommand(form.fields, form.settings, response.data),
           )
+          form.record.value = response.data
         },
         ...options,
       }),

@@ -1,7 +1,7 @@
 import type {
   BaseTableForm,
-  ConvertToNormalizedColumns,
   ConvertToNormalizedTableButtons,
+  FieldAsColumn, MappedRawColumn,
   NormalizedTableList,
   NormalizedTablePagination,
   NormalizedTableSettings,
@@ -9,9 +9,10 @@ import type {
   RawTableButtons,
   RawTableFilters,
   RawTablePagination,
-  RawTableSettings,
+  RawTableSettings
 } from '@fancy-crud/core'
 import { Bus, CreateTableCommand, ITableStore, injectable, inject as injecting } from '@fancy-crud/core'
+import { useProxies } from '@packages/vue/common/composables'
 import type { TableArgs, UseTable } from '../typing'
 import { TableStoreService } from './table-store.service'
 
@@ -25,13 +26,13 @@ export function useTable<
   B extends RawTableButtons,
   L,
   P extends RawTablePagination,
+  RecordType = any,
 >(
-  args: TableArgs<T, U, S, F, B, L, P>,
-): UseTable<T, U, S, F, B, L, P> {
+  args: TableArgs<T, U, S, F, B, L, P, RecordType>,
+): UseTable<T, U, S, F, B, L, P, RecordType> {
   const baseForm = { id: Symbol(''), settings: { url: '' } } as T
 
   const {
-    id: _id,
     form = baseForm,
     columns: rawColumns = {},
     settings: rawSettings = {
@@ -41,26 +42,45 @@ export function useTable<
     filterParams: rawFilterParams = {},
     buttons: rawButtons = {},
     list: rawList = {},
+    record = null,
   } = args
 
   const tableStore: ITableStore = injecting(ITableStore.name)!
   const bus = new Bus()
-  const id = Symbol(_id)
 
-  const { buttons: normalizedButtons, ...table } = bus.execute(
+  type ProxyCollection = [
+    FieldAsColumn<T['fields'], U>,
+    S & NormalizedTableSettings,
+    P & NormalizedTablePagination,
+    F,
+    ConvertToNormalizedTableButtons<B>,
+    NormalizedTableList<L>,
+  ]
+  const { proxies, createProxy } = useProxies<ProxyCollection>([
+    rawColumns,
+    rawSettings,
+    rawPagination,
+    rawFilterParams,
+    rawButtons,
+    rawList,
+  ], [true, false, false, false, true, false])
+
+  const [columns, settings, pagination, filterParams, buttons, list] = proxies
+
+  const table = bus.execute(
     new CreateTableCommand(
-      form, rawColumns, rawPagination, rawSettings, rawFilterParams, rawButtons, rawList,
+      form, columns as unknown as MappedRawColumn<T['fields'], U>, pagination, settings, filterParams, buttons, list, record,
     ),
   )
 
-  const columns = reactive(table.columns) as ConvertToNormalizedColumns<T, U>
-  const settings = reactive(table.settings) as S & NormalizedTableSettings
-  const pagination = reactive(table.pagination) as P & NormalizedTablePagination
-  const filterParams = reactive(table.filterParams) as F
-  const buttons = reactive(normalizedButtons) as ConvertToNormalizedTableButtons<B>
-  const list = reactive(table.list) as NormalizedTableList<L>
+  Object.assign(columns, table.columns)
+  Object.assign(settings, table.settings)
+  Object.assign(pagination, table.pagination)
+  Object.assign(filterParams, table.filterParams)
+  Object.assign(buttons, table.buttons)
+  Object.assign(list, table.list)
 
-  tableStore.save(id, {
+  tableStore.save(table.id, {
     columns,
     settings,
     pagination,
@@ -68,12 +88,15 @@ export function useTable<
     formId: form.id,
     buttons,
     list,
+    record: table.record,
   })
 
-  onUnmounted(() => tableStore.deleteById(id))
+  createProxy(table)
+
+  onUnmounted(() => tableStore.deleteById(table.id))
 
   return {
-    id,
+    id: table.id,
     columns,
     form,
     settings,
@@ -81,5 +104,6 @@ export function useTable<
     filterParams,
     buttons,
     list,
+    record: table.record as any,
   }
 }
