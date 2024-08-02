@@ -88,6 +88,11 @@ const table = useTable({
     created_at: {
       format: (value: unknown) => 'Lo que sea',
     },
+    is_active: {
+      input: {
+        isEnable: true
+      }
+    },
     actions: { value: 'actions', label: '', align: 'left' },
   },
   settings: {

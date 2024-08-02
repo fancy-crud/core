@@ -18,7 +18,7 @@ const form = useForm({
       placeholder: 'Seleccionar',
       type: FieldType.datepicker,
       wrapper: {
-        class: 'col-span-12',
+        class: 'col-span-6',
       },
     },
   },
