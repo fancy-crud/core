@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+@import '@fancy-crud/vue/dist/fancy-crud-vue.css';
+
+
+@custom-variant dark (&:where(.dark, .dark *));
