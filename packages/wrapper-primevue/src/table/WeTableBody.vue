@@ -23,7 +23,7 @@
         </Column>
       </template>
       <template v-else-if="column.key !== 'actions'">
-        <Column :field="column.value" :header="column.label" v-bind="column">
+        <Column :field="column.value" :header="column.label" v-bind="column as any">
           <template #body="slotProps">
             <slot :name="`column-${column.value}`" v-bind="{ row: slotProps.data, $index: slotProps.index }">
               {{ getValue(slotProps.data, column, slotProps.index) }}
@@ -50,7 +50,7 @@ const emit = defineEmits<TableBodyEmit>()
 const bus = new Bus()
 
 const parseHeaders = computed(() => props.headers.map(header => ({ ...header, title: header.label, key: header.value })))
-const actionHeader = computed(() => props.headers.find(header => header.value === 'actions' && header.exclude !== true))
+const actionHeader = computed(() => props.headers.find(header => header.value === 'actions' && header.exclude !== true) as any)
 
 function getValue(row: any, column: NormalizedColumn, rowIndex: number) {
   return bus.execute(

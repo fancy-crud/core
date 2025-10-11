@@ -14,33 +14,6 @@ declare global {
   const $shallowRef: typeof import('vue/macros')['$shallowRef']
   const $toRef: typeof import('vue/macros')['$toRef']
   const EffectScope: typeof import('vue')['EffectScope']
-  const FButton: typeof import('./src/common/components/index')['FButton']
-  const FCheckbox: typeof import('./src/forms/components/index')['FCheckbox']
-  const FColor: typeof import('./src/forms/components/index')['FColor']
-  const FDatepicker: typeof import('./src/forms/components/index')['FDatepicker']
-  const FDeleteConfirmationModal: typeof import('./src/tables/components/index')['FDeleteConfirmationModal']
-  const FFile: typeof import('./src/forms/components/index')['FFile']
-  const FFileList: typeof import('./src/forms/components/index')['FFileList']
-  const FFileReveal: typeof import('./src/forms/components/index')['FFileReveal']
-  const FForm: typeof import('./src/forms/components/index')['FForm']
-  const FFormBody: typeof import('./src/forms/components/index')['FFormBody']
-  const FFormFooter: typeof import('./src/forms/components/index')['FFormFooter']
-  const FFormHeader: typeof import('./src/forms/components/index')['FFormHeader']
-  const FModal: typeof import('./src/common/components/index')['FModal']
-  const FModalContent: typeof import('./src/common/components/index')['FModalContent']
-  const FPassword: typeof import('./src/forms/components/index')['FPassword']
-  const FRadio: typeof import('./src/forms/components/index')['FRadio']
-  const FSelect: typeof import('./src/forms/components/index')['FSelect']
-  const FTable: typeof import('./src/tables/components/index')['FTable']
-  const FTableBody: typeof import('./src/tables/components/index')['FTableBody']
-  const FTableFooter: typeof import('./src/tables/components/index')['FTableFooter']
-  const FTableHeaderActions: typeof import('./src/tables/components/index')['FTableHeaderActions']
-  const FTableRowActions: typeof import('./src/tables/components/index')['FTableRowActions']
-  const FTableRowFilePreview: typeof import('./src/tables/components/index')['FTableRowFilePreview']
-  const FText: typeof import('./src/forms/components/index')['FText']
-  const FTextVue: typeof import('./src/forms/components/index')['FTextVue']
-  const FTextarea: typeof import('./src/forms/components/index')['FTextarea']
-  const TableStoreService: typeof import('./src/tables/composables/table-store.service')['TableStoreService']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const computed: typeof import('vue')['computed']
@@ -48,7 +21,6 @@ declare global {
   const computedEager: typeof import('@vueuse/core')['computedEager']
   const computedInject: typeof import('@vueuse/core')['computedInject']
   const computedWithControl: typeof import('@vueuse/core')['computedWithControl']
-  const configureModalStack: typeof import('./src/common/composables/useModalStack')['configureModalStack']
   const controlledComputed: typeof import('@vueuse/core')['controlledComputed']
   const controlledRef: typeof import('@vueuse/core')['controlledRef']
   const createApp: typeof import('vue')['createApp']
@@ -56,7 +28,6 @@ declare global {
   const createGlobalState: typeof import('@vueuse/core')['createGlobalState']
   const createInjectionState: typeof import('@vueuse/core')['createInjectionState']
   const createReactiveFn: typeof import('@vueuse/core')['createReactiveFn']
-  const createRef: typeof import('@vueuse/core')['createRef']
   const createReusableTemplate: typeof import('@vueuse/core')['createReusableTemplate']
   const createSharedComposable: typeof import('@vueuse/core')['createSharedComposable']
   const createTemplatePromise: typeof import('@vueuse/core')['createTemplatePromise']
@@ -169,11 +140,9 @@ declare global {
   const useBroadcastChannel: typeof import('@vueuse/core')['useBroadcastChannel']
   const useBrowserLocation: typeof import('@vueuse/core')['useBrowserLocation']
   const useCached: typeof import('@vueuse/core')['useCached']
-  const useCheckboxField: typeof import('./src/forms/composables/fields/checkbox')['useCheckboxField']
   const useClipboard: typeof import('@vueuse/core')['useClipboard']
   const useClipboardItems: typeof import('@vueuse/core')['useClipboardItems']
   const useCloned: typeof import('@vueuse/core')['useCloned']
-  const useColorField: typeof import('./src/forms/composables/fields/color')['useColorField']
   const useColorMode: typeof import('@vueuse/core')['useColorMode']
   const useConfirmDialog: typeof import('@vueuse/core')['useConfirmDialog']
   const useCountdown: typeof import('@vueuse/core')['useCountdown']
@@ -185,7 +154,6 @@ declare global {
   const useCycleList: typeof import('@vueuse/core')['useCycleList']
   const useDark: typeof import('@vueuse/core')['useDark']
   const useDateFormat: typeof import('@vueuse/core')['useDateFormat']
-  const useDatepickerField: typeof import('./src/forms/composables/fields/datepicker')['useDatepickerField']
   const useDebounce: typeof import('@vueuse/core')['useDebounce']
   const useDebounceFn: typeof import('@vueuse/core')['useDebounceFn']
   const useDebouncedRefHistory: typeof import('@vueuse/core')['useDebouncedRefHistory']
@@ -209,17 +177,13 @@ declare global {
   const useFavicon: typeof import('@vueuse/core')['useFavicon']
   const useFetch: typeof import('@vueuse/core')['useFetch']
   const useFileDialog: typeof import('@vueuse/core')['useFileDialog']
-  const useFileField: typeof import('./src/forms/composables/fields/file')['useFileField']
   const useFileSystemAccess: typeof import('@vueuse/core')['useFileSystemAccess']
-  const useFilters: typeof import('./src/filters/composables/index')['useFilters']
   const useFocus: typeof import('@vueuse/core')['useFocus']
   const useFocusWithin: typeof import('@vueuse/core')['useFocusWithin']
-  const useForm: typeof import('./src/forms/composables/form')['useForm']
   const useFps: typeof import('@vueuse/core')['useFps']
   const useFullscreen: typeof import('@vueuse/core')['useFullscreen']
   const useGamepad: typeof import('@vueuse/core')['useGamepad']
   const useGeolocation: typeof import('@vueuse/core')['useGeolocation']
-  const useHintText: typeof import('./src/forms/composables/fields/utils/hint-text')['useHintText']
   const useId: typeof import('vue')['useId']
   const useIdle: typeof import('@vueuse/core')['useIdle']
   const useImage: typeof import('@vueuse/core')['useImage']
@@ -236,10 +200,7 @@ declare global {
   const useMediaQuery: typeof import('@vueuse/core')['useMediaQuery']
   const useMemoize: typeof import('@vueuse/core')['useMemoize']
   const useMemory: typeof import('@vueuse/core')['useMemory']
-  const useModalStack: typeof import('./src/common/composables/useModalStack')['useModalStack']
-  const useModalStackAware: typeof import('./src/common/composables/useModalStack')['useModalStackAware']
   const useModel: typeof import('vue')['useModel']
-  const useModelValue: typeof import('./src/forms/composables/fields/utils/model-value')['useModelValue']
   const useMounted: typeof import('@vueuse/core')['useMounted']
   const useMouse: typeof import('@vueuse/core')['useMouse']
   const useMouseInElement: typeof import('@vueuse/core')['useMouseInElement']
@@ -251,11 +212,9 @@ declare global {
   const useObjectUrl: typeof import('@vueuse/core')['useObjectUrl']
   const useOffsetPagination: typeof import('@vueuse/core')['useOffsetPagination']
   const useOnline: typeof import('@vueuse/core')['useOnline']
-  const useOptions: typeof import('./src/forms/composables/fields/utils/options')['useOptions']
   const usePageLeave: typeof import('@vueuse/core')['usePageLeave']
   const useParallax: typeof import('@vueuse/core')['useParallax']
   const useParentElement: typeof import('@vueuse/core')['useParentElement']
-  const usePasswordField: typeof import('./src/forms/composables/fields/password')['usePasswordField']
   const usePerformanceObserver: typeof import('@vueuse/core')['usePerformanceObserver']
   const usePermission: typeof import('@vueuse/core')['usePermission']
   const usePointer: typeof import('@vueuse/core')['usePointer']
@@ -268,20 +227,15 @@ declare global {
   const usePreferredReducedMotion: typeof import('@vueuse/core')['usePreferredReducedMotion']
   const usePreferredReducedTransparency: typeof import('@vueuse/core')['usePreferredReducedTransparency']
   const usePrevious: typeof import('@vueuse/core')['usePrevious']
-  const useProxies: typeof import('./src/common/composables/proxies')['useProxies']
-  const useRadioField: typeof import('./src/forms/composables/fields/radio')['useRadioField']
   const useRafFn: typeof import('@vueuse/core')['useRafFn']
   const useRefHistory: typeof import('@vueuse/core')['useRefHistory']
-  const useRequestList: typeof import('./src/http/composables/request-list')['useRequestList']
   const useResizeObserver: typeof import('@vueuse/core')['useResizeObserver']
-  const useRules: typeof import('./src/forms/composables/rules')['useRules']
   const useSSRWidth: typeof import('@vueuse/core')['useSSRWidth']
   const useScreenOrientation: typeof import('@vueuse/core')['useScreenOrientation']
   const useScreenSafeArea: typeof import('@vueuse/core')['useScreenSafeArea']
   const useScriptTag: typeof import('@vueuse/core')['useScriptTag']
   const useScroll: typeof import('@vueuse/core')['useScroll']
   const useScrollLock: typeof import('@vueuse/core')['useScrollLock']
-  const useSelectField: typeof import('./src/forms/composables/fields/select')['useSelectField']
   const useSessionStorage: typeof import('@vueuse/core')['useSessionStorage']
   const useShare: typeof import('@vueuse/core')['useShare']
   const useSlots: typeof import('vue')['useSlots']
@@ -294,20 +248,15 @@ declare global {
   const useStyleTag: typeof import('@vueuse/core')['useStyleTag']
   const useSupported: typeof import('@vueuse/core')['useSupported']
   const useSwipe: typeof import('@vueuse/core')['useSwipe']
-  const useTable: typeof import('./src/tables/composables/table')['useTable']
-  const useTableFooter: typeof import('./src/tables/composables/table-footer')['useTableFooter']
   const useTemplateRef: typeof import('vue')['useTemplateRef']
   const useTemplateRefsList: typeof import('@vueuse/core')['useTemplateRefsList']
   const useTextDirection: typeof import('@vueuse/core')['useTextDirection']
-  const useTextField: typeof import('./src/forms/composables/fields/text')['useTextField']
   const useTextSelection: typeof import('@vueuse/core')['useTextSelection']
   const useTextareaAutosize: typeof import('@vueuse/core')['useTextareaAutosize']
-  const useTextareaField: typeof import('./src/forms/composables/fields/textarea')['useTextareaField']
   const useThrottle: typeof import('@vueuse/core')['useThrottle']
   const useThrottleFn: typeof import('@vueuse/core')['useThrottleFn']
   const useThrottledRefHistory: typeof import('@vueuse/core')['useThrottledRefHistory']
   const useTimeAgo: typeof import('@vueuse/core')['useTimeAgo']
-  const useTimeAgoIntl: typeof import('@vueuse/core')['useTimeAgoIntl']
   const useTimeout: typeof import('@vueuse/core')['useTimeout']
   const useTimeoutFn: typeof import('@vueuse/core')['useTimeoutFn']
   const useTimeoutPoll: typeof import('@vueuse/core')['useTimeoutPoll']
@@ -353,15 +302,6 @@ declare global {
   // @ts-ignore
   export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, ShallowRef, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
-  // @ts-ignore
-  export type { ModalPosition, ModalStackPosition, ModalConfig, ModalStackConfig } from './src/common/composables/useModalStack'
-  import('./src/common/composables/useModalStack')
-  // @ts-ignore
-  export type { TableStoreService } from './src/tables/composables/table-store.service'
-  import('./src/tables/composables/table-store.service')
-  // @ts-ignore
-  export type { Proxy, ArgProxy } from './src/common/typings/index'
-  import('./src/common/typings/index')
 }
 
 // for vue template auto import
@@ -377,32 +317,6 @@ declare module 'vue' {
     readonly $shallowRef: UnwrapRef<typeof import('vue/macros')['$shallowRef']>
     readonly $toRef: UnwrapRef<typeof import('vue/macros')['$toRef']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
-    readonly FButton: UnwrapRef<typeof import('./src/common/components/index')['FButton']>
-    readonly FCheckbox: UnwrapRef<typeof import('./src/forms/components/index')['FCheckbox']>
-    readonly FColor: UnwrapRef<typeof import('./src/forms/components/index')['FColor']>
-    readonly FDatepicker: UnwrapRef<typeof import('./src/forms/components/index')['FDatepicker']>
-    readonly FDeleteConfirmationModal: UnwrapRef<typeof import('./src/tables/components/index')['FDeleteConfirmationModal']>
-    readonly FFile: UnwrapRef<typeof import('./src/forms/components/index')['FFile']>
-    readonly FFileList: UnwrapRef<typeof import('./src/forms/components/index')['FFileList']>
-    readonly FFileReveal: UnwrapRef<typeof import('./src/forms/components/index')['FFileReveal']>
-    readonly FForm: UnwrapRef<typeof import('./src/forms/components/index')['FForm']>
-    readonly FFormBody: UnwrapRef<typeof import('./src/forms/components/index')['FFormBody']>
-    readonly FFormFooter: UnwrapRef<typeof import('./src/forms/components/index')['FFormFooter']>
-    readonly FFormHeader: UnwrapRef<typeof import('./src/forms/components/index')['FFormHeader']>
-    readonly FModal: UnwrapRef<typeof import('./src/common/components/index')['FModal']>
-    readonly FModalContent: UnwrapRef<typeof import('./src/common/components/index')['FModalContent']>
-    readonly FPassword: UnwrapRef<typeof import('./src/forms/components/index')['FPassword']>
-    readonly FRadio: UnwrapRef<typeof import('./src/forms/components/index')['FRadio']>
-    readonly FSelect: UnwrapRef<typeof import('./src/forms/components/index')['FSelect']>
-    readonly FTable: UnwrapRef<typeof import('./src/tables/components/index')['FTable']>
-    readonly FTableBody: UnwrapRef<typeof import('./src/tables/components/index')['FTableBody']>
-    readonly FTableFooter: UnwrapRef<typeof import('./src/tables/components/index')['FTableFooter']>
-    readonly FTableHeaderActions: UnwrapRef<typeof import('./src/tables/components/index')['FTableHeaderActions']>
-    readonly FTableRowActions: UnwrapRef<typeof import('./src/tables/components/index')['FTableRowActions']>
-    readonly FTableRowFilePreview: UnwrapRef<typeof import('./src/tables/components/index')['FTableRowFilePreview']>
-    readonly FText: UnwrapRef<typeof import('./src/forms/components/index')['FText']>
-    readonly FTextarea: UnwrapRef<typeof import('./src/forms/components/index')['FTextarea']>
-    readonly TableStoreService: UnwrapRef<typeof import('./src/tables/composables/table-store.service')['TableStoreService']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
@@ -410,7 +324,6 @@ declare module 'vue' {
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
     readonly computedInject: UnwrapRef<typeof import('@vueuse/core')['computedInject']>
     readonly computedWithControl: UnwrapRef<typeof import('@vueuse/core')['computedWithControl']>
-    readonly configureModalStack: UnwrapRef<typeof import('./src/common/composables/useModalStack')['configureModalStack']>
     readonly controlledComputed: UnwrapRef<typeof import('@vueuse/core')['controlledComputed']>
     readonly controlledRef: UnwrapRef<typeof import('@vueuse/core')['controlledRef']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
@@ -418,7 +331,6 @@ declare module 'vue' {
     readonly createGlobalState: UnwrapRef<typeof import('@vueuse/core')['createGlobalState']>
     readonly createInjectionState: UnwrapRef<typeof import('@vueuse/core')['createInjectionState']>
     readonly createReactiveFn: UnwrapRef<typeof import('@vueuse/core')['createReactiveFn']>
-    readonly createRef: UnwrapRef<typeof import('@vueuse/core')['createRef']>
     readonly createReusableTemplate: UnwrapRef<typeof import('@vueuse/core')['createReusableTemplate']>
     readonly createSharedComposable: UnwrapRef<typeof import('@vueuse/core')['createSharedComposable']>
     readonly createTemplatePromise: UnwrapRef<typeof import('@vueuse/core')['createTemplatePromise']>
@@ -531,11 +443,9 @@ declare module 'vue' {
     readonly useBroadcastChannel: UnwrapRef<typeof import('@vueuse/core')['useBroadcastChannel']>
     readonly useBrowserLocation: UnwrapRef<typeof import('@vueuse/core')['useBrowserLocation']>
     readonly useCached: UnwrapRef<typeof import('@vueuse/core')['useCached']>
-    readonly useCheckboxField: UnwrapRef<typeof import('./src/forms/composables/fields/checkbox')['useCheckboxField']>
     readonly useClipboard: UnwrapRef<typeof import('@vueuse/core')['useClipboard']>
     readonly useClipboardItems: UnwrapRef<typeof import('@vueuse/core')['useClipboardItems']>
     readonly useCloned: UnwrapRef<typeof import('@vueuse/core')['useCloned']>
-    readonly useColorField: UnwrapRef<typeof import('./src/forms/composables/fields/color')['useColorField']>
     readonly useColorMode: UnwrapRef<typeof import('@vueuse/core')['useColorMode']>
     readonly useConfirmDialog: UnwrapRef<typeof import('@vueuse/core')['useConfirmDialog']>
     readonly useCountdown: UnwrapRef<typeof import('@vueuse/core')['useCountdown']>
@@ -547,7 +457,6 @@ declare module 'vue' {
     readonly useCycleList: UnwrapRef<typeof import('@vueuse/core')['useCycleList']>
     readonly useDark: UnwrapRef<typeof import('@vueuse/core')['useDark']>
     readonly useDateFormat: UnwrapRef<typeof import('@vueuse/core')['useDateFormat']>
-    readonly useDatepickerField: UnwrapRef<typeof import('./src/forms/composables/fields/datepicker')['useDatepickerField']>
     readonly useDebounce: UnwrapRef<typeof import('@vueuse/core')['useDebounce']>
     readonly useDebounceFn: UnwrapRef<typeof import('@vueuse/core')['useDebounceFn']>
     readonly useDebouncedRefHistory: UnwrapRef<typeof import('@vueuse/core')['useDebouncedRefHistory']>
@@ -571,16 +480,13 @@ declare module 'vue' {
     readonly useFavicon: UnwrapRef<typeof import('@vueuse/core')['useFavicon']>
     readonly useFetch: UnwrapRef<typeof import('@vueuse/core')['useFetch']>
     readonly useFileDialog: UnwrapRef<typeof import('@vueuse/core')['useFileDialog']>
-    readonly useFileField: UnwrapRef<typeof import('./src/forms/composables/fields/file')['useFileField']>
     readonly useFileSystemAccess: UnwrapRef<typeof import('@vueuse/core')['useFileSystemAccess']>
     readonly useFocus: UnwrapRef<typeof import('@vueuse/core')['useFocus']>
     readonly useFocusWithin: UnwrapRef<typeof import('@vueuse/core')['useFocusWithin']>
-    readonly useForm: UnwrapRef<typeof import('./src/forms/composables/form')['useForm']>
     readonly useFps: UnwrapRef<typeof import('@vueuse/core')['useFps']>
     readonly useFullscreen: UnwrapRef<typeof import('@vueuse/core')['useFullscreen']>
     readonly useGamepad: UnwrapRef<typeof import('@vueuse/core')['useGamepad']>
     readonly useGeolocation: UnwrapRef<typeof import('@vueuse/core')['useGeolocation']>
-    readonly useHintText: UnwrapRef<typeof import('./src/forms/composables/fields/utils/hint-text')['useHintText']>
     readonly useId: UnwrapRef<typeof import('vue')['useId']>
     readonly useIdle: UnwrapRef<typeof import('@vueuse/core')['useIdle']>
     readonly useImage: UnwrapRef<typeof import('@vueuse/core')['useImage']>
@@ -597,10 +503,7 @@ declare module 'vue' {
     readonly useMediaQuery: UnwrapRef<typeof import('@vueuse/core')['useMediaQuery']>
     readonly useMemoize: UnwrapRef<typeof import('@vueuse/core')['useMemoize']>
     readonly useMemory: UnwrapRef<typeof import('@vueuse/core')['useMemory']>
-    readonly useModalStack: UnwrapRef<typeof import('./src/common/composables/useModalStack')['useModalStack']>
-    readonly useModalStackAware: UnwrapRef<typeof import('./src/common/composables/useModalStack')['useModalStackAware']>
     readonly useModel: UnwrapRef<typeof import('vue')['useModel']>
-    readonly useModelValue: UnwrapRef<typeof import('./src/forms/composables/fields/utils/model-value')['useModelValue']>
     readonly useMounted: UnwrapRef<typeof import('@vueuse/core')['useMounted']>
     readonly useMouse: UnwrapRef<typeof import('@vueuse/core')['useMouse']>
     readonly useMouseInElement: UnwrapRef<typeof import('@vueuse/core')['useMouseInElement']>
@@ -612,11 +515,9 @@ declare module 'vue' {
     readonly useObjectUrl: UnwrapRef<typeof import('@vueuse/core')['useObjectUrl']>
     readonly useOffsetPagination: UnwrapRef<typeof import('@vueuse/core')['useOffsetPagination']>
     readonly useOnline: UnwrapRef<typeof import('@vueuse/core')['useOnline']>
-    readonly useOptions: UnwrapRef<typeof import('./src/forms/composables/fields/utils/options')['useOptions']>
     readonly usePageLeave: UnwrapRef<typeof import('@vueuse/core')['usePageLeave']>
     readonly useParallax: UnwrapRef<typeof import('@vueuse/core')['useParallax']>
     readonly useParentElement: UnwrapRef<typeof import('@vueuse/core')['useParentElement']>
-    readonly usePasswordField: UnwrapRef<typeof import('./src/forms/composables/fields/password')['usePasswordField']>
     readonly usePerformanceObserver: UnwrapRef<typeof import('@vueuse/core')['usePerformanceObserver']>
     readonly usePermission: UnwrapRef<typeof import('@vueuse/core')['usePermission']>
     readonly usePointer: UnwrapRef<typeof import('@vueuse/core')['usePointer']>
@@ -629,19 +530,15 @@ declare module 'vue' {
     readonly usePreferredReducedMotion: UnwrapRef<typeof import('@vueuse/core')['usePreferredReducedMotion']>
     readonly usePreferredReducedTransparency: UnwrapRef<typeof import('@vueuse/core')['usePreferredReducedTransparency']>
     readonly usePrevious: UnwrapRef<typeof import('@vueuse/core')['usePrevious']>
-    readonly useProxies: UnwrapRef<typeof import('./src/common/composables/proxies')['useProxies']>
-    readonly useRadioField: UnwrapRef<typeof import('./src/forms/composables/fields/radio')['useRadioField']>
     readonly useRafFn: UnwrapRef<typeof import('@vueuse/core')['useRafFn']>
     readonly useRefHistory: UnwrapRef<typeof import('@vueuse/core')['useRefHistory']>
     readonly useResizeObserver: UnwrapRef<typeof import('@vueuse/core')['useResizeObserver']>
-    readonly useRules: UnwrapRef<typeof import('./src/forms/composables/rules')['useRules']>
     readonly useSSRWidth: UnwrapRef<typeof import('@vueuse/core')['useSSRWidth']>
     readonly useScreenOrientation: UnwrapRef<typeof import('@vueuse/core')['useScreenOrientation']>
     readonly useScreenSafeArea: UnwrapRef<typeof import('@vueuse/core')['useScreenSafeArea']>
     readonly useScriptTag: UnwrapRef<typeof import('@vueuse/core')['useScriptTag']>
     readonly useScroll: UnwrapRef<typeof import('@vueuse/core')['useScroll']>
     readonly useScrollLock: UnwrapRef<typeof import('@vueuse/core')['useScrollLock']>
-    readonly useSelectField: UnwrapRef<typeof import('./src/forms/composables/fields/select')['useSelectField']>
     readonly useSessionStorage: UnwrapRef<typeof import('@vueuse/core')['useSessionStorage']>
     readonly useShare: UnwrapRef<typeof import('@vueuse/core')['useShare']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
@@ -654,20 +551,15 @@ declare module 'vue' {
     readonly useStyleTag: UnwrapRef<typeof import('@vueuse/core')['useStyleTag']>
     readonly useSupported: UnwrapRef<typeof import('@vueuse/core')['useSupported']>
     readonly useSwipe: UnwrapRef<typeof import('@vueuse/core')['useSwipe']>
-    readonly useTable: UnwrapRef<typeof import('./src/tables/composables/table')['useTable']>
-    readonly useTableFooter: UnwrapRef<typeof import('./src/tables/composables/table-footer')['useTableFooter']>
     readonly useTemplateRef: UnwrapRef<typeof import('vue')['useTemplateRef']>
     readonly useTemplateRefsList: UnwrapRef<typeof import('@vueuse/core')['useTemplateRefsList']>
     readonly useTextDirection: UnwrapRef<typeof import('@vueuse/core')['useTextDirection']>
-    readonly useTextField: UnwrapRef<typeof import('./src/forms/composables/fields/text')['useTextField']>
     readonly useTextSelection: UnwrapRef<typeof import('@vueuse/core')['useTextSelection']>
     readonly useTextareaAutosize: UnwrapRef<typeof import('@vueuse/core')['useTextareaAutosize']>
-    readonly useTextareaField: UnwrapRef<typeof import('./src/forms/composables/fields/textarea')['useTextareaField']>
     readonly useThrottle: UnwrapRef<typeof import('@vueuse/core')['useThrottle']>
     readonly useThrottleFn: UnwrapRef<typeof import('@vueuse/core')['useThrottleFn']>
     readonly useThrottledRefHistory: UnwrapRef<typeof import('@vueuse/core')['useThrottledRefHistory']>
     readonly useTimeAgo: UnwrapRef<typeof import('@vueuse/core')['useTimeAgo']>
-    readonly useTimeAgoIntl: UnwrapRef<typeof import('@vueuse/core')['useTimeAgoIntl']>
     readonly useTimeout: UnwrapRef<typeof import('@vueuse/core')['useTimeout']>
     readonly useTimeoutFn: UnwrapRef<typeof import('@vueuse/core')['useTimeoutFn']>
     readonly useTimeoutPoll: UnwrapRef<typeof import('@vueuse/core')['useTimeoutPoll']>

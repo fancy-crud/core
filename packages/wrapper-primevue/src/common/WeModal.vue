@@ -23,6 +23,7 @@ export default defineComponent({
         ...attrs,
         'visible': modelValue.value,
         'onUpdate:visible': (e: boolean) => modelValue.value = e,
+        modal: true,
       }, slots)
   },
 })

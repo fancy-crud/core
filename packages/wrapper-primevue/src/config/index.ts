@@ -19,7 +19,8 @@ export const styles = {
     rounded: true,
     icon: 'pi pi-pencil',
     severity: 'info',
-    text: true
+    text: true,
+    outlined: true,
   },
 
   removeButton: {
@@ -33,7 +34,8 @@ export const styles = {
     rounded: true,
     icon: 'pi pi-download',
     severity: 'info',
-    text: true
+    text: true,
+    outlined: true
   },
 
   confirmButton: {

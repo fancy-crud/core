@@ -1,9 +1,19 @@
 <template>
   <div class="field" :class="{ 'p-invalid': hasFieldErrors }">
-    <label v-if="label" :for="attrs.id" class="block mb-2">{{ label }}</label>
+    <label v-if="label" v-bind="attrs" class="block mb-2">{{ label }}</label>
     <slot />
-    <small v-if="hasFieldErrors" class="p-error block mt-1">{{ message }}</small>
-    <small v-else-if="message" class="block mt-1 text-gray-600">{{ message }}</small>
+    <small 
+      v-if="hasFieldErrors" 
+      class="field-hint p-error"
+    >
+      {{ message }}
+    </small>
+    <small 
+      v-else 
+      class="field-hint text-gray-600"
+    >
+      {{ message }}
+    </small>
   </div>
 </template>
 
@@ -18,6 +28,10 @@ const attrs = useAttrs()
 </script>
 
 <style lang="sass">
-.hidden-hint
-  opacity: 0
+.field-hint
+  display: block
+  margin-top: 0.25rem
+  min-height: 1.25rem
+  line-height: 1.25rem
+  margin-bottom: 0.5rem
 </style>
