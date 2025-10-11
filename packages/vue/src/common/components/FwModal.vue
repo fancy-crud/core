@@ -1,15 +1,24 @@
 <script lang="ts">
-import { getDefaults } from '@fancy-crud/core'
-
+/**
+ * FwModal - Default Modal Wrapper Component
+ * 
+ * This is the default modal renderer used by FModal.
+ * It provides a general-purpose implementation that works across all frameworks.
+ * 
+ * Wrappers can override this by providing their own FwModal if they need
+ * framework-specific behavior (e.g., using Dialog components, etc.)
+ * 
+ * This component receives:
+ * - Stack classes and styles from FModal via data attributes
+ * - User's custom classes from defaults
+ * - All slot content
+ */
 export default defineComponent({
+  name: 'FwModal',
   props: {
     modelValue: {
       type: Boolean,
-      default: () => false,
-    },
-    form: {
-      type: Object as PropType<any>,
-      default: () => ({}),
+      default: false,
     },
   },
   emits: {
@@ -17,7 +26,6 @@ export default defineComponent({
   },
   setup(props: any, { attrs, slots, emit }) {
     const modelValue = useVModel(props, 'modelValue', emit)
-    const defaults = computed(getDefaults)
 
     // Extract stack data passed from FModal (FModal handles all the logic)
     const inStack = computed(() => !!attrs['data-modal-in-stack'])
@@ -51,11 +59,6 @@ export default defineComponent({
       if (!modelValue.value) {
         classes.push('fancy-modal-closed')
       }
-      
-      // Add user's custom classes from defaults
-      if (defaults.value.modal?.class) {
-        classes.push(defaults.value.modal.class)
-      }
 
       return h('div', { class: 'fancy-modal-wrapper' }, [
         // Overlay (only visible when modal is open)
@@ -76,3 +79,4 @@ export default defineComponent({
   },
 })
 </script>
+
