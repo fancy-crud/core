@@ -8,23 +8,40 @@ export default defineComponent({
       type: Boolean,
       default: () => false,
     },
+    form: {
+      type: Object as PropType<any>,
+      default: () => ({}),
+    },
   },
   emits: {
     'update:modelValue': (_payload: boolean) => true,
   },
-  setup(props, { attrs, slots, emit }) {
+  setup(props: any, { attrs, slots, emit }) {
     const modelValue = useVModel(props, 'modelValue', emit)
 
     const defaults = computed(getDefaults)
 
     return () =>
       h(Dialog, {
+        modal: true,
         ...defaults.value.modal,
         ...attrs,
         'visible': modelValue.value,
         'onUpdate:visible': (e: boolean) => modelValue.value = e,
-        modal: true,
+        'header': " ",
       }, slots)
   },
 })
 </script>
+
+<style>
+.p-dialog-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.p-dialog-content {
+  padding-top: 1.5rem;
+}
+</style>
