@@ -7,15 +7,28 @@
     height: 100%;
     display: grid;
     grid-template-rows: auto 1fr auto;
+    overflow-y: hidden;
+  }
+
+  .f-form__header {
+    @apply pb-4;
+    display: flex;
+    flex-shrink: 0;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-content: center;
   }
 
   .f-form__body {
     @apply grid grid-cols-12 md:gap-x-8;
     align-content: start;
+    overflow-y: auto;
+    padding-right: 1rem;
   }
 
   .f-form__footer {
     @apply pt-2;
+    flex-shrink: 0;
   }
 
   .f-form__footer__button--aux {
