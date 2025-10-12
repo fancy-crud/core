@@ -27,8 +27,9 @@
   }
 
   .f-form__footer {
-    @apply pt-2;
+    @apply pt-4;
     flex-shrink: 0;
+    @apply border-t-1 border-gray-200;
   }
 
   .f-form__footer__button--aux {
