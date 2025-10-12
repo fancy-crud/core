@@ -17,6 +17,12 @@
     flex-flow: row nowrap;
     justify-content: space-between;
     align-content: center;
+    transition: box-shadow 0.2s ease;
+  }
+
+  /* Shadow when content is scrolled (has content above) */
+  .f-form__header--shadow {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   }
 
   .f-form__body {
@@ -30,6 +36,12 @@
     @apply pt-4;
     flex-shrink: 0;
     @apply border-t-1 border-gray-200;
+    transition: box-shadow 0.2s ease;
+  }
+
+  /* Shadow when there's content below (not at bottom) */
+  .f-form__footer--shadow {
+    box-shadow: 0 -8px 16px rgba(0, 0, 0, 0.1);
   }
 
   .f-form__footer__button--aux {
