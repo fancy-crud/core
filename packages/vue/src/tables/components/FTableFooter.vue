@@ -7,6 +7,7 @@
 </template>
 
 <script lang="ts" setup>
+import { useSlots } from 'vue'
 import { components } from '@fancy-crud/core'
 import type { TableFooterProps } from '../typing'
 

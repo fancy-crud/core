@@ -1,4 +1,4 @@
-import isEqual from 'lodash.isequal'
+import isEqual from 'fast-deep-equal'
 import { inject } from '@fancy-crud/bus'
 import { IHttp } from '../axioma/typing'
 import type { HttpRequestGet, SameAPIEndpoint } from '../axioma/typing'

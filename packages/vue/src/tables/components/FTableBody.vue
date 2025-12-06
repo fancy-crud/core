@@ -17,6 +17,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, inject, useSlots } from 'vue'
 import type { NormalizedColumn, NormalizedField, NormalizedTableButtons } from '@fancy-crud/core'
 import { ITableStore, components, injecting } from '@fancy-crud/core'
 

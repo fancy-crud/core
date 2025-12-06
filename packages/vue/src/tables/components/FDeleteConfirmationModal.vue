@@ -16,21 +16,21 @@
             d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
           /></svg>
           <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-            Are you sure you want to delete this record?
+            {{ t('confirm-delete-title') }}
           </h3>
           <f-button
             @click="accept"
             class="f-button f-modal__button--accept"
             v-bind="defaults.confirmButton"
           >
-            Yes, I'm sure
+            {{ t('confirm-delete-yes') }}
           </f-button>
           <f-button
             @click="cancel"
             class="f-button f-modal__button--cancel ml-4"
             v-bind="defaults.cancelButton"
           >
-            No, cancel
+            {{ t('confirm-delete-no') }}
           </f-button>
         </div>
       </div>
@@ -39,7 +39,8 @@
 </template>
 
 <script lang="ts" setup>
-import { getDefaults } from '@fancy-crud/core'
+import { computed, watch, ref } from 'vue'
+import { getDefaults, t } from '@fancy-crud/core'
 
 const props = defineProps<{
   modelValue: boolean

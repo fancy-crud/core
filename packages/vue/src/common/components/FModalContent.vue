@@ -13,6 +13,8 @@
  * - User's custom classes from defaults
  * - All slot content
  */
+import { computed, defineComponent } from 'vue'
+
 export default defineComponent({
   name: 'FwModal',
   props: {

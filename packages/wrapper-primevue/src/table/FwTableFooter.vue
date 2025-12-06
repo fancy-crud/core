@@ -14,6 +14,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
 import Select from 'primevue/select'
 import Paginator from 'primevue/paginator'
 import type { TableFooterEmit, TableFooterProps } from '@fancy-crud/vue'
