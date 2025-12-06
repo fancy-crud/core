@@ -17,7 +17,6 @@ declare module 'vue' {
     FwDatepicker: typeof import('./src/form/FwDatepicker.vue')['default']
     FwField: typeof import('./src/form/FwField.vue')['default']
     FwFile: typeof import('./src/form/FwFile.vue')['default']
-    FwModal: typeof import('./src/common/FwModal.vue')['default']
     FwPassword: typeof import('./src/form/FwPassword.vue')['default']
     FwRadio: typeof import('./src/form/FwRadio.vue')['default']
     FwSelect: typeof import('./src/form/FwSelect.vue')['default']
