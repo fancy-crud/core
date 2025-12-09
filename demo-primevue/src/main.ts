@@ -32,6 +32,11 @@ app.use(PrimeVue, {
 })
 app.use(ToastService)
 
+// Then register FancyCrud (which will use the toast handler and components internally)
+app.use(FancyCrud, fancyConfig)
+
+// Only register FwToast as a global component (the rest are used internally by FancyCrud)
+app.component('FwToast', FwToast)
 
 // Then register FancyCrud (which will use the toast handler and components internally)
 app.use(FancyCrud, fancyConfig)

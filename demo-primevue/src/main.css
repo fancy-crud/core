@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "tailwindcss-primeui";
 @import '@fancy-crud/vue/dist/fancy-crud-vue.css';
-@config '../tailwind.config.js'
 
 /* Custom theme - Tailwind v4 uses CSS custom properties */
 @theme {
