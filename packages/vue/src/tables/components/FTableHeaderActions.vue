@@ -18,6 +18,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
 import type { NormalizedTableButton } from '@fancy-crud/core'
 import { getDefaults } from '@fancy-crud/core'
 

@@ -1,3 +1,4 @@
+import { watch, reactive } from 'vue'
 import type { Proxy } from '@packages/vue/common'
 
 export function useProxies<T extends Record<string, any>>(proxies: unknown[], deep: boolean[]) {

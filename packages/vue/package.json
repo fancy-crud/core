@@ -21,26 +21,23 @@
     "src/styles"
   ],
   "scripts": {
-    "build": "vite build && vue-tsc -p ./tsconfig.build.json --declaration --emitDeclarationOnly && tsc-alias --verbose -p ./tsconfig.build.json"
+    "build": "vite build && vue-tsc -p ./tsconfig.build.json --declaration --emitDeclarationOnly && tsc-alias --verbose -p ./tsconfig.build.json",
+    "build:no-ts": "vite build"
   },
   "peerDependencies": {
     "@fancy-crud/core": "workspace:^",
     "@vueuse/core": "^13.9.0",
     "esno": "4.8.0",
-    "lodash.clonedeep": "^4.5.0",
-    "lodash.isequal": "^4.5.0",
     "vue": "^3.5.22"
   },
   "dependencies": {
     "@fancy-crud/core": "workspace:^",
     "@vueuse/core": "^13.9.0",
     "esno": "4.8.0",
-    "lodash.clonedeep": "^4.5.0",
-    "lodash.isequal": "^4.5.0",
     "vue": "^3.5.22"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.1.14",
+    "@tailwindcss/vite": "^4.1.17",
     "tailwindcss": "^4.1.14"
   },
   "release": {

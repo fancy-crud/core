@@ -1,7 +1,7 @@
 import { ReturnObject, FModalContent } from '@fancy-crud/vue'
 import FwButton from './FwButton.vue'
+
 export * from './notify'
-// import WeLoadingIcon from './WeLoadingIcon.vue'
 
 export const common = ReturnObject({
   button: FwButton,
@@ -11,5 +11,4 @@ export const common = ReturnObject({
 export {
   FwButton,
   FModalContent,
-  // WeLoadingIcon,
 }
