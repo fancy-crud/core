@@ -9,6 +9,13 @@ const bus = new Bus()
 const interceptors: ResponseInterceptorState = {
   ...genericErrorNotification(400, 451),
   ...genericErrorNotification(500, 511),
+  // Network error (no response from server)
+  0: (formId: symbol) => {
+    bus.execute(
+      new TriggerFormNotificationCommand(formId, NOTIFICATION_TYPE.error),
+    )
+  },
+  // Bad request - set field errors AND show notification
   400: (formId: symbol, error: { response?: { data: any } }) => {
     const formStore: IFormStore = inject(IFormStore)
     const form = formStore.searchById(formId)
@@ -20,11 +27,15 @@ const interceptors: ResponseInterceptorState = {
 
     const errors = error.response?.data
 
-    if (!errors)
-      return
+    if (errors) {
+      bus.execute(
+        new SetFieldsErrorsCommand(fields, errors),
+      )
+    }
 
+    // Also show error notification
     bus.execute(
-      new SetFieldsErrorsCommand(fields, errors),
+      new TriggerFormNotificationCommand(formId, NOTIFICATION_TYPE.error),
     )
   },
 }
