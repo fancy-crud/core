@@ -1,17 +1,6 @@
-import { blue, gray, red } from 'tailwindcss/colors'
+// tailwind.config.js — Tailwind v4 format
+import preset from './tailwind.preset.js'
 
-export const content = [
-  './src/**/*.{vue,js,ts}',
-]
-
-export const theme = {
-  extend: {
-    colors: {
-      primary: blue,
-      danger: red,
-      inactive: gray,
-      default: gray[300],
-    },
-  },
+export default {
+  presets: [preset],
 }
-export const plugins = []

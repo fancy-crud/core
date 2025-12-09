@@ -1,4 +1,5 @@
 <script lang="ts">
+import { defineComponent, h } from 'vue'
 import Button from 'primevue/button'
 
 export default defineComponent({

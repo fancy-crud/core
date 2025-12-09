@@ -30,6 +30,8 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, reactive } from 'vue'
+
 const props = defineProps<{
   items: File[]
 }>()
@@ -65,6 +67,8 @@ function previewFile(file: File) {
 </script>
 
 <style lang="sass" scoped>
+@reference "tailwindcss"
+
 .f-file-list
   @apply pt-6
   width: 100%

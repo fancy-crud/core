@@ -18,6 +18,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, Ref, inject } from 'vue'
 import type { FormMode } from '@fancy-crud/core'
 import { Bus, getDefaults, GetTitleByFormModeCommand } from '@fancy-crud/core'
 

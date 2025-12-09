@@ -13,6 +13,7 @@
     "url": "https://github.com/fancy-crud/core"
   },
   "dependencies": {
+    "@fancy-crud/bus": "^2.2.27",
     "@fancy-crud/core": "workspace:^",
     "@fancy-crud/plugin-rule-parsers": "workspace:^",
     "@fancy-crud/vue": "workspace:^",

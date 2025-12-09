@@ -1,3 +1,5 @@
+import { computed } from 'vue'
+
 type Options = unknown[][]
 
 interface Props {

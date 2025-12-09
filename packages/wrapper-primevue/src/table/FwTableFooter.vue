@@ -1,19 +1,23 @@
 <template>
+  
     <Select 
       v-model="state.pagination.perPage" 
       :options="props.pagination.rowsPerPageOptions"
       class="w-20"
     />
-
-    <Paginator
-      v-model:first="firstRecord"
-      :rows="state.pagination.perPage"
-      :totalRecords="props.pagination.count"
-      template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
-    />
+    <!-- <div> -->
+      <Paginator
+        v-model:first="firstRecord"
+        :rows="state.pagination.perPage"
+        :totalRecords="props.pagination.count"
+        template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
+      />
+    <!-- </div> -->
+  <!-- </div> -->
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
 import Select from 'primevue/select'
 import Paginator from 'primevue/paginator'
 import type { TableFooterEmit, TableFooterProps } from '@fancy-crud/vue'

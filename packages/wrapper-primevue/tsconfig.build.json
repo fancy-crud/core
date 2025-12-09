@@ -1,3 +1,12 @@
 {
-  "extends": "./tsconfig.common.json"
+  "extends": "./tsconfig.common.json",
+  "compilerOptions": {
+    "composite": false,
+    "baseUrl": ".",
+    "paths": {
+      "@fancy-crud/core": ["../core/src/index.ts"],
+      "@fancy-crud/vue": ["../vue/src/index.ts"]
+    }
+  },
+  "include": ["src"]
 }

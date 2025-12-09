@@ -29,7 +29,7 @@
   </slot>
 
   <slot name="table-footer" v-bind="tableFooterVBind">
-    <div v-if="!props.pagination.hidden" class="flex flex-row items-center mt-4" style="justify-content: space-between;">
+    <div v-if="!props.pagination.hidden" class="flex flex-col justify-between mt-4">
       <f-table-footer v-bind="tableFooterVBind" />
     </div>
   </slot>
@@ -49,6 +49,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, watch, useSlots, provide } from 'vue'
 import type { BaseTableForm, NormalizedTableButtons, NormalizedTableFilters, NormalizedTableList, NormalizedTablePagination, NormalizedTableSettings, ObjectWithNormalizedColumns, Pagination } from '@fancy-crud/core'
 import { Bus, CustomColumnsOrderCommand, IFormStore, ITableStore, ResetTablePaginationCommand, inject as injecting } from '@fancy-crud/core'
 
