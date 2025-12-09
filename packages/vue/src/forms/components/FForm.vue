@@ -1,6 +1,7 @@
 <template>
   <form
     class="f-form"
+    @submit.prevent
   >
     <slot name="before-form-header" />
 

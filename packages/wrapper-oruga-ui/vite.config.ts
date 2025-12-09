@@ -21,7 +21,12 @@ export default defineConfig({
       fileName: 'fancy-crud-wrapper-primevue',
     },
     rollupOptions: {
-      external: ['vue', '@primevue/primevue', '@fancy-crud/core', '@fancy-crud/vue'],
+      external: (id) => {
+        return id === 'vue' 
+          || id.startsWith('@oruga-ui') 
+          || id === '@fancy-crud/core' 
+          || id === '@fancy-crud/vue'
+      },
       output: {
         assetFileNames: (assetInfo) => {
           if (!assetInfo.name || assetInfo.name === 'style.css')

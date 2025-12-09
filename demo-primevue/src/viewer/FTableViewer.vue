@@ -76,25 +76,28 @@ const table = useTable({
   form,
   columns: {
     name: {
+      exclude: true,
+    },
+    first_name: {
       label: 'Name',
       format: (value: string) => value.toUpperCase(),
     },
-    gender: {
-      label: 'Gender',
-      format: (value: string) => value === 'm' ? 'Male' : 'Female',
-    },
-    created_at: {
-      label: 'Created at',
-      format: (value: string) => 'anything',
-    },
-    updated_at: {
-      label: 'Updated at',
-    },
+    // gender: {
+    //   label: 'Gender',
+    //   format: (value: string) => value === 'm' ? 'Male' : 'Female',
+    // },
+    // created_at: {
+    //   label: 'Created at',
+    //   format: (value: string) => 'anything',
+    // },
+    // updated_at: {
+    //   label: 'Updated at',
+    // },
     actions: { value: 'actions', label: '', width: '200px', align: 'left' },
   },
   settings: {
     // columnsOrder: ['actions', 'name', 'updated_at', '...'],
-    url: 'artists/',
+    url: 'patients/',
   },
   pagination: {
     rowsPerPage: 10,

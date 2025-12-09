@@ -9,6 +9,7 @@ export interface RawTableSettings extends Record<string, unknown> {
   rowToDelete?: null | Row
   autoInferColumns?: boolean
   columnsOrder?: string[]
+  modal?: Record<string, any>
 }
 
 export interface NormalizedTableSettings extends Required<RawTableSettings> {}

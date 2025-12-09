@@ -9,6 +9,7 @@ export class NormalizeTableSettingsHandler implements INormalizeTableSettingsHan
       displayConfirmationDialog: false,
       autoInferColumns: true,
       rowToDelete: null,
+      modal: {},
       ...rawSettings,
     } as T & NormalizedTableSettings
 

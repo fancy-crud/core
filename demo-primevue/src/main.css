@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tailwindcss-primeui";
 @import '@fancy-crud/vue/dist/fancy-crud-vue.css';
+@config '../tailwind.config.js'
 
 /* Custom theme - Tailwind v4 uses CSS custom properties */
 @theme {
@@ -29,4 +30,8 @@
   --color-danger-900: oklch(39.59% 0.132 25.72);
   --color-danger-950: oklch(25.82% 0.092 26.04);
   --color-danger: var(--color-danger-500);
+}
+
+.p-datatable-mask {
+  background-color: transparent;
 }

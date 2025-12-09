@@ -11,6 +11,7 @@ const packages = [
   'wrapper-vuetify',
   'wrapper-quasar',
   'wrapper-element-plus',
+  'wrapper-primevue',
 ]
 
 function replace_version({ filePath, err, data, version, packageName }) {

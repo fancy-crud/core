@@ -21,7 +21,12 @@ export default defineConfig({
       fileName: 'fancy-crud-wrapper-quasar',
     },
     rollupOptions: {
-      external: ['vue', 'quasar', '@fancy-crud/core', '@fancy-crud/vue'],
+      external: (id) => {
+        return id === 'vue' 
+          || id.startsWith('quasar') 
+          || id === '@fancy-crud/core' 
+          || id === '@fancy-crud/vue'
+      },
       output: {
         assetFileNames: (assetInfo) => {
           if (!assetInfo.name || assetInfo.name === 'style.css')

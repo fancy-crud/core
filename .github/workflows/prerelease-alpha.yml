@@ -11,19 +11,19 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [22.x]
         os: [ubuntu-latest]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 10.18.2
           run_install: |
             - recursive: true
               args: [--frozen-lockfile, --strict-peer-dependencies]
@@ -39,6 +39,7 @@ jobs:
           pnpm build:w-vuetify
           pnpm build:w-quasar
           pnpm build:w-element
+          pnpm build:w-primevue
 
           pnpm build:p-rule-parsers
           pnpm build:p-vue3-toastify
@@ -52,7 +53,7 @@ jobs:
       toTag: ${{ steps.toTag.outputs.tag }}
     steps:
       - name: checkout code repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -94,17 +95,17 @@ jobs:
     if: ${{ needs.compute-new-tag-version.outputs.fromTag != needs.compute-new-tag-version.outputs.toTag }}
     steps:
       - name: checkout code repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: setup node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 16.x
+          node-version: 22.x
 
       - name: install pnpm
-        run: npm i pnpm@8.15.7 -g
+        run: npm i pnpm@10.18.2 -g
 
       - name: Setup npmrc
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
@@ -126,6 +127,7 @@ jobs:
           pnpm build:w-vuetify
           pnpm build:w-quasar
           pnpm build:w-element
+          pnpm build:w-primevue
 
           pnpm build:p-rule-parsers
           pnpm build:p-vue3-toastify
@@ -139,7 +141,7 @@ jobs:
     if: ${{ needs.compute-new-tag-version.outputs.fromTag != needs.compute-new-tag-version.outputs.toTag }}
     steps:
       - name: checkout code repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 

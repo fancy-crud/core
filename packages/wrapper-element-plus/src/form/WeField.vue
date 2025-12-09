@@ -14,7 +14,7 @@ export default defineComponent({
   },
   setup(props, { attrs, slots }) {
     const computedError = computed(() => props.hasFieldErrors ? props.message : undefined)
-    return () => h(ElFormItem, { ...attrs, error: computedError.value, inlineMessage: props.message }, slots)
+    return () => h(ElFormItem, { ...attrs, error: computedError.value, inlineMessage: !!props.message }, slots)
   },
 })
 </script>
