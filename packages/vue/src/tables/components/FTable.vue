@@ -49,6 +49,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, watch, useSlots, provide } from 'vue'
 import type { BaseTableForm, NormalizedTableButtons, NormalizedTableFilters, NormalizedTableList, NormalizedTablePagination, NormalizedTableSettings, ObjectWithNormalizedColumns, Pagination } from '@fancy-crud/core'
 import { Bus, CustomColumnsOrderCommand, IFormStore, ITableStore, ResetTablePaginationCommand, inject as injecting } from '@fancy-crud/core'
 

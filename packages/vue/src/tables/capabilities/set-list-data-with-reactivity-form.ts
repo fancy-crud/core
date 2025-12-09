@@ -1,8 +1,9 @@
+import { watch } from 'vue'
 import type { ISetListDataHandler, NormalizedColumn, SetListDataCommand } from '@fancy-crud/core'
 import { Bus, FORM_MODE, HttpService, IFormStore, ITableStore, PaginateResult, SetFieldsValuesCommand, injecting } from '@fancy-crud/core'
 import type { ObjectWithRawFields } from '../..'
 import { useForm } from '../../forms'
-import cloneDeep from 'lodash.clonedeep'
+// Using native structuredClone instead of lodash.clonedeep
 
 export class SetListDataWithReactivityFormsHandler implements ISetListDataHandler {
   constructor(
@@ -52,7 +53,7 @@ export class SetListDataWithReactivityFormsHandler implements ISetListDataHandle
 
     items = items.map((record: any) => {
       const $form = useForm({
-        fields: cloneDeep(allowInputFields),
+        fields: structuredClone(allowInputFields),
         settings: {
           ...settings,
           mode: FORM_MODE.update,

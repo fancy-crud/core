@@ -1,21 +1,14 @@
 import { defineConfig } from '@fancy-crud/vue'
-import { useToast } from 'primevue/usetoast'
+import { components, toast, styles } from '@fancy-crud/wrapper-primevue'
 import axios from 'axios'
 
-import { components, notify, styles } from '@fancy-crud/wrapper-primevue'
-// import { valibotSafeParser as parser } from '@fancy-crud/plugin-rule-parsers'
-
 axios.defaults.baseURL = 'http://localhost:9000/api/'
-
-// Initialize toast
-// const toast = useToast()
-// const notifyInstance = notify()
-// notifyInstance.setToastInstance(toast)
 
 export default defineConfig({
   components,
   styles,
-  // toast: notifyInstance,
+  // Pass the toast handler for notifications
+  toast,
   http: {
     request: axios as any,
     hooks: {
@@ -27,9 +20,4 @@ export default defineConfig({
       },
     },
   },
-  // rules: {
-  //   parser,
-  // },
 })
-
-

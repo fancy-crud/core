@@ -21,6 +21,12 @@ export default defineConfig(() => {
       },
       rollupOptions: {
         external: [...Object.keys(dependencies)],
+        output: {
+          globals: {
+            '@fancy-crud/bus': 'FancyCrudBus',
+            'fast-deep-equal': 'isEqual',
+          },
+        },
       },
     },
   }

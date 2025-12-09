@@ -38,6 +38,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, useSlots, ref, provide } from 'vue'
 import type {
   BaseObjectWithNormalizedFields, DispatchOnFailedFormEventCommand, DispatchOnSuccessFormEventCommand, NormalizedSettings,
   ObjectWithNormalizedButtons,

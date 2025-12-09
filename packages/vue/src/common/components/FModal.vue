@@ -1,4 +1,5 @@
 <script lang="ts">
+import { computed, watch, onMounted, defineComponent, PropType } from 'vue'
 import { components } from '@fancy-crud/core'
 import { useModalStack, type ModalStackPosition } from '../composables/useModalStack'
 

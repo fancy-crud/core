@@ -6,15 +6,20 @@ import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import { name } from './package.json'
+import tailwindcss from '@tailwindcss/vite'
+import tsconfigPaths from 'vite-tsconfig-paths'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
-      '@packages/wrapper-primevue/': `${path.resolve(__dirname, 'src')}/`,
-    },
+      '@': path.resolve(__dirname, './src'),
+      '@packages/vue': path.resolve(__dirname, '../vue/src'),
+      '@packages/core': path.resolve(__dirname, '../core/src'),
+    }
   },
   build: {
+    sourcemap: false, // Disabled to avoid @tailwindcss/vite warning
     lib: {
       name,
       entry: path.resolve(__dirname, 'src/index.ts'),
@@ -39,19 +44,22 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+    tailwindcss(),
+    tsconfigPaths(),
     AutoImport({
       imports: [
         'vue',
         'vue/macros',
-        '@vueuse/core',
+        'vue-router',
+        '@vueuse/core'
       ],
+      vueTemplate: true,
       dts: true,
       dirs: [
         './src/**/components',
         './src/**/composables',
         './src/**/typings',
-      ],
-      vueTemplate: true,
+      ]
     }),
     Components({
       dirs: [

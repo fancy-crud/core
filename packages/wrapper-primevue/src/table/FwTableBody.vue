@@ -36,6 +36,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 import type { NormalizedColumn } from '@fancy-crud/core'

@@ -14,7 +14,12 @@
   },
   "main": "./dist/fancy-crud-wrapper-primevue.js",
   "module": "./dist/fancy-crud-wrapper-primevue.js",
-  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/fancy-crud-wrapper-primevue.js",
+      "types": "./dist/src/index.d.ts"
+    }
+  },
   "files": [
     "dist"
   ],
@@ -38,9 +43,11 @@
     "vue": "^3.5.22"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.21",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.14"
+    "@tailwindcss/vite": "^4.1.17",
+    "@vitejs/plugin-vue": "^6.0.2",
+    "tailwindcss": "^4.1.14",
+    "unplugin-auto-import": "^20.3.0",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "publishConfig": {
     "access": "public"

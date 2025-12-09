@@ -1,3 +1,4 @@
+import { reactive } from 'vue'
 import type { ITableStore, TableState } from '@fancy-crud/core'
 
 const tableStore: Record<symbol, TableState> = reactive({})

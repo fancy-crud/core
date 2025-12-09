@@ -27,6 +27,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, Ref, inject } from 'vue'
 import type { NormalizedButton, NormalizedSettings, ObjectWithNormalizedButtons } from '@fancy-crud/core'
 import { Bus, GetButtonLabelByFormModeCommand } from '@fancy-crud/core'
 
