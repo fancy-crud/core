@@ -13,7 +13,8 @@
  * - User's custom classes from defaults
  * - All slot content
  */
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, h } from 'vue'
+import { useVModel } from '@vueuse/core'
 
 export default defineComponent({
   name: 'FwModal',
