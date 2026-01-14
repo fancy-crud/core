@@ -18,14 +18,14 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
     "types": [
-      "vite/client",
+      "vite/client"
     ],
     "paths": {
-      "@packages/wrapper-quasar/*": ["src/*"],
+      "@packages/wrapper-quasar/*": ["src/*"]
     }
   },
   "exclude": [
     "dist",
-    "node_modules",
+    "node_modules"
   ]
 }

@@ -15,7 +15,7 @@ import '@fancy-crud/wrapper-primevue/dist/fancy-crud-wrapper-primevue.css'
 
 import { FwToast } from '@fancy-crud/wrapper-primevue'
 
-const app = createApp(App);
+const app = createApp(App)
 
 // IMPORTANT: Register PrimeVue and ToastService before FancyCrud
 app.use(PrimeVue, {
@@ -31,12 +31,6 @@ app.use(PrimeVue, {
   }
 })
 app.use(ToastService)
-
-// Then register FancyCrud (which will use the toast handler and components internally)
-app.use(FancyCrud, fancyConfig)
-
-// Only register FwToast as a global component (the rest are used internally by FancyCrud)
-app.component('FwToast', FwToast)
 
 // Then register FancyCrud (which will use the toast handler and components internally)
 app.use(FancyCrud, fancyConfig)

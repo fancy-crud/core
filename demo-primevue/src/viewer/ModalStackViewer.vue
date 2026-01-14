@@ -838,7 +838,7 @@
 
 <script lang="ts" setup>
 import type { RecordObject } from '@fancy-crud/vue'
-import { FieldType, useForm, useTable, useModalStack } from '@fancy-crud/vue'
+import { FieldType, useForm, useTable, useModalStack, ref } from '@fancy-crud/vue'
 import Button from 'primevue/button'
 
 // Get modal stack composable for debugging/display
@@ -997,7 +997,7 @@ const artistsForm = useForm({
       placeholder: 'Enter artist name',
       modelValue: '',
     },
-    name_6: {
+    name_9: {
       type: FieldType.text,
       label: 'Artist Name',
       placeholder: 'Enter artist name',
