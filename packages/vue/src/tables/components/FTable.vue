@@ -29,7 +29,7 @@
   </slot>
 
   <slot name="table-footer" v-bind="tableFooterVBind">
-    <div v-if="!props.pagination.hidden" class="flex flex-row items-center mt-4" style="justify-content: space-between;">
+    <div v-if="!props.pagination.hidden" class="flex flex-col justify-between mt-4">
       <f-table-footer v-bind="tableFooterVBind" />
     </div>
   </slot>

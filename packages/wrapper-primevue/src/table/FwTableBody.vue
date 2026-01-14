@@ -4,15 +4,7 @@
     :value="props.items"
     :loading="props.loading"
     class="elevation-1"
-    :paginator="false"
-    scrollable
   >
-    <template #loading>
-      <div class="flex justify-center items-center h-full">
-        <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
-      </div>
-    </template>
-
     <template v-for="(column, _columnIndex) in parseHeaders" :key="_columnIndex">
       <template v-if="column.key === 'actions' && actionHeader">
         <Column :field="column.value" :header="column.label" v-bind="actionHeader">

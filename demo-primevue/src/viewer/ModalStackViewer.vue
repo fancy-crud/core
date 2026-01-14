@@ -356,7 +356,7 @@
 
     <!-- RIGHT STACK POSITION DEMOS -->
     <f-modal v-model="showRightModal1" modal-id="right-modal-1">
-      <!-- <div class="p-6 border-l-4 border-blue-500">
+      <div class="p-6 border-l-4 border-blue-500">
         <h2 class="text-2xl font-bold mb-4 text-blue-600">🔵 Right Stack - Level 1</h2>
         <p class="mb-4">
           This is the <strong>default behavior</strong>. Modals stack to the <strong>right</strong>.
@@ -396,8 +396,7 @@
           severity="secondary"
           class="mt-4"
         />
-      </div> -->
-      <f-form v-bind="demoForm" />
+      </div>
     </f-modal>
 
     <f-modal v-model="showRightModal2" modal-id="right-modal-2">
@@ -893,20 +892,22 @@ const demoForm = useForm({
       placeholder: 'Enter name',
       modelValue: '',
     },
-    facility_id: {
+    email: {
       type: FieldType.text,
-      modelValue: '0199d99d-b7f7-7b83-9066-bf77dcd9b01b',
-    }
-  },
-  settings: {
-    url: 'rooms/',
-  },
-  responseInterceptor: {
-    201: (response: any) => {
-      console.log(response)
-      showRightModal1.value = false
-
-      return response
+      label: 'Email',
+      placeholder: 'Enter email',
+      modelValue: '',
+    },
+    category: {
+      type: FieldType.select,
+      label: 'Category',
+      optionLabel: 'label',
+      optionValue: 'value',
+      options: [
+        { label: 'Category A', value: 'a' },
+        { label: 'Category B', value: 'b' },
+      ],
+      modelValue: 'a',
     },
   },
 })

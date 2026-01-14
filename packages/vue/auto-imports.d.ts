@@ -6,38 +6,38 @@
 // biome-ignore lint: disable
 export {}
 declare global {
-  const $: typeof import('vue/macros')['$']
-  const $$: typeof import('vue/macros')['$$']
-  const $computed: typeof import('vue/macros')['$computed']
-  const $customRef: typeof import('vue/macros')['$customRef']
-  const $ref: typeof import('vue/macros')['$ref']
-  const $shallowRef: typeof import('vue/macros')['$shallowRef']
-  const $toRef: typeof import('vue/macros')['$toRef']
-  const EffectScope: typeof import('vue')['EffectScope']
-  const FButton: typeof import('./src/common/components/index')['FButton']
-  const FCheckbox: typeof import('./src/forms/components/index')['FCheckbox']
-  const FColor: typeof import('./src/forms/components/index')['FColor']
-  const FDatepicker: typeof import('./src/forms/components/index')['FDatepicker']
-  const FDeleteConfirmationModal: typeof import('./src/tables/components/index')['FDeleteConfirmationModal']
-  const FFile: typeof import('./src/forms/components/index')['FFile']
-  const FFileList: typeof import('./src/forms/components/index')['FFileList']
-  const FFileReveal: typeof import('./src/forms/components/index')['FFileReveal']
-  const FForm: typeof import('./src/forms/components/index')['FForm']
-  const FFormBody: typeof import('./src/forms/components/index')['FFormBody']
-  const FFormFooter: typeof import('./src/forms/components/index')['FFormFooter']
-  const FFormHeader: typeof import('./src/forms/components/index')['FFormHeader']
-  const FModal: typeof import('./src/common/components/index')['FModal']
-  const FModalContent: typeof import('./src/common/components/index')['FModalContent']
-  const FPassword: typeof import('./src/forms/components/index')['FPassword']
-  const FRadio: typeof import('./src/forms/components/index')['FRadio']
-  const FSelect: typeof import('./src/forms/components/index')['FSelect']
-  const FTable: typeof import('./src/tables/components/index')['FTable']
-  const FTableBody: typeof import('./src/tables/components/index')['FTableBody']
-  const FTableFooter: typeof import('./src/tables/components/index')['FTableFooter']
-  const FTableHeaderActions: typeof import('./src/tables/components/index')['FTableHeaderActions']
-  const FTableRowActions: typeof import('./src/tables/components/index')['FTableRowActions']
-  const FTableRowFilePreview: typeof import('./src/tables/components/index')['FTableRowFilePreview']
-  const FText: typeof import('./src/forms/components/index')['FText']
+  const $: typeof import('vue/macros').$
+  const $$: typeof import('vue/macros').$$
+  const $computed: typeof import('vue/macros').$computed
+  const $customRef: typeof import('vue/macros').$customRef
+  const $ref: typeof import('vue/macros').$ref
+  const $shallowRef: typeof import('vue/macros').$shallowRef
+  const $toRef: typeof import('vue/macros').$toRef
+  const EffectScope: typeof import('vue').EffectScope
+  const FButton: typeof import('./src/common/components/index').FButton
+  const FCheckbox: typeof import('./src/forms/components/index').FCheckbox
+  const FColor: typeof import('./src/forms/components/index').FColor
+  const FDatepicker: typeof import('./src/forms/components/index').FDatepicker
+  const FDeleteConfirmationModal: typeof import('./src/tables/components/index').FDeleteConfirmationModal
+  const FFile: typeof import('./src/forms/components/index').FFile
+  const FFileList: typeof import('./src/forms/components/index').FFileList
+  const FFileReveal: typeof import('./src/forms/components/index').FFileReveal
+  const FForm: typeof import('./src/forms/components/index').FForm
+  const FFormBody: typeof import('./src/forms/components/index').FFormBody
+  const FFormFooter: typeof import('./src/forms/components/index').FFormFooter
+  const FFormHeader: typeof import('./src/forms/components/index').FFormHeader
+  const FModal: typeof import('./src/common/components/index').FModal
+  const FModalContent: typeof import('./src/common/components/index').FModalContent
+  const FPassword: typeof import('./src/forms/components/index').FPassword
+  const FRadio: typeof import('./src/forms/components/index').FRadio
+  const FSelect: typeof import('./src/forms/components/index').FSelect
+  const FTable: typeof import('./src/tables/components/index').FTable
+  const FTableBody: typeof import('./src/tables/components/index').FTableBody
+  const FTableFooter: typeof import('./src/tables/components/index').FTableFooter
+  const FTableHeaderActions: typeof import('./src/tables/components/index').FTableHeaderActions
+  const FTableRowActions: typeof import('./src/tables/components/index').FTableRowActions
+  const FTableRowFilePreview: typeof import('./src/tables/components/index').FTableRowFilePreview
+  const FText: typeof import('./src/forms/components/index').FText
   const FTextVue: typeof import('./src/forms/components/index')['FTextVue']
   const FTextarea: typeof import('./src/forms/components/index').FTextarea
   const TableStoreService: typeof import('./src/tables/composables/table-store.service').TableStoreService
