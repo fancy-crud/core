@@ -6,11 +6,11 @@
     :has-field-errors="hasFieldErrors"
   >
     <DatePicker 
-      v-model="modelValue"
-      v-bind="props.field"
+      v-model="dateValue"
+      v-bind="datePickerProps"
       :class="inputClass"
       :style="(props.field as any).style"
-      :showClear="(props.field as any).clearable || (props.field as any).showClear"
+      :showClear="showClearValue"
     />
   </fw-field>
 </template>
@@ -33,8 +33,9 @@
  *     // PrimeVue options
  *     dateFormat: 'dd/mm/yy',
  *     showIcon: true,
- *     showTime: true,
+ *     showTime: true,      // Enable time selection (datetime mode)
  *     showButtonBar: true,
+ *     hourFormat: '24',     // '12' or '24'
  *     
  *     // Styling
  *     class: 'animate-fadein',
@@ -55,7 +56,61 @@ const props = defineProps<{
   field: NormalizedDatepickerField
 }>()
 
-const { hintText, modelValue, hasFieldErrors } = useDatepickerField<any>(props)
+const { hintText, vmodel, hasFieldErrors } = useDatepickerField<any>(props)
+
+// Helper function to normalize boolean values
+const toBoolean = (value: any): boolean | undefined => {
+  if (value === undefined || value === null) return undefined
+  if (typeof value === 'boolean') return value
+  if (typeof value === 'string') {
+    const normalized = value.toLowerCase().trim()
+    if (normalized === 'true') return true
+    if (normalized === 'false') return false
+  }
+  return Boolean(value)
+}
+
+// Helper function to convert ISO string to Date object
+const toDateObject = (value: any): Date | null | undefined => {
+  if (value === null || value === undefined) return value
+  if (value instanceof Date) return value
+  if (typeof value === 'string') {
+    try {
+      const date = new Date(value)
+      return isNaN(date.getTime()) ? null : date
+    } catch {
+      return null
+    }
+  }
+  return null
+}
+
+// Helper function to convert Date object to ISO string
+const toISOString = (value: any): string | null | undefined => {
+  if (value === null || value === undefined) return value
+  if (value instanceof Date) {
+    try {
+      return value.toISOString()
+    } catch {
+      return null
+    }
+  }
+  if (typeof value === 'string') return value
+  return null
+}
+
+// Computed property to handle date conversion
+const dateValue = computed({
+  get: () => {
+    // Convert ISO string from backend to Date object for PrimeVue
+    return toDateObject(vmodel.value.modelValue)
+  },
+  set: (val) => {
+    // Convert Date object back to ISO string for backend
+    const isoValue = toISOString(val)
+    vmodel.value['onUpdate:modelValue'](isoValue)
+  }
+})
 
 const inputClass = computed(() => {
   const field = props.field as any
@@ -64,5 +119,41 @@ const inputClass = computed(() => {
   const invalidClass = hasFieldErrors.value ? ['p-invalid'] : []
   
   return [...baseClasses, ...userClasses, ...invalidClass]
+})
+
+const showClearValue = computed(() => {
+  const field = props.field as any
+  return toBoolean(field.clearable || field.showClear)
+})
+
+const datePickerProps = computed(() => {
+  const field = props.field as any
+  return {
+    placeholder: field.placeholder,
+    disabled: toBoolean(field.disabled),
+    readonly: toBoolean(field.readonly),
+    showIcon: toBoolean(field.showIcon),
+    showTime: toBoolean(field.showTime),
+    showButtonBar: toBoolean(field.showButtonBar),
+    showOnFocus: toBoolean(field.showOnFocus),
+    iconDisplay: field.iconDisplay,
+    dateFormat: field.dateFormat,
+    hourFormat: field.hourFormat || '24',
+    timeOnly: toBoolean(field.timeOnly),
+    numberOfMonths: field.numberOfMonths,
+    view: field.view,
+    minDate: toDateObject(field.minDate),
+    maxDate: toDateObject(field.maxDate),
+    disabledDates: field.disabledDates?.map(toDateObject),
+    disabledDays: field.disabledDays,
+    inline: toBoolean(field.inline),
+    selectionMode: field.selectionMode,
+    panelClass: field.panelClass,
+    appendTo: field.appendTo,
+    fluid: toBoolean(field.fluid),
+    variant: field.variant,
+    size: field.size,
+    invalid: hasFieldErrors.value,
+  }
 })
 </script>
