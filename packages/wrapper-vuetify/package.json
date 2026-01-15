@@ -15,6 +15,13 @@
   "main": "./dist/fancy-crud-wrapper-vuetify.js",
   "module": "./dist/fancy-crud-wrapper-vuetify.js",
   "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/fancy-crud-wrapper-vuetify.js",
+      "types": "./dist/src/index.d.ts"
+    },
+    "./style.css": "./dist/fancy-crud-wrapper-vuetify.css"
+  },
   "files": [
     "dist"
   ],

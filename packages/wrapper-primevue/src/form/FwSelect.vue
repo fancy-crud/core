@@ -9,11 +9,11 @@
       v-bind="selectProps"
       v-model="modelValue"
       :options="selectOptions"
-      :optionLabel="(props.field as any).displayLabel || 'label'"
-      :optionValue="(props.field as any).displayValue || 'value'"
+      optionLabel="label"
+      optionValue="value"
       :class="inputClass"
       :style="(props.field as any).style"
-      :showClear="(props.field as any).clearable || (props.field as any).showClear"
+      :showClear="showClearValue"
     />
   </fw-field>
 </template>
@@ -62,13 +62,25 @@ const { vmodel, hintText, options, hasFieldErrors } = useSelectField(props)
 
 const modelValue = computed({
   get: () => vmodel.value.modelValue,
-  set: (val) => vmodel.value['onUpdate:modelValue'](val)
+  set: (val) => {
+    // This setter is called by the v-model binding
+    // Extract value if it's an object with value property (PrimeVue may return the whole option object)
+    // This handles cases where PrimeVue returns {value: 'true', label: 'Validados'} instead of just 'true'
+    let actualValue = val
+    if (val !== null && val !== undefined && typeof val === 'object' && 'value' in val) {
+      actualValue = val.value
+    }
+    vmodel.value['onUpdate:modelValue'](actualValue)
+  }
 })
 
 const selectOptions = computed(() => {
+  // options come from useSelectField as [label, value] tuples
+  // We convert them to {label, value} objects for PrimeVue
+  // This ensures consistent structure regardless of Django response or manual definition
   return options.value.map(([label, value]: any) => ({
     label: String(label),
-    value,
+    value, // Keep original value type (string, number, boolean, etc.)
   }))
 })
 
@@ -81,26 +93,43 @@ const inputClass = computed(() => {
   return [...baseClasses, ...userClasses, ...invalidClass]
 })
 
+// Helper function to normalize boolean values
+const toBoolean = (value: any): boolean | undefined => {
+  if (value === undefined || value === null) return undefined
+  if (typeof value === 'boolean') return value
+  if (typeof value === 'string') {
+    const normalized = value.toLowerCase().trim()
+    if (normalized === 'true') return true
+    if (normalized === 'false') return false
+  }
+  return Boolean(value)
+}
+
+const showClearValue = computed(() => {
+  const field = props.field as any
+  return toBoolean(field.clearable || field.showClear)
+})
+
 const selectProps = computed(() => {
   const field = props.field as any
   return {
     placeholder: field.placeholder,
-    disabled: field.disabled,
-    filter: field.filter,
+    disabled: toBoolean(field.disabled),
+    filter: toBoolean(field.filter),
     filterPlaceholder: field.filterPlaceholder,
     filterMatchMode: field.filterMatchMode,
-    loading: field.loading,
-    editable: field.editable,
+    loading: toBoolean(field.loading),
+    editable: toBoolean(field.editable),
     virtualScrollerOptions: field.virtualScrollerOptions,
-    autoFilterFocus: field.autoFilterFocus,
-    resetFilterOnHide: field.resetFilterOnHide,
+    autoFilterFocus: toBoolean(field.autoFilterFocus),
+    resetFilterOnHide: toBoolean(field.resetFilterOnHide),
     emptyMessage: field.emptyMessage,
     emptyFilterMessage: field.emptyFilterMessage,
     appendTo: field.appendTo,
     panelClass: field.panelClass,
     size: field.size,
     variant: field.variant,
-    fluid: field.fluid,
+    fluid: toBoolean(field.fluid),
   }
 })
 </script>

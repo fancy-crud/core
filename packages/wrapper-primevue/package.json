@@ -18,7 +18,8 @@
     ".": {
       "import": "./dist/fancy-crud-wrapper-primevue.js",
       "types": "./dist/src/index.d.ts"
-    }
+    },
+    "./style.css": "./dist/fancy-crud-wrapper-primevue.css"
   },
   "files": [
     "dist"
