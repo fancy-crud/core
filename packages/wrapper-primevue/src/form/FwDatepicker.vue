@@ -49,53 +49,7 @@ const props = defineProps<{
   field: NormalizedDatepickerField
 }>()
 
-const { hintText, vmodel, hasFieldErrors } = useDatepickerField<any>(props)
-
-// Convert ISO string to Date object
-const toDateObject = (value: any): Date | null | undefined => {
-  if (value === null || value === undefined) return value
-  if (value instanceof Date) return value
-  if (typeof value === 'string') {
-    try {
-      const date = new Date(value)
-      return isNaN(date.getTime()) ? null : date
-    } catch {
-      return null
-    }
-  }
-  return null
-}
-
-// Convert Date object to ISO string
-const toISOString = (value: any): string | null | undefined => {
-  if (value === null || value === undefined) return value
-  if (value instanceof Date) {
-    try {
-      return value.toISOString()
-    } catch {
-      return null
-    }
-  }
-  if (typeof value === 'string') return value
-  return null
-}
-
-// Handle bidirectional conversion between ISO strings (backend) and Date objects (PrimeVue)
-const dateValue = computed({
-  get: () => toDateObject(vmodel.value.modelValue),
-  set: (val: any) => {
-    const isoValue = toISOString(val)
-    vmodel.value['onUpdate:modelValue'](isoValue)
-  }
-})
-
-// Convert date constraint props to Date objects
-const minDateConverted = computed(() => toDateObject((props.field as any).minDate))
-const maxDateConverted = computed(() => toDateObject((props.field as any).maxDate))
-const disabledDatesConverted = computed(() => {
-  const dates = (props.field as any).disabledDates
-  return Array.isArray(dates) ? dates.map(toDateObject) : undefined
-})
+const { hintText, modelValue, hasFieldErrors } = useDatepickerField<any>(props)
 
 const inputClass = computed(() => {
   const field = props.field as any
