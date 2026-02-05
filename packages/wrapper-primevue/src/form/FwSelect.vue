@@ -70,7 +70,7 @@ const selectOptions = computed(() => {
   // Transform [label, value] tuples from useSelectField to {label, value} objects for PrimeVue
   return options.value.map(([label, value]: any) => ({
     label: String(label),
-    value,
+    value, // Keep original value type (string, number, boolean, etc.)
   }))
 })
 
