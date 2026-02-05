@@ -6,11 +6,13 @@
     :has-field-errors="hasFieldErrors"
   >
     <DatePicker 
+      v-bind="props.field"
       v-model="dateValue"
-      v-bind="datePickerProps"
+      :minDate="minDateConverted"
+      :maxDate="maxDateConverted"
+      :disabledDates="disabledDatesConverted"
       :class="inputClass"
-      :style="(props.field as any).style"
-      :showClear="showClearValue"
+      :invalid="hasFieldErrors"
     />
   </fw-field>
 </template>
@@ -19,9 +21,8 @@
 /**
  * FwDatepicker - DatePicker wrapper for PrimeVue
  * 
- * Supports all PrimeVue DatePicker options plus Tailwind/PrimeVue styling:
+ * Supports all PrimeVue DatePicker options:
  * @see https://primevue.org/datepicker/
- * @see https://primevue.org/tailwind/
  * 
  * @example
  * ```ts
@@ -30,17 +31,12 @@
  *     type: FieldType.datepicker,
  *     label: 'Birth Date',
  *     
- *     // PrimeVue options
+ *     // PrimeVue options (pass any DatePicker prop)
  *     dateFormat: 'dd/mm/yy',
  *     showIcon: true,
  *     showTime: true,      // Enable time selection (datetime mode)
  *     showButtonBar: true,
- *     hourFormat: '24',     // '12' or '24'
- *     
- *     // Styling
- *     class: 'animate-fadein',
- *     style: { maxWidth: '300px' },
- *     panelClass: 'bg-surface-0',
+ *     hourFormat: '24',
  *   }
  * }
  * ```
@@ -58,19 +54,7 @@ const props = defineProps<{
 
 const { hintText, vmodel, hasFieldErrors } = useDatepickerField<any>(props)
 
-// Helper function to normalize boolean values
-const toBoolean = (value: any): boolean | undefined => {
-  if (value === undefined || value === null) return undefined
-  if (typeof value === 'boolean') return value
-  if (typeof value === 'string') {
-    const normalized = value.toLowerCase().trim()
-    if (normalized === 'true') return true
-    if (normalized === 'false') return false
-  }
-  return Boolean(value)
-}
-
-// Helper function to convert ISO string to Date object
+// Convert ISO string to Date object
 const toDateObject = (value: any): Date | null | undefined => {
   if (value === null || value === undefined) return value
   if (value instanceof Date) return value
@@ -85,7 +69,7 @@ const toDateObject = (value: any): Date | null | undefined => {
   return null
 }
 
-// Helper function to convert Date object to ISO string
+// Convert Date object to ISO string
 const toISOString = (value: any): string | null | undefined => {
   if (value === null || value === undefined) return value
   if (value instanceof Date) {
@@ -99,17 +83,21 @@ const toISOString = (value: any): string | null | undefined => {
   return null
 }
 
-// Computed property to handle date conversion
+// Handle bidirectional conversion between ISO strings (backend) and Date objects (PrimeVue)
 const dateValue = computed({
-  get: () => {
-    // Convert ISO string from backend to Date object for PrimeVue
-    return toDateObject(vmodel.value.modelValue)
-  },
-  set: (val) => {
-    // Convert Date object back to ISO string for backend
+  get: () => toDateObject(vmodel.value.modelValue),
+  set: (val: any) => {
     const isoValue = toISOString(val)
     vmodel.value['onUpdate:modelValue'](isoValue)
   }
+})
+
+// Convert date constraint props to Date objects
+const minDateConverted = computed(() => toDateObject((props.field as any).minDate))
+const maxDateConverted = computed(() => toDateObject((props.field as any).maxDate))
+const disabledDatesConverted = computed(() => {
+  const dates = (props.field as any).disabledDates
+  return Array.isArray(dates) ? dates.map(toDateObject) : undefined
 })
 
 const inputClass = computed(() => {
@@ -119,41 +107,5 @@ const inputClass = computed(() => {
   const invalidClass = hasFieldErrors.value ? ['p-invalid'] : []
   
   return [...baseClasses, ...userClasses, ...invalidClass]
-})
-
-const showClearValue = computed(() => {
-  const field = props.field as any
-  return toBoolean(field.clearable || field.showClear)
-})
-
-const datePickerProps = computed(() => {
-  const field = props.field as any
-  return {
-    placeholder: field.placeholder,
-    disabled: toBoolean(field.disabled),
-    readonly: toBoolean(field.readonly),
-    showIcon: toBoolean(field.showIcon),
-    showTime: toBoolean(field.showTime),
-    showButtonBar: toBoolean(field.showButtonBar),
-    showOnFocus: toBoolean(field.showOnFocus),
-    iconDisplay: field.iconDisplay,
-    dateFormat: field.dateFormat,
-    hourFormat: field.hourFormat || '24',
-    timeOnly: toBoolean(field.timeOnly),
-    numberOfMonths: field.numberOfMonths,
-    view: field.view,
-    minDate: toDateObject(field.minDate),
-    maxDate: toDateObject(field.maxDate),
-    disabledDates: field.disabledDates?.map(toDateObject),
-    disabledDays: field.disabledDays,
-    inline: toBoolean(field.inline),
-    selectionMode: field.selectionMode,
-    panelClass: field.panelClass,
-    appendTo: field.appendTo,
-    fluid: toBoolean(field.fluid),
-    variant: field.variant,
-    size: field.size,
-    invalid: hasFieldErrors.value,
-  }
 })
 </script>
