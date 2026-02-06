@@ -6,11 +6,10 @@
     :has-field-errors="hasFieldErrors"
   >
     <DatePicker 
-      v-model="dateValue"
-      v-bind="datePickerProps"
+      v-bind="props.field"
+      v-model="modelValue"
       :class="inputClass"
-      :style="(props.field as any).style"
-      :showClear="showClearValue"
+      :invalid="hasFieldErrors"
     />
   </fw-field>
 </template>
@@ -19,9 +18,8 @@
 /**
  * FwDatepicker - DatePicker wrapper for PrimeVue
  * 
- * Supports all PrimeVue DatePicker options plus Tailwind/PrimeVue styling:
+ * Supports all PrimeVue DatePicker options:
  * @see https://primevue.org/datepicker/
- * @see https://primevue.org/tailwind/
  * 
  * @example
  * ```ts
@@ -30,17 +28,12 @@
  *     type: FieldType.datepicker,
  *     label: 'Birth Date',
  *     
- *     // PrimeVue options
+ *     // PrimeVue options (pass any DatePicker prop)
  *     dateFormat: 'dd/mm/yy',
  *     showIcon: true,
  *     showTime: true,      // Enable time selection (datetime mode)
  *     showButtonBar: true,
- *     hourFormat: '24',     // '12' or '24'
- *     
- *     // Styling
- *     class: 'animate-fadein',
- *     style: { maxWidth: '300px' },
- *     panelClass: 'bg-surface-0',
+ *     hourFormat: '24',
  *   }
  * }
  * ```
@@ -56,61 +49,7 @@ const props = defineProps<{
   field: NormalizedDatepickerField
 }>()
 
-const { hintText, vmodel, hasFieldErrors } = useDatepickerField<any>(props)
-
-// Helper function to normalize boolean values
-const toBoolean = (value: any): boolean | undefined => {
-  if (value === undefined || value === null) return undefined
-  if (typeof value === 'boolean') return value
-  if (typeof value === 'string') {
-    const normalized = value.toLowerCase().trim()
-    if (normalized === 'true') return true
-    if (normalized === 'false') return false
-  }
-  return Boolean(value)
-}
-
-// Helper function to convert ISO string to Date object
-const toDateObject = (value: any): Date | null | undefined => {
-  if (value === null || value === undefined) return value
-  if (value instanceof Date) return value
-  if (typeof value === 'string') {
-    try {
-      const date = new Date(value)
-      return isNaN(date.getTime()) ? null : date
-    } catch {
-      return null
-    }
-  }
-  return null
-}
-
-// Helper function to convert Date object to ISO string
-const toISOString = (value: any): string | null | undefined => {
-  if (value === null || value === undefined) return value
-  if (value instanceof Date) {
-    try {
-      return value.toISOString()
-    } catch {
-      return null
-    }
-  }
-  if (typeof value === 'string') return value
-  return null
-}
-
-// Computed property to handle date conversion
-const dateValue = computed({
-  get: () => {
-    // Convert ISO string from backend to Date object for PrimeVue
-    return toDateObject(vmodel.value.modelValue)
-  },
-  set: (val) => {
-    // Convert Date object back to ISO string for backend
-    const isoValue = toISOString(val)
-    vmodel.value['onUpdate:modelValue'](isoValue)
-  }
-})
+const { hintText, modelValue, hasFieldErrors } = useDatepickerField<any>(props)
 
 const inputClass = computed(() => {
   const field = props.field as any

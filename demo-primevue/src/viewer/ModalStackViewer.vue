@@ -837,8 +837,9 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue'
 import type { RecordObject } from '@fancy-crud/vue'
-import { FieldType, useForm, useTable, useModalStack, ref } from '@fancy-crud/vue'
+import { FieldType, useForm, useTable, useModalStack } from '@fancy-crud/vue'
 import Button from 'primevue/button'
 
 // Get modal stack composable for debugging/display
