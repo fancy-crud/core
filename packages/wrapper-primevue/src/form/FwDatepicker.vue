@@ -59,40 +59,4 @@ const inputClass = computed(() => {
   
   return [...baseClasses, ...userClasses, ...invalidClass]
 })
-
-const showClearValue = computed(() => {
-  const field = props.field as any
-  return toBoolean(field.clearable || field.showClear)
-})
-
-const datePickerProps = computed(() => {
-  const field = props.field as any
-  return {
-    placeholder: field.placeholder,
-    disabled: toBoolean(field.disabled),
-    readonly: toBoolean(field.readonly),
-    showIcon: toBoolean(field.showIcon),
-    showTime: toBoolean(field.showTime),
-    showButtonBar: toBoolean(field.showButtonBar),
-    showOnFocus: toBoolean(field.showOnFocus),
-    iconDisplay: field.iconDisplay,
-    dateFormat: field.dateFormat,
-    hourFormat: field.hourFormat || '24',
-    timeOnly: toBoolean(field.timeOnly),
-    numberOfMonths: field.numberOfMonths,
-    view: field.view,
-    minDate: toDateObject(field.minDate),
-    maxDate: toDateObject(field.maxDate),
-    disabledDates: field.disabledDates?.map(toDateObject),
-    disabledDays: field.disabledDays,
-    inline: toBoolean(field.inline),
-    selectionMode: field.selectionMode,
-    panelClass: field.panelClass,
-    appendTo: field.appendTo,
-    fluid: toBoolean(field.fluid),
-    variant: field.variant,
-    size: field.size,
-    invalid: hasFieldErrors.value,
-  }
-})
 </script>
