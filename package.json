@@ -37,7 +37,9 @@
     "overrides": {
       "lodash@<4.17.23": ">=4.17.23",
       "lodash-es@<4.17.23": ">=4.17.23",
-      "diff@<4.0.4": ">=4.0.4"
+      "diff@<4.0.4": ">=4.0.4",
+      "glob@<11.0.0": ">=11.0.0",
+      "semver-diff@<6.0.0": ">=6.0.0"
     }
   },
   "devDependencies": {
@@ -46,8 +48,7 @@
     "@mdi/font": "^7.4.47",
     "@oruga-ui/oruga-next": "^0.11.6",
     "@oruga-ui/theme-bulma": "^0.7.3",
-    "@primeuix/themes": "^1.2.5",
-    "@primevue/themes": "^4.5.4",
+    "@primeuix/themes": "^2.0.3",
     "@quasar/extras": "^1.17.0",
     "@rollup/plugin-typescript": "^12.3.0",
     "@tailwindcss/vite": "^4.1.18",
@@ -72,7 +73,7 @@
     "primevue": "^4.5.4",
     "quasar": "^2.18.6",
     "sass": "^1.97.3",
-    "semantic-release": "^24.2.9",
+    "semantic-release": "^25.0.3",
     "tailwindcss": "^4.1.18",
     "taze": "^19.9.2",
     "ts-node": "10.9.2",
