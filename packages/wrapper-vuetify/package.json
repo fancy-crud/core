@@ -33,14 +33,14 @@
   "peerDependencies": {
     "@fancy-crud/core": "workspace:^",
     "@fancy-crud/vue": "workspace:^",
-    "@vueuse/core": "^12.7.0",
+    "@vueuse/core": "^13.9.0 || ^14.0.0",
     "vue": "^3.2.19",
     "vuetify": "^3.3.23"
   },
   "dependencies": {
     "@fancy-crud/core": "workspace:^",
     "@fancy-crud/vue": "workspace:^",
-    "@vueuse/core": "^13.9.0",
+    "@vueuse/core": "^14.2.0",
     "vue": "^3.5.22",
     "vuetify": "^3.10.5"
   },
