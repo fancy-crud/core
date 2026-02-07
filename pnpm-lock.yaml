@@ -243,8 +243,8 @@ importers:
         specifier: workspace:^
         version: link:../packages/wrapper-primevue
       '@primeuix/themes':
-        specifier: ^1.2.5
-        version: 1.2.5
+        specifier: ^2.0.3
+        version: 2.0.3
       '@tailwindcss/vite':
         specifier: ^4.1.14
         version: 4.1.17(vite@7.2.6(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.97.3)(tsx@4.21.0)(yaml@2.8.2))
@@ -1843,9 +1843,6 @@ packages:
 
   '@primeuix/styles@2.0.3':
     resolution: {integrity: sha512-2ykAB6BaHzR/6TwF8ShpJTsZrid6cVIEBVlookSdvOdmlWuevGu5vWOScgIwqWwlZcvkFYAGR/SUV3OHCTBMdw==}
-
-  '@primeuix/themes@1.2.5':
-    resolution: {integrity: sha512-n3YkwJrHQaEESc/D/A/iD815sxp8cKnmzscA6a8Tm8YvMtYU32eCahwLLe6h5rywghVwxASWuG36XBgISYOIjQ==}
 
   '@primeuix/themes@2.0.3':
     resolution: {integrity: sha512-3fS1883mtCWhgUgNf/feiaaDSOND4EBIOu9tZnzJlJ8QtYyL6eFLcA6V3ymCWqLVXQ1+lTVEZv1gl47FIdXReg==}
@@ -7366,10 +7363,6 @@ snapshots:
       '@primeuix/styled': 0.7.4
 
   '@primeuix/styles@2.0.3':
-    dependencies:
-      '@primeuix/styled': 0.7.4
-
-  '@primeuix/themes@1.2.5':
     dependencies:
       '@primeuix/styled': 0.7.4
 
