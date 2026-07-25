@@ -1,5 +1,6 @@
 <script lang="ts">
 import { QInput } from 'quasar'
+import type { QInputProps } from 'quasar'
 import type { NormalizedPasswordField } from '@fancy-crud/vue'
 import type { PropType } from 'vue'
 import { usePasswordField } from '@fancy-crud/vue'
@@ -28,6 +29,8 @@ export default defineComponent({
         hint: hintText.value,
         error: hasFieldErrors.value,
         rules: undefined,
+        // See WqText.vue: vmodel types the value as unknown while QInput declares it concretely.
+        modelValue: vmodel.value.modelValue as QInputProps['modelValue'],
       }, {
         ...slots,
       })

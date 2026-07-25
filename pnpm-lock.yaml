@@ -100,8 +100,8 @@ importers:
         specifier: ^4.5.4
         version: 4.5.4(vue@3.5.27(typescript@5.9.3))
       quasar:
-        specifier: ^2.18.6
-        version: 2.18.6
+        specifier: ^2.23.1
+        version: 2.23.1
       sass:
         specifier: ^1.97.3
         version: 1.97.3
@@ -325,15 +325,15 @@ importers:
         specifier: ^14.2.0
         version: 14.2.0(vue@3.5.25(typescript@5.9.3))
       quasar:
-        specifier: ^2.18.5
-        version: 2.18.6
+        specifier: ^2.23.1
+        version: 2.23.1
       vue:
         specifier: ^3.5.22
         version: 3.5.25(typescript@5.9.3)
     devDependencies:
       '@quasar/vite-plugin':
         specifier: ^1.10.0
-        version: 1.10.0(@vitejs/plugin-vue@6.0.4(vite@7.3.1(@types/node@24.10.11)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.97.3)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.25(typescript@5.9.3)))(quasar@2.18.6)(vite@7.3.1(@types/node@24.10.11)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.97.3)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.25(typescript@5.9.3))
+        version: 1.10.0(@vitejs/plugin-vue@6.0.4(vite@7.3.1(@types/node@24.10.11)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.97.3)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.25(typescript@5.9.3)))(quasar@2.23.1)(vite@7.3.1(@types/node@24.10.11)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.97.3)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.25(typescript@5.9.3))
       '@tailwindcss/vite':
         specifier: ^4.1.14
         version: 4.1.17(vite@7.3.1(@types/node@24.10.11)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.97.3)(tsx@4.21.0)(yaml@2.8.2))
@@ -544,8 +544,8 @@ importers:
         specifier: ^14.2.0
         version: 14.2.0(vue@3.5.25(typescript@5.9.3))
       quasar:
-        specifier: ^2.18.5
-        version: 2.18.6
+        specifier: ^2.22.0
+        version: 2.23.1
       vue:
         specifier: ^3.5.22
         version: 3.5.25(typescript@5.9.3)
@@ -5124,8 +5124,8 @@ packages:
   quansync@1.0.0:
     resolution: {integrity: sha512-5xZacEEufv3HSTPQuchrvV6soaiACMFnq1H8wkVioctoH3TRha9Sz66lOxRwPK/qZj7HPiSveih9yAyh98gvqA==}
 
-  quasar@2.18.6:
-    resolution: {integrity: sha512-ZlK+vJXOBPSFDCNQDBDNwSI+AHoqaFPxK8ve6mhsYLhMKWI5b8zsGY9VU1xYjngO2aBvU4fvGWXy4tTbzrBk8Q==}
+  quasar@2.23.1:
+    resolution: {integrity: sha512-jr6z9DDAmilv7NZ0m+hQe1PjqE5X4lj4OEalGgr27fgFVRUUOEUUJAkBYXnH1+uhv5tTwZ/CxTBilFyesBsZqQ==}
     engines: {node: '>= 10.18.1', npm: '>= 6.13.4', yarn: '>= 1.21.1'}
 
   queue-lit@1.5.2:
@@ -7412,10 +7412,10 @@ snapshots:
 
   '@quasar/extras@1.17.0': {}
 
-  '@quasar/vite-plugin@1.10.0(@vitejs/plugin-vue@6.0.4(vite@7.3.1(@types/node@24.10.11)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.97.3)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.25(typescript@5.9.3)))(quasar@2.18.6)(vite@7.3.1(@types/node@24.10.11)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.97.3)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.25(typescript@5.9.3))':
+  '@quasar/vite-plugin@1.10.0(@vitejs/plugin-vue@6.0.4(vite@7.3.1(@types/node@24.10.11)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.97.3)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.25(typescript@5.9.3)))(quasar@2.23.1)(vite@7.3.1(@types/node@24.10.11)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.97.3)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.25(typescript@5.9.3))':
     dependencies:
       '@vitejs/plugin-vue': 6.0.4(vite@7.3.1(@types/node@24.10.11)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.97.3)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.25(typescript@5.9.3))
-      quasar: 2.18.6
+      quasar: 2.23.1
       vite: 7.3.1(@types/node@24.10.11)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.97.3)(tsx@4.21.0)(yaml@2.8.2)
       vue: 3.5.25(typescript@5.9.3)
 
@@ -10847,7 +10847,7 @@ snapshots:
 
   quansync@1.0.0: {}
 
-  quasar@2.18.6: {}
+  quasar@2.23.1: {}
 
   queue-lit@1.5.2: {}
 

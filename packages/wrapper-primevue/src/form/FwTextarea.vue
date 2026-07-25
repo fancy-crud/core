@@ -7,7 +7,7 @@
   >
     <Textarea 
       v-bind="props.field" 
-      v-model="modelValue" 
+      v-model="value" 
       :class="inputClass"
       :style="(props.field as any).style"
     />
@@ -41,6 +41,7 @@
  * }
  * ```
  */
+import type { Ref } from 'vue'
 import { computed } from 'vue'
 import Textarea from 'primevue/textarea'
 import type { NormalizedTextareaField } from '@fancy-crud/vue'
@@ -53,6 +54,10 @@ const props = defineProps<{
 }>()
 
 const { hintText, modelValue, hasFieldErrors } = useTextareaField(props)
+
+// The fancy-crud model is unknown while Textarea declares it concretely. The ref
+// accepts any value on write, so only the read side needs typing.
+const value = modelValue as Ref<string | null | undefined>
 
 const inputClass = computed(() => {
   const field = props.field as any

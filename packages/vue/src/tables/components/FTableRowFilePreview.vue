@@ -2,7 +2,6 @@
   <a
     @mouseenter="openPreview"
     @mouseleave="closePreview"
-    ref="triggerEl"
     :href="url || undefined"
     tabindex="0"
     target="_blank"
@@ -17,7 +16,6 @@
   <teleport to="body">
     <figure
       v-if="isImageType"
-      ref="targetEl"
       class="bg-white rounded divide-y divide-gray-100 shadow-lg dark:bg-gray-700 z-10 flex justify-end"
       :class="{ hidden: !display }"
     >
@@ -31,17 +29,13 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue'
-// import { createPopper } from '@popperjs/core'
+import { computed, ref } from 'vue'
 
 const props = defineProps<{
   type: string
   url: string | null
 }>()
 
-// set the dropdown menu element
-const targetEl = ref()
-const triggerEl = ref()
 const display = ref(false)
 
 const isImageType = computed(() => props.type === 'image')
@@ -57,18 +51,4 @@ const openPreview = () => {
 const closePreview = () => {
   display.value = false
 }
-
-onMounted(() => {
-  // createPopper(triggerEl.value, targetEl.value, {
-  //   placement: 'left',
-  //   modifiers: [
-  //     {
-  //       name: 'offset',
-  //       options: {
-  //         offset: [0, 10],
-  //       },
-  //     },
-  //   ],
-  // })
-})
 </script>
