@@ -1,5 +1,6 @@
 <script lang="ts">
 import { QInput } from 'quasar'
+import type { QInputProps } from 'quasar'
 import type { NormalizedTextField } from '@fancy-crud/vue'
 import type { PropType } from 'vue'
 import { useTextField } from '@fancy-crud/vue'
@@ -29,6 +30,8 @@ export default defineComponent({
         hint: hintText.value,
         rules: undefined,
         type: 'textarea',
+        // Ver WqText.vue: vmodel tipa el valor como unknown y QInput lo declara concreto.
+        modelValue: vmodel.value.modelValue as QInputProps['modelValue'],
       }, {
         ...slots,
       })

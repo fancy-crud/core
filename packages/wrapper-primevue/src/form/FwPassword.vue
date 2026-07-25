@@ -7,7 +7,7 @@
   >
     <Password 
       v-bind="props.field" 
-      v-model="modelValue" 
+      v-model="value" 
       :class="inputClass"
       :style="(props.field as any).style"
       :inputClass="(props.field as any).inputClass || 'w-full'"
@@ -47,6 +47,7 @@
  * }
  * ```
  */
+import type { Ref } from 'vue'
 import { computed } from 'vue'
 import Password from 'primevue/password'
 import type { NormalizedPasswordField } from '@fancy-crud/vue'
@@ -59,6 +60,9 @@ const props = defineProps<{
 }>()
 
 const { hintText, modelValue, hasFieldErrors } = usePasswordField(props)
+
+// Ver FwTextarea.vue: el modelo de fancy-crud es unknown y Password lo declara concreto.
+const value = modelValue as Ref<string | null | undefined>
 
 const inputClass = computed(() => {
   const field = props.field as any

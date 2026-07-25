@@ -14,19 +14,21 @@
   },
   "main": "./dist/fancy-crud-wrapper-primevue.js",
   "module": "./dist/fancy-crud-wrapper-primevue.js",
+  "types": "./dist/src/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/fancy-crud-wrapper-primevue.js",
       "types": "./dist/src/index.d.ts"
     },
-    "./style.css": "./dist/fancy-crud-wrapper-primevue.css"
+    "./style.css": "./dist/fancy-crud-wrapper-primevue.css",
+    "./dist/*": "./dist/*"
   },
   "files": [
     "dist"
   ],
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
+    "build": "vite build && vue-tsc -p ./tsconfig.build.json --declaration --emitDeclarationOnly && tsc-alias --verbose -p ./tsconfig.build.json",
     "build:no-ts": "vite build"
   },
   "peerDependencies": {

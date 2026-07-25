@@ -20,7 +20,8 @@
       "import": "./dist/fancy-crud-wrapper-quasar.js",
       "types": "./dist/src/index.d.ts"
     },
-    "./style.css": "./dist/fancy-crud-wrapper-quasar.css"
+    "./style.css": "./dist/fancy-crud-wrapper-quasar.css",
+    "./dist/*": "./dist/*"
   },
   "files": [
     "dist"
@@ -41,7 +42,7 @@
     "@fancy-crud/core": "workspace:^",
     "@fancy-crud/vue": "workspace:^",
     "@vueuse/core": "^14.2.0",
-    "quasar": "^2.18.5",
+    "quasar": "^2.22.0",
     "vue": "^3.5.22"
   },
   "devDependencies": {

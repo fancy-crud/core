@@ -21,7 +21,7 @@
     "@fancy-crud/wrapper-quasar": "workspace:^",
     "@quasar/extras": "^1.17.0",
     "@vueuse/core": "^14.2.0",
-    "quasar": "^2.18.5",
+    "quasar": "^2.23.1",
     "vue": "^3.5.22"
   },
   "devDependencies": {
