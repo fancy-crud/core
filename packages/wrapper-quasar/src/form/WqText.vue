@@ -29,8 +29,8 @@ export default defineComponent({
         error: hasFieldErrors.value,
         hint: hintText.value,
         rules: undefined,
-        // vmodel tipa el valor como unknown y QInput lo declara concreto: sin el cast,
-        // h() descarta todas sus sobrecargas y no se pueden emitir las declaraciones.
+        // vmodel types the value as unknown while QInput declares it concretely: without
+        // the cast, h() discards every overload and the declarations cannot be emitted.
         modelValue: vmodel.value.modelValue as QInputProps['modelValue'],
       }, {
         ...slots,

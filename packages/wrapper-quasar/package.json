@@ -35,7 +35,7 @@
     "@fancy-crud/core": "workspace:^",
     "@fancy-crud/vue": "workspace:^",
     "@vueuse/core": "^13.9.0 || ^14.0.0",
-    "quasar": "^2.13.0",
+    "quasar": "^2.22.0",
     "vue": "^3.2.19"
   },
   "dependencies": {

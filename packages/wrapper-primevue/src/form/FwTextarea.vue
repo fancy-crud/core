@@ -55,8 +55,8 @@ const props = defineProps<{
 
 const { hintText, modelValue, hasFieldErrors } = useTextareaField(props)
 
-// El modelo de fancy-crud es unknown y Textarea lo declara concreto. El ref acepta
-// cualquier valor al escribir, asi que solo hace falta tipar la lectura.
+// The fancy-crud model is unknown while Textarea declares it concretely. The ref
+// accepts any value on write, so only the read side needs typing.
 const value = modelValue as Ref<string | null | undefined>
 
 const inputClass = computed(() => {

@@ -61,7 +61,7 @@ const props = defineProps<{
 
 const { hintText, modelValue, hasFieldErrors } = usePasswordField(props)
 
-// Ver FwTextarea.vue: el modelo de fancy-crud es unknown y Password lo declara concreto.
+// See FwTextarea.vue: the fancy-crud model is unknown while Password declares it concretely.
 const value = modelValue as Ref<string | null | undefined>
 
 const inputClass = computed(() => {

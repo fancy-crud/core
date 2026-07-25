@@ -30,7 +30,7 @@ export default defineComponent({
         hint: hintText.value,
         rules: undefined,
         type: 'textarea',
-        // Ver WqText.vue: vmodel tipa el valor como unknown y QInput lo declara concreto.
+        // See WqText.vue: vmodel types the value as unknown while QInput declares it concretely.
         modelValue: vmodel.value.modelValue as QInputProps['modelValue'],
       }, {
         ...slots,

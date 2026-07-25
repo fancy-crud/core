@@ -14,7 +14,7 @@
     "build:vue:no-ts": "pnpm --filter=@fancy-crud/vue build:no-ts",
     "build:p-rule-parsers": "pnpm --filter=@fancy-crud/plugin-rule-parsers build",
     "build:p-vue3-toastify": "pnpm --filter=@fancy-crud/plugin-vue3-toastify build",
-    "build:w-oruga": "pnpm --filter=@fancy-crud/wrapper-oruga-ui build",
+    "build:w-oruga": "pnpm --filter=@fancy-crud/wrapper-oruga-ui build:no-ts",
     "build:w-vuetify": "pnpm --filter=@fancy-crud/wrapper-vuetify build:no-ts",
     "build:w-quasar": "pnpm --filter=@fancy-crud/wrapper-quasar build",
     "build:w-element": "pnpm --filter=@fancy-crud/wrapper-element-plus build",
