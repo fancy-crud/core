@@ -1,10 +1,11 @@
 <template>
   <form
     class="f-form"
+    @submit.prevent
   >
     <slot name="before-form-header" />
 
-    <f-form-header v-slot="bind" :title="props.settings.title" :mode="props.settings.mode">
+    <f-form-header @close="onAuxClick" v-slot="bind" v-bind="props.settings">
       <slot name="form-header" v-bind="bind" />
     </f-form-header>
 
@@ -38,6 +39,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, useSlots, ref, provide } from 'vue'
 import type {
   BaseObjectWithNormalizedFields, DispatchOnFailedFormEventCommand, DispatchOnSuccessFormEventCommand, NormalizedSettings,
   ObjectWithNormalizedButtons,
@@ -73,6 +75,15 @@ const { isFormValid } = useRules(
   props.fields, ruleConfigStore.searchById(props.id),
 )
 
+// Provide scroll state for header/footer shadows
+const isScrolledFromTop = ref(false)
+const isScrolledFromBottom = ref(false)
+
+provide('formScrollState', {
+  isScrolledFromTop,
+  isScrolledFromBottom,
+})
+
 const beforeAndAfterFieldSlots = computed(() => {
   return Object.entries(slots).filter(
     ([slotName]) => slotName.startsWith('before-') || slotName.startsWith('after-') || slotName.startsWith('field-'),
@@ -106,10 +117,3 @@ class VueDispatchOnFailedFormEventHandler extends DispatchOnFailedFormEventHandl
 register(IDispatchOnSuccessFormEventHandler.name, VueDispatchOnSuccessFormEventHandler)
 register(IDispatchOnFailedFormEventHandler.name, VueDispatchOnFailedFormEventHandler)
 </script>
-
-<style lang="sass" scoped>
-.f-form
-  height: 100%
-  display: grid
-  grid-template-rows: auto 1fr auto
-</style>

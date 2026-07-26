@@ -23,10 +23,8 @@
   "scripts": {
     "build": "vite build && tsc && tsc-alias --verbose -p ./tsconfig.json"
   },
-  "peerDependencies": {
-  },
   "devDependencies": {
-    "vitest": "^0.34.6"
+    "vitest": "^3.2.4"
   },
   "publishConfig": {
     "access": "public"

@@ -1,0 +1,55 @@
+<template>
+  <div class="bg-white rounded-xl p-4 shadow-sm">
+    <f-form v-bind="form" />
+  </div>
+</template>
+
+<script lang='ts' setup>
+import { FieldType, useForm, FFormFooter } from '@fancy-crud/vue'
+import { Bus, ResetFieldsByFormIdCommand } from '@fancy-crud/core'
+import InputText from 'primevue/inputtext'
+
+const bus = new Bus()
+
+const title = ref('Modo root')
+
+const form = useForm({
+  fields: () => ({
+    name: {
+      type: FieldType.text,
+      label: title.value,
+      placeholder: 'Como asi pues?',
+      // hintText: 'Display some message',
+      modelValue: title.value,
+      rules: value => {
+        return value === 'root' ? 'Root is not allowed' : true
+      },
+      wrapper: {
+        class: 'col-span-6',
+      },
+    },
+    gender: {
+      type: '',
+      modelValue: 'm',
+    },
+  }),
+  settings: () => ({
+    url: 'artists/',
+    title: title.value,
+  }),
+  buttons: () => ({
+    main: {
+      label: title.value,
+      loading: false,
+    },
+    aux: {
+      onClick: () => {
+        bus.execute(
+          new ResetFieldsByFormIdCommand(form.id),
+        )
+      },
+    },
+  }),
+})
+</script>
+

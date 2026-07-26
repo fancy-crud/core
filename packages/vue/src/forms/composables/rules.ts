@@ -1,3 +1,4 @@
+import { computed } from 'vue'
 import type { BaseObjectWithNormalizedFields, NormalizedField, RuleConfig } from '@fancy-crud/core'
 import { Bus, ValidateFieldRulesCommand, ValidateFormCommand, rulesConfig } from '@fancy-crud/core'
 

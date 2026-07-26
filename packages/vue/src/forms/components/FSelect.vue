@@ -1,4 +1,5 @@
 <script lang="ts">
+import { defineComponent } from 'vue'
 import { components } from '@fancy-crud/core'
 
 export default defineComponent({

@@ -1,6 +1,6 @@
-import type { ZodAny } from 'zod/lib/types'
+import type { ZodTypeAny } from 'zod'
 
-export function zodSafeParser(raw: { value: unknown; rule: ZodAny }) {
+export function zodSafeParser(raw: { value: unknown; rule: ZodTypeAny }) {
   if (typeof raw === 'string' || typeof raw === 'boolean')
     return raw
 

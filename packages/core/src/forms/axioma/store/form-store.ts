@@ -1,10 +1,12 @@
-import type { BaseObjectWithNormalizedFields, ButtonType, NormalizedButton, NormalizedSettings } from '../typing'
+import type { BaseObjectWithNormalizedFields, ButtonType, NormalizedButton, NormalizedSettings, RecordObject } from '../typing'
 
 export interface FormState {
+  id: symbol
   originalNormalizedFields: BaseObjectWithNormalizedFields
   fields: BaseObjectWithNormalizedFields
   settings: NormalizedSettings
   buttons: Record<ButtonType, NormalizedButton>
+  record: RecordObject
 }
 
 export abstract class IFormStore {

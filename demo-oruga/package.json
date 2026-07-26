@@ -15,19 +15,18 @@
   },
   "dependencies": {
     "@fancy-crud/core": "workspace:^",
+    "@fancy-crud/plugin-rule-parsers": "workspace:^",
     "@fancy-crud/vue": "workspace:^",
     "@fancy-crud/wrapper-oruga-ui": "workspace:^",
     "@fancy-crud/wrapper-vuetify": "workspace:^",
-    "@fancy-crud/plugin-rule-parsers": "workspace:^",
-    "@oruga-ui/oruga-next": "^0.6.0",
-    "@oruga-ui/theme-oruga": "^0.0.1",
-    "@oruga-ui/theme-bulma": "^0.2.11",
-    "@vueuse/core": "^9.9.0",
-    "vue": "^3.3.4"
+    "@oruga-ui/oruga-next": "^0.11.6",
+    "@oruga-ui/theme-bulma": "^0.7.3",
+    "@oruga-ui/theme-oruga": "^0.7.1",
+    "@vueuse/core": "^13.9.0",
+    "vue": "^3.5.40"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.15",
-    "postcss": "^8.4.28",
-    "tailwindcss": "^3.3.3"
+    "@tailwindcss/vite": "^4.3.3",
+    "tailwindcss": "^4.3.3"
   }
 }

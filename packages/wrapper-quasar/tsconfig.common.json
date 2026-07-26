@@ -11,21 +11,21 @@
     "esModuleInterop": true,
     "jsx": "preserve",
     "skipLibCheck": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "noUnusedLocals": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
     "types": [
-      "vite/client",
+      "vite/client"
     ],
     "paths": {
-      "@packages/wrapper-quasar/*": ["src/*"],
+      "@packages/wrapper-quasar/*": ["src/*"]
     }
   },
   "exclude": [
     "dist",
-    "node_modules",
+    "node_modules"
   ]
 }

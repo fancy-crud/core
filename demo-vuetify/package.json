@@ -15,17 +15,16 @@
   },
   "dependencies": {
     "@fancy-crud/core": "workspace:^",
-    "@fancy-crud/vue": "workspace:^",
-    "@fancy-crud/wrapper-vuetify": "workspace:^",
     "@fancy-crud/plugin-rule-parsers": "workspace:^",
     "@fancy-crud/plugin-vue3-toastify": "workspace:^",
-    "vuetify": "^3.3.23",
-    "@vueuse/core": "^9.9.0",
-    "vue": "^3.3.4"
+    "@fancy-crud/vue": "workspace:^",
+    "@fancy-crud/wrapper-vuetify": "workspace:^",
+    "@vueuse/core": "^14.3.0",
+    "vue": "^3.5.40",
+    "vuetify": "^3.12.11"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.15",
-    "postcss": "^8.4.28",
-    "tailwindcss": "^3.3.3"
+    "@tailwindcss/vite": "^4.3.3",
+    "tailwindcss": "^4.3.3"
   }
 }

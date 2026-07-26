@@ -32,6 +32,9 @@ const defaults = ReturnObject<Record<string, { wrapper?: { class?: string }; cla
   cancelButton: {
     class: '',
   },
+  closeModalButton: {
+    class: '',
+  },
 })
 
 export function setDefaults(newDefaults: Record<string, any>) {

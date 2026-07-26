@@ -14,18 +14,17 @@
     "url": "https://github.com/fancy-crud/core"
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^2.1.0",
+    "@element-plus/icons-vue": "^2.3.2",
     "@fancy-crud/core": "workspace:^",
     "@fancy-crud/plugin-rule-parsers": "workspace:^",
     "@fancy-crud/vue": "workspace:^",
     "@fancy-crud/wrapper-element-plus": "workspace:^",
-    "@vueuse/core": "^9.9.0",
-    "element-plus": "^2.4.2",
-    "vue": "^3.3.4"
+    "@vueuse/core": "^13.9.0",
+    "element-plus": "^2.14.3",
+    "vue": "^3.5.40"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.15",
-    "postcss": "^8.4.28",
-    "tailwindcss": "^3.3.3"
+    "@tailwindcss/vite": "^4.3.3",
+    "tailwindcss": "^4.3.3"
   }
 }

@@ -7,6 +7,9 @@ export interface RawTableSettings extends Record<string, unknown> {
   displayFormDialog?: boolean
   displayConfirmationDialog?: boolean
   rowToDelete?: null | Row
+  autoInferColumns?: boolean
+  columnsOrder?: string[]
+  modal?: Record<string, any>
 }
 
 export interface NormalizedTableSettings extends Required<RawTableSettings> {}

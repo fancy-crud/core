@@ -22,6 +22,7 @@ export class PrepareFormToUpdateHandler implements IPrepareFormToUpdateHandler {
       new SwitchFormToUpdateModeCommand(form, options),
     )
 
+    form.record.value = row
     type rowKey = keyof typeof row
     const lookupField = (tableSettings.lookupField || form.settings.lookupField) as rowKey
     let lookupValue = ''
@@ -39,6 +40,7 @@ export class PrepareFormToUpdateHandler implements IPrepareFormToUpdateHandler {
         setFieldsValues.execute(
           new SetFieldsValuesCommand(form.fields, form.settings, response.data || {}),
         )
+        form.record.value = response.data || {}
 
         if (options?.onReady)
           options.onReady()

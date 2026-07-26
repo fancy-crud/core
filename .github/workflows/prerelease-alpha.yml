@@ -11,19 +11,19 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [22.x]
         os: [ubuntu-latest]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 10.18.2
           run_install: |
             - recursive: true
               args: [--frozen-lockfile, --strict-peer-dependencies]
@@ -39,6 +39,7 @@ jobs:
           pnpm build:w-vuetify
           pnpm build:w-quasar
           pnpm build:w-element
+          pnpm build:w-primevue
 
           pnpm build:p-rule-parsers
           pnpm build:p-vue3-toastify
@@ -52,7 +53,7 @@ jobs:
       toTag: ${{ steps.toTag.outputs.tag }}
     steps:
       - name: checkout code repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -81,9 +82,10 @@ jobs:
       - name: Run matic-release
         run: poetry run python scripts/release.py --ci
 
-      - name: Publish tag
-        run: git push --tags
-
+      # The tag is deliberately not pushed here. matic-release creates it
+      # locally, which is all toTag below needs, and pushing it before the
+      # publish succeeds makes the next run compute toTag == fromTag and skip
+      # publishing altogether. It is pushed by the push-tag job instead.
       - name: 'Get lastest tag'
         id: toTag
         uses: "WyriHaximus/github-action-get-previous-tag@v1"
@@ -94,20 +96,45 @@ jobs:
     if: ${{ needs.compute-new-tag-version.outputs.fromTag != needs.compute-new-tag-version.outputs.toTag }}
     steps:
       - name: checkout code repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: setup node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 16.x
+          node-version: 22.x
 
       - name: install pnpm
-        run: npm i pnpm@latest -g
+        run: npm i pnpm@10.18.2 -g
 
+      # Written to the user config, not to ./.npmrc: the repository ships its
+      # own .npmrc with shamefully-hoist, and overwriting it made the CI
+      # install resolve differently from a local one. Keeping the token out of
+      # the working tree also keeps it out of anything built from it.
       - name: Setup npmrc
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
+      # npm answers 404 to a PUT when the credential cannot write to the scope,
+      # so an auth failure is indistinguishable from a missing package at publish
+      # time. Resolve it here instead, before the build.
+      - name: Verify npm authentication
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "$NPM_TOKEN" ]; then
+            echo "::error::NPM_TOKEN is empty: the secret is not reaching this job."
+            exit 1
+          fi
+          echo "Token length: ${#NPM_TOKEN}"
+
+          if ! npm whoami; then
+            echo "::error::The token cannot authenticate against the registry: expired, revoked, or not a valid npm token."
+            exit 1
+          fi
+
+          npm access list packages @fancy-crud \
+            || echo "::warning::Could not list the @fancy-crud packages. The token authenticates but may not carry write access to the scope."
 
       - name: setup pnpm config
         run: pnpm config set store-dir $PNPM_CACHE_FOLDER
@@ -126,12 +153,13 @@ jobs:
           pnpm build:w-vuetify
           pnpm build:w-quasar
           pnpm build:w-element
+          pnpm build:w-primevue
 
           pnpm build:p-rule-parsers
           pnpm build:p-vue3-toastify
           pnpm --filter "./packages/**" publish --no-git-checks --tag ${{ github.ref_name }}
 
-  generate-release:
+  push-tag:
     runs-on: ubuntu-latest
     needs:
       - compute-new-tag-version
@@ -139,7 +167,31 @@ jobs:
     if: ${{ needs.compute-new-tag-version.outputs.fromTag != needs.compute-new-tag-version.outputs.toTag }}
     steps:
       - name: checkout code repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push the release tag
+        env:
+          TAG: ${{ needs.compute-new-tag-version.outputs.toTag }}
+        run: |
+          if git ls-remote --exit-code --tags origin "refs/tags/$TAG" >/dev/null 2>&1; then
+            echo "$TAG is already on the remote, nothing to push."
+            exit 0
+          fi
+          git tag "$TAG"
+          git push origin "refs/tags/$TAG"
+
+  generate-release:
+    runs-on: ubuntu-latest
+    needs:
+      - compute-new-tag-version
+      - publish
+      - push-tag
+    if: ${{ needs.compute-new-tag-version.outputs.fromTag != needs.compute-new-tag-version.outputs.toTag }}
+    steps:
+      - name: checkout code repository
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 

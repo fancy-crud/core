@@ -1,7 +1,7 @@
 import { Bus, inject } from '@fancy-crud/bus'
 import type { NormalizedField, SaveFormCommand, StandardErrorResponseStructure, StandardResponseStructure } from '../axioma'
 import { DispatchOnFailedFormEventCommand, DispatchOnSuccessFormEventCommand, FilterFieldsByFormModeCommand, GenerateFormDataCommand, IFormStore } from '../axioma'
-import { SaveRecordCommand } from '../../common/http/axioma'
+import { ParseUrlCommand, SaveRecordCommand } from '../../common/http/axioma'
 
 export class SaveFormHandler {
   constructor(
@@ -26,7 +26,11 @@ export class SaveFormHandler {
       new GenerateFormDataCommand(filteredFieldsAsObject),
     )
 
-    const { url, mode, lookupValue } = form.settings
+    const { mode, lookupValue } = form.settings
+
+    const url = this.bus.execute(
+      new ParseUrlCommand(form.settings.url, mode, form.record.value),
+    )
     const data = formData || jsonForm
 
     const onSuccess = (response?: StandardResponseStructure) => this.bus.execute(

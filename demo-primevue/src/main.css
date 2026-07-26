@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@import "tailwindcss-primeui";
+@import '@fancy-crud/vue/dist/fancy-crud-vue.css';
+
+/* Custom theme - Tailwind v4 uses CSS custom properties */
+@theme {
+  --color-primary-50: oklch(97.05% 0.014 254.6);
+  --color-primary-100: oklch(93.22% 0.033 255.58);
+  --color-primary-200: oklch(87.47% 0.074 257.08);
+  --color-primary-300: oklch(79.28% 0.129 256.79);
+  --color-primary-400: oklch(70.69% 0.165 254.62);
+  --color-primary-500: oklch(62.31% 0.188 259.81);
+  --color-primary-600: oklch(54.61% 0.215 262.88);
+  --color-primary-700: oklch(48.82% 0.217 264.38);
+  --color-primary-800: oklch(42.44% 0.183 265.64);
+  --color-primary-900: oklch(37.91% 0.146 265.52);
+  --color-primary-950: oklch(28.24% 0.105 269.37);
+  --color-primary: var(--color-primary-500);
+
+  --color-danger-50: oklch(97.05% 0.014 17.38);
+  --color-danger-100: oklch(93.57% 0.032 17.72);
+  --color-danger-200: oklch(88.52% 0.062 18.33);
+  --color-danger-300: oklch(80.77% 0.103 19.57);
+  --color-danger-400: oklch(70.44% 0.159 22.22);
+  --color-danger-500: oklch(63.71% 0.198 25.33);
+  --color-danger-600: oklch(57.71% 0.215 27.32);
+  --color-danger-700: oklch(50.52% 0.191 27.52);
+  --color-danger-800: oklch(44.41% 0.16 25.77);
+  --color-danger-900: oklch(39.59% 0.132 25.72);
+  --color-danger-950: oklch(25.82% 0.092 26.04);
+  --color-danger: var(--color-danger-500);
+}
+
+.p-datatable-mask {
+  background-color: transparent;
+}

@@ -4,4 +4,5 @@ packages:
   - './demo-vuetify'
   - './demo-quasar'
   - './demo-element-plus'
+  - './demo-primevue'
   - '!**/tests/**'

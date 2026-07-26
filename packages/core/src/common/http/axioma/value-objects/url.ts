@@ -9,10 +9,10 @@ export class Url {
     let result: string
 
     if (this.url.endsWith('/'))
-      result = [this.url + String(this.lookupValue || ''), ''].join('/')
+      result = [this.url + String(this.lookupValue ?? ''), ''].join('/')
 
     else
-      result = [this.url, String(this.lookupValue || '')].join('/')
+      result = [this.url, String(this.lookupValue ?? '')].join('/')
 
     if (result.endsWith('//'))
       result = result.substring(0, result.length - 1)

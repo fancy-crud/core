@@ -11,5 +11,9 @@ export function valibotSafeParser(raw: { value: unknown; rule: AnySchema }) {
   if (result.success)
     return result.success
 
-  return result.issues[0].message
+  if ('issues' in result && result.issues && result.issues.length > 0) {
+    return result.issues[0].message
+  }
+
+  return 'Validation failed'
 }

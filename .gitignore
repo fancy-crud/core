@@ -4,10 +4,44 @@
 *.local
 dist
 dist-ssr
-node_modules
+
+# Dependencies
+node_modules/
+**/node_modules/
 .pnpm-store/
+.pnpm-debug.log
+
+# IDE
 .idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+*.tmp
+*.temp
+.cache/
+.temp/
+
+# Build
+dist/
+dist-ssr/
+*.tsbuildinfo
+
+# Server
 server/media
 server/*.sqlite3
 __pycache__

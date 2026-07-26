@@ -1,11 +1,25 @@
 import '@packages/core/forms/integration/register-handlers'
 import { NormalizeFormFieldsCommand } from '@packages/core/forms/axioma'
 import { describe, expect, it } from 'vitest'
+import {components} from '@packages/core/config';
 
 describe('NormalizeFormFields', () => {
+  function _getComponent(fieldType: string) {
+    type ControlType = keyof typeof defaultControls
+
+    const control = defaultControls[fieldType]
+
+    return control ?? (defaultControls[fieldType as ControlType] ?? defaultControls.text)
+  }
+
   const recordValue = (_: any) => null
   const interceptOptions = (options: any[]) => options
   const parseModelValue = (value: any) => value
+  const getComponent = () => _getComponent('text')
+
+  const defaultControls: Record<string, any> = {
+    ...components,
+  }
 
   it.concurrent('should normalize form fields with default values when no fields are provided', () => {
     const command = new NormalizeFormFieldsCommand({})
@@ -22,6 +36,7 @@ describe('NormalizeFormFields', () => {
         recordValue,
         interceptOptions,
         parseModelValue,
+        getComponent
       },
       lastName: {
         type: 'text',
@@ -29,6 +44,7 @@ describe('NormalizeFormFields', () => {
         recordValue,
         interceptOptions,
         parseModelValue,
+        getComponent
       },
     }
 
@@ -45,6 +61,7 @@ describe('NormalizeFormFields', () => {
       recordValue,
       interceptOptions,
       parseModelValue,
+      getComponent,
       wasFocused: false,
       modelValue: null,
       ref: null,
@@ -64,6 +81,7 @@ describe('NormalizeFormFields', () => {
       recordValue,
       interceptOptions,
       parseModelValue,
+      getComponent,
       wasFocused: false,
       ref: null,
       modelValue: null,
@@ -83,6 +101,7 @@ describe('NormalizeFormFields', () => {
         recordValue,
         interceptOptions,
         parseModelValue,
+        getComponent
       },
     }
 
@@ -99,6 +118,7 @@ describe('NormalizeFormFields', () => {
       recordValue,
       interceptOptions,
       parseModelValue,
+      getComponent,
       wasFocused: false,
       modelValue: null,
       ref: null,
@@ -119,6 +139,7 @@ describe('NormalizeFormFields', () => {
         recordValue,
         interceptOptions,
         parseModelValue,
+        getComponent
       },
     }
 
@@ -134,6 +155,7 @@ describe('NormalizeFormFields', () => {
       recordValue,
       interceptOptions,
       parseModelValue,
+      getComponent,
       debounceTime: 0,
       wasFocused: false,
       modelValue: null,

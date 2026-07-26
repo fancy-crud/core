@@ -7,7 +7,9 @@ export class NormalizeTableSettingsHandler implements INormalizeTableSettingsHan
       skipDeleteConfirmation: false,
       displayFormDialog: false,
       displayConfirmationDialog: false,
+      autoInferColumns: true,
       rowToDelete: null,
+      modal: {},
       ...rawSettings,
     } as T & NormalizedTableSettings
 

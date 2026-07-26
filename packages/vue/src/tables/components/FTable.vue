@@ -3,7 +3,7 @@
     <f-table-header-actions v-bind="tableHeaderVBind" />
   </slot>
 
-  <f-modal v-model="table.settings.displayFormDialog" v-bind="table.settings.modal">
+  <f-modal v-model="table.settings.displayFormDialog" v-bind="table.settings.modal" :form="props.form" :modal-id="String(props.id)">
     <slot name="table-form" v-bind="tableFormVBind">
       <div v-if="tableForm.settings.loading" class="loader-wrapper">
         <div :class="{ loader: tableForm.settings.loading }" />
@@ -29,7 +29,7 @@
   </slot>
 
   <slot name="table-footer" v-bind="tableFooterVBind">
-    <div v-if="!props.pagination.hidden" class="flex justify-between mt-4">
+    <div v-if="!props.pagination.hidden" class="flex flex-col justify-between mt-4">
       <f-table-footer v-bind="tableFooterVBind" />
     </div>
   </slot>
@@ -49,8 +49,9 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, watch, useSlots, provide } from 'vue'
 import type { BaseTableForm, NormalizedTableButtons, NormalizedTableFilters, NormalizedTableList, NormalizedTablePagination, NormalizedTableSettings, ObjectWithNormalizedColumns, Pagination } from '@fancy-crud/core'
-import { Bus, IFormStore, ITableStore, ResetTablePaginationCommand, inject as injecting } from '@fancy-crud/core'
+import { Bus, CustomColumnsOrderCommand, IFormStore, ITableStore, ResetTablePaginationCommand, inject as injecting } from '@fancy-crud/core'
 
 const props = defineProps<{
   id: symbol
@@ -65,6 +66,7 @@ const props = defineProps<{
 
 provide('tableId', props.id)
 
+const bus = new Bus()
 const slots = useSlots()
 
 const formStore: IFormStore = injecting(IFormStore.name)!
@@ -73,13 +75,15 @@ const tableStore: ITableStore = injecting(ITableStore.name)!
 const table = tableStore.searchById(props.id)!
 
 const tableForm = formStore.searchById(table.formId)!
-const headers = computed(() => Object.values(props.columns).filter(column => !column.exclude))
+const headers = computed(() => Object.values(
+  bus.execute(
+    new CustomColumnsOrderCommand(props.columns, table.settings.columnsOrder),
+  ),
+).filter(column => !column.exclude))
 
 const computedData = computed<any[]>(() => {
   return table.list.data
 })
-
-props.list.fetchData()
 
 const tableHeaderVBind = computed(() => {
   const dump = props.buttons.dump
@@ -121,7 +125,6 @@ const tableFooterVBind = computed(() => {
   }
 })
 
-const bus = new Bus()
 watch(() => table.filterParams, () => {
   if (table.pagination.page === 1)
     props.list.fetchData()
@@ -139,5 +142,9 @@ watch(() => table.pagination.page, () => {
 watch(() => table.pagination.rowsPerPage, () => {
   if (table.list.options?.hotFetch !== false)
     props.list.fetchData()
+})
+
+watch(() => table.settings.displayFormDialog, () => {
+  tableForm.settings.loading = !table.settings.displayFormDialog
 })
 </script>

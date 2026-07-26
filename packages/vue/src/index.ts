@@ -1,4 +1,4 @@
-import './styles/index.sass'
+import './styles/index.css'
 import type { App, Plugin } from 'vue'
 
 import type { Config } from '@fancy-crud/core'

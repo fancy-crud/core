@@ -107,8 +107,11 @@ jobs:
       - name: install pnpm
         run: npm i pnpm@8.15.7 -g
 
+      # Written to the user config, not to ./.npmrc: the repository ships its
+      # own .npmrc with shamefully-hoist, and overwriting it made the CI
+      # install resolve differently from a local one.
       - name: Setup npmrc
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: setup pnpm config
         run: pnpm config set store-dir $PNPM_CACHE_FOLDER

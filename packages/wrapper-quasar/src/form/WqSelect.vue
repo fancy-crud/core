@@ -26,6 +26,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, useSlots } from 'vue'
 import { QSelect } from 'quasar'
 import type { NormalizedSelectField } from '@fancy-crud/vue'
 import { useSelectField } from '@fancy-crud/vue'

@@ -1,21 +1,15 @@
 <template>
-  <q-input v-model="r" />
   <div class="pb-5">
     <f-table v-bind="table">
-      <template #column-created_at>
-        <a href="https://google.com" class="underline text-primary-500" target="_blank">Haz click</a>
-      </template>
     </f-table>
-
-    <!-- <q-btn icon="plus" /> -->
   </div>
 </template>
 
 <script lang='ts' setup>
 import { FieldType, useForm, useTable } from '@fancy-crud/vue'
-import { z } from 'zod';
+import { z } from 'zod'
 
-const r = ref(1)
+const displayDialog = ref(false)
 
 const form = useForm({
   id: 'formulario',
@@ -32,9 +26,9 @@ const form = useForm({
     gender: {
       type: FieldType.select,
       label: 'Gender',
-      rules: value => ({ value, rule: z.string().nonempty() }),
-      multiple: true,
-      exclude: true,
+      rules: (value: any) => ({ value, rule: z.string().nonempty() }),
+      options: ['m', 'f'],
+      multiple: false,
       wrapper: {
         class: 'col-span-6',
       },
@@ -66,10 +60,19 @@ const form = useForm({
       },
     },
   },
-  settings: {
-    url: 'artists/',
-    title: '{{ Crear artista | Actualizar artista }}',
+  settings: (f) => {
+    return {
+      url: 'artists/',
+      title: '{{ Crear artista | Actualizar artista }}',
+      lookupField: 'id',
+    }
   },
+  responseInterceptor: {
+    201: (response: any) => {
+      displayDialog.value = false
+      return response
+    },
+  }
 })
 
 const table = useTable({
@@ -92,16 +95,15 @@ const table = useTable({
     },
     is_active: {
       input: {
-        type: FieldType.checkbox,
-        isEnable: true,
-      },
+        isEnable: true
+      }
     },
-    actions: { value: 'actions', label: '', align: 'right' },
+    actions: { value: 'actions', label: '', align: 'left' },
   },
-  settings: {
+  settings: () => ({
     url: 'artists/',
-    lookupField: 'id',
-  },
+    displayFormDialog: displayDialog.value,
+  }),
   pagination: {
     rowsPerPage: 10,
   },

@@ -1,5 +1,8 @@
 <template>
-  <footer class="f-form__footer">
+  <footer 
+    class="f-form__footer"
+    :class="{ 'f-form__footer--shadow': isScrolledFromBottom }"
+  >
     <slot v-bind="{ mainButton, auxButton, getLabel, onMainClick, onAuxClick, isMainButtonDisabled, buttons, settings, isFormValid }">
       <f-button
         v-if="!mainButton.hidden"
@@ -24,6 +27,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, Ref, inject } from 'vue'
 import type { NormalizedButton, NormalizedSettings, ObjectWithNormalizedButtons } from '@fancy-crud/core'
 import { Bus, GetButtonLabelByFormModeCommand } from '@fancy-crud/core'
 
@@ -39,6 +43,17 @@ const emit = defineEmits<{
 }>()
 
 const bus = new Bus()
+
+// Inject scroll state from FFormBody
+const formScrollState = inject<{
+  isScrolledFromTop: Ref<boolean>
+  isScrolledFromBottom: Ref<boolean>
+}>('formScrollState', {
+  isScrolledFromTop: ref(false),
+  isScrolledFromBottom: ref(false),
+})
+
+const isScrolledFromBottom = formScrollState.isScrolledFromBottom
 
 const mainButton = computed(() => {
   const { onClick, ...attrs } = props.buttons.main

@@ -5,23 +5,33 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
+import tailwindcss from '@tailwindcss/vite'
+import tsconfigPaths from 'vite-tsconfig-paths'
 import { name } from './package.json'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
-      '@packages/wrapper-quasar/': `${path.resolve(__dirname, 'src')}/`,
+      '@': path.resolve(__dirname, './src'),
+      '@packages/vue': path.resolve(__dirname, '../vue/src'),
+      '@packages/core': path.resolve(__dirname, '../core/src'),
     },
   },
   build: {
+    sourcemap: false,
     lib: {
       name,
       entry: path.resolve(__dirname, 'src/index.ts'),
       fileName: 'fancy-crud-wrapper-quasar',
     },
     rollupOptions: {
-      external: ['vue', 'quasar', '@fancy-crud/core', '@fancy-crud/vue'],
+      external: (id) => {
+        return id === 'vue' 
+          || id.startsWith('quasar') 
+          || id === '@fancy-crud/core' 
+          || id === '@fancy-crud/vue'
+      },
       output: {
         assetFileNames: (assetInfo) => {
           if (!assetInfo.name || assetInfo.name === 'style.css')
@@ -40,26 +50,27 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+    tailwindcss(),
+    tsconfigPaths(),
     AutoImport({
       imports: [
         'vue',
         'vue/macros',
+        'vue-router',
         '@vueuse/core',
       ],
+      vueTemplate: true,
       dts: true,
       dirs: [
         './src/**/components',
         './src/**/composables',
         './src/**/typings',
       ],
-      vueTemplate: true,
     }),
     Components({
       dirs: [
         'src/**',
       ],
-
-      // allow auto import and register components used in markdown
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
       dts: true,
     }),

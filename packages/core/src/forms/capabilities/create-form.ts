@@ -7,7 +7,9 @@ import type {
   CreateFormCommand,
   ICreateFormHandler,
   RawFormButtons,
+  RecordObjectValue,
   StandardErrorResponseStructure,
+
   StandardResponseStructure,
 } from '@packages/core/forms/axioma'
 import {
@@ -16,6 +18,7 @@ import {
   NormalizeButtonsCommand,
   NormalizeFormFieldsCommand,
   NormalizeSettingsCommand,
+
   SaveFormCommand,
 } from '@packages/core/forms/axioma'
 import { getDefaultInterceptors, getDefaultNotificationHandler, getDefaultRulesConfig } from '@packages/core/config'
@@ -34,7 +37,8 @@ export class CreateFormHandler implements ICreateFormHandler {
     T extends BaseObjectWithRawFields,
     U extends RawSetting,
     V extends RawFormButtons,
-  >(command: CreateFormCommand<T, U, V>): Form<T, V> {
+    RecordObjectValueType extends RecordObjectValue = RecordObjectValue,
+  >(command: CreateFormCommand<T, U, V, RecordObjectValueType>): Form<T, V, RecordObjectValueType> {
     const {
       id,
       rawFields = {},
@@ -43,6 +47,7 @@ export class CreateFormHandler implements ICreateFormHandler {
       responseInterceptor = {},
       notifications = {},
       rulesConfig = {},
+      record = { value: null },
     } = command
 
     const formId = Symbol(id)
@@ -61,12 +66,7 @@ export class CreateFormHandler implements ICreateFormHandler {
       new NormalizeButtonsCommand(rawButtons),
     ) as ConvertToNormalizedFormButtons<V>
 
-    normalizedButtons.main.onClick = () => {
-      if (rawButtons.main?.onClick) {
-        rawButtons.main.onClick()
-        return
-      }
-
+    normalizedButtons.main.onClick = rawButtons.main?.onClick || (() => {
       bus.execute(
         new SaveFormCommand(formId, {
           onSuccess(response?: StandardResponseStructure) {
@@ -81,13 +81,15 @@ export class CreateFormHandler implements ICreateFormHandler {
           },
         }),
       )
-    }
+    })
 
     this.formStore.save(formId, {
+      id: formId,
       originalNormalizedFields,
       fields: clonedNormalizedFields,
       settings: normalizedSettings,
       buttons: normalizedButtons,
+      record,
     })
 
     this.notificationStore.save(formId, {
@@ -111,6 +113,7 @@ export class CreateFormHandler implements ICreateFormHandler {
       clonedNormalizedFields,
       normalizedSettings,
       normalizedButtons,
+      record,
     }
   }
 }
