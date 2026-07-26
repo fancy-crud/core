@@ -110,6 +110,27 @@ jobs:
       - name: Setup npmrc
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
 
+      # npm answers 404 to a PUT when the credential cannot write to the scope,
+      # so an auth failure is indistinguishable from a missing package at publish
+      # time. Resolve it here instead, before the build.
+      - name: Verify npm authentication
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "$NPM_TOKEN" ]; then
+            echo "::error::NPM_TOKEN is empty: the secret is not reaching this job."
+            exit 1
+          fi
+          echo "Token length: ${#NPM_TOKEN}"
+
+          if ! npm whoami; then
+            echo "::error::The token cannot authenticate against the registry: expired, revoked, or not a valid npm token."
+            exit 1
+          fi
+
+          npm access list packages @fancy-crud \
+            || echo "::warning::Could not list the @fancy-crud packages. The token authenticates but may not carry write access to the scope."
+
       - name: setup pnpm config
         run: pnpm config set store-dir $PNPM_CACHE_FOLDER
 
