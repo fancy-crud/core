@@ -82,9 +82,10 @@ jobs:
       - name: Run matic-release
         run: poetry run python scripts/release.py --ci
 
-      - name: Publish tag
-        run: git push --tags
-
+      # The tag is deliberately not pushed here. matic-release creates it
+      # locally, which is all toTag below needs, and pushing it before the
+      # publish succeeds makes the next run compute toTag == fromTag and skip
+      # publishing altogether. It is pushed by the push-tag job instead.
       - name: 'Get lastest tag'
         id: toTag
         uses: "WyriHaximus/github-action-get-previous-tag@v1"
@@ -154,11 +155,35 @@ jobs:
           pnpm build:p-vue3-toastify
           pnpm --filter "./packages/**" publish --no-git-checks --tag ${{ github.ref_name }}
 
+  push-tag:
+    runs-on: ubuntu-latest
+    needs:
+      - compute-new-tag-version
+      - publish
+    if: ${{ needs.compute-new-tag-version.outputs.fromTag != needs.compute-new-tag-version.outputs.toTag }}
+    steps:
+      - name: checkout code repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push the release tag
+        env:
+          TAG: ${{ needs.compute-new-tag-version.outputs.toTag }}
+        run: |
+          if git ls-remote --exit-code --tags origin "refs/tags/$TAG" >/dev/null 2>&1; then
+            echo "$TAG is already on the remote, nothing to push."
+            exit 0
+          fi
+          git tag "$TAG"
+          git push origin "refs/tags/$TAG"
+
   generate-release:
     runs-on: ubuntu-latest
     needs:
       - compute-new-tag-version
       - publish
+      - push-tag
     if: ${{ needs.compute-new-tag-version.outputs.fromTag != needs.compute-new-tag-version.outputs.toTag }}
     steps:
       - name: checkout code repository
