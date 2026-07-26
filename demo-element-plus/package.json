@@ -20,11 +20,11 @@
     "@fancy-crud/vue": "workspace:^",
     "@fancy-crud/wrapper-element-plus": "workspace:^",
     "@vueuse/core": "^13.9.0",
-    "element-plus": "^2.11.4",
-    "vue": "^3.5.22"
+    "element-plus": "^2.14.3",
+    "vue": "^3.5.40"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.1.14",
-    "tailwindcss": "^4.1.14"
+    "@tailwindcss/vite": "^4.3.3",
+    "tailwindcss": "^4.3.3"
   }
 }

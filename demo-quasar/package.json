@@ -19,14 +19,14 @@
     "@fancy-crud/plugin-vue3-toastify": "workspace:^",
     "@fancy-crud/vue": "workspace:^",
     "@fancy-crud/wrapper-quasar": "workspace:^",
-    "@quasar/extras": "^1.17.0",
-    "@vueuse/core": "^14.2.0",
+    "@quasar/extras": "^1.18.0",
+    "@vueuse/core": "^14.3.0",
     "quasar": "^2.23.1",
-    "vue": "^3.5.22"
+    "vue": "^3.5.40"
   },
   "devDependencies": {
-    "@quasar/vite-plugin": "^1.10.0",
-    "@tailwindcss/vite": "^4.1.14",
-    "tailwindcss": "^4.1.14"
+    "@quasar/vite-plugin": "^1.12.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "tailwindcss": "^4.3.3"
   }
 }
