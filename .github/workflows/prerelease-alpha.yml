@@ -108,8 +108,12 @@ jobs:
       - name: install pnpm
         run: npm i pnpm@10.18.2 -g
 
+      # Written to the user config, not to ./.npmrc: the repository ships its
+      # own .npmrc with shamefully-hoist, and overwriting it made the CI
+      # install resolve differently from a local one. Keeping the token out of
+      # the working tree also keeps it out of anything built from it.
       - name: Setup npmrc
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       # npm answers 404 to a PUT when the credential cannot write to the scope,
       # so an auth failure is indistinguishable from a missing package at publish
